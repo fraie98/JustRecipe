@@ -4,32 +4,27 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Controller {
-    @FXML
-    private JFXTextField usernameLoginTextField;
-    @FXML
-    private JFXPasswordField passwordLoginTextField;
-    @FXML
-    private JFXTextField firstNameRegistrationTextField;
-    @FXML
-    private JFXTextField lastNameRegistrationTextField;
-    @FXML
-    private JFXTextField usernameRegistrationTextField;
-    @FXML
-    private JFXPasswordField passwordRegistrationTextField;
-    @FXML
-    private JFXPasswordField confirmPasswordRegistrationTextField;
-    @FXML
-    private Label labelLoginFailed;
-    @FXML
-    private Label labelRegistrationFailed;
-    @FXML
-    private Button loginButton;
-    @FXML
-    private Button registrationButton;
+import java.io.IOException;
+
+public class WelcomePageController {
+    @FXML private JFXTextField usernameLoginTextField;
+    @FXML private JFXPasswordField passwordLoginTextField;
+    @FXML private JFXTextField firstNameRegistrationTextField;
+    @FXML private JFXTextField lastNameRegistrationTextField;
+    @FXML private JFXTextField usernameRegistrationTextField;
+    @FXML private JFXPasswordField passwordRegistrationTextField;
+    @FXML private JFXPasswordField confirmPasswordRegistrationTextField;
+    @FXML private Label labelLoginFailed;
+    @FXML private Label labelRegistrationFailed;
+    @FXML private Button loginButton;
+    @FXML private Button registrationButton;
 
     public void initialize()
     {
@@ -46,7 +41,10 @@ public class Controller {
             return;
         }
 
-        login(usernameLoginTextField.getText(), passwordLoginTextField.getText());
+        if (login(usernameLoginTextField.getText(), passwordLoginTextField.getText()))
+        {
+            Utils.changeScene("/homepage.fxml", actionEvent);
+        }
     }
 
     private void handleRegisterButtonAction(ActionEvent actionEvent) {
@@ -61,18 +59,21 @@ public class Controller {
             return;
         }
 
-        register(firstNameRegistrationTextField.getText(), lastNameRegistrationTextField.getText(),
-                usernameRegistrationTextField.getText(), passwordRegistrationTextField.getText());
+        if (register(firstNameRegistrationTextField.getText(), lastNameRegistrationTextField.getText(),
+                usernameRegistrationTextField.getText(), passwordRegistrationTextField.getText()))
+        {
+           Utils.changeScene("/homepage.fxml", actionEvent);
+        }
     }
 
-    private void login (final String username, final String password)
+    private boolean login (final String username, final String password)
     {
-
+        return true;
     }
 
-    private void register (final String firsName, final String lastName, final String username,
+    private boolean register (final String firsName, final String lastName, final String username,
                            final String password)
     {
-
+        return true;
     }
 }
