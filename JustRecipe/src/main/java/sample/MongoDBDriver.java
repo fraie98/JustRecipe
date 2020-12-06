@@ -10,7 +10,7 @@ public class MongoDBDriver {
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection collection;
-    private String hostName; //es: localhost
+    private String hostname; //es: localhost
     private int port; // 27017 default value
     private String username;
     private String password;
@@ -20,10 +20,10 @@ public class MongoDBDriver {
     private Consumer<Document> printDocuments = doc -> {
         System.out.println(doc.toJson());};
 
-    //DA CAMBIARE: PASSARE LA CLASSE PARAMETRIDICONFIGURAZIONE
+    //DA CAMBIARE: PASSARE LA CLASSE PARAMETRI DI CONFIGURAZIONE
     public MongoDBDriver (String hostName, int port, String username, String password)
     {
-        this.hostName = hostName;
+        this.hostname = hostName;
         this.port = port;
         this.username = username;
         this.password = password;
@@ -32,13 +32,14 @@ public class MongoDBDriver {
     public void initConnection()
     {
         ConnectionString connectionString = new ConnectionString("mongodb://" + username + ":" + password
-                + "@" + hostName + ":" + port);
+                + "@" + hostname + ":" + port);
         mongoClient = MongoClients.create(connectionString);
         database = mongoClient.getDatabase(DBNAME);
     }
 
-    public void changeCollections(String name)
+    public void changeCollection(String name)
     {
         collection = database.getCollection(name);
     }
+    public void closeConnection() {mongoClient.close();}
 }
