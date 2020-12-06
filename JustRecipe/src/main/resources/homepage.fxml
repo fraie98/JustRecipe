@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="778.0" prefWidth="1197.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox>
@@ -21,7 +20,7 @@
                <left>
                   <ImageView fitHeight="81.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                      <image>
-                        <Image url="@../img/icon.png" />
+                        <Image url="@img/icon.png" />
                      </image>
                      <BorderPane.margin>
                         <Insets left="20.0" />
@@ -33,7 +32,7 @@
                      <children>
                         <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icon/exit_icon-icons.com_70975.png" />
+                              <Image url="@img/exit.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="20.0" />
@@ -41,7 +40,7 @@
                         </ImageView>
                         <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icon/explore_117649.png" />
+                              <Image url="@img/discovery.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="20.0" />
@@ -49,7 +48,7 @@
                         </ImageView>
                         <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icon/home_house_3526.png" />
+                              <Image url="@img/home.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="20.0" />
@@ -57,7 +56,7 @@
                         </ImageView>
                         <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icon/user_84308.png" />
+                              <Image url="@img/user.png" />
                            </image>
                            <HBox.margin>
                               <Insets right="20.0" />
