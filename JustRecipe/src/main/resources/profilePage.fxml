@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.AreaChart?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="782.0" prefWidth="394.0" SplitPane.resizableWithParent="false">
+<AnchorPane disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="778.0" prefWidth="1197.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="778.0" prefWidth="1197.0">
          <children>
-            <ImageView fitHeight="193.0" fitWidth="198.0" layoutX="13.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="30.0">
-               <image>
-                  <Image url="@../img/profPic.jpg" />
-               </image>
-            </ImageView>
-            <Text layoutX="53.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FirstName" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="330.0">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Text layoutX="54.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LastName" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="380.0">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Text layoutX="51.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UserName" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="430.0">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Text>
-            <Button layoutX="55.0" layoutY="234.0" mnemonicParsing="false" text="ChangeImage" />
-         </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="782.0" prefWidth="452.0" SplitPane.resizableWithParent="false">
-         <children>
-            <SplitPane dividerPositions="0.2826086956521739" orientation="VERTICAL" prefHeight="784.0" prefWidth="520.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="144.0" prefWidth="518.0" SplitPane.resizableWithParent="false">
+            <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgb(237, 160, 66);">
+               <center>
+                  <LineChart prefHeight="201.0" prefWidth="914.0" title="Week calories!" BorderPane.alignment="CENTER">
+                    <xAxis>
+                      <CategoryAxis label="Days" prefHeight="17.0" prefWidth="833.0" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis label="Calories" side="LEFT" />
+                    </yAxis>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </LineChart>
+               </center>
+               <left>
+                  <HBox BorderPane.alignment="CENTER">
                      <children>
-                        <Text layoutX="186.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calories for this week!" AnchorPane.topAnchor="12.0" />
-                        <AreaChart layoutX="15.0" layoutY="28.0" prefHeight="183.0" prefWidth="482.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="28.0">
-                          <xAxis>
-                            <CategoryAxis label="Day" prefWidth="279.0" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis label="Calories" side="LEFT" />
-                          </yAxis>
-                        </AreaChart>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="144.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/user.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="userName">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                              </Text>
+                           </children>
+                        </VBox>
                      </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="646.0" prefWidth="518.0" SplitPane.resizableWithParent="false">
+                  </HBox>
+               </left>
+            </BorderPane>
+            <HBox prefHeight="582.0" prefWidth="1197.0" style="-fx-background-color: RGB(204, 199, 194);">
+               <children>
+                  <VBox prefHeight="580.0" prefWidth="199.0">
                      <children>
-                        <ScrollPane prefHeight="581.0" prefWidth="520.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
-                        <Text layoutX="96.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Recipes">
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Text>
-                        <Button layoutX="311.0" layoutY="26.0" mnemonicParsing="false" text="EditRecipe" />
-                        <Button layoutX="416.0" layoutY="26.0" mnemonicParsing="false" text="AddRecipe" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User Options:">
+                           <VBox.margin>
+                              <Insets left="55.0" top="40.0" />
+                           </VBox.margin></Text>
+                        <Button mnemonicParsing="false" text="changeProfileImg" wrapText="true">
+                           <VBox.margin>
+                              <Insets left="30.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" text="addNewRecipe" wrapText="true">
+                           <VBox.margin>
+                              <Insets left="37.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
-         </children></AnchorPane>
-  </items>
-</SplitPane>
+                  </VBox>
+                  <VBox prefHeight="700.0" prefWidth="891.0" style="-fx-background-color: white;" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
