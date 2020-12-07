@@ -32,6 +32,9 @@ public class WelcomePageController {
 
     private Neo4jDriver neo4jDriver;
 
+    /**
+     * Method called when the controller is initialized
+     */
     public void initialize()
     {
         labelLoginFailed.setVisible(false);
@@ -42,6 +45,10 @@ public class WelcomePageController {
         neo4jDriver.initConnection();
     }
 
+    /**
+     * Method used to handle the Login button click event
+     * @param actionEvent   The event that occurs when the user click the Login button
+     */
     private void handleLoginButtonAction(ActionEvent actionEvent) {
         labelLoginFailed.setVisible(false);
         if (usernameLoginTextField.getText().equals("") || passwordLoginTextField.getText().equals(""))
@@ -63,6 +70,10 @@ public class WelcomePageController {
         }
     }
 
+    /**
+     * Method used to handle the Register button click event
+     * @param actionEvent   The event that occurs when the user click the Register button
+     */
     private void handleRegisterButtonAction(ActionEvent actionEvent) {
         labelLoginFailed.setVisible(false);
         if ((firstNameRegistrationTextField.getText().equals("") ||
@@ -90,6 +101,12 @@ public class WelcomePageController {
         }
     }
 
+    /**
+     * Function used to perform the operations needed to login a user
+     * @param username  username of the user
+     * @param password  password of the user
+     * @return          true if the login was successful, otherwise false
+     */
     private boolean login (final String username, final String password)
     {
         if (neo4jDriver.checkUser(username, password))
@@ -98,10 +115,18 @@ public class WelcomePageController {
             return false;
     }
 
+    /**
+     * Function used to perform the operations needed to register a user
+     * @param firsName  first name of the user
+     * @param lastName  last name of the user
+     * @param username  username of the user
+     * @param password  password of the user
+     * @return          true if the registration was successful, otherwise false
+     */
     private boolean register (final String firsName, final String lastName, final String username,
                            final String password)
     {
-        // First of all I need to check if it is possible to use this username
+        // I need to check if it is possible to use this username
         if (!neo4jDriver.checkUsername(username)) //If it wasn't previously used
         {
             neo4jDriver.addUser(firsName, lastName, username, password);

@@ -4,7 +4,10 @@ import org.neo4j.driver.*;
 
 import static org.neo4j.driver.Values.parameters;
 
-public class Neo4jDriver {
+/**
+ * This class is used to communicate with Neo4j
+ */
+public class Neo4jDriver implements DatabaseDriver{
     private Driver driver;
     private String hostname;
     private int port;
@@ -20,11 +23,31 @@ public class Neo4jDriver {
         this.password = password;
     }
 
+    /**
+     * Method that inits the Driver
+     */
+    @Override
     public void initConnection()
     {
         driver = GraphDatabase.driver( "neo4j://" + hostname + ":" + port, AuthTokens.basic( username, password ) );
     }
 
+    /**
+     * Method for closing the connection of the Driver
+     */
+    @Override
+    public void closeConnection ()
+    {
+        driver.close();
+    }
+
+    /**
+     * Method that creates a new node in the graphDB with the information of the new user
+     * @param firstName     first name of the new user
+     * @param lastName      last name of the new user
+     * @param username      username of the new user
+     * @param password      password of the new user
+     */
     public void addUser( final String firstName, final String lastName, final String username,
                          final String password)
     {
@@ -40,6 +63,12 @@ public class Neo4jDriver {
         }
     }
 
+    /**
+     * Method that checks if the user already exists
+     * @param username  username to check
+     * @param password  password to check
+     * @return          true if the user exists in the graph, otherwise false
+     */
     public boolean checkUser (final String username, final String password)
     {
         try ( Session session = driver.session())
@@ -62,6 +91,11 @@ public class Neo4jDriver {
         }
     }
 
+    /**
+     * Method that checks if the username has already been used
+     * @param username  username to check
+     * @return          true if the username already exists, otherwise false
+     */
     public boolean checkUsername(final String username) {
         try ( Session session = driver.session())
         {
@@ -80,10 +114,5 @@ public class Neo4jDriver {
             else
                 return false;
         }
-    }
-
-    public void closeConnection ()
-    {
-        driver.close();
     }
 }
