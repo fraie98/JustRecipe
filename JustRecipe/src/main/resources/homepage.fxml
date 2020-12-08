@@ -48,7 +48,7 @@
                               <Insets right="20.0" />
                            </HBox.margin>
                         </ImageView>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="profileImg" fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handleProfilePic" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@img/user.png" />
                            </image>

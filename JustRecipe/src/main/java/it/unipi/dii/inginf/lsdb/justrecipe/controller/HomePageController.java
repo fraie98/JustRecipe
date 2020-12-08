@@ -7,15 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 
-public class HomePageController{
+public class HomePageController {
     private Neo4jDriver neo4jDriver;
     @FXML private VBox mainPage;
+    @FXML private ImageView profileImg;
 
     /**
      * Function used to pass the Neo4jDriver instance from another controller to this controller
@@ -59,6 +63,13 @@ public class HomePageController{
 
         mainPage.getChildren().add(0,riga1);
         mainPage.getChildren().add(1,riga2);
+    }
+
+    @FXML
+    private void handleProfilePic()
+    {
+        System.out.println("ProfileImageClicked!");
+
     }
 
 }

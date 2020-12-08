@@ -16,6 +16,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -42,6 +43,25 @@ public class Utils {
             scene = new Scene(loader.load());
             stage.setScene(scene);
             stage.show();
+            return loader.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //prova per far partire una nuova schermata cliccando un imageview
+    //WIP
+    public static Object changeScene (String fileName)
+    {
+        Scene scene = null;
+        FXMLLoader loader = null;
+        try {
+            loader=new FXMLLoader(Utils.class.getResource(fileName));
+//            Stage stage = (Stage) ((Node) .getSource()).getScene().getWindow();
+            scene = new Scene(loader.load());
+//            stage.setScene(scene);
+//            stage.show();
             return loader.getController();
         } catch (IOException e) {
             e.printStackTrace();
