@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="483.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="295.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="115.0">
+         <image>
+            <Image url="@img/user.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="356.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="208.0" fitWidth="295.0" layoutX="20.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/tiramisu.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="title" layoutX="20.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisù">
+         <font>
+            <Font name="Liberation Sans" size="57.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="20.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/tag.png" />
+         </image></ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="296.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/carbs.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="295.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/calories.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="296.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/fat.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="356.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="356.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="356.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="40">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="70.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="italian, dolce, prova, ciao, mascarpone">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

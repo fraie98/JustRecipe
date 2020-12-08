@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="778.0" prefWidth="1197.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unipi.dii.inginf.lsdb.justrecipe.controller.HomePageController">
+<AnchorPane disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="778.0" prefWidth="1197.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unipi.dii.inginf.lsdb.justrecipe.controller.HomePageController">
    <children>
       <VBox>
          <children>
@@ -71,7 +71,7 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <VBox prefHeight="700.0" prefWidth="891.0" style="-fx-background-color: white;" />
+                  <VBox fx:id="mainPage" prefHeight="700.0" prefWidth="819.0" style="-fx-background-color: white; -fx-alignment: center;" />
                </children>
             </HBox>
          </children>
