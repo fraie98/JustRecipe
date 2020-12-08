@@ -1,7 +1,7 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
+import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import org.neo4j.driver.*;
-
 import static org.neo4j.driver.Values.parameters;
 
 /**
@@ -9,18 +9,18 @@ import static org.neo4j.driver.Values.parameters;
  */
 public class Neo4jDriver implements DatabaseDriver{
     private Driver driver;
-    private String hostname;
+    private String ip;
     private int port;
     private String username;
     private String password;
 
-    //DA CAMBIARE: PASSARE LA CLASSE PARAMETRI DI CONFIGURAZIONE
-    public Neo4jDriver( String hostName, int port, String username, String password )
+    public Neo4jDriver(ConfigurationParameters configurationParameters)
     {
-        this.hostname = hostName;
-        this.port = port;
-        this.username = username;
-        this.password = password;
+        this.ip = configurationParameters.getNeo4jIp();
+        this.port = configurationParameters.getNeo4jPort();
+        this.username = configurationParameters.getNeo4jUsername();
+        this.password = configurationParameters.getNeo4jPassword();
+        initConnection();
     }
 
     /**
@@ -29,7 +29,7 @@ public class Neo4jDriver implements DatabaseDriver{
     @Override
     public void initConnection()
     {
-        driver = GraphDatabase.driver( "neo4j://" + hostname + ":" + port, AuthTokens.basic( username, password ) );
+        driver = GraphDatabase.driver( "neo4j://" + ip + ":" + port, AuthTokens.basic( username, password ) );
     }
 
     /**

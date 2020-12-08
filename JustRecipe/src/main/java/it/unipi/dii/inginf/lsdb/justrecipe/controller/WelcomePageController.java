@@ -2,12 +2,27 @@ package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.thoughtworks.xstream.XStream;
+import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Controller for the Welcome page
@@ -26,6 +41,7 @@ public class WelcomePageController {
     @FXML private Button registrationButton;
 
     private Neo4jDriver neo4jDriver;
+    private final ConfigurationParameters configurationParameters = Utils.readConfigurationParameters();
 
     /**
      * Method called when the controller is initialized
@@ -36,8 +52,7 @@ public class WelcomePageController {
         labelRegistrationFailed.setVisible(false);
         loginButton.setOnAction(actionEvent -> handleLoginButtonAction(actionEvent));
         registrationButton.setOnAction(actionEvent -> handleRegisterButtonAction(actionEvent));
-        neo4jDriver = new Neo4jDriver("localhost", 7687, "neo4j", "justrecipe");
-        neo4jDriver.initConnection();
+        neo4jDriver = new Neo4jDriver(configurationParameters);
     }
 
     /**
