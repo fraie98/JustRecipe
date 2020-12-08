@@ -1,4 +1,4 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.utils;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

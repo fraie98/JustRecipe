@@ -1,4 +1,4 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.model;
 
 import java.sql.Timestamp;
 

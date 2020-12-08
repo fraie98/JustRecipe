@@ -1,4 +1,4 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.model;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -14,11 +14,12 @@ public class Recipe {
     private int fat;
     private int protain;
     private int carbs;
+    private List<Comment> comments;
 
-    //Blank constractor
+    //Blank constructor
     public Recipe(){}
 
-    //Constractor
+    //Constructor
     public Recipe(String title, String picture, String instructions, List<String> ingredients, List<String> categories,
                   Timestamp creationTime, int calories, int fat, int protain, int carbs){
         this.title = title;

@@ -1,4 +1,5 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.controller;
+import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 
 public class HomePageController{
     private Neo4jDriver neo4jDriver;
@@ -9,11 +10,6 @@ public class HomePageController{
      */
     public void transferNeo4jDriver(Neo4jDriver neo4jDriver) {
         this.neo4jDriver = neo4jDriver;
-        /*try {
-            this.neo4jDriver.closeConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 
     public void initialize()

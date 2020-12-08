@@ -1,4 +1,4 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
 import org.neo4j.driver.*;
 

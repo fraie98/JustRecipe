@@ -1,18 +1,13 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
+import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Controller for the Welcome page
@@ -127,7 +122,7 @@ public class WelcomePageController {
                            final String password)
     {
         // I need to check if it is possible to use this username
-        if (!neo4jDriver.checkUsername(username)) //If it wasn't previously used
+        if (!neo4jDriver.checkUsername(username)) // If it wasn't previously used
         {
             neo4jDriver.addUser(firsName, lastName, username, password);
             return true;

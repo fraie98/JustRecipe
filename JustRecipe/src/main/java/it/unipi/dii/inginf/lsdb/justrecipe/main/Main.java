@@ -1,4 +1,4 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

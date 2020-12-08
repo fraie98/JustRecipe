@@ -1,4 +1,4 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.client.*;

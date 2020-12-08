@@ -1,4 +1,4 @@
-package sample;
+package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
 /**
  * Interface with the method that every database driver must implement
