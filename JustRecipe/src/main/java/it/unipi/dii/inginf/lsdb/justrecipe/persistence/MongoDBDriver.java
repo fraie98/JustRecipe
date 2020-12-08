@@ -2,8 +2,10 @@ package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.client.*;
+import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import org.bson.Document;
 
+import java.util.Iterator;
 import java.util.function.Consumer;
 
 /**
@@ -13,25 +15,27 @@ public class MongoDBDriver implements DatabaseDriver{
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection collection;
-    private String hostname; //es: localhost
-    private int port; // 27017 default value
+    private String ip;
+    private int port;
     private String username;
     private String password;
-    private final String DBNAME = "justrecipe";
+    private String dbName;
 
     /**
-     * Function that prints in json format all the document of a stream
+     * Consumer function that prints the document in json format
      */
     private Consumer<Document> printDocuments = doc -> {
-        System.out.println(doc.toJson());};
+        System.out.println(doc.toJson());
+    };
 
-    //DA CAMBIARE: PASSARE LA CLASSE PARAMETRI DI CONFIGURAZIONE
-    public MongoDBDriver (String hostName, int port, String username, String password)
+    public MongoDBDriver (ConfigurationParameters configurationParameters)
     {
-        this.hostname = hostName;
-        this.port = port;
-        this.username = username;
-        this.password = password;
+        this.ip = configurationParameters.getMongoIp();
+        this.port = configurationParameters.getMongoPort();
+        this.username = configurationParameters.getMongoUsername();
+        this.password = configurationParameters.getMongoPassword();
+        this.dbName = configurationParameters.getMongoDbName();
+        initConnection();
     }
 
     /**
@@ -39,10 +43,18 @@ public class MongoDBDriver implements DatabaseDriver{
      */
     @Override
     public void initConnection() {
-        ConnectionString connectionString = new ConnectionString("mongodb://" + username + ":" + password
-                + "@" + hostname + ":" + port);
+        ConnectionString connectionString;
+        if (!username.equals("")) // if there are access rules
+        {
+            connectionString = new ConnectionString("mongodb://" + username + ":" + password
+                    + "@" + ip + ":" + port);
+        }
+        else // standard access
+        {
+            connectionString = new ConnectionString("mongodb://" + ip + ":" + port);
+        }
         mongoClient = MongoClients.create(connectionString);
-        database = mongoClient.getDatabase(DBNAME);
+        database = mongoClient.getDatabase(dbName);
     }
 
     /**
@@ -57,8 +69,16 @@ public class MongoDBDriver implements DatabaseDriver{
      * Method used to change the collection
      * @param name  name of the new collection
      */
-    public void changeCollection(String name)
+    public void chooseCollection(String name)
     {
         collection = database.getCollection(name);
+    }
+
+    /**
+     * Method useful for checking development issues
+     */
+    public void printAllCollectionDocuments ()
+    {
+        collection.find().forEach(printDocuments);
     }
 }
