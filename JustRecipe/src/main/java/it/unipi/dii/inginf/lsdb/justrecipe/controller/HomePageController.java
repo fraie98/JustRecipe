@@ -21,6 +21,7 @@ public class HomePageController {
     private Neo4jDriver neo4jDriver;
     @FXML private VBox mainPage;
     @FXML private ImageView profileImg;
+    @FXML private VBox window;
 
     /**
      * Function used to pass the Neo4jDriver instance from another controller to this controller
@@ -33,10 +34,7 @@ public class HomePageController {
     /**
      * Initialization function for HomePageController
      */
-    public void initialize()
-    {
-        addRecipesSnap();
-    }
+    public void initialize(){ addRecipesSnap(); }
 
     /**
      * Function that adds the snapshots of the recipes to the homepage
