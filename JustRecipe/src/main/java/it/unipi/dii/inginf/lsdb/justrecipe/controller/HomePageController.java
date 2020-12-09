@@ -22,6 +22,7 @@ public class HomePageController {
     private Neo4jDriver neo4jDriver;
     @FXML private VBox mainPage;
     @FXML private ImageView profileImg;
+    @FXML private ImageView discoveryImg;
 
     /**
      * Function used to pass the Neo4jDriver instance from another controller to this controller
@@ -37,7 +38,8 @@ public class HomePageController {
     public void initialize()
     {
         addRecipesSnap();
-        profileImg.setOnMouseClicked(mouseEvent -> clickOnProfPicToChangePage(mouseEvent));
+        profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
+        discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
     }
 
     /**
@@ -73,10 +75,17 @@ public class HomePageController {
     }
 
 
-    private void clickOnProfPicToChangePage(MouseEvent mouseEvent){
-        System.out.println("ImageClicked");
-        HomePageController homePageController = (HomePageController) Utils.changeScene("/profilePage.fxml", mouseEvent);
-        homePageController.transferNeo4jDriver(neo4jDriver);
+    private void clickOnProfImgToChangePage(MouseEvent mouseEvent){
+        try {
+            ProfilePageController profilePageController = (ProfilePageController) Utils.changeScene("/profilePage.fxml", mouseEvent);
+            profilePageController.transferNeo4jDriver(neo4jDriver);
+        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
     }
 
+    private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
+        try{
+            DiscoveryPageController discoveryPageController = (DiscoveryPageController) Utils.changeScene("/discoveryPage.fxml", mouseEvent);
+            discoveryPageController.transferNeo4jDriver(neo4jDriver);
+        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+    }
 }

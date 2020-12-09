@@ -3,6 +3,7 @@ package it.unipi.dii.inginf.lsdb.justrecipe.utils;
 import com.thoughtworks.xstream.XStream;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -30,36 +31,16 @@ public class Utils {
      * Snippet of code for jumping in the next scene
      * Every scene has associated its specific controller
      * @param fileName      The name of the file in which i can obtain the GUI (.fxml)
-     * @param actionEvent   The event that leads to change the scene
+     * @param event   The event that leads to change the scene
      * @return The new controller, because I need to pass some parameters
      */
-    public static Object changeScene (String fileName, ActionEvent actionEvent)
+    public static Object changeScene (String fileName, Event event)
     {
         Scene scene = null;
         FXMLLoader loader = null;
         try {
             loader=new FXMLLoader(Utils.class.getResource(fileName));
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.show();
-            return loader.getController();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    //prova per far partire una nuova schermata cliccando un imageview
-    //WIP
-    public static Object changeScene (String fileName, MouseEvent mouseEvent)
-    {
-        Scene scene = null;
-        FXMLLoader loader = null;
-        try {
-            loader=new FXMLLoader(Utils.class.getResource(fileName));
-            Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-//            Stage stage = new Stage();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(loader.load());
             stage.setScene(scene);
             stage.show();
