@@ -20,6 +20,7 @@ public class Main extends Application {
         primaryStage.setTitle("JustRecipe");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        //primaryStage.setOnCloseRequest(actionEvent -> {close();});
     }
 
     public static void main(String[] args) {

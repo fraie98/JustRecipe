@@ -29,9 +29,29 @@ public class RecipeSnapshotController {
     {
         Pane newSnap = getRecipesSnapshotFXML();
 
+        // Title
         Text t = (Text) newSnap.getChildren().get(3);
         t.setText(title);
-
+        // User
+        Text u = (Text) newSnap.getChildren().get(1);
+        u.setText(user);
+        // Carbs
+        Text c = (Text) newSnap.getChildren().get(9);
+        c.setText(String.valueOf(carbs));
+        // Protein
+        Text p = (Text) newSnap.getChildren().get(8);
+        p.setText(String.valueOf(protein));
+        // Fat
+        Text f = (Text) newSnap.getChildren().get(10);
+        f.setText(String.valueOf(fat));
+        // Categories
+        String overallTags = new String("");
+        for (String s:tags) {
+            overallTags = overallTags.concat(s).concat(", ");
+        }
+        Text categ = (Text) newSnap.getChildren().get(11);
+        categ.setText(overallTags);
+        // Recipe's pic
         ImageView recipefoto = (ImageView) newSnap.getChildren().get(2);
         recipefoto.setImage(new Image(imgPath));
 

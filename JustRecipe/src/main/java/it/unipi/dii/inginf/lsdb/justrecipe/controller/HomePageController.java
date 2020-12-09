@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class HomePageController {
     private Neo4jDriver neo4jDriver;
@@ -42,12 +43,16 @@ public class HomePageController {
      */
     public void addRecipesSnap() {
         RecipeSnapshotController repCtrl = new RecipeSnapshotController();
+        ArrayList<String> c = new ArrayList<>();
+        c.add("prova");
+        c.add("prova1");
+        c.add("prova3");
 
         /* All this part must be substituted with a cycle*/
-        Pane rec1 = repCtrl.createSnapRecipe("Titolo1","user1",20,30,40,null,"img/pizza.jpg");
-        Pane rec2 = repCtrl.createSnapRecipe("Titolo2","user2",20,30,40,null,"img/tiramisu.jpg");
-        Pane rec3 = repCtrl.createSnapRecipe("Titolo3","user3",20,30,40,null,"img/tiramisu.jpg");
-        Pane rec4 = repCtrl.createSnapRecipe("Titolo4","user4",20,30,40,null,"img/tiramisu.jpg");
+        Pane rec1 = repCtrl.createSnapRecipe("Titolo1","user1",1,2,3,c,"img/pizza.jpg");
+        Pane rec2 = repCtrl.createSnapRecipe("Titolo2","user2",4,5,6,c,"img/tiramisu.jpg");
+        Pane rec3 = repCtrl.createSnapRecipe("Titolo3","user3",7,8,9,c,"img/tiramisu.jpg");
+        Pane rec4 = repCtrl.createSnapRecipe("Titolo4","user4",10,11,12,c,"img/tiramisu.jpg");
 
         HBox riga1 = new HBox();
         riga1.setStyle("-fx-padding: 10px");
