@@ -1,22 +1,11 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
-import it.unipi.dii.inginf.lsdb.justrecipe.main.Main;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
-
-import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class HomePageController {
@@ -34,7 +23,8 @@ public class HomePageController {
     public void initialize()
     {
         neo4jDriver = Neo4jDriver.getInstance();
-        //mongoDBDriver = MongoDBDriver.getInstance();
+        mongoDBDriver = MongoDBDriver.getInstance();
+        mongoDBDriver.getHomepageRecipe();
         addRecipesSnap();
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
@@ -45,16 +35,16 @@ public class HomePageController {
      */
     public void addRecipesSnap() {
         RecipeSnapshotController repCtrl = new RecipeSnapshotController();
-        ArrayList<String> c = new ArrayList<>();
-        c.add("prova");
-        c.add("prova1");
-        c.add("prova3");
+        ArrayList<String> categories = new ArrayList<>();
+        categories.add("prova");
+        categories.add("prova1");
+        categories.add("prova3");
 
         /* All this part must be substituted with a cycle*/
-        Pane rec1 = repCtrl.createSnapRecipe("Titolo1","user1",1,2,3,c,"img/pizza.jpg");
-        Pane rec2 = repCtrl.createSnapRecipe("Titolo2","user2",4,5,6,c,"img/tiramisu.jpg");
-        Pane rec3 = repCtrl.createSnapRecipe("Titolo3","user3",7,8,9,c,"img/tiramisu.jpg");
-        Pane rec4 = repCtrl.createSnapRecipe("Titolo4","user4",10,11,12,c,"img/tiramisu.jpg");
+        Pane rec1 = repCtrl.createSnapRecipe("Titolo1","user1",1,2,3,categories,"img/pizza.jpg");
+        Pane rec2 = repCtrl.createSnapRecipe("Titolo2","user2",4,5,6,categories,"img/tiramisu.jpg");
+        Pane rec3 = repCtrl.createSnapRecipe("Titolo3","user3",7,8,9,categories,"img/tiramisu.jpg");
+        Pane rec4 = repCtrl.createSnapRecipe("Titolo4","user4",10,11,12,categories,"img/tiramisu.jpg");
 
         HBox riga1 = new HBox();
         riga1.setStyle("-fx-padding: 10px");

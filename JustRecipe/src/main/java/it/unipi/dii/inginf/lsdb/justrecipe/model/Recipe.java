@@ -1,19 +1,21 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.model;
 
-import java.sql.Timestamp;
+import org.bson.types.ObjectId;
+
+import java.util.Date;
 import java.util.List;
 
 public class Recipe {
     private String title;
-    private String picture;
     private String instructions;
     private List<String> ingredients;
     private List<String> categories;
-    private Timestamp creationTime;
     private int calories;
     private int fat;
-    private int protain;
+    private int protein;
     private int carbs;
+    private String creationTime;
+    private String picture;
     private List<Comment> comments;
 
     //Blank constructor
@@ -21,7 +23,7 @@ public class Recipe {
 
     //Constructor
     public Recipe(String title, String picture, String instructions, List<String> ingredients, List<String> categories,
-                  Timestamp creationTime, int calories, int fat, int protain, int carbs){
+                  String creationTime, int calories, int fat, int protein, int carbs){
         this.title = title;
         this.picture = picture;
         this.instructions = instructions;
@@ -30,12 +32,13 @@ public class Recipe {
         this.creationTime = creationTime;
         this.calories = calories;
         this.fat = fat;
-        this.protain = protain;
+        this.protein = protein;
         this.carbs = carbs;
     }
 
 
     //Getters
+
     public String getTitle() {
         return title;
     }
@@ -56,7 +59,7 @@ public class Recipe {
         return categories;
     }
 
-    public Timestamp getCreationTime() {
+    public String getCreationTime() {
         return creationTime;
     }
 
@@ -68,8 +71,8 @@ public class Recipe {
         return fat;
     }
 
-    public int getProtain() {
-        return protain;
+    public int getProtein() {
+        return protein;
     }
 
     public int getCarbs() {
@@ -98,10 +101,9 @@ public class Recipe {
         this.categories = categories;
     }
 
-    public void setCreationTime(Timestamp creationTime) {
+    public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
-
     public void setCalories(int calories) {
         this.calories = calories;
     }
@@ -110,8 +112,8 @@ public class Recipe {
         this.fat = fat;
     }
 
-    public void setProtain(int protain) {
-        this.protain = protain;
+    public void setProtein(int protein) {
+        this.protein = protein;
     }
 
     public void setCarbs(int carbs) {

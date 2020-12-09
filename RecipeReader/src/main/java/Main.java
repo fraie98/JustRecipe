@@ -52,9 +52,9 @@ public class Main {
                 doc.append("instructions", instructions);
             }
             if (rawRecipe.getIngredients() != null)
-                doc.append("ingredients", Arrays.asList(rawRecipe.getIngredients()));
+                doc.append("ingredients", rawRecipe.getIngredients());
             if (rawRecipe.getCategories() != null)
-                doc.append("categories", Arrays.asList(rawRecipe.getCategories()));
+                doc.append("categories", rawRecipe.getCategories());
             if (rawRecipe.getCalories() != 0)
                 doc.append("calories", rawRecipe.getCalories());
             if (rawRecipe.getFat() != 0)
@@ -64,13 +64,15 @@ public class Main {
             if (rawRecipe.getCarbs() != 0)
                 doc.append("carbs", rawRecipe.getCarbs());
             // For the timestamp MongoDB use the "Date"
-            doc.append("creationTime", date);
+            doc.append("creationTime", date.toString());
             documents.add(doc);
         }
         
         collection.insertMany(documents);
         System.out.println(collection.countDocuments()); //How many documents loaded
         mongoClient.close();
+
+        //System.out.println(recipesWithoutDuplicates.get(0).getIngredients());
     }
 
     /**

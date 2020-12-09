@@ -18,10 +18,10 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(loader.load()));
         primaryStage.show();
 
-        // close the connection to Neo4J when the app closes
+        // close the connection to Neo4J and MongoDB when the app closes
         primaryStage.setOnCloseRequest(actionEvent -> {
             Neo4jDriver.getInstance().closeConnection();
-            //MongoDBDriver.getInstance().closeConnection();
+            MongoDBDriver.getInstance().closeConnection();
         });
     }
 
