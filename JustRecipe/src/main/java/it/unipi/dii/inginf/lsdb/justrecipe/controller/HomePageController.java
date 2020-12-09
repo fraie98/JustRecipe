@@ -23,8 +23,8 @@ public class HomePageController {
     public void initialize()
     {
         neo4jDriver = Neo4jDriver.getInstance();
-        mongoDBDriver = MongoDBDriver.getInstance();
-        mongoDBDriver.getHomepageRecipe();
+        /*mongoDBDriver = MongoDBDriver.getInstance();
+        mongoDBDriver.getHomepageRecipe();*/
         addRecipesSnap();
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
