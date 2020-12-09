@@ -2,17 +2,18 @@ package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 import it.unipi.dii.inginf.lsdb.justrecipe.main.Main;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class HomePageController {
     public void initialize()
     {
         addRecipesSnap();
+        profileImg.setOnMouseClicked(mouseEvent -> clickOnProfPicToChangePage(mouseEvent));
     }
 
     /**
@@ -70,11 +72,11 @@ public class HomePageController {
         mainPage.getChildren().add(1,riga2);
     }
 
-    @FXML
-    private void handleProfilePic()
-    {
-        System.out.println("ProfileImageClicked!");
 
+    private void clickOnProfPicToChangePage(MouseEvent mouseEvent){
+        System.out.println("ImageClicked");
+        HomePageController homePageController = (HomePageController) Utils.changeScene("/profilePage.fxml", mouseEvent);
+        homePageController.transferNeo4jDriver(neo4jDriver);
     }
 
 }
