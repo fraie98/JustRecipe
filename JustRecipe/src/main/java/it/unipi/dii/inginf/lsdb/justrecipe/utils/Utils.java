@@ -31,7 +31,7 @@ public class Utils {
      * Snippet of code for jumping in the next scene
      * Every scene has associated its specific controller
      * @param fileName      The name of the file in which i can obtain the GUI (.fxml)
-     * @param event   The event that leads to change the scene
+     * @param event         The event that leads to change the scene
      * @return The new controller, because I need to pass some parameters
      */
     public static Object changeScene (String fileName, Event event)

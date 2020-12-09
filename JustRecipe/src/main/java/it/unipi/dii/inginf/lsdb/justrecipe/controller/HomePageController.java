@@ -1,5 +1,6 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 import it.unipi.dii.inginf.lsdb.justrecipe.main.Main;
+import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.event.ActionEvent;
@@ -20,23 +21,20 @@ import java.util.ArrayList;
 
 public class HomePageController {
     private Neo4jDriver neo4jDriver;
+    private MongoDBDriver mongoDBDriver;
+    private String username; // username of the user logged
     @FXML private VBox mainPage;
     @FXML private ImageView profileImg;
     @FXML private ImageView discoveryImg;
 
-    /**
-     * Function used to pass the Neo4jDriver instance from another controller to this controller
-     * @param neo4jDriver
-     */
-    public void transferNeo4jDriver(Neo4jDriver neo4jDriver) {
-        this.neo4jDriver = neo4jDriver;
-    }
 
     /**
      * Initialization function for HomePageController
      */
     public void initialize()
     {
+        neo4jDriver = Neo4jDriver.getInstance();
+        //mongoDBDriver = MongoDBDriver.getInstance();
         addRecipesSnap();
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
@@ -77,15 +75,21 @@ public class HomePageController {
 
     private void clickOnProfImgToChangePage(MouseEvent mouseEvent){
         try {
-            ProfilePageController profilePageController = (ProfilePageController) Utils.changeScene("/profilePage.fxml", mouseEvent);
-            profilePageController.transferNeo4jDriver(neo4jDriver);
+            ProfilePageController profilePageController = (ProfilePageController)
+                    Utils.changeScene("/profilePage.fxml", mouseEvent);
+            profilePageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
     }
 
     private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
         try{
-            DiscoveryPageController discoveryPageController = (DiscoveryPageController) Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-            discoveryPageController.transferNeo4jDriver(neo4jDriver);
+            DiscoveryPageController discoveryPageController = (DiscoveryPageController)
+                    Utils.changeScene("/discoveryPage.fxml", mouseEvent);
+            discoveryPageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

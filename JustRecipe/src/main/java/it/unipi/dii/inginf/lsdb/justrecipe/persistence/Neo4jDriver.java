@@ -1,26 +1,40 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
+
+import static java.lang.System.exit;
 import static org.neo4j.driver.Values.parameters;
 
 /**
  * This class is used to communicate with Neo4j
  */
 public class Neo4jDriver implements DatabaseDriver{
+    private static Neo4jDriver instance = null; // Singleton Instance
+
     private Driver driver;
     private String ip;
     private int port;
     private String username;
     private String password;
 
-    public Neo4jDriver(ConfigurationParameters configurationParameters)
+    private Neo4jDriver(ConfigurationParameters configurationParameters)
     {
         this.ip = configurationParameters.getNeo4jIp();
         this.port = configurationParameters.getNeo4jPort();
         this.username = configurationParameters.getNeo4jUsername();
         this.password = configurationParameters.getNeo4jPassword();
         initConnection();
+    }
+
+    public static Neo4jDriver getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new Neo4jDriver(Utils.readConfigurationParameters());
+        }
+        return instance;
     }
 
     /**
@@ -38,7 +52,8 @@ public class Neo4jDriver implements DatabaseDriver{
     @Override
     public void closeConnection ()
     {
-        driver.close();
+        if (driver != null)
+            driver.close();
     }
 
     /**

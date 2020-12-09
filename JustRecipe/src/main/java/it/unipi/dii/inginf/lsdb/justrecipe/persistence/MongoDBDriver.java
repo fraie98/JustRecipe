@@ -3,6 +3,7 @@ package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 import com.mongodb.ConnectionString;
 import com.mongodb.client.*;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.bson.Document;
 
 import java.util.Iterator;
@@ -12,6 +13,8 @@ import java.util.function.Consumer;
  * This class is used to communicate with MongoDB
  */
 public class MongoDBDriver implements DatabaseDriver{
+    private static MongoDBDriver instance;
+
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection collection;
@@ -21,6 +24,14 @@ public class MongoDBDriver implements DatabaseDriver{
     private String password;
     private String dbName;
 
+    public static MongoDBDriver getInstance() {
+        if (instance == null)
+        {
+            instance = new MongoDBDriver(Utils.readConfigurationParameters());
+        }
+        return instance;
+    }
+
     /**
      * Consumer function that prints the document in json format
      */
@@ -28,7 +39,7 @@ public class MongoDBDriver implements DatabaseDriver{
         System.out.println(doc.toJson());
     };
 
-    public MongoDBDriver (ConfigurationParameters configurationParameters)
+    private MongoDBDriver (ConfigurationParameters configurationParameters)
     {
         this.ip = configurationParameters.getMongoIp();
         this.port = configurationParameters.getMongoPort();
@@ -62,7 +73,8 @@ public class MongoDBDriver implements DatabaseDriver{
      */
     @Override
     public void closeConnection() {
-        mongoClient.close();
+        if (mongoClient != null)
+            mongoClient.close();
     }
 
     /**
