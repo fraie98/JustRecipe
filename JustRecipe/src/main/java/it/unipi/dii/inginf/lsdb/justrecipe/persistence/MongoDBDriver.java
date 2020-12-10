@@ -115,7 +115,7 @@ public class MongoDBDriver implements DatabaseDriver{
                     (List<String>)doc.get("categories"), doc.getInteger("calories", 0),
                     doc.getInteger("fat", 0), doc.getInteger("protein", 0),
                     doc.getInteger("carbs", 0), doc.getDate("creationTime"),
-                    doc.getString("picture"), doc.getString("authorUsername"), new ArrayList<>());
+                    doc.getString("picture"), doc.getString("author"), new ArrayList<>());
             // I take also the comments information,
             // to avoid having to search for them when you see the single recipe
             if (doc.get("comments") != null)

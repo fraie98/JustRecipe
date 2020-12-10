@@ -67,6 +67,7 @@ public class Main {
                 doc.append("carbs", rawRecipe.getCarbs());
             // For the timestamp MongoDB use the "Date"
             doc.append("creationTime", date);
+            doc.append("author", "admin");
             documents.add(doc);
         }
         
