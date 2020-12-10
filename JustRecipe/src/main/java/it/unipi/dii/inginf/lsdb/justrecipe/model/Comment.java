@@ -1,36 +1,54 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.model;
-
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Comment {
+    private String authorUsername;
     private String text;
-    private Timestamp timestamp;
+    private Date creationTime;
 
-    //Constractors
+    //Constructors
     public Comment(){}
 
-    public Comment(String text, Timestamp timestamp) {
+    public Comment(String authorUsername, String text, Date creationTime) {
+        this.authorUsername = authorUsername;
         this.text = text;
-        this.timestamp = timestamp;
+        this.creationTime = creationTime;
     }
 
 
     //Getters
+
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
     public String getText() {
         return text;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Date getCreationTime() {
+        return creationTime;
     }
-
 
     //Setters
     public void setText(String text) {
         this.text = text;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "authorUsername='" + authorUsername + '\'' +
+                ", text='" + text + '\'' +
+                ", creationTime=" + creationTime +
+                '}';
     }
 }

@@ -3,8 +3,6 @@ package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
-
-import static java.lang.System.exit;
 import static org.neo4j.driver.Values.parameters;
 
 /**

@@ -2,10 +2,12 @@ package it.unipi.dii.inginf.lsdb.justrecipe.model;
 
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Recipe {
+    private ObjectId id;
     private String title;
     private String instructions;
     private List<String> ingredients;
@@ -14,16 +16,20 @@ public class Recipe {
     private int fat;
     private int protein;
     private int carbs;
-    private String creationTime;
+    private Date creationTime;
     private String picture;
+    private String authorUsername;
     private List<Comment> comments;
 
     //Blank constructor
     public Recipe(){}
 
     //Constructor
-    public Recipe(String title, String picture, String instructions, List<String> ingredients, List<String> categories,
-                  String creationTime, int calories, int fat, int protein, int carbs){
+    public Recipe(ObjectId id, String title, String instructions, List<String> ingredients, List<String> categories,
+                  int calories, int fat, int protein, int carbs, Date creationTime, String picture, String authorUsername,
+                  List<Comment> comments)
+    {
+        this.id = id;
         this.title = title;
         this.picture = picture;
         this.instructions = instructions;
@@ -34,10 +40,25 @@ public class Recipe {
         this.fat = fat;
         this.protein = protein;
         this.carbs = carbs;
+        this.authorUsername = authorUsername;
+        this.comments = comments;
+    }
+
+    public Recipe(String title, String instructions, List<String> ingredients, List<String> categories,
+                  int calories, int fat, int protein, int carbs, Date creationTime, String picture,
+                  String authorUsername)
+    {
+        this(new ObjectId(), title, instructions, ingredients, categories, calories, fat, protein, carbs,
+                creationTime, picture, authorUsername, new ArrayList<Comment>());
     }
 
 
     //Getters
+
+
+    public ObjectId getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
@@ -59,7 +80,7 @@ public class Recipe {
         return categories;
     }
 
-    public String getCreationTime() {
+    public Date getCreationTime() {
         return creationTime;
     }
 
@@ -79,6 +100,13 @@ public class Recipe {
         return carbs;
     }
 
+    public String getAuthorUsername() {
+        return authorUsername;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
 
     //Setters
     public void setTitle(String title) {
@@ -101,9 +129,10 @@ public class Recipe {
         this.categories = categories;
     }
 
-    public void setCreationTime(String creationTime) {
+    public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
     }
+
     public void setCalories(int calories) {
         this.calories = calories;
     }
@@ -118,5 +147,35 @@ public class Recipe {
 
     public void setCarbs(int carbs) {
         this.carbs = carbs;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public void setAuthorUsername(String authorUsername) {
+        this.authorUsername = authorUsername;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "_id=" + id +
+                ", title='" + title + '\'' +
+                ", instructions='" + instructions + '\'' +
+                ", ingredients=" + ingredients +
+                ", categories=" + categories +
+                ", calories=" + calories +
+                ", fat=" + fat +
+                ", protein=" + protein +
+                ", carbs=" + carbs +
+                ", creationTime=" + creationTime +
+                ", picture='" + picture + '\'' +
+                ", comments=" + comments +
+                '}';
     }
 }

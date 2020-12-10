@@ -1,4 +1,5 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -6,7 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class HomePageController {
     private Neo4jDriver neo4jDriver;
@@ -16,6 +18,8 @@ public class HomePageController {
     @FXML private ImageView profileImg;
     @FXML private ImageView discoveryImg;
 
+    private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20;
+
 
     /**
      * Initialization function for HomePageController
@@ -23,8 +27,7 @@ public class HomePageController {
     public void initialize()
     {
         neo4jDriver = Neo4jDriver.getInstance();
-        /*mongoDBDriver = MongoDBDriver.getInstance();
-        mongoDBDriver.getHomepageRecipe();*/
+        mongoDBDriver = MongoDBDriver.getInstance();
         addRecipesSnap();
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
@@ -34,32 +37,27 @@ public class HomePageController {
      * Function that adds the snapshots of the recipes to the homepage
      */
     public void addRecipesSnap() {
+        List<Recipe> recipes = mongoDBDriver.getHomepageRecipe(0, HOW_MANY_SNAPSHOT_TO_SHOW, null);
         RecipeSnapshotController repCtrl = new RecipeSnapshotController();
-        ArrayList<String> categories = new ArrayList<>();
-        categories.add("prova");
-        categories.add("prova1");
-        categories.add("prova3");
 
-        /* All this part must be substituted with a cycle*/
-        Pane rec1 = repCtrl.createSnapRecipe("Titolo1","user1",1,2,3,categories,"img/pizza.jpg");
-        Pane rec2 = repCtrl.createSnapRecipe("Titolo2","user2",4,5,6,categories,"img/tiramisu.jpg");
-        Pane rec3 = repCtrl.createSnapRecipe("Titolo3","user3",7,8,9,categories,"img/tiramisu.jpg");
-        Pane rec4 = repCtrl.createSnapRecipe("Titolo4","user4",10,11,12,categories,"img/tiramisu.jpg");
+        Iterator<Recipe> iterator = recipes.iterator();
 
-        HBox riga1 = new HBox();
-        riga1.setStyle("-fx-padding: 10px");
-        riga1.setSpacing(20);
-        riga1.getChildren().add(rec1);
-        riga1.getChildren().add(rec2);
-
-        HBox riga2 = new HBox();
-        riga2.setStyle("-fx-padding: 10px");
-        riga2.setSpacing(20);
-        riga2.getChildren().add(rec3);
-        riga2.getChildren().add(rec4);
-
-        mainPage.getChildren().add(0,riga1);
-        mainPage.getChildren().add(1,riga2);
+        while (iterator.hasNext())
+        {
+            HBox row = new HBox();
+            row.setStyle("-fx-padding: 10px");
+            row.setSpacing(20);
+            Recipe recipe1 = iterator.next();
+            Pane rec1 = repCtrl.createSnapRecipe(recipe1);
+            row.getChildren().add(rec1);
+            if (iterator.hasNext())
+            {
+                Recipe recipe2 = iterator.next();
+                Pane rec2 = repCtrl.createSnapRecipe(recipe2);
+                row.getChildren().add(rec2);
+            }
+            mainPage.getChildren().add(row);
+        }
     }
 
 

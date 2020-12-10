@@ -5,6 +5,8 @@ import com.mongodb.client.*;
 import org.bson.Document;
 import java.io.IOException;
 import java.nio.file.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -64,15 +66,13 @@ public class Main {
             if (rawRecipe.getCarbs() != 0)
                 doc.append("carbs", rawRecipe.getCarbs());
             // For the timestamp MongoDB use the "Date"
-            doc.append("creationTime", date.toString());
+            doc.append("creationTime", date);
             documents.add(doc);
         }
         
         collection.insertMany(documents);
         System.out.println(collection.countDocuments()); //How many documents loaded
         mongoClient.close();
-
-        //System.out.println(recipesWithoutDuplicates.get(0).getIngredients());
     }
 
     /**

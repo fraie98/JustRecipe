@@ -1,16 +1,18 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
-import com.google.gson.Gson;
 import com.mongodb.ConnectionString;
 import com.mongodb.client.*;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.bson.Document;
-
-import java.text.SimpleDateFormat;
+import org.bson.conversions.Bson;
 import java.util.*;
 import java.util.function.Consumer;
+import static com.mongodb.client.model.Aggregates.*;
+import static com.mongodb.client.model.Sorts.descending;
 
 /**
  * This class is used to communicate with MongoDB
@@ -90,34 +92,46 @@ public class MongoDBDriver implements DatabaseDriver{
         collection = database.getCollection(name);
     }
 
-    // PER ORA METTO LE PRIME 20, PER PROVA
-    public List<Recipe> getHomepageRecipe ()
+    /**
+     * Function used to get the list of Recipe to show in the homepage
+     * @param from  first extreme of the interval
+     * @param to    second extreme of the interval
+     * @return      The list of (to-from) element to show, in descendent order from creationTime
+     */
+    // DA AGGIUNGERE: considerare solo le ricette fatte dagli utenti che seguo
+    // Utilizzare la lista di follower
+    public List<Recipe> getHomepageRecipe (int from, int to, List<User> follower)
     {
         List<Recipe> recipes = new ArrayList<>();
-        Gson gson = new Gson();
-        MongoCursor cursor = collection.find().limit(20).iterator();
+        Bson sort = sort(descending("creationTime"));
+        Bson skip = skip(from);
+        Bson limit = limit(to);
+        MongoCursor cursor = collection.aggregate(Arrays.asList(sort, skip, limit)).iterator();
         while (cursor.hasNext())
         {
-            Document document = (Document) cursor.next();
-            recipes.add(gson.fromJson(document.toJson(), Recipe.class));
+            Document doc = (Document) cursor.next();
+            Recipe recipe = new Recipe(doc.getObjectId("_id"), doc.getString("title"),
+                    doc.getString("instructions"), (List<String>)doc.get("ingredients"),
+                    (List<String>)doc.get("categories"), doc.getInteger("calories", 0),
+                    doc.getInteger("fat", 0), doc.getInteger("protein", 0),
+                    doc.getInteger("carbs", 0), doc.getDate("creationTime"),
+                    doc.getString("picture"), doc.getString("authorUsername"), new ArrayList<>());
+            // I take also the comments information,
+            // to avoid having to search for them when you see the single recipe
+            if (doc.get("comments") != null)
+            {
+                List<Document> docCommentsArray = (ArrayList<Document>) doc.get("comments");
+                List<Comment> comments = new ArrayList<>();
+                for (Document docComment: docCommentsArray)
+                {
+                    Comment comment = new Comment(docComment.getString("author"),
+                            docComment.getString("text"), docComment.getDate("creationTime"));
+                    comments.add(comment);
+                }
+                recipe.setComments(comments);
+            }
+            recipes.add(recipe);
         }
-        for (Recipe recipe: recipes)
-        {
-            System.out.println(recipe.getTitle());
-        }
-        /*Document firstDoc = (Document) collection.find().first();
-        System.out.println(firstDoc.toJson());
-        Recipe recipe = gson.fromJson(firstDoc.toJson(), Recipe.class);
-        System.out.println(recipe.getTitle());
-        System.out.println(recipe.getCreationTime());*/
         return recipes;
-    }
-
-    /**
-     * Method useful for checking development issues
-     */
-    public void printAllCollectionDocuments ()
-    {
-        collection.find().forEach(printDocuments);
     }
 }

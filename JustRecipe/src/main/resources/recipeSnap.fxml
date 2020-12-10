@@ -24,7 +24,7 @@
             <Image url="@img/tiramisu.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="title" layoutX="17.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisù">
+      <Text layoutX="17.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisù">
          <font>
             <Font name="Liberation Sans" size="31.0" />
          </font>

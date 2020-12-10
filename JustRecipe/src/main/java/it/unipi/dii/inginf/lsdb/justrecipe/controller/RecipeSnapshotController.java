@@ -1,5 +1,6 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,48 +13,53 @@ import java.io.IOException;
 import java.util.List;
 
 public class RecipeSnapshotController {
-    @FXML private Text title;
+    private final int HOW_MANY_CHAR_SNAPSHOT_TITLE = 25;
+    private final int HOW_MANY_CHAR_SNAPSHOT_CATEGORIES = 50;
+
 
     /**
      * It create a snapshot for the recipe with these values
-     * @param title
-     * @param user
-     * @param carbs
-     * @param protein
-     * @param fat
-     * @param tags
-     * @param imgPath
+     * @param recipe    The recipe to show
      * @return The pane that is the snapshot of the recipe
      */
-    public Pane createSnapRecipe(String title, String user, Integer carbs, Integer protein, Integer fat, List<String> tags, String imgPath)
+    public Pane createSnapRecipe (Recipe recipe)
     {
         Pane newSnap = getRecipesSnapshotFXML();
 
         // Title
         Text t = (Text) newSnap.getChildren().get(3);
+        String title = recipe.getTitle();
+        if (title.length() > HOW_MANY_CHAR_SNAPSHOT_TITLE)
+        {
+            title = title.substring(0, HOW_MANY_CHAR_SNAPSHOT_TITLE-1) + "...";
+        }
         t.setText(title);
         // User
         Text u = (Text) newSnap.getChildren().get(1);
-        u.setText(user);
+        u.setText(recipe.getAuthorUsername());
         // Carbs
         Text c = (Text) newSnap.getChildren().get(9);
-        c.setText(String.valueOf(carbs));
-        // Protein
+        c.setText(String.valueOf(recipe.getCarbs()));
+        // Protein (???)
         Text p = (Text) newSnap.getChildren().get(8);
-        p.setText(String.valueOf(protein));
+        p.setText(String.valueOf(recipe.getProtein()));
         // Fat
         Text f = (Text) newSnap.getChildren().get(10);
-        f.setText(String.valueOf(fat));
+        f.setText(String.valueOf(recipe.getFat()));
         // Categories
-        String overallTags = new String("");
-        for (String s:tags) {
+        String overallTags = "";
+        for (String s: recipe.getCategories()) {
             overallTags = overallTags.concat(s).concat(", ");
+        }
+        if (overallTags.length() > HOW_MANY_CHAR_SNAPSHOT_CATEGORIES)
+        {
+            overallTags = overallTags.substring(0, HOW_MANY_CHAR_SNAPSHOT_CATEGORIES-1) + "...";
         }
         Text categ = (Text) newSnap.getChildren().get(11);
         categ.setText(overallTags);
         // Recipe's pic
         ImageView recipefoto = (ImageView) newSnap.getChildren().get(2);
-        recipefoto.setImage(new Image(imgPath));
+        recipefoto.setImage(new Image("img/pizza.jpg"));
 
         return newSnap;
     }
