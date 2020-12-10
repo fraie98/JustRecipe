@@ -4,6 +4,7 @@ import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -34,18 +35,22 @@ public class RecipeSnapshotController {
             title = title.substring(0, HOW_MANY_CHAR_SNAPSHOT_TITLE-1) + "...";
         }
         t.setText(title);
+
         // User
         Text u = (Text) newSnap.getChildren().get(1);
         u.setText(recipe.getAuthorUsername());
         // Carbs
         Text c = (Text) newSnap.getChildren().get(9);
         c.setText(String.valueOf(recipe.getCarbs()));
-        // Protein (???)
-        Text p = (Text) newSnap.getChildren().get(8);
+        // Protein
+        Text p = (Text) newSnap.getChildren().get(13);
         p.setText(String.valueOf(recipe.getProtein()));
         // Fat
         Text f = (Text) newSnap.getChildren().get(10);
         f.setText(String.valueOf(recipe.getFat()));
+        // Calories
+        Text cal = (Text) newSnap.getChildren().get(8);
+        p.setText(String.valueOf(recipe.getCalories()));
         // Categories
         String overallTags = "";
         for (String s: recipe.getCategories()) {
@@ -59,7 +64,7 @@ public class RecipeSnapshotController {
         categ.setText(overallTags);
         // Recipe's pic
         ImageView recipefoto = (ImageView) newSnap.getChildren().get(2);
-        recipefoto.setImage(new Image("img/pizza.jpg"));
+        recipefoto.setImage(new Image("img/genericRecipe.png"));
 
         return newSnap;
     }

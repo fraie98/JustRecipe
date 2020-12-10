@@ -9,22 +9,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="426.0" style="-fx-background-color: white; -fx-background-position: center; -fx-border-color: black; -fx-border-radius: 10px; -fx-border-style: solid; -fx-border-width: 3px; -fx-border-color: orange;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="257.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="257.0" AnchorPane.topAnchor="79.0">
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="259.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="259.0" AnchorPane.topAnchor="71.0">
          <image>
             <Image url="@img/user.png" />
          </image>
       </ImageView>
-      <Text layoutX="317.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+      <Text fx:id="snapUser" layoutX="317.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <ImageView fitHeight="177.0" fitWidth="236.0" layoutX="17.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="snapImg" fitHeight="190.0" fitWidth="231.0" layoutX="17.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/tiramisu.jpg" />
+            <Image url="@img/genericRecipe.png" />
          </image>
       </ImageView>
-      <Text layoutX="17.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisù">
+      <Text fx:id="snapTitle" layoutX="17.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisù">
          <font>
             <Font name="Liberation Sans" size="31.0" />
          </font>
@@ -34,39 +34,49 @@
             <Image url="@img/tag.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="256.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="263.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/carbs.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="256.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="263.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/calories.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="256.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="263.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/fat.png" />
          </image>
       </ImageView>
-      <Text layoutX="317.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30">
+      <Text fx:id="snapCal" layoutX="317.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="317.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20">
+      <Text fx:id="snapCarbs" layoutX="316.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="317.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="40">
+      <Text fx:id="snapFat" layoutX="317.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="40">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="67.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="italian, dolce, prova, ciao, mascarpone">
+      <Text fx:id="snapCategories" layoutX="67.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="italian, dolce, prova, ciao, mascarpone">
          <font>
             <Font size="14.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="263.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/protein1.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="snapProtein" layoutX="316.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50">
+         <font>
+            <Font size="17.0" />
          </font>
       </Text>
    </children>
