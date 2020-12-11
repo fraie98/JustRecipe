@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-
 public class ProfilePageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
