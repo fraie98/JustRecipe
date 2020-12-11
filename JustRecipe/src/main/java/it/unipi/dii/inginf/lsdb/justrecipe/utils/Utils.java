@@ -21,6 +21,11 @@ import javax.xml.validation.SchemaFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Class that contains some useful method
@@ -102,5 +107,36 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Function used to get the string representation of a List<String>, with every element separated by comma
+     * @param list  the list to transform
+     * @return      the string representation
+     */
+    public static String fromListToString (List<String> list)
+    {
+        String string = "";
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext())
+        {
+            string = string.concat(iterator.next());
+            if (iterator.hasNext())
+            {
+                string = string.concat(", ");
+            }
+        }
+        return string;
+    }
+
+    /**
+     * Function that transform a Date object in the standard format choosen for the application
+     * @param date
+     * @return
+     */
+    public static String fromDateToString (Date date)
+    {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date);
     }
 }

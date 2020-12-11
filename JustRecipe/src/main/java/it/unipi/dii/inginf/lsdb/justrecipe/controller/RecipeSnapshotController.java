@@ -3,22 +3,17 @@ package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.util.List;
-
 public class RecipeSnapshotController {
     private final int HOW_MANY_CHAR_SNAPSHOT_TITLE = 25;
     private final int HOW_MANY_CHAR_SNAPSHOT_CATEGORIES = 45;
 
+    @FXML private Pane snapePane;
     @FXML private Text snapTitle;
     @FXML private Text snapUser;
     @FXML private Text snapCarbs;
@@ -32,13 +27,20 @@ public class RecipeSnapshotController {
 
     public void initialize ()
     {
-        snapImg.setOnMouseClicked(mouseEvent -> esegui(mouseEvent));
+
+        snapePane.setOnMouseClicked(mouseEvent -> showMoreInformation(mouseEvent));
     }
 
-    public void esegui (MouseEvent mouseEvent)
-    {
-        System.out.println(snapTitle.getText());
+    /**
+     * This function is used to show the complete information of the recipe in a new page
+     * @param mouseEvent    The event that leads to show the recipe completely (click of the mouse in the pane)
+     */
+    private void showMoreInformation(MouseEvent mouseEvent) {
+        RecipePageController recipePageController =
+                (RecipePageController) Utils.changeScene("/recipePage.fxml", mouseEvent);
+        recipePageController.setRecipe(recipe);
     }
+
 
     public void setRecipe (Recipe recipe)
     {

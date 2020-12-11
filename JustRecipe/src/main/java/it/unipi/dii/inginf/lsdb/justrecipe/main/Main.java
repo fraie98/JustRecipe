@@ -17,6 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("JustRecipe");
         primaryStage.setScene(new Scene(loader.load()));
         primaryStage.show();
+        //primaryStage.setResizable(false);
 
         // close the connection to Neo4J and MongoDB when the app closes
         primaryStage.setOnCloseRequest(actionEvent -> {
