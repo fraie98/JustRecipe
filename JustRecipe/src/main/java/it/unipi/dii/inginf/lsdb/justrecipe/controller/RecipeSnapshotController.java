@@ -17,7 +17,7 @@ import java.util.List;
 
 public class RecipeSnapshotController {
     private final int HOW_MANY_CHAR_SNAPSHOT_TITLE = 25;
-    private final int HOW_MANY_CHAR_SNAPSHOT_CATEGORIES = 50;
+    private final int HOW_MANY_CHAR_SNAPSHOT_CATEGORIES = 45;
 
     @FXML private Text snapTitle;
     @FXML private Text snapUser;
@@ -32,7 +32,12 @@ public class RecipeSnapshotController {
 
     public void initialize ()
     {
+        snapImg.setOnMouseClicked(mouseEvent -> esegui(mouseEvent));
+    }
 
+    public void esegui (MouseEvent mouseEvent)
+    {
+        System.out.println(snapTitle.getText());
     }
 
     public void setRecipe (Recipe recipe)

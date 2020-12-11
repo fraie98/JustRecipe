@@ -1,4 +1,5 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.model;
+
 import java.util.Date;
 
 public class Comment {

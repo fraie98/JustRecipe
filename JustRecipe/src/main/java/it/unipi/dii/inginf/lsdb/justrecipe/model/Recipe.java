@@ -1,13 +1,14 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.model;
 
+import com.google.gson.annotations.SerializedName;
 import org.bson.types.ObjectId;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Recipe {
-    private ObjectId id;
     private String title;
     private String instructions;
     private List<String> ingredients;
@@ -25,11 +26,10 @@ public class Recipe {
     public Recipe(){}
 
     //Constructor
-    public Recipe(ObjectId id, String title, String instructions, List<String> ingredients, List<String> categories,
+    public Recipe(String title, String instructions, List<String> ingredients, List<String> categories,
                   int calories, int fat, int protein, int carbs, Date creationTime, String picture, String authorUsername,
                   List<Comment> comments)
     {
-        this.id = id;
         this.title = title;
         this.picture = picture;
         this.instructions = instructions;
@@ -48,17 +48,12 @@ public class Recipe {
                   int calories, int fat, int protein, int carbs, Date creationTime, String picture,
                   String authorUsername)
     {
-        this(new ObjectId(), title, instructions, ingredients, categories, calories, fat, protein, carbs,
+        this( title, instructions, ingredients, categories, calories, fat, protein, carbs,
                 creationTime, picture, authorUsername, new ArrayList<Comment>());
     }
 
 
     //Getters
-
-
-    public ObjectId getId() {
-        return id;
-    }
 
     public String getTitle() {
         return title;
@@ -149,10 +144,6 @@ public class Recipe {
         this.carbs = carbs;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
-
     public void setAuthorUsername(String authorUsername) {
         this.authorUsername = authorUsername;
     }
@@ -164,8 +155,7 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe{" +
-                "_id=" + id +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", instructions='" + instructions + '\'' +
                 ", ingredients=" + ingredients +
                 ", categories=" + categories +
@@ -175,6 +165,7 @@ public class Recipe {
                 ", carbs=" + carbs +
                 ", creationTime=" + creationTime +
                 ", picture='" + picture + '\'' +
+                ", authorUsername='" + authorUsername + '\'' +
                 ", comments=" + comments +
                 '}';
     }

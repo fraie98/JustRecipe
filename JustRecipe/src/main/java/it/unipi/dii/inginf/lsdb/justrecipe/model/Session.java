@@ -6,11 +6,9 @@ public class Session {
     public Session(User loggedUser) {
         this.loggedUser = loggedUser;
     }
-
     public void setLoggedUser(User loggedUser) {
         this.loggedUser = loggedUser;
     }
-
     public User getLoggedUser() {
         return loggedUser;
     }

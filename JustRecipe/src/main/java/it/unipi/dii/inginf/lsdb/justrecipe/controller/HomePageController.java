@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -97,7 +96,6 @@ public class HomePageController {
             RecipeSnapshotController recipeSnapshotController =
                     (RecipeSnapshotController) loader.getController();
             recipeSnapshotController.setRecipe(recipe);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
