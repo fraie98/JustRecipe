@@ -2,14 +2,20 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unipi.dii.inginf.lsdb.justrecipe.controller.DiscoveryPageController">
    <children>
@@ -87,7 +93,38 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <VBox fx:id="mainPage" prefHeight="700.0" prefWidth="819.0" style="-fx-background-color: white; -fx-alignment: center;" />
+                  <BorderPane prefHeight="700.0" prefWidth="921.0" style="-fx-background-color: white;">
+                     <top>
+                        <Pane prefHeight="149.0" prefWidth="921.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField layoutX="50.0" layoutY="73.0" prefHeight="30.0" prefWidth="547.0" />
+                              <SplitMenuButton layoutX="683.0" layoutY="75.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" text="Search" textAlignment="CENTER">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" text="Username" />
+                                  <MenuItem mnemonicParsing="false" text="User's Full Name" />
+                                    <MenuItem mnemonicParsing="false" text="Recipe Title" />
+                                    <MenuItem mnemonicParsing="false" text="Recipe Category" />
+                                    <MenuItem mnemonicParsing="false" text="Recipe Ingredients" />
+                                </items>
+                              </SplitMenuButton>
+                              <Text layoutX="104.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
+                                 <font>
+                                    <Font size="34.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="52.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/search.png" />
+                                 </image>
+                              </ImageView>
+                              <Line endX="100.0" layoutX="550.0" layoutY="134.0" startX="-279.0" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <bottom>
+                        <VBox prefHeight="502.0" prefWidth="921.0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                  </BorderPane>
                </children>
             </HBox>
          </content>
