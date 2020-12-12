@@ -56,10 +56,7 @@ public class RecipeSnapshotController {
         snapProtein.setText(String.valueOf(recipe.getProtein()));
         snapFat.setText(String.valueOf(recipe.getFat()));
         snapCal.setText(String.valueOf(recipe.getCalories()));
-        String overallTags = "";
-        for (String s: recipe.getCategories()) {
-            overallTags = overallTags.concat(s).concat(", ");
-        }
+        String overallTags = Utils.fromListToString(recipe.getCategories());
         if (overallTags.length() > HOW_MANY_CHAR_SNAPSHOT_CATEGORIES)
         {
             overallTags = overallTags.substring(0, HOW_MANY_CHAR_SNAPSHOT_CATEGORIES-1) + "...";

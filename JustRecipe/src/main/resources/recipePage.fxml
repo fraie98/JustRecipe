@@ -79,9 +79,9 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <ScrollPane hbarPolicy="NEVER" style="-fx-background-color: white;" vbarPolicy="NEVER">
+                  <ScrollPane hbarPolicy="NEVER" prefWidth="772.0" style="-fx-background-color: white;" vbarPolicy="NEVER">
                      <content>
-                        <VBox fx:id="recipeVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;">
+                        <VBox fx:id="recipeVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="770.0" spacing="20.0" style="-fx-background-color: white;">
                            <children>
                               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <children>
@@ -170,22 +170,12 @@
                                                 <Image url="@img/edit.png" />
                                              </image>
                                           </ImageView>
-                                          <Label layoutX="35.0" layoutY="21.0" text="Like:">
+                                          <Label fx:id="recipeLikes" layoutX="14.0" layoutY="23.0" text="Like:">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="1.0" layoutY="52.0" text="Published on:">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="recipeLikes" layoutX="86.0" layoutY="21.0" text="0">
-                                             <font>
-                                                <Font size="15.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="recipeDate" layoutX="103.0" layoutY="52.0" text="date">
+                                          <Label fx:id="recipeDate" layoutX="14.0" layoutY="51.0" text="Published on:">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -202,7 +192,7 @@
                                     <Text fx:id="recipeInstructions" layoutX="23.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anticamente le nonne usavano preparare una colazione che oggi potremmo definirepovera, ma che all’epoca era davvero ricchissima! Ancora oggi la ricetta è immutata,basta rompere in un bicchiere un uovo freschissimo e sbatterlo con dello zucchero ea piacere aggiungere caffè o latte caldo, per i più piccoli, e marsala o anice per i piùgrandicelli. Ed è proprio da questa portentosa crema che nasce la crema al mascarponebase del tiramisù. Il dolce italiano per eccellenza, quello più famoso e amato,ma soprattutto che ha dato vita a tantissime altre versioni, anche tiramisù senza uova!Poi il tiramisù alle fragole o quello alla Nutella, giusto per citarne un paio!Senza contare le rivisitazioni più raffinate come la crostata morbida o la torta al tiramisù." wrappingWidth="725.0" />
                                  </children>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Pane>
                               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
@@ -222,10 +212,10 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Pane>
-                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="133.0" prefWidth="770.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="770.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                                  <children>
                                     <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -239,7 +229,7 @@
                                     </Text>
                                  </children>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets bottom="35.0" />
                                  </VBox.margin>
                               </Pane>
                            </children>

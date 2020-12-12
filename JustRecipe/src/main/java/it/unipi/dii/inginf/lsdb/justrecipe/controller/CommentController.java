@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
+/**
+ * Controller for the single comment
+ */
 public class CommentController {
 
     @FXML private Label commentDate;

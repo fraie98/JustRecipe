@@ -2,12 +2,10 @@ package it.unipi.dii.inginf.lsdb.justrecipe.utils;
 
 import com.thoughtworks.xstream.XStream;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -130,7 +128,7 @@ public class Utils {
     }
 
     /**
-     * Function that transform a Date object in the standard format choosen for the application
+     * Function that transform a Date object in the standard format chosen for the application
      * @param date
      * @return
      */

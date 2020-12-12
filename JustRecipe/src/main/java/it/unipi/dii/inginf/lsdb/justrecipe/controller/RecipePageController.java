@@ -5,6 +5,7 @@ import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Controller for the page of the recipe
+ */
 public class RecipePageController {
 
     @FXML private ImageView homeImg;
@@ -49,8 +53,13 @@ public class RecipePageController {
         homeImg.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfileToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscoveryToChangePage(mouseEvent));
+        recipeVBox.setAlignment(Pos.CENTER);
     }
 
+    /**
+     * Setters for the recipe, in which we also set the correct value to show
+     * @param recipe    Recipe to show
+     */
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
         recipeTitle.setText(recipe.getTitle());
@@ -70,7 +79,9 @@ public class RecipePageController {
         recipeProtein.setText(String.valueOf(recipe.getProtein()));
         recipeCategories.setText(Utils.fromListToString(recipe.getCategories()));
         recipeIngredients.setText(Utils.fromListToString(recipe.getIngredients()));
-        recipeDate.setText(Utils.fromDateToString(recipe.getCreationTime()));
+        recipeDate.setText("Published on: " + Utils.fromDateToString(recipe.getCreationTime()));
+        //TO DO
+        recipeLikes.setText("Likes: 0");
 
         List<Comment> comments = new ArrayList<>();
         comments.add(new Comment("Pippo", "Hello World!", new Date()));
@@ -79,24 +90,39 @@ public class RecipePageController {
         addRecipeComments();
     }
 
+    /**
+     * Function used to handle the click on the homepage icon
+     * @param mouseEvent    event that represents the click on the icon
+     */
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
         HomePageController homePageController = (HomePageController)
                 Utils.changeScene("/homepage.fxml", mouseEvent);
         homePageController.setUsername(username);
     }
 
+    /**
+     * Function used to handle the click on the profile icon
+     * @param mouseEvent    event that represents the click on the icon
+     */
     private void clickOnProfileToChangePage(MouseEvent mouseEvent){
         ProfilePageController profilePageController = (ProfilePageController)
                 Utils.changeScene("/profilePage.fxml", mouseEvent);
         profilePageController.setUsername(username);
     }
 
+    /**
+     * Function used to handle the click on the discovery icon
+     * @param mouseEvent    event that represents the click on the icon
+     */
     private void clickOnDiscoveryToChangePage(MouseEvent mouseEvent){
         DiscoveryPageController discoveryPageController = (DiscoveryPageController)
                 Utils.changeScene("/discoveryPage.fxml", mouseEvent);
         discoveryPageController.setUsername(username);
     }
 
+    /**
+     * Function used to add the comments for the recipe
+     */
     public void addRecipeComments() {
         if (recipe.getComments() != null)
         {
@@ -111,6 +137,11 @@ public class RecipePageController {
         }
     }
 
+    /**
+     * Function used to load the .fxml for the comment
+     * @param comment   Comment to show
+     * @return          The pane in which i have showed the comment
+     */
     public Pane loadComment (Comment comment)
     {
         Pane pane = null;
