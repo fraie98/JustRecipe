@@ -1,19 +1,15 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mongodb.ConnectionString;
 import com.mongodb.client.*;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
-import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-
-import javax.print.Doc;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.function.Consumer;

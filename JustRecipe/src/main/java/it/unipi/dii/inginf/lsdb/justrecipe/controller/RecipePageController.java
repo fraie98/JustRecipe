@@ -10,9 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -126,6 +126,9 @@ public class RecipePageController {
     public void addRecipeComments() {
         if (recipe.getComments() != null)
         {
+            Label commentsTitle = new Label("Comments:");
+            commentsTitle.setFont(Font.font(24));
+            recipeVBox.getChildren().add(commentsTitle);
             Iterator<Comment> iterator = recipe.getComments().iterator();
             while (iterator.hasNext())
             {
@@ -140,7 +143,7 @@ public class RecipePageController {
     /**
      * Function used to load the .fxml for the comment
      * @param comment   Comment to show
-     * @return          The pane in which i have showed the comment
+     * @return          The pane in which I have showed the comment
      */
     public Pane loadComment (Comment comment)
     {
