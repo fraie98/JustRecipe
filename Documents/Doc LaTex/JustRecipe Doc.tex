@@ -1,3 +1,4 @@
+% !TeX spellcheck = en_US
 \documentclass[a4paper]{report}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -45,28 +46,67 @@ Furthermore, everyone has experimented the infamous question: “What will I eat
 
 \section{Requirements}
 \subsection{Main Actors}
-\subsection{Functional Requirements}
-Unregistered User
+The main actors of the application are four:
 \begin{itemize}
-	\item Sign-up
+	\item Unregistered User
+	
+	\noindent He is the user which open the application for the first time, in order to access he must sign-up.
+	
+	\item User
+	
+	\noindent He is the normal user (the registered one).
+	
+	\item Moderator
+	
+	\noindent He is in charge of controlling the comments and eventually delete the ones which contain abuses.
+	
+	\item Administrator
+	
+	\noindent He is the most powerful actor, he can delete users and recipes and he is also in charge of elect moderators
 \end{itemize}
-User
+
+\noindent Each actor can do all the features of the previous ones in the list.
+
+\subsection{Functional Requirements}
+\subsubsection{Features offered to the Unregistered User}
+\begin{itemize}
+	\item  Registration
+	
+	\noindent In order to access the application an user must sign-up. Otherwise he is not allowed to access and to use all the functionalities.
+\end{itemize}
+\subsubsection{Features offered to the Registered User}
 \begin{itemize}
 	\item Login/Logout
+	
+	\noindent The only way to access the application, as we said previously, is to sign-up and the login. At the end the user can logout and close the session.
+	
 	\item Search a recipe
+	
+	\noindent It's possible to search a recipe searching for the title and for categories.
+	
 	\item Browse suggested recipes
+	
+	\noindent The suggestions will be offered in a proper section, they are done considering the relationship between the user logged, the users followed by the user logged and so on so forth.
+	
 	\item Browse recipes of following users
+	
+	\noindent In a proper section (i.e. the Homepage) the user can browse the recipes of the following user. Indeed he can see only a snapsht of the recipes, if he want a more in-depth view he can click on it and se the recipe page in which he is able to see all the recipe details. 
+	
 	\item Add a recipe
 	\item Edit own recipes
 	\item Comment recipes
 	\item Follow another user
 	\item Like a recipe
 \end{itemize}
-Moderator
+
+\subsubsection{Features offered to the Moderator}
 \begin{itemize}
 	\item Delete comments
+	
+	\noindent The moderator is in charge of delete comments which contain racist abuse, crude terms and so on so forth.
 \end{itemize}
-Administrator
+
+\subsubsection{Features offered to the Administrator}
 \begin{itemize}
 	\item Delete users
 	\item Delete recipes
