@@ -73,7 +73,7 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="logoutPic" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/exit.png" />
                      </image>

@@ -19,6 +19,7 @@ public class HomePageController {
     @FXML private VBox mainPage;
     @FXML private ImageView profileImg;
     @FXML private ImageView discoveryImg;
+    @FXML private ImageView logoutPic;
 
     private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20;
 
@@ -33,6 +34,7 @@ public class HomePageController {
         addRecipesSnap();
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
+        logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
     }
 
     /**
@@ -61,7 +63,10 @@ public class HomePageController {
         }
     }
 
-
+    /**
+     * Function that let the navigation into the ui ---> profilePage
+     * @param mouseEvent event that represents the click on the icon
+     */
     private void clickOnProfImgToChangePage(MouseEvent mouseEvent){
         try {
             ProfilePageController profilePageController = (ProfilePageController)
@@ -70,6 +75,21 @@ public class HomePageController {
         }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
     }
 
+    /**
+     * Function that let the logout action, by going into the welcome page
+     * @param mouseEvent event that represents the click on the icon
+     */
+    private void clickOnLogoutImg(MouseEvent mouseEvent){
+        try {
+            WelcomePageController welcomePageController = (WelcomePageController)
+                Utils.changeScene("/welcome.fxml", mouseEvent);
+        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+    }
+
+    /**
+     * Function that let the navigation into the ui ---> discoveryPage
+     * @param mouseEvent event that represents the click on the icon
+     */
     private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
         try{
             DiscoveryPageController discoveryPageController = (DiscoveryPageController)

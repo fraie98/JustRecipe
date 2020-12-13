@@ -13,6 +13,7 @@ public class ProfilePageController {
     private String username;
     @FXML private ImageView homepageIcon;
     @FXML private ImageView discoveryImg;
+    @FXML private ImageView logoutPic;
 
     public void initialize ()
     {
@@ -20,12 +21,17 @@ public class ProfilePageController {
         //mongoDBDriver = MongoDBDriver.getInstance();
         homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
+        logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Function that let the navigation into the ui ---> homepage
+     * @param mouseEvent event that represents the click on the icon
+     */
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
         try{
             HomePageController homePageController = (HomePageController)
@@ -34,6 +40,21 @@ public class ProfilePageController {
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
     }
 
+    /**
+     * Function that let the logout action, by going into the welcome page
+     * @param mouseEvent event that represents the click on the icon
+     */
+    private void clickOnLogoutImg(MouseEvent mouseEvent){
+        try {
+            WelcomePageController welcomePageController = (WelcomePageController)
+                    Utils.changeScene("/welcome.fxml", mouseEvent);
+        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+    }
+
+    /**
+     * Function that let the navigation into the ui ---> discoveryPage
+     * @param mouseEvent event that represents the click on the icon
+     */
     private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
         try{
             DiscoveryPageController discoveryPageController = (DiscoveryPageController)

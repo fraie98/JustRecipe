@@ -32,6 +32,7 @@ public class RecipePageController {
     @FXML private Text recipeInstructions;
     @FXML private ImageView recipeLikeImg;
     @FXML private ImageView recipePicture;
+    @FXML private ImageView logoutPic;
     @FXML private Text recipeTitle;
     @FXML private Text recipeUsername;
     @FXML private Text recipeCarbs;
@@ -53,6 +54,7 @@ public class RecipePageController {
         homeImg.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfileToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscoveryToChangePage(mouseEvent));
+        logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
         recipeVBox.setAlignment(Pos.CENTER);
     }
 
@@ -118,6 +120,17 @@ public class RecipePageController {
         DiscoveryPageController discoveryPageController = (DiscoveryPageController)
                 Utils.changeScene("/discoveryPage.fxml", mouseEvent);
         discoveryPageController.setUsername(username);
+    }
+
+    /**
+     * Function that let the logout action, by going into the welcome page
+     * @param mouseEvent event that represents the click on the icon
+     */
+    private void clickOnLogoutImg(MouseEvent mouseEvent){
+        try {
+            WelcomePageController welcomePageController = (WelcomePageController)
+                    Utils.changeScene("/welcome.fxml", mouseEvent);
+        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
     }
 
     /**
