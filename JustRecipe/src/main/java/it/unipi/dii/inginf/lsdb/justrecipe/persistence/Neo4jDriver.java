@@ -1,6 +1,7 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
 import static org.neo4j.driver.Values.parameters;
@@ -127,5 +128,51 @@ public class Neo4jDriver implements DatabaseDriver{
             else
                 return false;
         }
+    }
+
+    /**
+     *
+     * @param one  Username of user one
+     * @param two  Username of user two
+     * @return  true if one is followed by two, false otherwise
+     */
+    public boolean isUserOneFollowedByUserTwo(String one, String two)
+    {
+        // Mock-up
+        // In the future this funtion must interrogate neo4j db
+        // in order to know if user one follow user two
+        return true;
+    }
+
+    /**
+     * It cretes the relation follower-[:Follow]->following
+     * @param follower  The user who starts to follow
+     * @param following  The user who is followed by follower
+     */
+    public void follow(String follower, String following)
+    {
+
+    }
+
+    /**
+     * It deletes the relation oldFollower-[:Follow]->oldFollowing
+     * @param oldFollower  The user who decide to unfollow
+     * @param oldFollowing  The user unfollowed
+     */
+    public void unfollow(String oldFollower, String oldFollowing)
+    {
+
+    }
+
+    /**
+     * It returns the info about the user
+     * @param username  Username of the target user
+     * @return  The entity User with all informations about the user with the indicated username
+     */
+    public User getUserInfo(String username)
+    {
+        User u = null;
+        u = new User("Tizio","Caio",null,"prova","pw");
+        return u;
     }
 }

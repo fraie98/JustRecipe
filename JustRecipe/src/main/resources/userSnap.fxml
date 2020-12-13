@@ -6,29 +6,50 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="239.0" style="-fx-background-color: white; -fx-background-position: center; -fx-border-radius: 10px; -fx-border-style: solid; -fx-border-color: rgb(12, 163, 216); -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="239.0" style="-fx-background-color: white; -fx-background-position: center; -fx-border-radius: 10px; -fx-border-style: solid; -fx-border-color: rgb(12, 163, 216); -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unipi.dii.inginf.lsdb.justrecipe.controller.UserSnapshotController">
    <children>
-      <Text layoutX="51.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+      <Text fx:id="userSnapUsername" layoutX="51.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
          <font>
             <Font size="27.0" />
          </font>
       </Text>
-      <Text layoutX="81.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipes: x">
+      <Text layoutX="80.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipes:">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="85.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Follower: x" />
-      <Text layoutX="81.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Following: x" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+      <Text layoutX="78.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Follower:">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="74.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Following:">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <ImageView fx:id="userSnapImg" fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/genericUser.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="86.0" fitWidth="78.0" layoutX="81.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="userSnapFollowButton" fitHeight="86.0" fitWidth="78.0" layoutX="81.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/follow.png" />
          </image>
       </ImageView>
+      <Text fx:id="userSnapRecipes" layoutX="155.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="userSnapFollowing" layoutX="155.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="userSnapFollower" layoutX="155.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

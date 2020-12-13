@@ -6,6 +6,9 @@ public class User {
     private String picture;
     private String username;
     private String password;
+    private int follower;
+    private int following;
+    private int numRecipes;
 
     public User(){}
 
@@ -40,6 +43,17 @@ public class User {
         return password;
     }
 
+    public int getFollower() {
+        return follower;
+    }
+
+    public int getFollowing() {
+        return following;
+    }
+
+    public int getNumRecipes() {
+        return numRecipes;
+    }
 
     //Setters
     public void setFirstName(String firstName) {
@@ -60,6 +74,18 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setFollower(int follower) {
+        this.follower = follower;
+    }
+
+    public void setFollowing(int following) {
+        this.following = following;
+    }
+
+    public void setNumRecipes(int numRecipes) {
+        this.numRecipes = numRecipes;
     }
 }
 

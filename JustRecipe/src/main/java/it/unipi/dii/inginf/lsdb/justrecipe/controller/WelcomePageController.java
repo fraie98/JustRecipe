@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.thoughtworks.xstream.XStream;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.main.Main;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -74,6 +75,8 @@ public class WelcomePageController {
                 HomePageController homePageController = (HomePageController)
                         Utils.changeScene("/homepage.fxml", actionEvent);
                 homePageController.setUsername(usernameLoginTextField.getText());
+                Session newSession = Session.getInstance();
+                newSession.setLoggedUser(neo4jDriver.getUserInfo(usernameLoginTextField.getText()));
             }
             else
             {
