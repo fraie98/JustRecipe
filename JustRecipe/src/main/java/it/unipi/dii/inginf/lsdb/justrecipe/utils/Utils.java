@@ -6,6 +6,9 @@ import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -16,6 +19,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -76,7 +80,7 @@ public class Utils {
         }
         else
         {
-            System.exit(1); //If i can't read the configuration file i can't continue with the program
+            System.exit(1); //If i can't read the configuration file I can't continue with the program
         }
         return null;
     }
@@ -136,5 +140,20 @@ public class Utils {
     {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(date);
+    }
+
+    /**
+     * Function that shows an error alert
+     * @param text  Text to be shown
+     */
+    public static void showErrorAlert (String text)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(text);
+        alert.setHeaderText("Ops.. Something went wrong..");
+        alert.setTitle("Error");
+        ImageView imageView = new ImageView(new Image("/img/emoticon-cry.png"));
+        alert.setGraphic(imageView);
+        alert.show();
     }
 }

@@ -91,9 +91,10 @@ public class Neo4jDriver implements DatabaseDriver{
                  Result result = tx.run( "MATCH (u:User) " +
                                  "WHERE u.username = $username " +
                                  "AND u.password = $password " +
-                                 "RETURN count(*)",
+                                 "RETURN u " +
+                                 "LIMIT 1",
                         parameters( "username", username, "password", password ) );
-                 if (result.single().get(0).asInt() != 0)
+                 if (result.stream().count() != 0)
                     return true;
                  else
                      return false;
@@ -116,9 +117,10 @@ public class Neo4jDriver implements DatabaseDriver{
             Boolean present = session.readTransaction((TransactionWork<Boolean>) tx -> {
                 Result result = tx.run( "MATCH (u:User) " +
                                 "WHERE u.username = $username " +
-                                "RETURN count(*)",
+                                "RETURN u " +
+                                "LIMIT 1",
                         parameters( "username", username) );
-                if (result.single().get(0).asInt() != 0)
+                if (result.stream().count() != 0)
                     return true;
                 else
                     return false;
@@ -151,7 +153,7 @@ public class Neo4jDriver implements DatabaseDriver{
      */
     public void follow(String follower, String following)
     {
-
+        
     }
 
     /**

@@ -37,8 +37,6 @@ public class WelcomePageController {
     @FXML private JFXTextField usernameRegistrationTextField;
     @FXML private JFXPasswordField passwordRegistrationTextField;
     @FXML private JFXPasswordField confirmPasswordRegistrationTextField;
-    @FXML private Label labelLoginFailed;
-    @FXML private Label labelRegistrationFailed;
     @FXML private Button loginButton;
     @FXML private Button registrationButton;
     private Neo4jDriver neo4jDriver;
@@ -48,8 +46,6 @@ public class WelcomePageController {
      */
     public void initialize()
     {
-        labelLoginFailed.setVisible(false);
-        labelRegistrationFailed.setVisible(false);
         loginButton.setOnAction(actionEvent -> handleLoginButtonAction(actionEvent));
         registrationButton.setOnAction(actionEvent -> handleRegisterButtonAction(actionEvent));
         neo4jDriver = Neo4jDriver.getInstance();
@@ -63,10 +59,9 @@ public class WelcomePageController {
      * @param actionEvent   The event that occurs when the user click the Login button
      */
     private void handleLoginButtonAction(ActionEvent actionEvent) {
-        labelLoginFailed.setVisible(false);
         if (usernameLoginTextField.getText().equals("") || passwordLoginTextField.getText().equals(""))
         {
-            labelLoginFailed.setVisible(true);
+            Utils.showErrorAlert("You need to insert all the values!");
         }
         else
         {
@@ -80,7 +75,7 @@ public class WelcomePageController {
             }
             else
             {
-                labelLoginFailed.setVisible(true);
+                Utils.showErrorAlert("Login failed!");
             }
         }
     }
@@ -90,7 +85,6 @@ public class WelcomePageController {
      * @param actionEvent   The event that occurs when the user click the Register button
      */
     private void handleRegisterButtonAction(ActionEvent actionEvent) {
-        labelLoginFailed.setVisible(false);
         if ((firstNameRegistrationTextField.getText().equals("") ||
                 lastNameRegistrationTextField.getText().equals("") ||
                 usernameRegistrationTextField.getText().equals("") ||
@@ -98,7 +92,7 @@ public class WelcomePageController {
                 confirmPasswordRegistrationTextField.getText().equals(""))
             || (!passwordRegistrationTextField.getText().equals(confirmPasswordRegistrationTextField.getText())))
         {
-            labelRegistrationFailed.setVisible(true);
+            Utils.showErrorAlert("You need to insert all the values!");
         }
         else
         {
@@ -111,7 +105,7 @@ public class WelcomePageController {
             }
             else
             {
-                labelRegistrationFailed.setVisible(true);
+                Utils.showErrorAlert("Registration failed!");
             }
         }
     }

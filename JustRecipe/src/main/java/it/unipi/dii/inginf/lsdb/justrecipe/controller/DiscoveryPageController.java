@@ -3,7 +3,12 @@ package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +20,9 @@ public class DiscoveryPageController {
     @FXML private ImageView homepageIcon;
     @FXML private ImageView profilePageIcon;
     @FXML private ImageView logoutPic;
+    @FXML private Button searchButton;
+    @FXML private TextField searchBarTextField;
+    @FXML private ComboBox searchComboBox;
 
     public void initialize ()
     {
@@ -23,6 +31,22 @@ public class DiscoveryPageController {
         homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
         profilePageIcon.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
+
+        // Initializing the options of the ComboBox
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "Recipe title",
+                        "Recipe categories",
+                        "Recipe ingredients",
+                        "Most common recipe categories",
+                        "Best recipes",
+                        "User username",
+                        "User full name",
+                        "Most followed and active user",
+                        "Top Commentators",
+                        "Most liked user"
+                );
+        searchComboBox.setItems(options);
     }
 
     public void setUsername(String username) {

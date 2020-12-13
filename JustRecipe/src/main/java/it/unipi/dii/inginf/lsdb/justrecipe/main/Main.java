@@ -4,6 +4,7 @@ import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -16,8 +17,10 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/welcome.fxml"));
         primaryStage.setTitle("JustRecipe");
         primaryStage.setScene(new Scene(loader.load()));
+        primaryStage.centerOnScreen();
         primaryStage.show();
         //primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("/img/icon.png"));
 
         // close the connection to Neo4J and MongoDB when the app closes
         primaryStage.setOnCloseRequest(actionEvent -> {

@@ -39,7 +39,6 @@
                   <JFXPasswordField fx:id="passwordLoginTextField" layoutX="196.0" layoutY="61.0" prefHeight="25.0" prefWidth="150.0" />
                   <JFXButton fx:id="loginButton" layoutX="301.0" layoutY="116.0" style="-fx-background-color: grey;" text="Login" textFill="WHITE" />
                   <Line endX="100.0" layoutX="196.0" layoutY="163.0" startX="-100.0" strokeLineCap="ROUND" />
-                  <Label fx:id="labelLoginFailed" layoutX="74.0" layoutY="119.0" text="Login failed!" textFill="#eb0b0b" />
                </children>
             </Pane>
          </top>
@@ -60,7 +59,6 @@
                   <JFXTextField fx:id="usernameRegistrationTextField" layoutX="197.0" layoutY="84.0" prefHeight="25.0" prefWidth="148.0" />
                   <JFXPasswordField fx:id="passwordRegistrationTextField" layoutX="196.0" layoutY="117.0" prefHeight="25.0" prefWidth="150.0" />
                   <JFXPasswordField fx:id="confirmPasswordRegistrationTextField" layoutX="196.0" layoutY="149.0" prefHeight="25.0" prefWidth="150.0" />
-                  <Label fx:id="labelRegistrationFailed" layoutX="70.0" layoutY="203.0" text="Registration failed!" textFill="#eb0b0b" />
                </children>
             </Pane>
          </bottom>
