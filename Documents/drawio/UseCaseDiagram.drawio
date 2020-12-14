@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-12-14T10:34:12.369Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="0hES37RLAlDPlfEJVlK1" version="14.0.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-14T10:34:30.986Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="urx_Nr96lFfH8kem1NOm" version="14.0.1" type="github">
   <diagram id="zVrHperSgIiEOsMFfDu-" name="Page-1">
     <mxGraphModel dx="1185" dy="645" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -92,7 +92,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="WYv_reuwZ5NgwWXfh_Jt-1" value="Indicare nella documentazione, uno con 0 following vedrà le ultime ricette generali" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
-          <mxGeometry x="930" y="955" width="450" height="20" as="geometry" />
+          <mxGeometry x="30" y="1060" width="450" height="20" as="geometry" />
         </mxCell>
         <mxCell id="WYv_reuwZ5NgwWXfh_Jt-3" value="Browse Users" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="230" y="430" width="100" height="60" as="geometry" />
@@ -295,9 +295,6 @@
           <mxGeometry x="-0.3437" relative="1" as="geometry">
             <mxPoint x="-6.68" y="-0.21" as="offset" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="WYv_reuwZ5NgwWXfh_Jt-52" value="&lt;font color=&quot;#0000ff&quot;&gt;Azioni che può fare solo l&#39;utente proprietario&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
-          <mxGeometry x="930" y="980" width="250" height="20" as="geometry" />
         </mxCell>
         <mxCell id="WYv_reuwZ5NgwWXfh_Jt-53" value="Edit/Delete Profile" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="830" y="560" width="100" height="60" as="geometry" />
