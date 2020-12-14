@@ -4,6 +4,7 @@ import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -12,7 +13,7 @@ public class UserSnapshotController {
     private Neo4jDriver neo4jDriver;
     private Session appSession;
     @FXML private ImageView userSnapImg;
-    @FXML private Text userSnapUsername;
+    @FXML private Label userSnapUsername;
     @FXML private Text userSnapFollower;
     @FXML private Text userSnapFollowing;
     @FXML private Text userSnapRecipes;

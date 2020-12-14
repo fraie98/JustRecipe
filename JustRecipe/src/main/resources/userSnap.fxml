@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,11 +9,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="239.0" style="-fx-background-color: white; -fx-background-position: center; -fx-border-radius: 10px; -fx-border-style: solid; -fx-border-color: rgb(12, 163, 216); -fx-border-width: 3px;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unipi.dii.inginf.lsdb.justrecipe.controller.UserSnapshotController">
    <children>
-      <Text fx:id="userSnapUsername" layoutX="51.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </Text>
       <Text layoutX="80.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recipes:">
          <font>
             <Font size="15.0" />
@@ -51,5 +47,10 @@
             <Font size="15.0" />
          </font>
       </Text>
+      <Label fx:id="userSnapUsername" layoutX="10.0" layoutY="186.0" maxWidth="220.0" prefHeight="35.0" prefWidth="220.0" style="-fx-alignment: center;" text="Username">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

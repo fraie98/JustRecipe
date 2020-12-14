@@ -11,8 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class RecipeSnapshotController {
-   // private final int HOW_MANY_CHAR_SNAPSHOT_TITLE = 25;
-    //private final int HOW_MANY_CHAR_SNAPSHOT_CATEGORIES = 45;
 
     @FXML private Pane snapPane;
     @FXML private Label snapTitle;
