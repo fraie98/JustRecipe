@@ -1,29 +1,27 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
-import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class ProfilePageController {
+public class AddRecipePageController {
     private Neo4jDriver neo4jDriver;
-    private MongoDBDriver mongoDBDriver;
     private String username;
-    @FXML private ImageView homepageIcon;
+    @FXML private ImageView homeImg;
+    @FXML private ImageView profileImg;
     @FXML private ImageView discoveryImg;
-    @FXML private ImageView logoutPic;
-    @FXML private ImageView addRecipeImg;
+    @FXML private ImageView logoutImg;
 
     public void initialize ()
     {
         neo4jDriver = Neo4jDriver.getInstance();
-        //mongoDBDriver = MongoDBDriver.getInstance();
-        homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
+//        mongoDBDriver = MongoDBDriver.getInstance();
+        homeImg.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
-        logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
-        addRecipeImg.setOnMouseClicked(mouseEvent -> clickOnAddRecipeImg(mouseEvent));
+        logoutImg.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
+        profileImg.setOnMouseClicked(mouseEvent -> clickOnProfileToChangePage(mouseEvent));
     }
 
     public void setUsername(String username) {
@@ -40,15 +38,6 @@ public class ProfilePageController {
                     Utils.changeScene("/homepage.fxml", mouseEvent);
             homePageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
-    }
-
-    private void clickOnAddRecipeImg(MouseEvent mouseEvent){
-        try{
-            AddRecipePageController addRecipePageController;
-            addRecipePageController = (AddRecipePageController)
-                    Utils.changeScene("/addRecipe.fxml", mouseEvent);
-            addRecipePageController.setUsername(username);
-        }catch (NullPointerException n){System.out.println("addRecipePageController is null!!!!");n.printStackTrace();}
     }
 
     /**
@@ -71,6 +60,16 @@ public class ProfilePageController {
             DiscoveryPageController discoveryPageController = (DiscoveryPageController)
                     Utils.changeScene("/discoveryPage.fxml", mouseEvent);
             discoveryPageController.setUsername(username);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        }catch (NullPointerException n){System.out.println("DiscoveryPageController is null!!!!");}
+    }
+
+    /**
+     * Function used to handle the click on the profile icon
+     * @param mouseEvent    event that represents the click on the icon
+     */
+    private void clickOnProfileToChangePage(MouseEvent mouseEvent){
+        ProfilePageController profilePageController = (ProfilePageController)
+                Utils.changeScene("/profilePage.fxml", mouseEvent);
+        profilePageController.setUsername(username);
     }
 }

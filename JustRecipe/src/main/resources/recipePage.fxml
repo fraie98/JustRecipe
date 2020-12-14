@@ -31,7 +31,7 @@
             </ImageView>
          </left>
          <right>
-            <HBox alignment="CENTER" prefHeight="73.0" prefWidth="274.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="84.0" prefWidth="240.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="logoutPic" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>

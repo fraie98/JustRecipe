@@ -71,12 +71,12 @@
          <right>
             <VBox prefHeight="124.0" prefWidth="45.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addRecipeImg" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/addRecipe.png" />
                      </image>
                      <VBox.margin>
-                        <Insets top="5.0" />
+                        <Insets />
                      </VBox.margin>
                   </ImageView>
                   <ImageView fx:id="discoveryImg" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
@@ -100,7 +100,7 @@
                         <Image url="@img/exit.png" />
                      </image>
                      <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="10.0" top="5.0" />
                      </VBox.margin>
                   </ImageView>
                </children>
