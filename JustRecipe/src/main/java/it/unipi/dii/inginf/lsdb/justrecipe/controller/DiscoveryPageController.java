@@ -1,5 +1,6 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
@@ -38,7 +39,8 @@ public class DiscoveryPageController {
 
     private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20;
     private final int HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW = 5;
-    private final int HOW_MANY_RECIPE_FOR_EACH_COMMON_CATEGORY = 4;
+    private final int HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY = 4;
+    private final int HOW_MANY_COMMENTS_TO_SHOW = 20;
 
     public void initialize ()
     {
@@ -52,7 +54,7 @@ public class DiscoveryPageController {
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "Recipe title",
-                        "Recipe categories",
+                        "Recipe category",
                         "Recipe ingredients",
                         "Most common recipe categories",
                         "Best recipes",
@@ -60,7 +62,8 @@ public class DiscoveryPageController {
                         "User full name",
                         "Most followed and active user",
                         "Top Commentators",
-                        "Most liked user"
+                        "Most liked user",
+                        "Last comments" // To show only if the user is a moderator
                 );
         searchComboBox.setItems(options);
 
@@ -82,11 +85,16 @@ public class DiscoveryPageController {
                 Label categoryName = new Label();
                 categoryName.setText(category.concat("\n"));
                 categoryName.setFont(Font.font(48));
-                discoveryVBox.setAlignment(Pos.CENTER);
                 discoveryVBox.getChildren().add(categoryName);
-                List<Recipe> recipes = mongoDBDriver.getRecipesOfCategory(category, HOW_MANY_RECIPE_FOR_EACH_COMMON_CATEGORY);
+                List<Recipe> recipes = mongoDBDriver.getRecipesOfCategory(category, HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY);
                 Utils.addRecipesSnap(discoveryVBox, recipes);
             }
+        }
+        // For the moderator
+        else if (String.valueOf(searchComboBox.getValue()).equals("Last comments"))
+        {
+            List<Comment> comments = mongoDBDriver.searchAllComments(0, HOW_MANY_COMMENTS_TO_SHOW);
+            Utils.showComments(discoveryVBox, comments);
         }
     }
 

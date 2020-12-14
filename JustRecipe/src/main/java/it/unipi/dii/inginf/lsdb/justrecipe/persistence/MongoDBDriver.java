@@ -8,6 +8,7 @@ import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -196,5 +197,31 @@ public class MongoDBDriver implements DatabaseDriver{
         Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
         recipes = gson.fromJson(gson.toJson(results), recipeListType);
         return recipes;
+    }
+
+    /**
+     * Function for searching all the comments, ordered by the creationTime (first the last)
+     * The list will be useful for the moderators
+     * @param from      first extreme of the interval
+     * @param to        second extreme of the interval
+     * @return          The list of the comments
+     */
+    public List<Comment> searchAllComments (int from, int to)
+    {
+        List<Comment> comments = new ArrayList<>();
+        Gson gson = new Gson();
+        Bson unwind = unwind("$comments");
+        Bson sort = sort(descending("creationTime"));
+        Bson skip = skip(from);
+        Bson limit = limit(to);
+        MongoCursor<Document> iterator = (MongoCursor<Document>)
+                collection.aggregate(Arrays.asList(unwind, sort, skip, limit)).iterator();
+        while (iterator.hasNext())
+        {
+            Document document = (Document) iterator.next().get("comments");
+            Comment comment = gson.fromJson(gson.toJson(document), Comment.class);
+            comments.add(comment);
+        }
+        return comments;
     }
 }

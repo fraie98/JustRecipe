@@ -222,7 +222,7 @@
                                  <children>
                                     <VBox prefHeight="253.0" prefWidth="330.0">
                                        <children>
-                                          <Label text="Insert Ingrediets (separate with ','):">
+                                          <Label text="Insert Ingredients (separate with ','):">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>

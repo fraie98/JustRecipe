@@ -115,7 +115,7 @@
                         </Pane>
                      </top>
                      <bottom>
-                        <VBox fx:id="discoveryVBox" prefHeight="502.0" prefWidth="921.0" BorderPane.alignment="CENTER">
+                        <VBox fx:id="discoveryVBox" alignment="CENTER" prefHeight="564.0" prefWidth="921.0" BorderPane.alignment="CENTER">
                            <padding>
                               <Insets left="15.0" />
                            </padding></VBox>

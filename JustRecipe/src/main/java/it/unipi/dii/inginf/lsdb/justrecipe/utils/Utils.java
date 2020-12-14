@@ -2,17 +2,21 @@ package it.unipi.dii.inginf.lsdb.justrecipe.utils;
 
 import com.thoughtworks.xstream.XStream;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.controller.CommentController;
 import it.unipi.dii.inginf.lsdb.justrecipe.controller.RecipeSnapshotController;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -183,6 +187,8 @@ public class Utils {
 
     /**
      * Function that adds the snapshots of the recipes, 2 for each row
+     * @param pane      Pane in which I have to show the snapshots
+     * @param recipes   Recipes to show
      */
     public static void addRecipesSnap(Pane pane, List<Recipe> recipes) {
         Iterator<Recipe> iterator = recipes.iterator();
@@ -202,5 +208,40 @@ public class Utils {
             }
             pane.getChildren().add(row);
         }
+    }
+
+    /**
+     * Function used to show the comments
+     * @param pane      Pane in which I have to show the comments
+     * @param comments  Comments to show
+     */
+    public static void showComments(Pane pane, List<Comment> comments) {
+        Iterator<Comment> iterator = comments.iterator();
+        while (iterator.hasNext())
+        {
+            Comment comment = iterator.next();
+            Pane commentPane = loadComment(comment);
+            pane.getChildren().add(commentPane);
+        }
+    }
+
+    /**
+     * Function used to load the .fxml for the comment
+     * @param comment   Comment to show
+     * @return          The pane in which I have showed the comment
+     */
+    private static Pane loadComment (Comment comment)
+    {
+        Pane pane = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(Utils.class.getResource("/comment.fxml"));
+            pane = (Pane) loader.load();
+            CommentController commentController =
+                    (CommentController) loader.getController();
+            commentController.setComment(comment);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return pane;
     }
 }

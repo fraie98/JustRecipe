@@ -89,7 +89,13 @@ public class RecipePageController {
         comments.add(new Comment("Pippo", "Hello World!", new Date()));
         comments.add(new Comment("Pluto", "Fantastic recipe!", new Date()));
         recipe.setComments(comments);
-        addRecipeComments();
+        if (comments != null)
+        {
+            Label commentsTitle = new Label("Comments:");
+            commentsTitle.setFont(Font.font(24));
+            recipeVBox.getChildren().add(commentsTitle);
+            Utils.showComments(recipeVBox, recipe.getComments());
+        }
     }
 
     /**
@@ -131,46 +137,6 @@ public class RecipePageController {
             WelcomePageController welcomePageController = (WelcomePageController)
                     Utils.changeScene("/welcome.fxml", mouseEvent);
         }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
-    }
-
-    /**
-     * Function used to add the comments for the recipe
-     */
-    public void addRecipeComments() {
-        if (recipe.getComments() != null)
-        {
-            Label commentsTitle = new Label("Comments:");
-            commentsTitle.setFont(Font.font(24));
-            recipeVBox.getChildren().add(commentsTitle);
-            Iterator<Comment> iterator = recipe.getComments().iterator();
-            while (iterator.hasNext())
-            {
-                Comment comment = iterator.next();
-                Pane commentPane = loadComment(comment);
-                commentPane.setCenterShape(true);
-                recipeVBox.getChildren().add(commentPane);
-            }
-        }
-    }
-
-    /**
-     * Function used to load the .fxml for the comment
-     * @param comment   Comment to show
-     * @return          The pane in which I have showed the comment
-     */
-    public Pane loadComment (Comment comment)
-    {
-        Pane pane = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/comment.fxml"));
-            pane = (Pane) loader.load();
-            CommentController commentController =
-                    (CommentController) loader.getController();
-            commentController.setComment(comment);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return pane;
     }
 }
 

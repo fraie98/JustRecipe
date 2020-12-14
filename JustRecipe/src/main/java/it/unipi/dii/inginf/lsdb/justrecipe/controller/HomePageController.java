@@ -36,6 +36,7 @@ public class HomePageController {
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
+        mongoDBDriver.searchAllComments(0, 20);
     }
 
     /**
