@@ -1,8 +1,8 @@
 PWD /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.tex
-OUTPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.log
+INPUT JustRecipe Doc.tex
+OUTPUT JustRecipe Doc.log
 INPUT /usr/share/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/share/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/share/texmf-dist/tex/latex/base/size10.clo
@@ -45,9 +45,9 @@ INPUT /usr/share/texmf-dist/tex/latex/caption/caption3.sty
 INPUT /usr/share/texmf-dist/tex/latex/caption/caption3.sty
 INPUT /usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 INPUT /usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-INPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.aux
-INPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.aux
-OUTPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.aux
+INPUT JustRecipe Doc.aux
+INPUT JustRecipe Doc.aux
+OUTPUT JustRecipe Doc.aux
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
@@ -67,21 +67,32 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
-OUTPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.pdf
+OUTPUT JustRecipe Doc.pdf
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx2488.tfm
-INPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.toc
-INPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.toc
+INPUT JustRecipe Doc.toc
+INPUT JustRecipe Doc.toc
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm
-OUTPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.toc
+OUTPUT JustRecipe Doc.toc
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecrm2074.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx2074.tfm
-INPUT /home/francesco/Documenti/repo/JustRecipe/Documents/Doc LaTex/JustRecipe Doc.aux
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecti1000.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1440.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
+INPUT img/UseCaseDiagram.png
+INPUT ./img/UseCaseDiagram.png
+INPUT ./img/UseCaseDiagram.png
+INPUT JustRecipe Doc.aux
+INPUT /usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb

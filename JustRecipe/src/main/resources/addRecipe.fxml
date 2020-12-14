@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="779.0" prefWidth="953.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="99.0" prefWidth="953.0" style="-fx-background-color: rgb(237, 160, 66);">
+         <center>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Recipe" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="42.0" />
+               </font>
+            </Text>
+         </center>
+         <left>
+            <ImageView fitHeight="81.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@img/icon.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets left="10.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </left>
+      </BorderPane>
+      <ScrollPane prefHeight="689.0" prefWidth="953.0" style="-fx-background-color: RGB(204, 199, 194);">
+         <content>
+            <HBox prefHeight="683.0" prefWidth="951.0" style="-fx-background-color: RGB(204, 199, 194);">
+               <children>
+                  <ScrollPane prefWidth="772.0">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                     <content>
+                        <VBox prefWidth="770.0">
+                           <children>
+                              <HBox prefHeight="45.0" prefWidth="770.0">
+                                 <children>
+                                    <Label text="Insert Title:">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="23.0" prefWidth="171.0">
+                                       <HBox.margin>
+                                          <Insets left="300.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="45.0" prefWidth="770.0">
+                                 <children>
+                                    <Label text="URL Picture:">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="23.0" prefWidth="171.0">
+                                       <HBox.margin>
+                                          <Insets left="290.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="45.0" prefWidth="770.0">
+                                 <children>
+                                    <Label text="Insert Calories:">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="23.0" prefWidth="110.0">
+                                       <HBox.margin>
+                                          <Insets left="253.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="45.0" prefWidth="770.0">
+                                 <children>
+                                    <Label text="Insert Carbs:">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="23.0" prefWidth="110.0">
+                                       <HBox.margin>
+                                          <Insets left="283.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Insert Fat:">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="23.0" prefWidth="110.0">
+                                       <HBox.margin>
+                                          <Insets left="318.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Insert Protein:">
+                                       <font>
+                                          <Font size="26.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="40.0" prefWidth="110.0">
+                                       <HBox.margin>
+                                          <Insets left="267.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="45.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="26.0" prefWidth="446.0" text="Insert Categories (separate with ','):">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="30.0" right="30.0" top="4.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField prefHeight="40.0" prefWidth="233.0">
+                                       <HBox.margin>
+                                          <Insets left="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="253.0" prefWidth="770.0">
+                                 <children>
+                                    <VBox prefHeight="253.0" prefWidth="330.0">
+                                       <children>
+                                          <Label text="Insert Ingrediets (separate with ','):">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea prefHeight="214.0" prefWidth="325.0">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </TextArea>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="30.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="253.0" prefWidth="330.0">
+                                       <children>
+                                          <Label text="Insert Instructions:">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font>
+                                          </Label>
+                                          <TextArea prefHeight="214.0" prefWidth="241.0">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </TextArea>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="60.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="33.0" prefWidth="770.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Clear">
+                                       <HBox.margin>
+                                          <Insets left="308.0" right="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" text="Submit">
+                                       <HBox.margin>
+                                          <Insets left="40.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets left="84.0" />
+               </padding>
+            </HBox>
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>
