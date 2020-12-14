@@ -1,17 +1,28 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class DiscoveryPageController {
     private Neo4jDriver neo4jDriver;
@@ -23,11 +34,16 @@ public class DiscoveryPageController {
     @FXML private Button searchButton;
     @FXML private TextField searchBarTextField;
     @FXML private ComboBox searchComboBox;
+    @FXML private VBox discoveryVBox;
+
+    private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20;
+    private final int HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW = 5;
+    private final int HOW_MANY_RECIPE_FOR_EACH_COMMON_CATEGORY = 4;
 
     public void initialize ()
     {
         neo4jDriver = Neo4jDriver.getInstance();
-        //mongoDBDriver = MongoDBDriver.getInstance();
+        mongoDBDriver = MongoDBDriver.getInstance();
         homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
         profilePageIcon.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
@@ -47,6 +63,31 @@ public class DiscoveryPageController {
                         "Most liked user"
                 );
         searchComboBox.setItems(options);
+
+        searchButton.setOnAction(actionEvent -> search(actionEvent));
+    }
+
+    private void search(ActionEvent actionEvent) {
+        discoveryVBox.getChildren().remove(0, discoveryVBox.getChildren().size());
+        if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))
+        {
+            List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(), HOW_MANY_SNAPSHOT_TO_SHOW);
+            Utils.addRecipesSnap(discoveryVBox, recipes);
+        }
+        else if (String.valueOf(searchComboBox.getValue()).equals("Most common recipe categories"))
+        {
+            List<String> mostCommonRecipeCategories = mongoDBDriver.searchMostCommonRecipeCategories(HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW);
+            for (String category: mostCommonRecipeCategories)
+            {
+                Label categoryName = new Label();
+                categoryName.setText(category.concat("\n"));
+                categoryName.setFont(Font.font(48));
+                discoveryVBox.setAlignment(Pos.CENTER);
+                discoveryVBox.getChildren().add(categoryName);
+                List<Recipe> recipes = mongoDBDriver.getRecipesOfCategory(category, HOW_MANY_RECIPE_FOR_EACH_COMMON_CATEGORY);
+                Utils.addRecipesSnap(discoveryVBox, recipes);
+            }
+        }
     }
 
     public void setUsername(String username) {

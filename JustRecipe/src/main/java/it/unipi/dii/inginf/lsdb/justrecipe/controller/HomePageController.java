@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,36 +32,10 @@ public class HomePageController {
     {
         neo4jDriver = Neo4jDriver.getInstance();
         mongoDBDriver = MongoDBDriver.getInstance();
-        addRecipesSnap();
+        Utils.addRecipesSnap(mainPage, mongoDBDriver.getHomepageRecipe(0, HOW_MANY_SNAPSHOT_TO_SHOW, new ArrayList<>()));
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
-    }
-
-    /**
-     * Function that adds the snapshots of the recipes to the homepage
-     */
-    public void addRecipesSnap() {
-        List<Recipe> recipes = mongoDBDriver.getHomepageRecipe(0, HOW_MANY_SNAPSHOT_TO_SHOW, null);
-
-        Iterator<Recipe> iterator = recipes.iterator();
-
-        while (iterator.hasNext())
-        {
-            HBox row = new HBox();
-            row.setStyle("-fx-padding: 10px");
-            row.setSpacing(20);
-            Recipe recipe1 = iterator.next();
-            Pane rec1 = createRecipeSnapshot(recipe1);
-            row.getChildren().add(rec1);
-            if (iterator.hasNext())
-            {
-                Recipe recipe2 = iterator.next();
-                Pane rec2 = createRecipeSnapshot(recipe2);
-                row.getChildren().add(rec2);
-            }
-            mainPage.getChildren().add(row);
-        }
     }
 
     /**
@@ -100,25 +75,5 @@ public class HomePageController {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    /**
-     * This function create a pane that contains a recipe snapshot
-     * @param recipe    recipe to display in the snapshot
-     * @return
-     */
-    public Pane createRecipeSnapshot(Recipe recipe)
-    {
-        Pane pane = null;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/recipeSnap.fxml"));
-            pane = (Pane) loader.load();
-            RecipeSnapshotController recipeSnapshotController =
-                    (RecipeSnapshotController) loader.getController();
-            recipeSnapshotController.setRecipe(recipe);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return pane;
     }
 }

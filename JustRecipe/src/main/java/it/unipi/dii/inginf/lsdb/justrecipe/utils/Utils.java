@@ -2,6 +2,8 @@ package it.unipi.dii.inginf.lsdb.justrecipe.utils;
 
 import com.thoughtworks.xstream.XStream;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.controller.RecipeSnapshotController;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -155,5 +159,48 @@ public class Utils {
         ImageView imageView = new ImageView(new Image("/img/emoticon-cry.png"));
         alert.setGraphic(imageView);
         alert.show();
+    }
+
+    /**
+     * This function create a pane that contains a recipe snapshot
+     * @param recipe    recipe to display in the snapshot
+     * @return
+     */
+    private static Pane createRecipeSnapshot(Recipe recipe)
+    {
+        Pane pane = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(Utils.class.getResource("/recipeSnap.fxml"));
+            pane = (Pane) loader.load();
+            RecipeSnapshotController recipeSnapshotController =
+                    (RecipeSnapshotController) loader.getController();
+            recipeSnapshotController.setRecipe(recipe);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return pane;
+    }
+
+    /**
+     * Function that adds the snapshots of the recipes, 2 for each row
+     */
+    public static void addRecipesSnap(Pane pane, List<Recipe> recipes) {
+        Iterator<Recipe> iterator = recipes.iterator();
+        while (iterator.hasNext())
+        {
+            HBox row = new HBox();
+            row.setStyle("-fx-padding: 10px");
+            row.setSpacing(20);
+            Recipe recipe1 = iterator.next();
+            Pane rec1 = createRecipeSnapshot(recipe1);
+            row.getChildren().add(rec1);
+            if (iterator.hasNext())
+            {
+                Recipe recipe2 = iterator.next();
+                Pane rec2 = createRecipeSnapshot(recipe2);
+                row.getChildren().add(rec2);
+            }
+            pane.getChildren().add(row);
+        }
     }
 }
