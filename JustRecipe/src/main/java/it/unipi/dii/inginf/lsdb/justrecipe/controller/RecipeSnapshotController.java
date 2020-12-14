@@ -3,6 +3,7 @@ package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -10,25 +11,25 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class RecipeSnapshotController {
-    private final int HOW_MANY_CHAR_SNAPSHOT_TITLE = 25;
-    private final int HOW_MANY_CHAR_SNAPSHOT_CATEGORIES = 45;
+   // private final int HOW_MANY_CHAR_SNAPSHOT_TITLE = 25;
+    //private final int HOW_MANY_CHAR_SNAPSHOT_CATEGORIES = 45;
 
-    @FXML private Pane snapePane;
-    @FXML private Text snapTitle;
-    @FXML private Text snapUser;
-    @FXML private Text snapCarbs;
-    @FXML private Text snapCal;
-    @FXML private Text snapFat;
-    @FXML private Text snapProtein;
+    @FXML private Pane snapPane;
+    @FXML private Label snapTitle;
+    @FXML private Label snapUser;
+    @FXML private Label snapCarbs;
+    @FXML private Label snapCal;
+    @FXML private Label snapFat;
+    @FXML private Label snapProtein;
     @FXML private ImageView snapImg;
-    @FXML private Text snapCategories;
+    @FXML private Label snapCategories;
 
     private Recipe recipe; // recipe shows in this snapshot
 
     public void initialize ()
     {
 
-        snapePane.setOnMouseClicked(mouseEvent -> showMoreInformation(mouseEvent));
+        snapPane.setOnMouseClicked(mouseEvent -> showMoreInformation(mouseEvent));
     }
 
     /**
@@ -45,23 +46,13 @@ public class RecipeSnapshotController {
     public void setRecipe (Recipe recipe)
     {
         this.recipe = recipe;
-        String title = recipe.getTitle();
-        if (title.length() > HOW_MANY_CHAR_SNAPSHOT_TITLE)
-        {
-            title = title.substring(0, HOW_MANY_CHAR_SNAPSHOT_TITLE-1) + "...";
-        }
-        snapTitle.setText(title);
+        snapTitle.setText(recipe.getTitle());
         snapUser.setText(recipe.getAuthorUsername());
         snapCarbs.setText(String.valueOf(recipe.getCarbs()));
         snapProtein.setText(String.valueOf(recipe.getProtein()));
         snapFat.setText(String.valueOf(recipe.getFat()));
         snapCal.setText(String.valueOf(recipe.getCalories()));
-        String overallTags = Utils.fromListToString(recipe.getCategories());
-        if (overallTags.length() > HOW_MANY_CHAR_SNAPSHOT_CATEGORIES)
-        {
-            overallTags = overallTags.substring(0, HOW_MANY_CHAR_SNAPSHOT_CATEGORIES-1) + "...";
-        }
-        snapCategories.setText(overallTags);
+        snapCategories.setText(Utils.fromListToString(recipe.getCategories()));
         if (recipe.getPicture() != null)
         {
             snapImg.setImage(new Image(recipe.getPicture()));

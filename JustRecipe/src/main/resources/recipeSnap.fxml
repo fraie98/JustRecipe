@@ -1,34 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="snapePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="426.0" style="-fx-background-color: white; -fx-background-position: center; -fx-border-radius: 10px; -fx-border-style: solid; -fx-border-width: 3px; -fx-border-color: orange;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unipi.dii.inginf.lsdb.justrecipe.controller.RecipeSnapshotController">
+<AnchorPane fx:id="snapPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="426.0" style="-fx-background-color: white; -fx-background-position: center; -fx-border-radius: 10px; -fx-border-style: solid; -fx-border-width: 3px; -fx-border-color: orange;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unipi.dii.inginf.lsdb.justrecipe.controller.RecipeSnapshotController">
    <children>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="259.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="259.0" AnchorPane.topAnchor="71.0">
          <image>
             <Image url="@img/user.png" />
          </image>
       </ImageView>
-      <Text fx:id="snapUser" layoutX="317.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
       <ImageView fx:id="snapImg" fitHeight="190.0" fitWidth="231.0" layoutX="17.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/genericRecipe.png" />
          </image>
       </ImageView>
-      <Text fx:id="snapTitle" layoutX="17.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisù">
-         <font>
-            <Font name="Liberation Sans" size="31.0" />
-         </font>
-      </Text>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="17.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/tag.png" />
@@ -49,36 +39,46 @@
             <Image url="@img/fat.png" />
          </image>
       </ImageView>
-      <Text fx:id="snapCal" layoutX="317.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fx:id="snapCarbs" layoutX="316.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fx:id="snapFat" layoutX="317.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="40">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fx:id="snapCategories" layoutX="67.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="italian, dolce, prova, ciao, mascarpone">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="263.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/protein1.png" />
          </image>
       </ImageView>
-      <Text fx:id="snapProtein" layoutX="316.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50">
+      <Label fx:id="snapTitle" layoutX="37.0" layoutY="25.0" maxWidth="380.0" prefHeight="36.0" prefWidth="376.0" text="Tiramisù">
          <font>
-            <Font size="17.0" />
+            <Font name="Liberation Sans" size="32.0" />
          </font>
-      </Text>
+      </Label>
+      <Label fx:id="snapUser" layoutX="316.0" layoutY="84.0" maxWidth="95.0" prefHeight="20.0" prefWidth="86.0" text="Username">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="snapCarbs" layoutX="317.0" layoutY="125.0" text="20">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="snapCal" layoutX="317.0" layoutY="163.0" text="30">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="snapFat" layoutX="317.0" layoutY="205.0" text="40">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="snapProtein" layoutX="317.0" layoutY="243.0" text="50">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="snapCategories" layoutX="71.0" layoutY="279.0" maxWidth="360.0" prefHeight="18.0" prefWidth="338.0" text="italian, dolce, prova, ciao, mascarpone">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
    <opaqueInsets>
       <Insets />
