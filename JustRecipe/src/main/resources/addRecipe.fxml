@@ -47,7 +47,7 @@
             </ImageView>
          </left>
          <right>
-            <HBox prefHeight="71.0" prefWidth="199.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="71.0" prefWidth="214.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="homeImg" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>

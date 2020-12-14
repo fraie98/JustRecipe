@@ -28,7 +28,7 @@
             </ImageView>
          </left>
          <right>
-            <HBox alignment="CENTER" prefHeight="73.0" prefWidth="274.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="84.0" prefWidth="204.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="logoutPic" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,21 +51,21 @@
                         <Image url="@img/user.png" />
                      </image>
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets right="5.0" />
                      </HBox.margin>
                   </ImageView>
                </children>
             </HBox>
          </right>
          <center>
-            <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/home.png" />
                      </image>
                      <HBox.margin>
-                        <Insets left="400.0" />
+                        <Insets />
                      </HBox.margin>
                   </ImageView>
                   <Label text="Home">
