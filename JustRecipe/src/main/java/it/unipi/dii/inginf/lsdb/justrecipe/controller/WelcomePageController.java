@@ -98,6 +98,8 @@ public class WelcomePageController {
             if (register(firstNameRegistrationTextField.getText(), lastNameRegistrationTextField.getText(),
                     usernameRegistrationTextField.getText(), passwordRegistrationTextField.getText()))
             {
+                Session newSession = Session.getInstance();
+                newSession.setLoggedUser(neo4jDriver.getUserInfo(usernameRegistrationTextField.getText()));
                 HomePageController homePageController = (HomePageController)
                         Utils.changeScene("/homepage.fxml", actionEvent);
             }
