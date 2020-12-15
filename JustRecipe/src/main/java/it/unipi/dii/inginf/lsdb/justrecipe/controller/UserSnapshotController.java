@@ -18,6 +18,7 @@ public class UserSnapshotController {
     @FXML private Text userSnapFollowing;
     @FXML private Text userSnapRecipes;
     @FXML private ImageView userSnapFollowButton;
+    @FXML private ImageView userSnapDelete;
 
     public void initialize()
     {
@@ -50,13 +51,23 @@ public class UserSnapshotController {
             userSnapFollowButton.setImage(new Image("/img/follow.png"));
             userSnapFollowButton.setOnMouseClicked(mouseEvent -> followButtonAction(true,usernameLogged, u.getUsername()));
         }
+
+        if(appSession.getLoggedUser().getRole()!=2 && !appSession.getLoggedUser().getUsername().equals(u.getUsername()))
+            userSnapDelete.setVisible(false);
+        else
+            userSnapDelete.setOnMouseClicked(mouseEvent -> deleteUserAction(u.getUsername()));
     }
 
-    public void followButtonAction(boolean chooser, String follower, String following)
+    private void followButtonAction(boolean chooser, String follower, String following)
     {
         if(chooser)
             neo4jDriver.follow(follower,following);
         else
             neo4jDriver.unfollow(follower,following);
+    }
+
+    private void deleteUserAction(String username)
+    {
+        neo4jDriver.deleteUser(username);
     }
 }

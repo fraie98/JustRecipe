@@ -1,5 +1,6 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -47,7 +48,7 @@ public class HomePageController {
         try {
             ProfilePageController profilePageController = (ProfilePageController)
                     Utils.changeScene("/profilePage.fxml", mouseEvent);
-            profilePageController.setUsername(username);
+            profilePageController.setProfile(Session.getInstance().getLoggedUser());
         }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
     }
 

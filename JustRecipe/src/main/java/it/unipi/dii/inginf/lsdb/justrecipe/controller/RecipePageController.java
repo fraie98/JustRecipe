@@ -2,6 +2,8 @@ package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
+import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,9 +47,12 @@ public class RecipePageController {
     @FXML private Label recipeLikes;
     @FXML private Label recipeDate;
     @FXML private VBox recipeVBox;
+    @FXML private ImageView recipeDelete;
 
     private Recipe recipe;
     private String username;
+    private Session appSession;
+    private Neo4jDriver neo4jDriver;
 
     public void initialize ()
     {
@@ -56,6 +61,8 @@ public class RecipePageController {
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscoveryToChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
         recipeVBox.setAlignment(Pos.CENTER);
+        appSession = Session.getInstance();
+        neo4jDriver = Neo4jDriver.getInstance();
     }
 
     /**
@@ -96,6 +103,11 @@ public class RecipePageController {
             recipeVBox.getChildren().add(commentsTitle);
             Utils.showComments(recipeVBox, recipe.getComments());
         }
+
+        if(appSession.getLoggedUser().getRole()!=2 && !appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
+            recipeDelete.setVisible(false);
+        else
+            recipeDelete.setOnMouseClicked(mouseEvent -> neo4jDriver.deleteRecipe(recipe.getTitle(),recipe.getCreationTime()));
     }
 
     /**
@@ -115,7 +127,7 @@ public class RecipePageController {
     private void clickOnProfileToChangePage(MouseEvent mouseEvent){
         ProfilePageController profilePageController = (ProfilePageController)
                 Utils.changeScene("/profilePage.fxml", mouseEvent);
-        profilePageController.setUsername(username);
+        profilePageController.setProfile(Session.getInstance().getLoggedUser());
     }
 
     /**

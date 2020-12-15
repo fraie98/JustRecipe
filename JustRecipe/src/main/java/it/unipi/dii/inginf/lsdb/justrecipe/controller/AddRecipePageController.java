@@ -1,5 +1,6 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
@@ -70,6 +71,6 @@ public class AddRecipePageController {
     private void clickOnProfileToChangePage(MouseEvent mouseEvent){
         ProfilePageController profilePageController = (ProfilePageController)
                 Utils.changeScene("/profilePage.fxml", mouseEvent);
-        profilePageController.setUsername(username);
+        profilePageController.setProfile(Session.getInstance().getLoggedUser());
     }
 }

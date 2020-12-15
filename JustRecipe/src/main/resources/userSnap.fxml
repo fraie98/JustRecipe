@@ -32,25 +32,30 @@
             <Image url="@img/follow.png" />
          </image>
       </ImageView>
-      <Text fx:id="userSnapRecipes" layoutX="155.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text fx:id="userSnapFollowing" layoutX="155.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
-      <Text fx:id="userSnapFollower" layoutX="155.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Text>
       <Label fx:id="userSnapUsername" layoutX="10.0" layoutY="186.0" maxWidth="220.0" prefHeight="35.0" prefWidth="220.0" style="-fx-alignment: center;" text="Username">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
+      <Label fx:id="userSnapRecipes" layoutX="154.0" layoutY="225.0" maxWidth="64.0" prefHeight="21.0" prefWidth="11.0" text="x">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="userSnapFollower" layoutX="154.0" layoutY="251.0" maxWidth="64.0" text="x">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="userSnapFollowing" layoutX="154.0" layoutY="278.0" maxWidth="64.0" text="x">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="userSnapDelete" fitHeight="46.0" fitWidth="39.0" layoutX="185.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/delete.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

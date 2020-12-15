@@ -9,16 +9,18 @@ public class User {
     private int follower;
     private int following;
     private int numRecipes;
+    private int role; // 0:user, 1:moderator, 2:admin
 
     public User(){}
 
     //Constructor
-    public User(String firstName, String lastName, String picture, String username, String password) {
+    public User(String firstName, String lastName, String picture, String username, String password, int role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.picture = picture;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
 
@@ -45,6 +47,10 @@ public class User {
 
     public int getFollower() {
         return follower;
+    }
+
+    public int getRole() {
+        return role;
     }
 
     public int getFollowing() {
@@ -86,6 +92,10 @@ public class User {
 
     public void setNumRecipes(int numRecipes) {
         this.numRecipes = numRecipes;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }
 

@@ -1,6 +1,8 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
+import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+
+import java.util.Date;
 
 public class RecipeSnapshotController {
 
@@ -21,12 +25,16 @@ public class RecipeSnapshotController {
     @FXML private Label snapProtein;
     @FXML private ImageView snapImg;
     @FXML private Label snapCategories;
+    @FXML private ImageView snapDeleteRecipe;
 
     private Recipe recipe; // recipe shows in this snapshot
+    private Neo4jDriver neo4jDriver;
+    private Session appSession;
 
     public void initialize ()
     {
-
+        appSession = Session.getInstance();
+        neo4jDriver = Neo4jDriver.getInstance();
         snapPane.setOnMouseClicked(mouseEvent -> showMoreInformation(mouseEvent));
     }
 
@@ -59,5 +67,16 @@ public class RecipeSnapshotController {
         {
             snapImg.setImage(new Image("img/genericRecipe.png"));
         }
+
+
+        if ((appSession.getLoggedUser().getRole()!=2)  && !appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
+            snapDeleteRecipe.setVisible(false);
+        else
+            snapDeleteRecipe.setOnMouseClicked(mouseEvent -> deleteRecipeAction(recipe.getTitle(),recipe.getCreationTime()));
+    }
+
+    private void deleteRecipeAction(String recipeTitle, Date ts)
+    {
+        neo4jDriver.deleteRecipe(recipeTitle,ts);
     }
 }

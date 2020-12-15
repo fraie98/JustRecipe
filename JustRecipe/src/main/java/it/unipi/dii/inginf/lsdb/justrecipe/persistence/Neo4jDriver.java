@@ -4,6 +4,9 @@ import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
+
+import java.util.Date;
+
 import static org.neo4j.driver.Values.parameters;
 
 /**
@@ -69,7 +72,7 @@ public class Neo4jDriver implements DatabaseDriver{
         {
             session.writeTransaction((TransactionWork<Void>) tx -> {
                 tx.run( "MERGE (u:User {firstName: $firstName, lastName: $lastName, username: $username," +
-                                "password: $password})",
+                                "password: $password, role:0})",
                         parameters( "firstName", firstName, "lastName", lastName, "username",
                                 username, "password", password ) );
                 return null;
@@ -174,7 +177,45 @@ public class Neo4jDriver implements DatabaseDriver{
     public User getUserInfo(String username)
     {
         User u = null;
-        u = new User("Tizio","Caio",null,"prova","pw");
+        u = new User("pippo","pippo",null,"pippo","pippo",0);
         return u;
+    }
+
+    /**
+     * It deletes the user with the given username
+     * @param username username of the user that I want to delete
+     */
+    public void deleteUser(String username)
+    {
+
+    }
+
+    /**
+     * It deletes a recipe given the title and the creation timestamp (the title is not unique)
+     * @param title  title of the recipe that I want to delete (target recipe)
+     * @param creationTs  creation timestamp of the target recipe
+     */
+    public void deleteRecipe(String title, Date creationTs)
+    {
+
+    }
+
+    /**
+     * It deletes a comment given the author and the creationTs
+     * @param author author of the target comment
+     * @param creationTs creation timestamp of the target comment
+     */
+    public void deleteComment(String author, Date creationTs)
+    {
+
+    }
+
+    /**
+     * Edit a user given its username
+     * @param username username of the target user
+     */
+    public void editProfile(String username)
+    {
+
     }
 }

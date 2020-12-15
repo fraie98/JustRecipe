@@ -160,12 +160,12 @@
                                     </Pane>
                                     <Pane prefHeight="240.0" prefWidth="318.0">
                                        <children>
-                                          <ImageView fx:id="recipeLikeImg" fitHeight="101.0" fitWidth="93.0" layoutX="8.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="recipeLikeImg" fitHeight="81.0" fitWidth="93.0" layoutX="9.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/like.png" />
                                              </image>
                                           </ImageView>
-                                          <ImageView fx:id="recipeEditImg" fitHeight="81.0" fitWidth="70.0" layoutX="148.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="recipeEditImg" fitHeight="81.0" fitWidth="70.0" layoutX="131.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/edit.png" />
                                              </image>
@@ -180,6 +180,11 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
+                                          <ImageView fx:id="recipeDelete" fitHeight="81.0" fitWidth="200.0" layoutX="231.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/delete.png" />
+                                             </image>
+                                          </ImageView>
                                        </children>
                                     </Pane>
                                  </children>
