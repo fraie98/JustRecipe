@@ -25,7 +25,6 @@ public class RecipeSnapshotController {
     @FXML private Label snapProtein;
     @FXML private ImageView snapImg;
     @FXML private Label snapCategories;
-    @FXML private ImageView snapDeleteRecipe;
 
     private Recipe recipe; // recipe shows in this snapshot
     private Neo4jDriver neo4jDriver;
@@ -67,16 +66,5 @@ public class RecipeSnapshotController {
         {
             snapImg.setImage(new Image("img/genericRecipe.png"));
         }
-
-
-        if ((appSession.getLoggedUser().getRole()!=2)  && !appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
-            snapDeleteRecipe.setVisible(false);
-        else
-            snapDeleteRecipe.setOnMouseClicked(mouseEvent -> deleteRecipeAction(recipe.getTitle(),recipe.getCreationTime()));
-    }
-
-    private void deleteRecipeAction(String recipeTitle, Date ts)
-    {
-        neo4jDriver.deleteRecipe(recipeTitle,ts);
     }
 }

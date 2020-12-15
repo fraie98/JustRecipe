@@ -44,7 +44,7 @@
             <Image url="@img/protein1.png" />
          </image>
       </ImageView>
-      <Label fx:id="snapTitle" layoutX="17.0" layoutY="25.0" maxWidth="335.0" prefHeight="36.0" prefWidth="338.0" text="Tiramisù">
+      <Label fx:id="snapTitle" layoutX="17.0" layoutY="25.0" maxWidth="380.0" prefHeight="36.0" prefWidth="387.0" text="Tiramisù">
          <font>
             <Font name="Liberation Sans" size="32.0" />
          </font>
@@ -79,11 +79,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ImageView fx:id="snapDeleteRecipe" fitHeight="40.0" fitWidth="40.0" layoutX="374.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@img/delete.png" />
-         </image>
-      </ImageView>
    </children>
    <opaqueInsets>
       <Insets />

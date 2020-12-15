@@ -160,12 +160,12 @@
                                     </Pane>
                                     <Pane prefHeight="240.0" prefWidth="318.0">
                                        <children>
-                                          <ImageView fx:id="recipeLikeImg" fitHeight="81.0" fitWidth="93.0" layoutX="9.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="recipeLikeImg" fitHeight="40.0" fitWidth="54.0" layoutX="14.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/like.png" />
                                              </image>
                                           </ImageView>
-                                          <ImageView fx:id="recipeEditImg" fitHeight="81.0" fitWidth="70.0" layoutX="131.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="recipeEditImg" fitHeight="40.0" fitWidth="70.0" layoutX="17.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/edit.png" />
                                              </image>
@@ -175,12 +175,12 @@
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="recipeDate" layoutX="14.0" layoutY="51.0" text="Published on:">
+                                          <Label fx:id="recipeDate" layoutX="108.0" layoutY="23.0" text="Published on:">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <ImageView fx:id="recipeDelete" fitHeight="81.0" fitWidth="200.0" layoutX="231.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fx:id="recipeDelete" fitHeight="40.0" fitWidth="200.0" layoutX="14.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@img/delete.png" />
                                              </image>
