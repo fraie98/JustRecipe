@@ -218,4 +218,14 @@ public class Neo4jDriver implements DatabaseDriver{
     {
 
     }
+
+    /**
+     * It edit a comment given its title and its creation timestamp
+     * @param title
+     * @param creationTs
+     */
+    public void editComment(String title, Date creationTs)
+    {
+
+    }
 }

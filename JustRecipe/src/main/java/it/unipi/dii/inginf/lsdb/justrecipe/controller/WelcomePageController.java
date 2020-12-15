@@ -71,7 +71,6 @@ public class WelcomePageController {
                 newSession.setLoggedUser(neo4jDriver.getUserInfo(usernameLoginTextField.getText()));
                 HomePageController homePageController = (HomePageController)
                         Utils.changeScene("/homepage.fxml", actionEvent);
-                homePageController.setUsername(usernameLoginTextField.getText());
             }
             else
             {
@@ -101,7 +100,6 @@ public class WelcomePageController {
             {
                 HomePageController homePageController = (HomePageController)
                         Utils.changeScene("/homepage.fxml", actionEvent);
-                homePageController.setUsername(usernameRegistrationTextField.getText());
             }
             else
             {

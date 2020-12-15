@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 
 public class AddRecipePageController {
     private Neo4jDriver neo4jDriver;
-    private String username;
+   // private String username;
     @FXML private ImageView homeImg;
     @FXML private ImageView profileImg;
     @FXML private ImageView discoveryImg;
@@ -25,10 +25,6 @@ public class AddRecipePageController {
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfileToChangePage(mouseEvent));
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     /**
      * Function that let the navigation into the ui ---> homepage
      * @param mouseEvent event that represents the click on the icon
@@ -37,7 +33,6 @@ public class AddRecipePageController {
         try{
             HomePageController homePageController = (HomePageController)
                     Utils.changeScene("/homepage.fxml", mouseEvent);
-            homePageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
     }
 
@@ -60,7 +55,6 @@ public class AddRecipePageController {
         try{
             DiscoveryPageController discoveryPageController = (DiscoveryPageController)
                     Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-            discoveryPageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("DiscoveryPageController is null!!!!");}
     }
 

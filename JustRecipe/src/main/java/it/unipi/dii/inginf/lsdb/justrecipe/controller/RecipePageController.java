@@ -50,7 +50,7 @@ public class RecipePageController {
     @FXML private ImageView recipeDelete;
 
     private Recipe recipe;
-    private String username;
+   // private String username;
     private Session appSession;
     private Neo4jDriver neo4jDriver;
 
@@ -117,7 +117,6 @@ public class RecipePageController {
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
         HomePageController homePageController = (HomePageController)
                 Utils.changeScene("/homepage.fxml", mouseEvent);
-        homePageController.setUsername(username);
     }
 
     /**
@@ -137,7 +136,6 @@ public class RecipePageController {
     private void clickOnDiscoveryToChangePage(MouseEvent mouseEvent){
         DiscoveryPageController discoveryPageController = (DiscoveryPageController)
                 Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-        discoveryPageController.setUsername(username);
     }
 
     /**

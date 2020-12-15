@@ -41,6 +41,9 @@ public class CommentController {
         else
             commentDeleteButton.setVisible(false);
 
-
+        if(appSession.getLoggedUser().getUsername().equals(comment.getAuthorUsername()))
+            commentModifyButton.setOnMouseClicked(mouseEvent -> Neo4jDriver.getInstance().editComment(comment.getAuthorUsername(),comment.getCreationTime()));
+        else
+            commentModifyButton.setVisible(false);
     }
 }

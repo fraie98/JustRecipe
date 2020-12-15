@@ -17,7 +17,6 @@ import java.util.List;
 public class HomePageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
-    private String username; // username of the logged user
     @FXML private VBox mainPage;
     @FXML private ImageView profileImg;
     @FXML private ImageView discoveryImg;
@@ -71,11 +70,7 @@ public class HomePageController {
         try{
             DiscoveryPageController discoveryPageController = (DiscoveryPageController)
                     Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-            discoveryPageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }
