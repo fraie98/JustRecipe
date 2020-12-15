@@ -127,13 +127,16 @@ public class Utils {
     public static String fromListToString (List<String> list)
     {
         String string = "";
-        Iterator<String> iterator = list.iterator();
-        while (iterator.hasNext())
+        if (list != null)
         {
-            string = string.concat(iterator.next());
-            if (iterator.hasNext())
+            Iterator<String> iterator = list.iterator();
+            while (iterator.hasNext())
             {
-                string = string.concat(", ");
+                string = string.concat(iterator.next());
+                if (iterator.hasNext())
+                {
+                    string = string.concat(", ");
+                }
             }
         }
         return string;

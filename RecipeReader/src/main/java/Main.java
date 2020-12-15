@@ -1,22 +1,15 @@
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.neo4j.driver.*;
-import sun.tracing.dtrace.DTraceProviderFactory;
 
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
-import static org.neo4j.driver.Values.parameters;
 
 public class Main {
     public static int HOW_MANY_RECIPES_TO_REMOVE = 30000;
@@ -37,6 +30,7 @@ public class Main {
         driver = GraphDatabase.driver( "neo4j://localhost:7687", AuthTokens.basic( "neo4j", "justrecipe" ) );
 
         // First of all It is useful to remove the old values (if they exists)
+        // Just for re-execute the algorithm without problem
         collection.drop();
         deleteAllGraph();
 
@@ -78,9 +72,13 @@ public class Main {
         users.add(new User("Jessica", "Evans", "jessica.evans", "jessica.evans"));
         users.add(new User("Lily", "Rodriguez", "lily.rodriguez", "lily.rodriguez"));
         users.add(new User("Sophie", "Roberts", "sophie.roberts", "sophie.roberts"));
-        addRecipesToDatabases(recipesWithoutDuplicates, users);
+
+        // First I insert the user, because when i choose randomly i can't be sure
+        // that they will be all pick-up, so i need to be sure that they are present
+        // So, instead of adding the users in the insertRecipesAndUsers function, i have created another one
+        addUsers(users);
+        insertRecipesAndUsers(recipesWithoutDuplicates, users);
         
-        //collection.insertMany(documents);
         System.out.println(collection.countDocuments()); //How many documents loaded
         mongoClient.close();
         driver.close();
@@ -129,39 +127,51 @@ public class Main {
         Collections.addAll(recipes, recipeList);
     }
 
-    public static void addRecipesToDatabases (List<RecipeRaw> recipeRawList, List<User> users)
+    /**
+     * Method that creates a new nodes in the graphDB with the informations of the new users
+     * @param users      Users to add
+     */
+    public static void addUsers( final List<User> users)
     {
-        // Partition the recipe in "users.size()" sublist
-        List<List<RecipeRaw>> lists = new ArrayList<List<RecipeRaw>>(users.size());
-        // Initialization of each sublist
-        for (int i = 0; i < users.size(); i++) {
-            lists.add(new ArrayList<RecipeRaw>());
-        }
-        // Inserting the values of the original list in the sublists, O(n)
-        // The first in the first, the second in the second, and so on
-        // With the module I come back to 0 after I reach users.size()
-        int index = 0;
-        for (RecipeRaw t : recipeRawList) {
-            lists.get(index).add(t);
-            index = (index + 1) % users.size();
-        }
-        // Insert every sublist with the user in the databases
-        int i = 0;
-        for (List<RecipeRaw> recipeRaws: lists)
+        Map<String,Object> params = new HashMap<>();
+        List<Map<String,Object>> list = new ArrayList<>();
+        for (User user: users)
         {
-            insertRecipesOfUser(recipeRaws, users.get(i));
-            i++;
+            Map<String,Object> props = new HashMap<>();
+            props.put( "firstName", user.getFirstName());
+            props.put( "lastName", user.getLastName());
+            props.put( "username", user.getUsername());
+            props.put( "password", user.getPassword());
+            list.add(props);
+        }
+        params.put( "batch", list );
+
+        try ( Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Void>) tx -> {
+                tx.run( "UNWIND $batch AS row " +
+                                "MERGE (u:User {firstName: row.firstName, lastName: row.lastName, " +
+                                "username: row.username," +
+                                "password: row.password, role:0})",
+                        params);
+                return null;
+            });
         }
     }
 
-    public static void insertRecipesOfUser (List<RecipeRaw> recipeRaws, User user)
+    public static void insertRecipesAndUsers (List<RecipeRaw> recipeRaws, List<User> users)
     {
         List<Document> documents = new ArrayList<Document>();
         Date date = new Date();
         Map<String,Object> params = new HashMap<>();
         List<Map<String,Object>> list = new ArrayList<>();
-        for (RecipeRaw rawRecipe: recipeRaws) // For every recipe to associate with this user
+        Random random = new Random();
+        for (RecipeRaw rawRecipe: recipeRaws) // For every recipe
         {
+            // pick-up randomly a user to associate with this recipe
+            int userIndex = random.nextInt(users.size()); //[0,19]
+            User user = users.get(userIndex);
+
             // MongoDB part
             String title = rawRecipe.getTitle();
             Document doc = new Document("title", title);
@@ -197,10 +207,7 @@ public class Main {
 
             // Neo4j part
             Map<String,Object> props = new HashMap<>();
-            props.put( "firstName", user.getFirstName());
-            props.put( "lastName", user.getLastName());
             props.put( "username", user.getUsername());
-            props.put( "password", user.getPassword());
             props.put("title", rawRecipe.getTitle());
             list.add(props);
         }
@@ -213,11 +220,10 @@ public class Main {
         try ( Session session = driver.session())
         {
             session.writeTransaction((TransactionWork<Void>) tx -> {
-                // First step: find the user with the merge (if he doesn't exist, he will be created)
+                // First step: find the right user
                 // Second step: merge the path, for creating it if it is necessary
                 tx.run( "UNWIND $batch AS row " +
-                                "MERGE (u:User {firstName: row.firstName, lastName: row.lastName, " +
-                                "username: row.username, password: row.password}) " +
+                                "MATCH (u:User {username: row.username}) " +
                                 "MERGE (u)-[:ADD]->(r:Recipe {title: row.title})",
                         params);
                 return null;

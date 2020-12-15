@@ -50,8 +50,8 @@ public class WelcomePageController {
         registrationButton.setOnAction(actionEvent -> handleRegisterButtonAction(actionEvent));
         neo4jDriver = Neo4jDriver.getInstance();
 
-        usernameLoginTextField.setText("pippo");
-        passwordLoginTextField.setText("pippo");
+        usernameLoginTextField.setText("oliver.smith");
+        passwordLoginTextField.setText("oliver.smith");
     }
 
     /**

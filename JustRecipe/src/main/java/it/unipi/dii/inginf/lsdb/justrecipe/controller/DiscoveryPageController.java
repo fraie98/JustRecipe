@@ -22,7 +22,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import jdk.jfr.internal.SecuritySupport;
 
 import java.util.Date;
 import java.util.Iterator;
