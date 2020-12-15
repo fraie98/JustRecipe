@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -94,6 +95,8 @@ public class DiscoveryPageController {
         else if (String.valueOf(searchComboBox.getValue()).equals("Last comments"))
         {
             List<Comment> comments = mongoDBDriver.searchAllComments(0, HOW_MANY_COMMENTS_TO_SHOW);
+            comments.add(new Comment("Pippo", "Hello world!", new Date()));
+            comments.add(new Comment("Pippo", "Hello world!", new Date()));
             Utils.showComments(discoveryVBox, comments);
         }
     }
