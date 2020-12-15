@@ -12,8 +12,8 @@ public class Session {
         return instance;
     }
 
-    public void setLoggedUser(User loggedUser) {
-        this.loggedUser = loggedUser;
+    public static void setLoggedUser(User loggedUser) {
+        instance.loggedUser = loggedUser;
     }
     public User getLoggedUser() {
         return loggedUser;

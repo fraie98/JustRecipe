@@ -50,8 +50,8 @@ public class WelcomePageController {
         registrationButton.setOnAction(actionEvent -> handleRegisterButtonAction(actionEvent));
         neo4jDriver = Neo4jDriver.getInstance();
 
-        usernameLoginTextField.setText("Pippo");
-        passwordLoginTextField.setText("Pippo");
+        usernameLoginTextField.setText("pippo");
+        passwordLoginTextField.setText("pippo");
     }
 
     /**
@@ -67,11 +67,10 @@ public class WelcomePageController {
         {
             if (login(usernameLoginTextField.getText(), passwordLoginTextField.getText()))
             {
-                HomePageController homePageController = (HomePageController)
-                        Utils.changeScene("/homepage.fxml", actionEvent);
-                homePageController.setUsername(usernameLoginTextField.getText());
                 Session newSession = Session.getInstance();
                 newSession.setLoggedUser(neo4jDriver.getUserInfo(usernameLoginTextField.getText()));
+                HomePageController homePageController = (HomePageController)
+                        Utils.changeScene("/homepage.fxml", actionEvent);
             }
             else
             {
@@ -99,9 +98,10 @@ public class WelcomePageController {
             if (register(firstNameRegistrationTextField.getText(), lastNameRegistrationTextField.getText(),
                     usernameRegistrationTextField.getText(), passwordRegistrationTextField.getText()))
             {
+                Session newSession = Session.getInstance();
+                newSession.setLoggedUser(neo4jDriver.getUserInfo(usernameRegistrationTextField.getText()));
                 HomePageController homePageController = (HomePageController)
                         Utils.changeScene("/homepage.fxml", actionEvent);
-                homePageController.setUsername(usernameRegistrationTextField.getText());
             }
             else
             {

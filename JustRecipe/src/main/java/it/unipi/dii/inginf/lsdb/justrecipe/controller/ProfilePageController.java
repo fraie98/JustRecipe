@@ -1,5 +1,7 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -10,14 +12,16 @@ import javafx.scene.input.MouseEvent;
 public class ProfilePageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
-    private String username;
+    private Session appSession;
     @FXML private ImageView homepageIcon;
     @FXML private ImageView discoveryImg;
     @FXML private ImageView logoutPic;
     @FXML private ImageView addRecipeImg;
-
+    @FXML private ImageView profileDeleteUser;
+    @FXML private ImageView profileEditUser;
     public void initialize ()
     {
+        appSession = Session.getInstance();
         neo4jDriver = Neo4jDriver.getInstance();
         //mongoDBDriver = MongoDBDriver.getInstance();
         homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
@@ -26,8 +30,17 @@ public class ProfilePageController {
         addRecipeImg.setOnMouseClicked(mouseEvent -> clickOnAddRecipeImg(mouseEvent));
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setProfile(User u)
+    {
+        if(appSession.getLoggedUser().getRole()!=3 && !appSession.getLoggedUser().getUsername().equals(u.getUsername()))
+            profileDeleteUser.setVisible(false);
+        else
+            profileDeleteUser.setOnMouseClicked(mouseEvent -> neo4jDriver.deleteUser(u.getUsername()));
+
+        if(appSession.getLoggedUser().getUsername().equals(u.getUsername()))
+            profileEditUser.setOnMouseClicked(mouseEvent -> neo4jDriver.editProfile(u.getUsername()));
+        else
+            profileEditUser.setVisible(false);
     }
 
     /**
@@ -38,7 +51,6 @@ public class ProfilePageController {
         try{
             HomePageController homePageController = (HomePageController)
                     Utils.changeScene("/homepage.fxml", mouseEvent);
-            homePageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
     }
 
@@ -47,7 +59,6 @@ public class ProfilePageController {
             AddRecipePageController addRecipePageController;
             addRecipePageController = (AddRecipePageController)
                     Utils.changeScene("/addRecipe.fxml", mouseEvent);
-            addRecipePageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("addRecipePageController is null!!!!");n.printStackTrace();}
     }
 
@@ -70,7 +81,6 @@ public class ProfilePageController {
         try{
             DiscoveryPageController discoveryPageController = (DiscoveryPageController)
                     Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-            discoveryPageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
     }
 }

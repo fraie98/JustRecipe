@@ -44,7 +44,7 @@
             <Image url="@img/protein1.png" />
          </image>
       </ImageView>
-      <Label fx:id="snapTitle" layoutX="37.0" layoutY="25.0" maxWidth="380.0" prefHeight="36.0" prefWidth="376.0" text="Tiramisù">
+      <Label fx:id="snapTitle" layoutX="17.0" layoutY="25.0" maxWidth="380.0" prefHeight="36.0" prefWidth="387.0" text="Tiramisù">
          <font>
             <Font name="Liberation Sans" size="32.0" />
          </font>

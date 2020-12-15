@@ -2,6 +2,7 @@ package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -21,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import jdk.jfr.internal.SecuritySupport;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -29,7 +31,6 @@ import java.util.List;
 public class DiscoveryPageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
-    private String username;
     @FXML private ImageView homepageIcon;
     @FXML private ImageView profilePageIcon;
     @FXML private ImageView logoutPic;
@@ -101,9 +102,6 @@ public class DiscoveryPageController {
         }
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     /**
      * Function that let the navigation into the ui ---> homepage
@@ -113,7 +111,6 @@ public class DiscoveryPageController {
         try{
             HomePageController homePageController = (HomePageController)
                     Utils.changeScene("/homepage.fxml", mouseEvent);
-            homePageController.setUsername(username);
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
     }
 
@@ -136,7 +133,7 @@ public class DiscoveryPageController {
         try {
             ProfilePageController profilePageController = (ProfilePageController)
                     Utils.changeScene("/profilePage.fxml", mouseEvent);
-            profilePageController.setUsername(username);
+            profilePageController.setProfile(Session.getInstance().getLoggedUser());
         }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
     }
 }
