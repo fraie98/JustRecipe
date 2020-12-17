@@ -87,7 +87,7 @@ public class DiscoveryPageController {
     }
 
     private void search(ActionEvent actionEvent) {
-        discoveryVBox.getChildren().remove(0, discoveryVBox.getChildren().size());
+        Utils.removeAllFromPane(discoveryVBox);
         if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))
         {
             List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(), 0, HOW_MANY_SNAPSHOT_TO_SHOW);

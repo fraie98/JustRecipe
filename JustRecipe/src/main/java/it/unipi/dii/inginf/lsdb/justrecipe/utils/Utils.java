@@ -209,7 +209,7 @@ public class Utils {
                 Pane rec2 = createRecipeSnapshot(recipe2);
                 row.getChildren().add(rec2);
             }
-            vBox.getChildren().add(row);
+            vBox.getChildren().add(row);;
         }
     }
 
@@ -307,6 +307,15 @@ public class Utils {
             }
             vBox.getChildren().add(row);
         }
+    }
+
+    /**
+     * Function used to remove all element on a pane
+     * @param pane      Pane to free
+     */
+    public static void removeAllFromPane (Pane pane)
+    {
+        pane.getChildren().remove(0, pane.getChildren().size());
     }
 
 }

@@ -105,12 +105,12 @@ public class MongoDBDriver implements DatabaseDriver{
 
     /**
      * Function used to get the list of Recipe to show in the homepage
-     * @param from      first extreme of the interval
-     * @param to        second extreme of the interval
-     * @param follower  list of follower of the user, used to choose the interest recipes
-     * @return          The list of (to-from) element to show, in descendent order from creationTime
+     * @param howManySkip       how many to skip
+     * @param howMany           how many recipe we want obtain
+     * @param follower          list of follower of the user, used to choose the interest recipes
+     * @return                  The list of element to show, in descendent order from creationTime
      */
-    public List<Recipe> getHomepageRecipe (int from, int to, List<User> follower)
+    public List<Recipe> getHomepageRecipe (int howManySkip, int howMany, List<User> follower)
     {
         List<Recipe> recipes = new ArrayList<>();
         Gson gson = new Gson();
@@ -123,8 +123,8 @@ public class MongoDBDriver implements DatabaseDriver{
         else
         {
             Bson sort = sort(descending("creationTime"));
-            Bson skip = skip(from);
-            Bson limit = limit(to);
+            Bson skip = skip(howManySkip);
+            Bson limit = limit(howMany);
             results = (List<Document>) collection.aggregate(Arrays.asList(sort, skip, limit))
                     .into(new ArrayList<>());
         }
@@ -137,21 +137,21 @@ public class MongoDBDriver implements DatabaseDriver{
 
     /**
      * Function that returns "howMany" recipes that contains in their title the title inserted by the user
-     * @param title     Title to check
-     * @param from      First extreme of the interval
-     * @param to        Second extreme of the interval
-     * @return          The list of the recipes that match the condition
+     * @param title         Title to check
+     * @param howManySkip   How many to skip
+     * @param howMany       How many recipe we want obtain
+     * @return              The list of the recipes that match the condition
      */
-    public List<Recipe> searchRecipesFromTitle (String title, int from, int to)
+    public List<Recipe> searchRecipesFromTitle (String title, int howManySkip, int howMany)
     {
         List<Recipe> recipes = new ArrayList<>();
         Gson gson = new Gson();
         Pattern pattern = Pattern.compile("^.*" + title + ".*$", Pattern.CASE_INSENSITIVE);
         Bson match = Aggregates.match(Filters.regex("title", pattern));
         Bson sort = sort(descending("creationTime"));
-        Bson skip = skip(from);
-        Bson limit = limit(to);
-        List<Document> results = (List<Document>) collection.aggregate(Arrays.asList(match, sort, limit))
+        Bson skip = skip(howManySkip);
+        Bson limit = limit(howMany);
+        List<Document> results = (List<Document>) collection.aggregate(Arrays.asList(match, sort, skip, limit))
                 .into(new ArrayList<>());
         Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
         recipes = gson.fromJson(gson.toJson(results), recipeListType);
@@ -204,18 +204,18 @@ public class MongoDBDriver implements DatabaseDriver{
     /**
      * Function for searching all the comments, ordered by the creationTime (first the last)
      * The list will be useful for the moderators
-     * @param from      first extreme of the interval
-     * @param to        second extreme of the interval
-     * @return          The list of the comments
+     * @param howManySkip   How many to skip
+     * @param howMany       How many comments we want obtain
+     * @return              The list of the comments
      */
-    public List<Comment> searchAllComments (int from, int to)
+    public List<Comment> searchAllComments (int howManySkip, int howMany)
     {
         List<Comment> comments = new ArrayList<>();
         Gson gson = new Gson();
         Bson unwind = unwind("$comments");
         Bson sort = sort(descending("creationTime"));
-        Bson skip = skip(from);
-        Bson limit = limit(to);
+        Bson skip = skip(howManySkip);
+        Bson limit = limit(howMany);
         MongoCursor<Document> iterator = (MongoCursor<Document>)
                 collection.aggregate(Arrays.asList(unwind, sort, skip, limit)).iterator();
         while (iterator.hasNext())

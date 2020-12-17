@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.Blend?>
@@ -87,7 +88,20 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <VBox fx:id="mainPage" prefHeight="700.0" prefWidth="819.0" style="-fx-background-color: white; -fx-alignment: center;" />
+                  <VBox style="-fx-alignment: center;">
+                     <children>
+                        <VBox fx:id="mainPage" prefHeight="700.0" prefWidth="819.0" style="-fx-background-color: white; -fx-alignment: center;" />
+                        <HBox spacing="10.0" style="-fx-alignment: center;">
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
+                           <children>
+                              <Button fx:id="previousButton" focusTraversable="false" mnemonicParsing="false" text="Previous" />
+                              <Button fx:id="nextButton" focusTraversable="false" mnemonicParsing="false" text="Next" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
          </content>
