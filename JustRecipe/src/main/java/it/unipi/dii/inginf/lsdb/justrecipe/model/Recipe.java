@@ -152,6 +152,8 @@ public class Recipe {
         this.comments = comments;
     }
 
+    public void addComments(Comment comment) {this.comments.add(comment);}
+
     @Override
     public String toString() {
         return "Recipe{" +

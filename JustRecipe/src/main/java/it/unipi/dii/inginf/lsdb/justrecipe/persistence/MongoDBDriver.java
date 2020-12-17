@@ -3,6 +3,7 @@ package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
@@ -13,6 +14,8 @@ import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -24,6 +27,8 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Projections.include;
 import static com.mongodb.client.model.Sorts.descending;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 /**
  * This class is used to communicate with MongoDB
@@ -34,6 +39,7 @@ public class MongoDBDriver implements DatabaseDriver{
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection collection;
+    private CodecRegistry pojoCodecRegistry;
     private String ip;
     private int port;
     private String username;
@@ -83,6 +89,8 @@ public class MongoDBDriver implements DatabaseDriver{
         }
         mongoClient = MongoClients.create(connectionString);
         database = mongoClient.getDatabase(dbName);
+        pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
     }
 
     /**
@@ -225,5 +233,12 @@ public class MongoDBDriver implements DatabaseDriver{
             comments.add(comment);
         }
         return comments;
+    }
+    public void updateComments(String title, List<Comment> comments){
+//        chooseCollection("recipe");
+        collection = collection.withCodecRegistry(pojoCodecRegistry);
+        Bson update = new Document("comments", comments);
+        Bson updateOperation = new Document("$set", update);
+        collection.updateOne(new Document("title", title), updateOperation);
     }
 }

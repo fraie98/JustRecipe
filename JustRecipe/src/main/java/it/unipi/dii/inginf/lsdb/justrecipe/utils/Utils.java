@@ -230,6 +230,16 @@ public class Utils {
     }
 
     /**
+     * Function used to show one comment
+     * @param pane      Pane in which I have to show the comments
+     * @param comment  Comments to show
+     */
+    public static void showComment(Pane pane, Comment comment){
+        Pane commentPane = loadComment(comment);
+        pane.getChildren().add(commentPane);
+    }
+
+    /**
      * Function used to load the .fxml for the comment
      * @param comment   Comment to show
      * @return          The pane in which I have showed the comment

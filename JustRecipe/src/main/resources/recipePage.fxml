@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -74,7 +76,7 @@
       </BorderPane>
       <ScrollPane hbarPolicy="NEVER" vbarPolicy="ALWAYS">
          <content>
-            <HBox alignment="CENTER" prefHeight="693.0" prefWidth="1197.0" style="-fx-background-color: RGB(204, 199, 194);">
+            <HBox alignment="CENTER" prefHeight="700.0" prefWidth="1197.0" style="-fx-background-color: RGB(204, 199, 194);">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -85,7 +87,7 @@
                            <children>
                               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Text fx:id="recipeTitle" layoutX="20.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisu" wrappingWidth="725.0">
+                                    <Text fx:id="recipeTitle" focusTraversable="true" layoutX="20.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisu" wrappingWidth="725.0">
                                        <font>
                                           <Font size="48.0" />
                                        </font>
@@ -192,6 +194,23 @@
                                     <Insets top="20.0" />
                                  </padding>
                               </HBox>
+                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="770.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/ingredients1.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text fx:id="recipeIngredients" layoutX="114.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="uova, mascarpone, ingr1, ingr2, ingr3, ingr4, ingr5" wrappingWidth="600.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </Pane>
                               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="770.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Text fx:id="recipeInstructions" layoutX="23.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anticamente le nonne usavano preparare una colazione che oggi potremmo definirepovera, ma che all’epoca era davvero ricchissima! Ancora oggi la ricetta è immutata,basta rompere in un bicchiere un uovo freschissimo e sbatterlo con dello zucchero ea piacere aggiungere caffè o latte caldo, per i più piccoli, e marsala o anice per i piùgrandicelli. Ed è proprio da questa portentosa crema che nasce la crema al mascarponebase del tiramisù. Il dolce italiano per eccellenza, quello più famoso e amato,ma soprattutto che ha dato vita a tantissime altre versioni, anche tiramisù senza uova!Poi il tiramisù alle fragole o quello alla Nutella, giusto per citarne un paio!Senza contare le rivisitazioni più raffinate come la crostata morbida o la torta al tiramisù." wrappingWidth="725.0" />
@@ -217,25 +236,20 @@
                                     <Insets />
                                  </opaqueInsets>
                                  <VBox.margin>
-                                    <Insets />
+                                    <Insets bottom="20.0" />
                                  </VBox.margin>
                               </Pane>
-                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="770.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                              <Pane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="84.0" fitWidth="78.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@img/ingredients1.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text fx:id="recipeIngredients" layoutX="114.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="uova, mascarpone, ingr1, ingr2, ingr3, ingr4, ingr5" wrappingWidth="600.0">
+                                    <TextArea fx:id="commentsArea" focusTraversable="false" layoutX="29.0" layoutY="39.0" prefHeight="106.0" prefWidth="723.0" />
+                                    <Label layoutX="282.0" layoutY="9.0" text="Write a comment:">
                                        <font>
-                                          <Font size="15.0" />
+                                          <Font size="24.0" />
                                        </font>
-                                    </Text>
+                                    </Label>
+                                    <Button fx:id="sendButton" layoutX="701.0" layoutY="160.0" mnemonicParsing="false" text="Send" />
+                                    <Button fx:id="cancelButton" layoutX="624.0" layoutY="160.0" mnemonicParsing="false" text="Cancel" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets bottom="35.0" />
-                                 </VBox.margin>
                               </Pane>
                            </children>
                         </VBox>
