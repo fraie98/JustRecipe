@@ -143,27 +143,45 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
-     *
+     * It controls if a user with username @one is followed by the user with username @two
      * @param one  Username of user one
      * @param two  Username of user two
      * @return  true if one is followed by two, false otherwise
      */
-    public boolean isUserOneFollowedByUserTwo(String one, String two)
+    public Boolean isUserOneFollowedByUserTwo(String one, String two)
     {
-        // Mock-up
-        // In the future this funtion must interrogate neo4j db
-        // in order to know if user one follow user two
-        return true;
+        Boolean relation;
+        try(Session session = driver.session())
+        {
+            relation = session.readTransaction((TransactionWork<Boolean>) tx -> {
+                    Result r = tx.run("match (a:User{username:$two})-[r:FOLLOWS]->(b:User{username:$one}) " +
+                            "return count(*)",parameters("one",one,"two",two));
+                    Record rec = r.next();
+                    if(rec.get(0).asInt()==0)
+                        return false;
+                    else
+                        return true;
+            });
+        }
+        return relation;
     }
 
     /**
-     * It cretes the relation follower-[:Follow]->following
+     * It creates the relation follower-[:Follow]->following
      * @param follower  The user who starts to follow
      * @param following  The user who is followed by follower
      */
-    public void follow(String follower, String following)
+    public void follow(String follower, String following) //tested
     {
-        
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Integer>) tx -> {
+                    tx.run("match (a:User) where a.username=$following " +
+                            "match (b:User) where b.username=$follower " +
+                            "merge (b)-[:FOLLOWS]->(a)",parameters("follower",follower,"following",following));
+                    return 1;
+                });
+        }
     }
 
     /**
@@ -171,9 +189,66 @@ public class Neo4jDriver implements DatabaseDriver{
      * @param oldFollower  The user who decide to unfollow
      * @param oldFollowing  The user unfollowed
      */
-    public void unfollow(String oldFollower, String oldFollowing)
+    public void unfollow(String oldFollower, String oldFollowing) //tested
     {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Integer>) tx -> {
+                    tx.run("match (u:User{username:$oldFollower})-[r:FOLLOWS]->(u2:User{username:$oldFollowing})" +
+                            " delete r",parameters("oldFollower",oldFollower,"oldFollowing",oldFollowing));
+                    return 1;
+                });
+        }
+    }
 
+    public int howManyFollower(String user)
+    {
+        return 0;
+    }
+
+    public int howManyFollowing(String user)
+    {
+        return 0;
+    }
+
+    /**
+     * It creates the relation user-[:LIKES]->recipe
+     * @param user  Username of the target user
+     * @param recipeTitle  Title of the target recipe
+     */
+    public void like(String user, String recipeTitle) //tested
+    {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Integer>) tx -> {
+                    tx.run("match (a:User) where a.username=$u " +
+                            "match (b:Recipe) where b.title=$t " +
+                            "merge (a)-[:LIKES]->(b)",parameters("u",user,"t",recipeTitle));
+                    return 1;
+            });
+        }
+    }
+
+    /**
+     * It deletes the relation user-[:LIKES]->recipe
+     * @param user  Username of the target user
+     * @param recipeTitle  Title of the target recipe
+     */
+    public void unlike(String user, String recipeTitle) //tested
+    {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Integer>) tx -> {
+                    tx.run("match (u:User{username:$u})-[r:LIKES]->(p:Recipe{title:$t})" +
+                            " delete r",parameters("u",user,"t",recipeTitle));
+                    return 1;
+            });
+        }
+    }
+
+    public int howManyLikes(String recipeTitle)
+    {
+        return 0;
     }
 
     /**
