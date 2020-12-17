@@ -11,7 +11,7 @@
 \contentsline {subsubsection}{Features offered to the Administrator}{5}%
 \contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}%
 \contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{6}%
-\contentsline {section}{\numberline {2.3}UML Class Diagram}{6}%
+\contentsline {section}{\numberline {2.3}UML Class Diagram}{7}%
 \contentsline {section}{\numberline {2.4}Data Model}{8}%
 \contentsline {subsection}{\numberline {2.4.1}DocumentDB}{8}%
 \contentsline {subsection}{\numberline {2.4.2}GraphDB}{8}%
