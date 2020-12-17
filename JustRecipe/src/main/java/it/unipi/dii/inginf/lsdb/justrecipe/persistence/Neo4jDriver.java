@@ -1,5 +1,6 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
@@ -171,7 +172,7 @@ public class Neo4jDriver implements DatabaseDriver{
      * @param follower  The user who starts to follow
      * @param following  The user who is followed by follower
      */
-    public void follow(String follower, String following) //tested
+    public void follow(String follower, String following)
     {
         try(Session session = driver.session())
         {
@@ -189,7 +190,7 @@ public class Neo4jDriver implements DatabaseDriver{
      * @param oldFollower  The user who decide to unfollow
      * @param oldFollowing  The user unfollowed
      */
-    public void unfollow(String oldFollower, String oldFollowing) //tested
+    public void unfollow(String oldFollower, String oldFollowing)
     {
         try(Session session = driver.session())
         {
@@ -201,14 +202,78 @@ public class Neo4jDriver implements DatabaseDriver{
         }
     }
 
+    /**
+     * It counts the number of follower of a given user
+     * @param user  Username of the target user
+     * @return  the number of follower
+     */
     public int howManyFollower(String user)
     {
-        return 0;
+        return howMany( "match (a:User)-[r:FOLLOWS]->(b:User{username:$user}) return count(a)",user);
     }
 
+    /**
+     * It counts the number of following of a given user
+     * @param user  Username of the target user
+     * @return  The number of following
+     */
     public int howManyFollowing(String user)
     {
-        return 0;
+        return howMany("match (a:User)<-[r:FOLLOWS]-(b:User{username:$placeholder}) return count(a)",user);
+    }
+
+    /**
+     * It counts the number of likes of a given recipe
+     * @param recipeTitle  Title of the given recipe
+     * @return  The number of likes
+     */
+    public int howManyLikes(String recipeTitle)
+    {
+        return howMany("match (a:User)-[r:LIKES]->(b:Recipe{title:$placeholder}) return count(a)",recipeTitle);
+    }
+    /**
+     * Private function which execute a given query that count how many relation enter or go out from a node
+     * @param query  query text
+     * @param userOrRecipe  username of the given user or title of the given recipe
+     * @return  the number of incoming or outgoing relation
+     */
+    private int howMany(String query, String userOrRecipe)
+    {
+        int howMany;
+
+        try(Session session = driver.session())
+        {
+            howMany = session.readTransaction((TransactionWork<Integer>) tx -> {
+                Result r = tx.run(query,parameters("placeholder",userOrRecipe));
+                Record rec = r.next();
+                return rec.get(0).asInt();
+            });
+        }
+        return howMany;
+    }
+
+    /**
+     * It controls if the given recipe is liked by the given user
+     * @param recipeTitle  title of the given recipe
+     * @param one  username of the given user
+     * @return  true if the given recipe is liked by the given user, false otherwise
+     */
+    public Boolean isThisRecipeLikedByOne(String recipeTitle, String one)
+    {
+        Boolean relation;
+        try(Session session = driver.session())
+        {
+            relation = session.readTransaction((TransactionWork<Boolean>) tx -> {
+                Result r = tx.run("match (a:User{username:$one})-[r:LIKES]->(b:Recipe{title:$t}) " +
+                        "return count(*)",parameters("one",one,"t",recipeTitle));
+                Record rec = r.next();
+                if(rec.get(0).asInt()==0)
+                    return false;
+                else
+                    return true;
+            });
+        }
+        return relation;
     }
 
     /**
@@ -216,7 +281,7 @@ public class Neo4jDriver implements DatabaseDriver{
      * @param user  Username of the target user
      * @param recipeTitle  Title of the target recipe
      */
-    public void like(String user, String recipeTitle) //tested
+    public void like(String user, String recipeTitle)
     {
         try(Session session = driver.session())
         {
@@ -234,7 +299,7 @@ public class Neo4jDriver implements DatabaseDriver{
      * @param user  Username of the target user
      * @param recipeTitle  Title of the target recipe
      */
-    public void unlike(String user, String recipeTitle) //tested
+    public void unlike(String user, String recipeTitle)
     {
         try(Session session = driver.session())
         {
@@ -244,11 +309,6 @@ public class Neo4jDriver implements DatabaseDriver{
                     return 1;
             });
         }
-    }
-
-    public int howManyLikes(String recipeTitle)
-    {
-        return 0;
     }
 
     /**
