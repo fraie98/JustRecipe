@@ -1,5 +1,6 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
@@ -143,27 +144,45 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
-     *
+     * It controls if a user with username @one is followed by the user with username @two
      * @param one  Username of user one
      * @param two  Username of user two
      * @return  true if one is followed by two, false otherwise
      */
-    public boolean isUserOneFollowedByUserTwo(String one, String two)
+    public Boolean isUserOneFollowedByUserTwo(String one, String two)
     {
-        // Mock-up
-        // In the future this funtion must interrogate neo4j db
-        // in order to know if user one follow user two
-        return true;
+        Boolean relation;
+        try(Session session = driver.session())
+        {
+            relation = session.readTransaction((TransactionWork<Boolean>) tx -> {
+                    Result r = tx.run("match (a:User{username:$two})-[r:FOLLOWS]->(b:User{username:$one}) " +
+                            "return count(*)",parameters("one",one,"two",two));
+                    Record rec = r.next();
+                    if(rec.get(0).asInt()==0)
+                        return false;
+                    else
+                        return true;
+            });
+        }
+        return relation;
     }
 
     /**
-     * It cretes the relation follower-[:Follow]->following
+     * It creates the relation follower-[:Follow]->following
      * @param follower  The user who starts to follow
      * @param following  The user who is followed by follower
      */
     public void follow(String follower, String following)
     {
-        
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Integer>) tx -> {
+                    tx.run("match (a:User) where a.username=$following " +
+                            "match (b:User) where b.username=$follower " +
+                            "merge (b)-[:FOLLOWS]->(a)",parameters("follower",follower,"following",following));
+                    return 1;
+                });
+        }
     }
 
     /**
@@ -173,7 +192,123 @@ public class Neo4jDriver implements DatabaseDriver{
      */
     public void unfollow(String oldFollower, String oldFollowing)
     {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Integer>) tx -> {
+                    tx.run("match (u:User{username:$oldFollower})-[r:FOLLOWS]->(u2:User{username:$oldFollowing})" +
+                            " delete r",parameters("oldFollower",oldFollower,"oldFollowing",oldFollowing));
+                    return 1;
+                });
+        }
+    }
 
+    /**
+     * It counts the number of follower of a given user
+     * @param user  Username of the target user
+     * @return  the number of follower
+     */
+    public int howManyFollower(String user)
+    {
+        return howMany( "match (a:User)-[r:FOLLOWS]->(b:User{username:$user}) return count(a)",user);
+    }
+
+    /**
+     * It counts the number of following of a given user
+     * @param user  Username of the target user
+     * @return  The number of following
+     */
+    public int howManyFollowing(String user)
+    {
+        return howMany("match (a:User)<-[r:FOLLOWS]-(b:User{username:$placeholder}) return count(a)",user);
+    }
+
+    /**
+     * It counts the number of likes of a given recipe
+     * @param recipeTitle  Title of the given recipe
+     * @return  The number of likes
+     */
+    public int howManyLikes(String recipeTitle)
+    {
+        return howMany("match (a:User)-[r:LIKES]->(b:Recipe{title:$placeholder}) return count(a)",recipeTitle);
+    }
+    /**
+     * Private function which execute a given query that count how many relation enter or go out from a node
+     * @param query  query text
+     * @param userOrRecipe  username of the given user or title of the given recipe
+     * @return  the number of incoming or outgoing relation
+     */
+    private int howMany(String query, String userOrRecipe)
+    {
+        int howMany;
+
+        try(Session session = driver.session())
+        {
+            howMany = session.readTransaction((TransactionWork<Integer>) tx -> {
+                Result r = tx.run(query,parameters("placeholder",userOrRecipe));
+                Record rec = r.next();
+                return rec.get(0).asInt();
+            });
+        }
+        return howMany;
+    }
+
+    /**
+     * It controls if the given recipe is liked by the given user
+     * @param recipeTitle  title of the given recipe
+     * @param one  username of the given user
+     * @return  true if the given recipe is liked by the given user, false otherwise
+     */
+    public Boolean isThisRecipeLikedByOne(String recipeTitle, String one)
+    {
+        Boolean relation;
+        try(Session session = driver.session())
+        {
+            relation = session.readTransaction((TransactionWork<Boolean>) tx -> {
+                Result r = tx.run("match (a:User{username:$one})-[r:LIKES]->(b:Recipe{title:$t}) " +
+                        "return count(*)",parameters("one",one,"t",recipeTitle));
+                Record rec = r.next();
+                if(rec.get(0).asInt()==0)
+                    return false;
+                else
+                    return true;
+            });
+        }
+        return relation;
+    }
+
+    /**
+     * It creates the relation user-[:LIKES]->recipe
+     * @param user  Username of the target user
+     * @param recipeTitle  Title of the target recipe
+     */
+    public void like(String user, String recipeTitle)
+    {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Integer>) tx -> {
+                    tx.run("match (a:User) where a.username=$u " +
+                            "match (b:Recipe) where b.title=$t " +
+                            "merge (a)-[:LIKES]->(b)",parameters("u",user,"t",recipeTitle));
+                    return 1;
+            });
+        }
+    }
+
+    /**
+     * It deletes the relation user-[:LIKES]->recipe
+     * @param user  Username of the target user
+     * @param recipeTitle  Title of the target recipe
+     */
+    public void unlike(String user, String recipeTitle)
+    {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Integer>) tx -> {
+                    tx.run("match (u:User{username:$u})-[r:LIKES]->(p:Recipe{title:$t})" +
+                            " delete r",parameters("u",user,"t",recipeTitle));
+                    return 1;
+            });
+        }
     }
 
     /**
