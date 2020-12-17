@@ -181,21 +181,37 @@ The use case diagram of the application is described in the figure 2.1
 	\includegraphics[scale=0.42]{img/UseCaseDiagram.png}
 	\caption{Use Case Diagram}
 \end{figure}
-\emph{Scrivere perchè pallini colorati ecc....}
+Some observations on the diagram are necessary:
+\begin{itemize}
+	\item The circles in \underline{blue} are the ones which described actions available only for the owner of the object on which the actions are applied.
+	
+	\noindent So, in detail, this means that a \textbf{User} can edit/delete a profile if and only if he owns this profile. Then he can edit a recipe and/or a comment if and only if he add that recipe or that comment.
+	
+	
+	\item The action \emph{Browse Recipes of following users} is available only if the \textbf{User} follows at least one user. Otherwise he can start to follow users and see recipes executing the action \emph{Browse Suggested Recipes}; in this case, due to the fact that the user follows nobody, he will see the most famous recipes in general because it's impossible to suggest specific recipes because of the fact that he has no following and no likes/comments. 
+	
+	\item The actions in \underline{red} are the ones that can be performed only by the \textbf{Administrator}
+	
+	\item The actions in \underline{orange} are the ones that can be performed only by the \textbf{Moderators}
+\end{itemize}
 
 
 \section{UML Class Diagram}
-\emph{Scrivere intro}
+Let analyze the UML Class Diagram. There are three main entities: User, Comment, Recipe.
+
+\noindent It's important to point out that the \textbf{User} of the Use Case Diagram is here the so-called \emph{Registered User} and the \emph{User} of this diagram is the generic user. Then we undeline the fact that ,in order to represent the three actors of the use case diagram, a generalization is needed.
+ 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[scale=0.58]{img/ClassDiagram_generaliz.png}
+	\includegraphics[scale=0.55]{img/ClassDiagram_generaliz.png}
 	\caption{UML Analysis Classes Diagram with generalization unsolved}
 \end{figure}
 
-\noindent \emph{Scrivere come abbiamo risolto le generalizzazioni (aggiunto di role:int)}
+\noindent Observing the figure 2.2 it's possible to understand that we can resolve the generalization putting an attribute in the entity \emph{User}. It is an integer and we call it \emph{role}: if it's a \emph{Normal User} role is 0; if \emph{Moderator} then 1; if \emph{Administrator} then 2.
+
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[scale=0.58]{img/ClassDiagram.png}
+	\includegraphics[scale=0.55]{img/ClassDiagram.png}
 	\caption{UML Analysis Classes Diagram}
 \end{figure}
 
