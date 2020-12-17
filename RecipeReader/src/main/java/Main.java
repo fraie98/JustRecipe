@@ -41,7 +41,7 @@ public class Main {
         //I have removed the last HOW_MANY_RECIPES_TO_REMOVE recipes, that are the ones that have not so much information
         rawRecipes.subList(rawRecipes.size() - HOW_MANY_RECIPES_TO_REMOVE, rawRecipes.size()).clear();
 
-        // Remove the recipe with title == null (the filter (...)) and remove the duplicates (distinct())
+        // Remove the recipe with title == null (filter (...)) and remove the duplicates (distinct())
         List<RecipeRaw> recipesWithoutDuplicates = rawRecipes.stream().filter(new Predicate<RecipeRaw>() {
             @Override
             public boolean test(RecipeRaw recipeRaw) {
@@ -51,6 +51,7 @@ public class Main {
             }
         }).distinct().collect(Collectors.toList());
 
+        // List of users present at the initial time of the application
         List<User> users = new ArrayList<>();
         users.add(new User("Oliver", "Smith", "oliver.smith", "oliver.smith"));
         users.add(new User("Jack", "Jones", "jack.jones", "jack.jones"));
@@ -74,10 +75,10 @@ public class Main {
         users.add(new User("Sophie", "Roberts", "sophie.roberts", "sophie.roberts"));
 
         // First I insert the user, because when i choose randomly i can't be sure
-        // that they will be all pick-up, so i need to be sure that they are present
-        // So, instead of adding the users in the insertRecipesAndUsers function, i have created another one
+        // that they will be all pick-up, so i need to be sure that they are all present
+        // So, instead of adding the users in the insertRecipesAndUsers function, i have created another one function
         addUsers(users);
-        insertRecipesAndUsers(recipesWithoutDuplicates, users);
+        insertRecipesOfUsers(recipesWithoutDuplicates, users);
         
         System.out.println(collection.countDocuments()); //How many documents loaded
         mongoClient.close();
@@ -128,7 +129,7 @@ public class Main {
     }
 
     /**
-     * Method that creates a new nodes in the graphDB with the informations of the new users
+     * Method that creates a new nodes in the graphDB with the information of the new users
      * @param users      Users to add
      */
     public static void addUsers( final List<User> users)
@@ -159,7 +160,12 @@ public class Main {
         }
     }
 
-    public static void insertRecipesAndUsers (List<RecipeRaw> recipeRaws, List<User> users)
+    /**
+     * Function that insert all the recipes, every one is associated at one user randomly picked
+     * @param recipeRaws    The list of the recipes
+     * @param users         The list of the users
+     */
+    public static void insertRecipesOfUsers (List<RecipeRaw> recipeRaws, List<User> users)
     {
         List<Document> documents = new ArrayList<Document>();
         Date date = new Date();
@@ -208,7 +214,16 @@ public class Main {
             // Neo4j part
             Map<String,Object> props = new HashMap<>();
             props.put( "username", user.getUsername());
+            props.put("timestamp", date.getTime());
             props.put("title", rawRecipe.getTitle());
+            if (rawRecipe.getCalories() != 0)
+                props.put("calories", rawRecipe.getCalories());
+            if (rawRecipe.getFat() != 0)
+                props.put("fat", rawRecipe.getFat());
+            if (rawRecipe.getProtein() != 0)
+                props.put("protein", rawRecipe.getProtein());
+            if (rawRecipe.getCarbs() != 0)
+                props.put("carbs", rawRecipe.getCarbs());
             list.add(props);
         }
 
@@ -221,10 +236,11 @@ public class Main {
         {
             session.writeTransaction((TransactionWork<Void>) tx -> {
                 // First step: find the right user
-                // Second step: merge the path, for creating it if it is necessary
+                // Second step: create the path ADDS and the recipe
                 tx.run( "UNWIND $batch AS row " +
                                 "MATCH (u:User {username: row.username}) " +
-                                "MERGE (u)-[:ADD]->(r:Recipe {title: row.title})",
+                                "CREATE (u)-[:ADDS {when: row.timestamp}]->(r:Recipe {title: row.title, calories: row.calories, " +
+                                "fat: row.fat, protein: row.protein, carbs: row.carbs})",
                         params);
                 return null;
             });
