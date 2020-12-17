@@ -14,9 +14,9 @@ public class UserSnapshotController {
     private Session appSession;
     @FXML private ImageView userSnapImg;
     @FXML private Label userSnapUsername;
-    @FXML private Text userSnapFollower;
-    @FXML private Text userSnapFollowing;
-    @FXML private Text userSnapRecipes;
+    @FXML private Label userSnapFollower;
+    @FXML private Label userSnapFollowing;
+    @FXML private Label userSnapRecipes;
 
     public void initialize()
     {

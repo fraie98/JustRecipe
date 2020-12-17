@@ -3,6 +3,7 @@ package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,6 +25,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -69,13 +73,24 @@ public class DiscoveryPageController {
         searchComboBox.setItems(options);
 
         searchButton.setOnAction(actionEvent -> search(actionEvent));
+
+        List<User> users = new ArrayList<>();
+        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
+        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
+        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
+        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
+        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
+        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
+        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
+        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
+        Utils.addUsersSnap(discoveryVBox, users);
     }
 
     private void search(ActionEvent actionEvent) {
         discoveryVBox.getChildren().remove(0, discoveryVBox.getChildren().size());
         if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))
         {
-            List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(), HOW_MANY_SNAPSHOT_TO_SHOW);
+            List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(), 0, HOW_MANY_SNAPSHOT_TO_SHOW);
             Utils.addRecipesSnap(discoveryVBox, recipes);
         }
         else if (String.valueOf(searchComboBox.getValue()).equals("Most common recipe categories"))

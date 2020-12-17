@@ -138,17 +138,19 @@ public class MongoDBDriver implements DatabaseDriver{
     /**
      * Function that returns "howMany" recipes that contains in their title the title inserted by the user
      * @param title     Title to check
-     * @param howMany   How many recipes to obtain
+     * @param from      First extreme of the interval
+     * @param to        Second extreme of the interval
      * @return          The list of the recipes that match the condition
      */
-    public List<Recipe> searchRecipesFromTitle (String title, int howMany)
+    public List<Recipe> searchRecipesFromTitle (String title, int from, int to)
     {
         List<Recipe> recipes = new ArrayList<>();
         Gson gson = new Gson();
         Pattern pattern = Pattern.compile("^.*" + title + ".*$", Pattern.CASE_INSENSITIVE);
         Bson match = Aggregates.match(Filters.regex("title", pattern));
         Bson sort = sort(descending("creationTime"));
-        Bson limit = limit(howMany);
+        Bson skip = skip(from);
+        Bson limit = limit(to);
         List<Document> results = (List<Document>) collection.aggregate(Arrays.asList(match, sort, limit))
                 .into(new ArrayList<>());
         Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();

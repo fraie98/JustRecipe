@@ -4,19 +4,20 @@ import com.thoughtworks.xstream.XStream;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.controller.CommentController;
 import it.unipi.dii.inginf.lsdb.justrecipe.controller.RecipeSnapshotController;
+import it.unipi.dii.inginf.lsdb.justrecipe.controller.UserSnapshotController;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -27,7 +28,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -190,10 +190,10 @@ public class Utils {
 
     /**
      * Function that adds the snapshots of the recipes, 2 for each row
-     * @param pane      Pane in which I have to show the snapshots
+     * @param vBox      VBox in which I have to show the snapshots
      * @param recipes   Recipes to show
      */
-    public static void addRecipesSnap(Pane pane, List<Recipe> recipes) {
+    public static void addRecipesSnap(VBox vBox, List<Recipe> recipes) {
         Iterator<Recipe> iterator = recipes.iterator();
         while (iterator.hasNext())
         {
@@ -209,22 +209,23 @@ public class Utils {
                 Pane rec2 = createRecipeSnapshot(recipe2);
                 row.getChildren().add(rec2);
             }
-            pane.getChildren().add(row);
+            vBox.getChildren().add(row);
         }
     }
 
     /**
      * Function used to show the comments
-     * @param pane      Pane in which I have to show the comments
+     * @param vBox      VBox in which I have to show the comments
      * @param comments  Comments to show
      */
-    public static void showComments(Pane pane, List<Comment> comments) {
+    public static void showComments(VBox vBox, List<Comment> comments) {
         Iterator<Comment> iterator = comments.iterator();
+        vBox.setSpacing(20);
         while (iterator.hasNext())
         {
             Comment comment = iterator.next();
             Pane commentPane = loadComment(comment);
-            pane.getChildren().add(commentPane);
+            vBox.getChildren().add(commentPane);
         }
     }
 
@@ -247,4 +248,65 @@ public class Utils {
         }
         return pane;
     }
+
+    /**
+     * Function used to load the .fxml for the snapshot of the user
+     * @param user      User to load
+     * @return          The pane in which the snapshot has been loaded
+     */
+    private static Pane loadUserSnapshot (User user)
+    {
+        Pane pane = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(Utils.class.getResource("/userSnap.fxml"));
+            pane = (Pane) loader.load();
+            UserSnapshotController userSnapshotController =
+                    (UserSnapshotController) loader.getController();
+            userSnapshotController.setUserSnap(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return pane;
+    }
+
+    /**
+     * Function that load the snapshot of the users in the pane
+     * There will be four snapshot for each row (if possible)
+     * @param vBox          VBox in which the snapshot has to be inserted
+     * @param users         The users to show
+     */
+    public static void addUsersSnap(VBox vBox, List<User> users) {
+        Iterator<User> iterator = users.iterator();
+        while (iterator.hasNext())
+        {
+            HBox row = new HBox();
+            row.setStyle("-fx-padding: 10px");
+            row.setSpacing(10);
+            User user1 = iterator.next();
+            Pane pane1 = loadUserSnapshot (user1);
+            row.getChildren().add(pane1);
+            if (iterator.hasNext())
+            {
+                User user2 = iterator.next();
+                Pane pane2 = loadUserSnapshot (user2);
+                row.getChildren().add(pane2);
+
+                if (iterator.hasNext())
+                {
+                    User user3 = iterator.next();
+                    Pane pane3 = loadUserSnapshot (user3);
+                    row.getChildren().add(pane3);
+
+                    if (iterator.hasNext())
+                    {
+                        User user4 = iterator.next();
+                        Pane pane4 = loadUserSnapshot (user4);
+                        row.getChildren().add(pane4);
+                    }
+                }
+            }
+            vBox.getChildren().add(row);
+        }
+    }
+
 }
