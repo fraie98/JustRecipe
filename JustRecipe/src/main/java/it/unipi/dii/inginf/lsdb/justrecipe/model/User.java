@@ -23,6 +23,11 @@ public class User {
         this.role = role;
     }
 
+    public User (String firstName, String lastName, String username, String password)
+    {
+        this(firstName, lastName, null, username, password, 0);
+    }
+
 
     //Getters
     public String getFirstName() {
