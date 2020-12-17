@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.XStream;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.main.Main;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -67,8 +68,6 @@ public class WelcomePageController {
         {
             if (login(usernameLoginTextField.getText(), passwordLoginTextField.getText()))
             {
-                Session newSession = Session.getInstance();
-                newSession.setLoggedUser(neo4jDriver.getUserInfo(usernameLoginTextField.getText()));
                 HomePageController homePageController = (HomePageController)
                         Utils.changeScene("/homepage.fxml", actionEvent);
             }
@@ -99,7 +98,8 @@ public class WelcomePageController {
                     usernameRegistrationTextField.getText(), passwordRegistrationTextField.getText()))
             {
                 Session newSession = Session.getInstance();
-                newSession.setLoggedUser(neo4jDriver.getUserInfo(usernameRegistrationTextField.getText()));
+                User registered = new User(firstNameRegistrationTextField.getText(),lastNameRegistrationTextField.getText(),null,usernameRegistrationTextField.getText(),passwordRegistrationTextField.getText(),0);
+                newSession.setLoggedUser(registered);
                 HomePageController homePageController = (HomePageController)
                         Utils.changeScene("/homepage.fxml", actionEvent);
             }
@@ -118,10 +118,17 @@ public class WelcomePageController {
      */
     private boolean login (final String username, final String password)
     {
-        if (neo4jDriver.checkUser(username, password))
+        User isPresent = neo4jDriver.login(username, password);
+        if(isPresent!=null)
+        {
+            Session newSession = Session.getInstance();
+            newSession.setLoggedUser(isPresent);
             return true;
+        }
         else
+        {
             return false;
+        }
     }
 
     /**
@@ -136,7 +143,7 @@ public class WelcomePageController {
                            final String password)
     {
         // I need to check if it is possible to use this username
-        if (!neo4jDriver.checkUsername(username)) // If it wasn't previously used
+        if (!neo4jDriver.isRegistered(username)) // If it wasn't previously used
         {
             neo4jDriver.addUser(firsName, lastName, username, password);
             return true;

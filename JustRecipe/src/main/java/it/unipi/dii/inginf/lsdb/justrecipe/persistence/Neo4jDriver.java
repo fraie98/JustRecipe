@@ -1,11 +1,13 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 import static org.neo4j.driver.Values.parameters;
 
@@ -81,58 +83,63 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
-     * Method that checks if the user already exists
-     * @param username  username to check
-     * @param password  password to check
-     * @return          true if the user exists in the graph, otherwise false
+     * It controls that a user with the given username exists or not
+     * @param username  username of the user that I want to control
+     * @return true if the user is registered, false otherwise
      */
-    public boolean checkUser (final String username, final String password)
+    public boolean isRegistered (final String username)
     {
+        Boolean isPresent;
         try ( Session session = driver.session())
         {
-             Boolean present = session.readTransaction((TransactionWork<Boolean>) tx -> {
+             isPresent = session.readTransaction((TransactionWork<Boolean>) tx -> {
                  Result result = tx.run( "MATCH (u:User) " +
                                  "WHERE u.username = $username " +
-                                 "AND u.password = $password " +
                                  "RETURN u " +
                                  "LIMIT 1",
-                        parameters( "username", username, "password", password ) );
+                        parameters( "username", username) );
                  if (result.stream().count() != 0)
                     return true;
                  else
                      return false;
             });
-            if (present)
-                return true;
-            else
-                return false;
         }
+        return isPresent;
     }
 
     /**
-     * Method that checks if the username has already been used
-     * @param username  username to check
-     * @return          true if the username already exists, otherwise false
+     * It performs the login with the given username and password
+     * @param username  Username of the target user
+     * @param pw  Password of the target user
+     * @return The object user if the login is done successfully, otherwise null
      */
-    public boolean checkUsername(final String username) {
+    public User login(final String username, final String pw)
+    {
+        User u = null;
         try ( Session session = driver.session())
         {
-            Boolean present = session.readTransaction((TransactionWork<Boolean>) tx -> {
+            u = session.readTransaction((TransactionWork<User>) tx -> {
                 Result result = tx.run( "MATCH (u:User) " +
                                 "WHERE u.username = $username " +
-                                "RETURN u " +
+                                "AND u.password = $password " +
+                                "RETURN u.firstName, u.lastName, u.username, u.password, u.role  " +
                                 "LIMIT 1",
-                        parameters( "username", username) );
-                if (result.stream().count() != 0)
-                    return true;
-                else
-                    return false;
+                        parameters( "username", username,"password",pw) );
+                User log = null;
+                try
+                {
+                    Record r = result.next();
+                    log = new User(r.get(0).asString(),r.get(1).asString(),null,r.get(2).asString(),r.get(3).asString(),r.get(4).asInt());
+                }
+                catch (NoSuchElementException ex)
+                {
+                    log = null;
+                }
+
+                return log;
             });
-            if (present)
-                return true;
-            else
-                return false;
         }
+        return u;
     }
 
     /**
@@ -167,18 +174,6 @@ public class Neo4jDriver implements DatabaseDriver{
     public void unfollow(String oldFollower, String oldFollowing)
     {
 
-    }
-
-    /**
-     * It returns the info about the user
-     * @param username  Username of the target user
-     * @return  The entity User with all informations about the user with the indicated username
-     */
-    public User getUserInfo(String username)
-    {
-        User u = null;
-        u = new User("pippo","pippo",null,"pippo","pippo",0);
-        return u;
     }
 
     /**
