@@ -189,7 +189,6 @@ public class MongoDBDriver implements DatabaseDriver{
                 .into(new ArrayList<>());
         Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
         recipes = gson.fromJson(gson.toJson(results), recipeListType);
-        System.out.println(recipes);
         return recipes;
     }
 

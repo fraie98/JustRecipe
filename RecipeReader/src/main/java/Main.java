@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static int HOW_MANY_RECIPES_TO_REMOVE = 30000;
-    public static String PATH_FULL_FORMAT_RECIPES = "/home/francesco/Scaricati/full_format_recipes/full_format_recipes.json";
-    public static String PATH_RECIPES_RAW_NOSOURCE_FN = "/home/francesco/Scaricati/recipes_raw/recipes_raw_nosource_fn.json";
+    public static String PATH_FULL_FORMAT_RECIPES = "C:/Users/danyc/Downloads/full_format_recipes/full_format_recipes.json";
+    public static String PATH_RECIPES_RAW_NOSOURCE_FN = "C:/Users/danyc/Downloads/recipes_raw/recipes_raw_nosource_fn.json";
 
     private static MongoClient mongoClient;
     private static MongoDatabase database;
@@ -50,6 +50,10 @@ public class Main {
                 return false;
             }
         }).distinct().collect(Collectors.toList());
+
+        // This reverse is used to insert the recipe with more information in the tail,
+        // so they will be the last insert
+        Collections.reverse(recipesWithoutDuplicates);
 
         // List of users present at the initial time of the application
         List<User> users = new ArrayList<>();
@@ -172,6 +176,7 @@ public class Main {
         Map<String,Object> params = new HashMap<>();
         List<Map<String,Object>> list = new ArrayList<>();
         Random random = new Random();
+        int i= 0;
         for (RecipeRaw rawRecipe: recipeRaws) // For every recipe
         {
             // pick-up randomly a user to associate with this recipe
@@ -207,14 +212,14 @@ public class Main {
             if (rawRecipe.getCarbs() != 0)
                 doc.append("carbs", rawRecipe.getCarbs());
             // For the timestamp MongoDB use the "Date"
-            doc.append("creationTime", date);
+            doc.append("creationTime", new Date(date.getTime()+(1000*i)));
             doc.append("authorUsername", user.getUsername());
             documents.add(doc);
 
             // Neo4j part
             Map<String,Object> props = new HashMap<>();
             props.put( "username", user.getUsername());
-            props.put("timestamp", date.getTime());
+            props.put("timestamp", new Date(date.getTime()+(1000*i)).getTime());
             props.put("title", rawRecipe.getTitle());
             if (rawRecipe.getCalories() != 0)
                 props.put("calories", rawRecipe.getCalories());
@@ -225,6 +230,8 @@ public class Main {
             if (rawRecipe.getCarbs() != 0)
                 props.put("carbs", rawRecipe.getCarbs());
             list.add(props);
+
+            i++;
         }
 
         // Mongo insert
