@@ -247,8 +247,8 @@
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="sendButton" layoutX="644.0" layoutY="160.0" mnemonicParsing="false" text="AddComment" />
-                                    <Button fx:id="cancelButton" layoutX="567.0" layoutY="160.0" mnemonicParsing="false" text="Cancel" />
+                                    <Button fx:id="sendButton" layoutX="701.0" layoutY="160.0" mnemonicParsing="false" text="Send" />
+                                    <Button fx:id="cancelButton" layoutX="624.0" layoutY="160.0" mnemonicParsing="false" text="Cancel" />
                                  </children>
                               </Pane>
                            </children>
