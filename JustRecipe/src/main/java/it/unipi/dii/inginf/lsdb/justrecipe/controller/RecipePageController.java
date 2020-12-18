@@ -77,6 +77,10 @@ public class RecipePageController {
         cancelButton.setOnAction(actionEvent -> handleCancelButtonAction(actionEvent));
     }
 
+    /**
+     * Function who handle the adding comments, and upload on mongoDB
+     * @param actionEvent pressing the button
+     */
     private void handleSendButtonAction(ActionEvent actionEvent){
         if(commentsArea.getText().equals("")) {
             Utils.showErrorAlert("No Comments in the CommentsArea");
@@ -97,16 +101,26 @@ public class RecipePageController {
         mongoDBDriver.updateComments(recipe.getTitle(), recipe.getComments());
     }
 
+    /**
+     * Cancelling the comment textArea by clicking on the cancel Button
+     * @param actionEvent pressing the button
+     */
     private void handleCancelButtonAction(ActionEvent actionEvent){
         if(!commentsArea.getText().equals("")) commentsArea.setText("");
     }
 
     /**
      * Setters for the recipe, in which we also set the correct value to show
-     * @param recipe    Recipe to show
+     * @param r    Recipe to show
      */
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public void setRecipe(Recipe r) {
+        String title = r.getTitle();
+        if(r.getInstructions() == null){
+            System.out.println("Snap from Neo ---> getting recipes from MongoDB!");                                     //DEBUG
+            Recipe recipeMongoDB = MongoDBDriver.getInstance().getRecipeFromTitle(title);
+            this.recipe = recipeMongoDB;
+        }else
+            this.recipe = r;
         recipeTitle.setText(recipe.getTitle());
         recipeInstructions.setText(recipe.getInstructions());
         if (recipe.getPicture() != null)

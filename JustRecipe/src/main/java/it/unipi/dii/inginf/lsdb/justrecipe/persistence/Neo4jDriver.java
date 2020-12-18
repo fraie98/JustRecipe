@@ -7,9 +7,12 @@ import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
+import static org.neo4j.driver.Values.NULL;
 import static org.neo4j.driver.Values.parameters;
 
 /**
@@ -357,5 +360,37 @@ public class Neo4jDriver implements DatabaseDriver{
     public void editComment(String title, Date creationTs)
     {
 
+    }
+
+    public List<Recipe> getRecipeSnap(int howManySkip, int howMany, String username){
+        List <Recipe> recipes = new ArrayList<>();
+        System.out.println(username);
+        try(Session session = driver.session()) {
+            session.readTransaction((TransactionWork<List<Recipe>>) tx -> {
+                Result result = tx.run("MATCH (u:User{username:$u})-[ADDS]->(r:Recipe)"+"RETURN r.title as Title," +
+                                "r.calories as Calories, r.fat as Fat, r.protein as Protein SKIP $skip LIMIT $limit",
+                        parameters("u",username, "skip", howManySkip, "limit", howMany));
+
+                while(result.hasNext()){
+                    Record r = result.next();
+                    String title = r.get("Title").asString();
+                    int calories = 0;
+                    int protein = 0;
+                    int fat = 0;
+                    if(r.get("Calories") != NULL)
+                        calories = r.get("Calories").asInt();
+                    if(r.get("Fat") != NULL)
+                        fat = r.get("Fat").asInt();
+                    if(r.get("Protein") != NULL)
+                        protein = r.get("Protein").asInt();
+                    Recipe recipe = new Recipe(title, fat, calories, protein);
+                    recipe.setAuthorUsername(username);
+                    recipes.add(recipe);
+                }
+                System.out.println(recipes);
+                return recipes;
+            });
+        }
+        return recipes;
     }
 }

@@ -4,6 +4,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -48,9 +49,9 @@
                               <Insets left="20.0" />
                            </VBox.margin>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="userName">
+                              <Text fx:id="userName" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="userName">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font size="18.0" />
                                  </font>
                                  <HBox.margin>
                                     <Insets top="10.0" />
@@ -65,12 +66,12 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                            <children>
-                              <ImageView fx:id="profileDeleteUser" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="profileDeleteUser" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/delete.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="profileEditUser" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="profileEditUser" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/edit.png" />
                                  </image>
@@ -132,14 +133,14 @@
       </BorderPane>
       <ScrollPane hbarPolicy="NEVER">
          <content>
-            <HBox prefHeight="582.0" prefWidth="1197.0" style="-fx-background-color: RGB(204, 199, 194);">
+            <HBox prefHeight="518.0" prefWidth="1197.0" style="-fx-background-color: RGB(204, 199, 194);">
                <children>
-                  <VBox prefHeight="580.0" prefWidth="199.0">
+                  <VBox prefHeight="451.0" prefWidth="199.0">
                      <children>
-                        <HBox>
+                        <HBox prefHeight="16.0" prefWidth="118.0">
                            <children>
                               <Label text="Follower:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="number" />
+                              <Text fx:id="followerNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="number" />
                            </children>
                            <VBox.margin>
                               <Insets left="40.0" top="30.0" />
@@ -148,7 +149,7 @@
                         <HBox>
                            <children>
                               <Label text="Following:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="number" />
+                              <Text fx:id="followingNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="number" />
                            </children>
                            <VBox.margin>
                               <Insets left="40.0" top="10.0" />
@@ -157,7 +158,7 @@
                         <HBox>
                            <children>
                               <Label text="Recipes:" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="number" />
+                              <Text fx:id="recipesNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="number" />
                            </children>
                            <VBox.margin>
                               <Insets left="40.0" top="10.0" />
@@ -165,7 +166,23 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="700.0" prefWidth="891.0" style="-fx-background-color: white;" />
+                  <VBox prefWidth="891.0">
+                     <children>
+                        <VBox fx:id="recipeVbox" focusTraversable="true" prefHeight="480.0" prefWidth="891.0" style="-fx-background-color: white;" />
+                        <HBox spacing="10.0" style="-fx-alignment: center;">
+                           <children>
+                              <Button fx:id="previousButton" focusTraversable="false" mnemonicParsing="false" text="Previous">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </HBox.margin></Button>
+                              <Button fx:id="nextButton" focusTraversable="false" mnemonicParsing="false" text="Next">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </HBox.margin></Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
          </content>

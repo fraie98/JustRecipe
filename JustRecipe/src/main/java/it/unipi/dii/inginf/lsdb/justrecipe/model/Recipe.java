@@ -44,6 +44,13 @@ public class Recipe {
         this.comments = comments;
     }
 
+    public Recipe(String title, int fat, int calories, int protein){
+        this.title = title;
+        this.fat = fat;
+        this.protein = protein;
+        this.calories = calories;
+    }
+
     public Recipe(String title, String instructions, List<String> ingredients, List<String> categories,
                   int calories, int fat, int protein, int carbs, Date creationTime, String picture,
                   String authorUsername)

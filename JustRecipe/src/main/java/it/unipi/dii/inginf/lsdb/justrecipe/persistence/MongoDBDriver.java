@@ -17,6 +17,8 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
+
+import javax.print.Doc;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.function.Consumer;
@@ -143,6 +145,30 @@ public class MongoDBDriver implements DatabaseDriver{
         return recipes;
     }
 
+    public List<Recipe> getRecipesFromAuthorUsername(int howManySkip, int howMany, String username){
+        List<Recipe> recipes = new ArrayList<>();
+        Gson gson = new Gson();
+        List<Document> results = new ArrayList<>();
+        Bson sort = sort(descending("creationTime"));
+        Bson skip = skip(howManySkip);
+        Bson limit = limit(howMany);
+        Bson match = match(eq("authorUsername", username));
+        results = (List<Document>) collection.aggregate(Arrays.asList(match, sort, skip, limit))
+                .into(new ArrayList<>());
+        Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
+        recipes = gson.fromJson(gson.toJson(results), recipeListType);
+        return recipes;
+    }
+
+    public Recipe getRecipeFromTitle(String title){
+        Recipe recipe = null;
+        Gson gson = new Gson();
+        Type recipeType = new TypeToken<Recipe>(){}.getType();
+        Document myDoc =(Document) collection.find(eq("title", title)).first();
+        recipe = gson.fromJson(gson.toJson(myDoc), recipeType);
+        return recipe;
+    }
+
     /**
      * Function that returns "howMany" recipes that contains in their title the title inserted by the user
      * @param title         Title to check
@@ -163,6 +189,7 @@ public class MongoDBDriver implements DatabaseDriver{
                 .into(new ArrayList<>());
         Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
         recipes = gson.fromJson(gson.toJson(results), recipeListType);
+        System.out.println(recipes);
         return recipes;
     }
 
