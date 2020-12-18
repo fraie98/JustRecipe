@@ -1,30 +1,30 @@
 \babel@toc {english}{}
-\contentsline {chapter}{\numberline {1}Dataset}{3}%
-\contentsline {chapter}{\numberline {2}Design}{4}%
-\contentsline {section}{\numberline {2.1}Introduction To The Application}{4}%
-\contentsline {section}{\numberline {2.2}Requirements}{4}%
-\contentsline {subsection}{\numberline {2.2.1}Main Actors}{4}%
-\contentsline {subsection}{\numberline {2.2.2}Functional Requirements}{5}%
-\contentsline {subsubsection}{Features offered to the Unregistered User}{5}%
-\contentsline {subsubsection}{Features offered to the Registered User}{5}%
-\contentsline {subsubsection}{Features offered to the Moderator}{5}%
-\contentsline {subsubsection}{Features offered to the Administrator}{5}%
-\contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}%
-\contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{6}%
-\contentsline {section}{\numberline {2.3}UML Class Diagram}{7}%
-\contentsline {section}{\numberline {2.4}Data Model}{8}%
-\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{8}%
-\contentsline {subsection}{\numberline {2.4.2}GraphDB}{8}%
-\contentsline {section}{\numberline {2.5}Distributed Database Design}{8}%
-\contentsline {subsection}{\numberline {2.5.1}Replicas}{8}%
-\contentsline {subsection}{\numberline {2.5.2}Sharding}{8}%
-\contentsline {section}{\numberline {2.6}Software Architecture}{8}%
-\contentsline {chapter}{\numberline {3}Implementation and Test}{9}%
-\contentsline {section}{\numberline {3.1}Main Modules}{9}%
-\contentsline {section}{\numberline {3.2}Main Packages and Classes}{9}%
-\contentsline {section}{\numberline {3.3}Most Relevant Queries}{9}%
-\contentsline {subsection}{\numberline {3.3.1}MongoDB}{9}%
-\contentsline {subsection}{\numberline {3.3.2}Neo4J}{9}%
-\contentsline {section}{\numberline {3.4}Unit Test}{9}%
-\contentsline {section}{\numberline {3.5}Tests and Statistical Analysis}{9}%
-\contentsline {chapter}{\numberline {4}User Manual}{10}%
+\contentsline {chapter}{\numberline {1}Dataset}{3}{}%
+\contentsline {chapter}{\numberline {2}Design}{4}{}%
+\contentsline {section}{\numberline {2.1}Introduction To The Application}{4}{}%
+\contentsline {section}{\numberline {2.2}Requirements}{4}{}%
+\contentsline {subsection}{\numberline {2.2.1}Main Actors}{4}{}%
+\contentsline {subsection}{\numberline {2.2.2}Functional Requirements}{5}{}%
+\contentsline {subsubsection}{Features offered to the Unregistered User}{5}{}%
+\contentsline {subsubsection}{Features offered to the Registered User}{5}{}%
+\contentsline {subsubsection}{Features offered to the Moderator}{5}{}%
+\contentsline {subsubsection}{Features offered to the Administrator}{5}{}%
+\contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}{}%
+\contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{6}{}%
+\contentsline {section}{\numberline {2.3}UML Class Diagram}{7}{}%
+\contentsline {section}{\numberline {2.4}Data Model}{8}{}%
+\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{8}{}%
+\contentsline {subsection}{\numberline {2.4.2}GraphDB}{9}{}%
+\contentsline {section}{\numberline {2.5}Distributed Database Design}{9}{}%
+\contentsline {subsection}{\numberline {2.5.1}Replicas}{9}{}%
+\contentsline {subsection}{\numberline {2.5.2}Sharding}{9}{}%
+\contentsline {section}{\numberline {2.6}Software Architecture}{9}{}%
+\contentsline {chapter}{\numberline {3}Implementation and Test}{10}{}%
+\contentsline {section}{\numberline {3.1}Main Modules}{10}{}%
+\contentsline {section}{\numberline {3.2}Main Packages and Classes}{10}{}%
+\contentsline {section}{\numberline {3.3}Most Relevant Queries}{10}{}%
+\contentsline {subsection}{\numberline {3.3.1}MongoDB}{10}{}%
+\contentsline {subsection}{\numberline {3.3.2}Neo4J}{10}{}%
+\contentsline {section}{\numberline {3.4}Unit Test}{10}{}%
+\contentsline {section}{\numberline {3.5}Tests and Statistical Analysis}{10}{}%
+\contentsline {chapter}{\numberline {4}User Manual}{11}{}%
