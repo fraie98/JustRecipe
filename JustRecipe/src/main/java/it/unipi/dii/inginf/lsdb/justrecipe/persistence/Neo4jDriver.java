@@ -209,7 +209,7 @@ public class Neo4jDriver implements DatabaseDriver{
      */
     public int howManyFollower(String user)
     {
-        return howMany( "match (a:User)-[r:FOLLOWS]->(b:User{username:$user}) return count(a)",user);
+        return howMany( "match (a:User)-[r:FOLLOWS]->(b:User{username:$placeholder}) return count(a)",user);
     }
 
     /**
