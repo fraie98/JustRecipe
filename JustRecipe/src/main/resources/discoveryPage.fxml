@@ -120,8 +120,8 @@
                      <bottom>
                         <HBox prefHeight="43.0" prefWidth="819.0" spacing="10.0" style="-fx-background-color: RGB(204, 199, 194); -fx-alignment: center;" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="previousButton" mnemonicParsing="false" text="Previous" />
-                              <Button fx:id="nextButton" mnemonicParsing="false" text="Next" />
+                              <Button fx:id="previousButton" focusTraversable="false" mnemonicParsing="false" text="Previous" />
+                              <Button fx:id="nextButton" focusTraversable="false" mnemonicParsing="false" text="Next" />
                            </children>
                         </HBox>
                      </bottom>

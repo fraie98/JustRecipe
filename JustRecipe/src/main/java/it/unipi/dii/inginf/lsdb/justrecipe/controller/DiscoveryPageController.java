@@ -66,6 +66,8 @@ public class DiscoveryPageController {
                         "Last comments" // To show only if the user is a moderator
                 );
         searchComboBox.setItems(options);
+        // if some changes happens to the combobox
+        searchComboBox.setOnAction(actionEvent -> comboAction((ActionEvent) actionEvent));
         searchButton.setOnAction(actionEvent -> search(actionEvent));
 
         nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
@@ -149,6 +151,15 @@ public class DiscoveryPageController {
                     Utils.changeScene("/profilePage.fxml", mouseEvent);
             profilePageController.setProfile(Session.getInstance().getLoggedUser());
         }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+    }
+
+    /**
+     * Function that handle the changes to the searchComboBox
+     * @param event
+     */
+    private void comboAction(ActionEvent event) {
+        page = 0;
+        Utils.removeAllFromPane(discoveryVBox);
     }
 
     /**

@@ -362,35 +362,54 @@ public class Neo4jDriver implements DatabaseDriver{
 
     }
 
-    /*public List<Recipe> getRecipeSnap(int howManySkip, int howMany, String username){
+    /**
+     * Function that returns the recipe snapshots of one user
+     * @param howManySkip   How many to skip
+     * @param howMany       How many to obtain
+     * @param username      Username of the user
+     * @return              List of the recipes
+     */
+    public List<Recipe> getRecipeSnaps(int howManySkip, int howMany, String username){
         List <Recipe> recipes = new ArrayList<>();
         try(Session session = driver.session()) {
             session.readTransaction((TransactionWork<List<Recipe>>) tx -> {
-                Result result = tx.run("MATCH (u:User{username:$u})-[:ADDS]->(r:Recipe)"+"RETURN r.title as Title," +
-                                "r.calories as Calories, r.fat as Fat, r.protein as Protein SKIP $skip LIMIT $limit",
-                        parameters("u",username, "skip", howManySkip, "limit", howMany));
+                Result result = tx.run("MATCH (u:User{username:$username})-[a:ADDS]->(r:Recipe) " +
+                                "RETURN r.title as title, r.calories as calories, r.fat as fat, r.protein as protein, " +
+                                "r.carbs as carbs, r.picture as picture, u.username as authorUsername " +
+                                "ORDER BY a.when DESC " +
+                                "SKIP $skip LIMIT $limit",
+                        parameters("username", username, "skip", howManySkip, "limit", howMany));
 
                 while(result.hasNext()){
                     Record r = result.next();
-                    String title = r.get("Title").asString();
+                    String title = r.get("title").asString();
                     int calories = 0;
                     int protein = 0;
                     int fat = 0;
-                    if(r.get("Calories") != NULL)
-                        calories = r.get("Calories").asInt();
-                    if(r.get("Fat") != NULL)
-                        fat = r.get("Fat").asInt();
-                    if(r.get("Protein") != NULL)
-                        protein = r.get("Protein").asInt();
-                    Recipe recipe = new Recipe(title, fat, calories, protein);
-                    recipe.setAuthorUsername(username);
+                    int carbs = 0;
+                    String picture = null;
+                    String authorUsername = r.get("authorUsername").asString();
+                    if(r.get("calories") != NULL)
+                        calories = r.get("calories").asInt();
+                    if(r.get("fat") != NULL)
+                        fat = r.get("fat").asInt();
+                    if(r.get("protein") != NULL)
+                        protein = r.get("protein").asInt();
+                    if(r.get("carbs") != NULL)
+                        carbs = r.get("carbs").asInt();
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    Recipe recipe = new Recipe(title, fat, calories, protein, carbs, picture);
+                    recipe.setAuthorUsername(authorUsername);
                     recipes.add(recipe);
                 }
                 return recipes;
             });
         }
         return recipes;
-    }*/
+    }
 
     /**
      * Function that returns the information for creating the snapshot in the homepage
