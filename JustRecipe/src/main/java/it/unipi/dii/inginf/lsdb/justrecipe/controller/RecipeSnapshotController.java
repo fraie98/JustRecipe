@@ -26,7 +26,6 @@ public class RecipeSnapshotController {
     @FXML private Label snapFat;
     @FXML private Label snapProtein;
     @FXML private ImageView snapImg;
-    @FXML private Label snapCategories;
 
     private Recipe recipe; // recipe shows in this snapshot
     private Neo4jDriver neo4jDriver;
@@ -59,7 +58,7 @@ public class RecipeSnapshotController {
         snapProtein.setText(String.valueOf(recipe.getProtein()));
         snapFat.setText(String.valueOf(recipe.getFat()));
         snapCal.setText(String.valueOf(recipe.getCalories()));
-        snapCategories.setText(Utils.fromListToString(recipe.getCategories()));
+
         if (recipe.getPicture() != null)
         {
             snapImg.setImage(new Image(recipe.getPicture()));
