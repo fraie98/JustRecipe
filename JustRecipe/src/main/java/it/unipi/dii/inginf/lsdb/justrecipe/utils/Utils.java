@@ -169,6 +169,24 @@ public class Utils {
     }
 
     /**
+     * Function that shows an information windows
+     * @param text  Text to be shown
+     */
+    public static void showInfoAlert (String text)
+    {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(text);
+        alert.setHeaderText("Important Message");
+        alert.setTitle("Information");
+        ImageView imageView = new ImageView(new Image("/img/info.png"));
+        imageView.setFitHeight(45);
+        imageView.setFitWidth(45);
+        imageView.setPreserveRatio(true);
+        alert.setGraphic(imageView);
+        alert.show();
+    }
+
+    /**
      * This function create a pane that contains a recipe snapshot
      * @param recipe    recipe to display in the snapshot
      * @return

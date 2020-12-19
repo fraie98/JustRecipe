@@ -87,6 +87,8 @@ public class Neo4jDriver implements DatabaseDriver{
         }
     }
 
+
+
     /**
      * It controls that a user with the given username exists or not
      * @param username  username of the user that I want to control
@@ -224,6 +226,16 @@ public class Neo4jDriver implements DatabaseDriver{
     public int howManyFollowing(String user)
     {
         return howMany("match (a:User)<-[r:FOLLOWS]-(b:User{username:$placeholder}) return count(a)",user);
+    }
+
+    /**
+     * It counts the number of recipes added from the given user
+     * @param user  Username of the given user
+     * @return  The number of recipes added from the user
+     */
+    public int howManyRecipesAdded(String user)
+    {
+        return howMany("match (p:Recipe)<-[r:ADDS]-(b:User{username:$placeholder}) return count(p)",user);
     }
 
     /**

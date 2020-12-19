@@ -7,10 +7,12 @@ import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.neo4j.driver.internal.InternalPath;
 
 import java.util.ArrayList;
 
@@ -41,15 +43,23 @@ public class ProfilePageController {
         appSession = Session.getInstance();
         neo4jDriver = Neo4jDriver.getInstance();
         mongoDBDriver = MongoDBDriver.getInstance();
-//        Utils.addRecipesSnap(recipeVbox, neo4jDriver.getRecipeSnap(0,HOW_MANY_SNAPSHOT_TO_SHOW, appSession.getLoggedUser().getUsername()));
         userName.setText(appSession.getLoggedUser().getUsername());
         if(userName.getText().equals(appSession.getLoggedUser().getUsername()))
             addFollow.setVisible(false);
-//        if (appSession.getLoggedUser().getRole() == 0)
-//            profileDeleteUser.setVisible(false);
-//        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollower(userName.getText())));
-//        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollowing(userName.getText())));
-//        recipesNumber.setText(String.valueOf(neo4jDriver.));
+        else
+        {
+            if(neo4jDriver.isUserOneFollowedByUserTwo(userName.getText(),appSession.getLoggedUser().getUsername()))
+                addFollow.setImage(new Image("img/alreadyFollowed_profile.png"));
+
+            addFollow.setOnMouseClicked(mouseEvent -> clickOnFollow());
+        }
+
+        if (appSession.getLoggedUser().getRole() == 0)
+            profileDeleteUser.setVisible(false);
+
+        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollower(userName.getText())));
+        followingNumber.setText(String.valueOf(neo4jDriver.howManyFollowing(userName.getText())));
+        recipesNumber.setText(String.valueOf(neo4jDriver.howManyRecipesAdded(userName.getText())));
         page = 0;
         Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, appSession.getLoggedUser().getUsername()));
         homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
@@ -83,6 +93,26 @@ public class ProfilePageController {
             HomePageController homePageController = (HomePageController)
                     Utils.changeScene("/homepage.fxml", mouseEvent);
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+    }
+
+    /**
+     * Handle the click on the follow/unfollow button. If the logged user follow the user's profile
+     * then the click means unfollow, otherwise means follow. The image changes depending on this.
+     */
+    private void clickOnFollow()
+    {
+        if(neo4jDriver.isUserOneFollowedByUserTwo(userName.getText(),appSession.getLoggedUser().getUsername()))
+        {
+            // I want to unfollow an user
+            neo4jDriver.unfollow(appSession.getLoggedUser().getUsername(),userName.getText());
+            addFollow.setImage(new Image("img/follow_profile.png"));
+        }
+        else
+        {
+            // I want to follow a user
+            neo4jDriver.follow(appSession.getLoggedUser().getUsername(),userName.getText());
+            addFollow.setImage(new Image("img/alreadyFollowed_profile.png"));
+        }
     }
 
     /**
