@@ -66,7 +66,9 @@ public class AddRecipePageController {
             List<String> categ =  Arrays.asList(addCateg.getText().split(","));
             System.out.println(categ);
 
-            Date ts = new Date(System.currentTimeMillis());
+            //Date ts = new Date(System.currentTimeMillis());
+            //Date ts = new Date(new Date().getTime());
+            Date ts = new Date();
             String creator = appSession.getLoggedUser().getUsername();
 
             int calo, fat, carbs, proteins;
@@ -96,7 +98,7 @@ public class AddRecipePageController {
             Recipe newRec = new Recipe(addTitle.getText(), addInstructions.getText(), ingr, categ, calo, fat, proteins, carbs, ts, addUrl.getText(), creator, null);
 
             //neo4jDriver.addRecipe(newRec);
-            //mongoDBDriver.addRecipe(newRec);
+            mongoDBDriver.addRecipe(newRec);
 
             Utils.showInfoAlert("Recipe succesfully added");
             clearAllFields();

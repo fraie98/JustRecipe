@@ -8,6 +8,7 @@ import com.mongodb.client.*;
 import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.*;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -24,6 +25,7 @@ import static com.mongodb.client.model.Aggregates.*;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Projections.include;
+import static com.mongodb.client.model.Sorts.ascending;
 import static com.mongodb.client.model.Sorts.descending;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -100,6 +102,35 @@ public class MongoDBDriver implements DatabaseDriver{
             mongoClient.close();
     }
 
+    /**
+     * Add a new recipe in MongoDB
+     * @param r The object Recipe which contains all the necessary information about it
+     */
+    public void addRecipe(Recipe r)
+    {
+        Document doc = new Document("title",r.getTitle())
+                .append("instructions",r.getInstructions())
+                .append("ingredients",r.getIngredients());
+        // Optional fields
+        if(!r.getCategories().isEmpty())
+            doc.append("categories",r.getCategories());
+        if(r.getCalories()!=-1)
+            doc.append("calories",r.getCalories());
+        if(r.getFat()!=-1)
+            doc.append("fat",r.getFat());
+        if(r.getProtein()!=-1)
+            doc.append("protein",r.getProtein());
+        if(r.getCarbs()!=-1)
+            doc.append("carbs",r.getCarbs());
+        // Automatic fields
+        doc.append("creationTime",new Date(r.getCreationTime().getTime()))
+                .append("authorUsername",r.getAuthorUsername());
+        // Other option field
+        if(!r.getPicture().isEmpty())
+            doc.append("picture",r.getPicture());
+
+        collection.insertOne(doc);
+    }
     /**
      * Method used to change the collection
      * @param name  name of the new collection
