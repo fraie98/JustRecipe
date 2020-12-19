@@ -102,37 +102,37 @@
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="495.0" layoutY="57.0" prefHeight="23.0" prefWidth="171.0" />
+                              <TextField fx:id="addTitle" layoutX="495.0" layoutY="57.0" prefHeight="23.0" prefWidth="171.0" />
                               <Label layoutX="55.0" layoutY="94.0" text="URL Picture:">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="495.0" layoutY="96.0" prefHeight="23.0" prefWidth="171.0" />
+                              <TextField fx:id="addUrl" layoutX="495.0" layoutY="96.0" prefHeight="23.0" prefWidth="171.0" />
                               <Label layoutX="55.0" layoutY="132.0" text="Insert Calories:">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="495.0" layoutY="134.0" />
+                              <TextField fx:id="addCal" layoutX="495.0" layoutY="134.0" />
                               <Label layoutX="55.0" layoutY="173.0" text="Insert Carbs:">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="495.0" layoutY="175.0" prefHeight="23.0" prefWidth="110.0" />
+                              <TextField fx:id="addCarbs" layoutX="495.0" layoutY="175.0" prefHeight="23.0" prefWidth="110.0" />
                               <Label layoutX="55.0" layoutY="214.0" text="Insert Fat:">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="495.0" layoutY="216.0" prefHeight="23.0" prefWidth="110.0" />
+                              <TextField fx:id="addFat" layoutX="495.0" layoutY="216.0" prefHeight="23.0" prefWidth="110.0" />
                               <Label layoutX="55.0" layoutY="254.0" text="Insert Protein:">
                                  <font>
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="495.0" layoutY="256.0" prefHeight="23.0" prefWidth="110.0">
+                              <TextField fx:id="addProt" layoutX="495.0" layoutY="256.0" prefHeight="23.0" prefWidth="110.0">
                                  <padding>
                                     <Insets bottom="10.0" />
                                  </padding>
@@ -142,21 +142,21 @@
                                     <Font size="21.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="495.0" layoutY="296.0" prefHeight="25.0" prefWidth="233.0" />
+                              <TextField fx:id="addCateg" layoutX="495.0" layoutY="296.0" prefHeight="25.0" prefWidth="233.0" />
                               <Label layoutX="71.0" layoutY="364.0" text="Insert Ingredients (separate with ','):">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextArea layoutX="403.0" layoutY="392.0" prefHeight="214.0" prefWidth="325.0" />
+                              <TextArea fx:id="addInstructions" layoutX="403.0" layoutY="392.0" prefHeight="214.0" prefWidth="325.0" />
                               <Label layoutX="486.0" layoutY="363.0" text="Insert Instructions:">
                                  <font>
                                     <Font size="17.0" />
                                  </font>
                               </Label>
                               <Button layoutX="328.0" layoutY="628.0" mnemonicParsing="false" text="Clear" />
-                              <Button layoutX="403.0" layoutY="628.0" mnemonicParsing="false" text="Submit" />
-                              <TextArea layoutX="55.0" layoutY="392.0" prefHeight="214.0" prefWidth="325.0" />
+                              <Button fx:id="submit" layoutX="403.0" layoutY="628.0" mnemonicParsing="false" text="Submit" />
+                              <TextArea fx:id="addIngr" layoutX="55.0" layoutY="392.0" prefHeight="214.0" prefWidth="325.0" />
                            </children>
                         </Pane>
                      </content>

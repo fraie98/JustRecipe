@@ -95,6 +95,10 @@ public class ProfilePageController {
         }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
     }
 
+    /**
+     * Handle the click on the follow/unfollow button. If the logged user follow the user's profile
+     * then the click means unfollow, otherwise means follow. The image changes depending on this.
+     */
     private void clickOnFollow()
     {
         if(neo4jDriver.isUserOneFollowedByUserTwo(userName.getText(),appSession.getLoggedUser().getUsername()))
