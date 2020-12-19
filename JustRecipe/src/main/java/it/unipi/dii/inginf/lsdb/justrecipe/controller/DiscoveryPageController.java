@@ -35,7 +35,8 @@ public class DiscoveryPageController {
     @FXML private Button nextButton;
     @FXML private Button previousButton;
 
-    private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20;
+    private final int HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW = 20;
+    private final int HOW_MANY_USER_SNAPSHOT_TO_SHOW = 20;
     private final int HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW = 5;
     private final int HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY = 4;
     private final int HOW_MANY_COMMENTS_TO_SHOW = 20;
@@ -91,7 +92,7 @@ public class DiscoveryPageController {
         if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))
         {
             List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(),
-                    HOW_MANY_SNAPSHOT_TO_SHOW*page, HOW_MANY_SNAPSHOT_TO_SHOW);
+                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
             Utils.addRecipesSnap(discoveryVBox, recipes);
         }
         else if (String.valueOf(searchComboBox.getValue()).equals("Most common recipe categories"))
@@ -105,9 +106,22 @@ public class DiscoveryPageController {
                 categoryName.setText(category.concat("\n"));
                 categoryName.setFont(Font.font(48));
                 discoveryVBox.getChildren().add(categoryName);
-                List<Recipe> recipes = mongoDBDriver.getRecipesOfCategory(category, HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY);
+                List<Recipe> recipes = mongoDBDriver.getRecipesOfCategory(category,
+                        HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY);
                 Utils.addRecipesSnap(discoveryVBox, recipes);
             }
+        }
+        else if (String.valueOf(searchComboBox.getValue()).equals("User username"))
+        {
+            List<User> users = neo4jDriver.searchUserByUsername(HOW_MANY_USER_SNAPSHOT_TO_SHOW*page,
+                    HOW_MANY_USER_SNAPSHOT_TO_SHOW, searchBarTextField.getText());
+            Utils.addUsersSnap(discoveryVBox, users);
+        }
+        else if (String.valueOf(searchComboBox.getValue()).equals("User full name"))
+        {
+            List<User> users = neo4jDriver.searchUserByFullName(HOW_MANY_USER_SNAPSHOT_TO_SHOW*page,
+                    HOW_MANY_USER_SNAPSHOT_TO_SHOW, searchBarTextField.getText());
+            Utils.addUsersSnap(discoveryVBox, users);
         }
         // For the moderator
         else if (String.valueOf(searchComboBox.getValue()).equals("Last comments"))

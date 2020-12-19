@@ -6,6 +6,7 @@ import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
+import org.neo4j.driver.types.Node;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -423,7 +424,7 @@ public class Neo4jDriver implements DatabaseDriver{
     {
         List<Recipe> recipes = new ArrayList<>();
         try(Session session = driver.session()) {
-            session.readTransaction((TransactionWork<List<Recipe>>) tx -> {
+            session.readTransaction(tx -> {
                 Result result = tx.run("MATCH (u1:User{username:$username})-[:FOLLOWS]->(u2:User)-[a:ADDS]->(r:Recipe) "+
                                 "RETURN r.title as title, r.calories as calories, r.fat as fat, r.protein as protein, " +
                                 "r.carbs AS carbs, r.picture as picture, u2.username as authorUsername " +
@@ -455,9 +456,105 @@ public class Neo4jDriver implements DatabaseDriver{
                     recipe.setAuthorUsername(authorUsername);
                     recipes.add(recipe);
                 }
-                return recipes;
+                return null;
             });
         }
         return recipes;
+    }
+
+    /**
+     * Function that returns a list of the users that contains in their username the word passed
+     * @param howManySkip           How many to skip
+     * @param howMany               How many to return
+     * @param usernameWritten       Username passed by the user
+     * @return                      The list of users
+     */
+    public List<User> searchUserByUsername (int howManySkip, int howMany, String usernameWritten)
+    {
+        List<User> users = new ArrayList<>();
+        try(Session session = driver.session()) {
+            session.readTransaction(tx -> {
+                Result result = tx.run("MATCH (u:User) " +
+                                "WHERE toLower(u.username) CONTAINS toLower($username) " + //case insensitive search
+                                "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
+                                "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
+                                "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +
+                                "RETURN u.firstName AS firstName, u.lastName AS lastName, u.picture AS picture, " +
+                                "u.username AS username, u.password AS password, u.role AS role, " +
+                                "COUNT(DISTINCT f1) AS follower, COUNT (DISTINCT f2) AS following, COUNT (DISTINCT a) AS numRecipes " +
+                                "SKIP $skip LIMIT $limit",
+                        parameters("username",usernameWritten, "skip", howManySkip, "limit", howMany));
+
+                while(result.hasNext()){
+                    Record r = result.next();
+                    String firstName = r.get("firstName").asString();
+                    String lastName = r.get("lastName").asString();
+                    String picture = null;
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    String username = r.get("username").asString();
+                    String password = r.get("password").asString();
+                    int role = r.get("role").asInt();
+                    User user = new User(firstName, lastName, picture, username, password, role);
+                    user.setFollower(r.get("follower").asInt());
+                    user.setFollowing(r.get("following").asInt());
+                    user.setNumRecipes(r.get("numRecipes").asInt());
+                    users.add(user);
+                }
+                return null;
+            });
+        }
+        return users;
+    }
+
+    /**
+     * Function that returns the list of users whom contains in their full name the string passed
+     * @param howManySkip       How many to skip
+     * @param howMany           How many to retrieve
+     * @param fullName          Part of the full name
+     * @return                  The list of users
+     */
+    public List<User> searchUserByFullName (int howManySkip, int howMany, String fullName)
+    {
+        List<User> users = new ArrayList<>();
+        try(Session session = driver.session()) {
+            session.readTransaction(tx -> {
+                Result result = tx.run("MATCH (u:User) " +
+                                // consider firstName-lastName and lastName-firstName
+                                "WHERE toLower(u.firstName + ' ' + u.lastName) CONTAINS toLower($fullName) " +
+                                "OR toLower(u.lastName + ' ' + u.firstName) CONTAINS toLower($fullName) " +
+                                "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
+                                "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
+                                "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +
+                                "RETURN u.firstName AS firstName, u.lastName AS lastName, u.picture AS picture, " +
+                                "u.username AS username, u.password AS password, u.role AS role, " +
+                                "COUNT(DISTINCT f1) AS follower, COUNT (DISTINCT f2) AS following, COUNT (DISTINCT a) AS numRecipes " +
+                                "SKIP $skip LIMIT $limit",
+                        parameters("fullName",fullName, "skip", howManySkip, "limit", howMany));
+
+                while(result.hasNext()){
+                    Record r = result.next();
+                    String firstName = r.get("firstName").asString();
+                    String lastName = r.get("lastName").asString();
+                    String picture = null;
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    String username = r.get("username").asString();
+                    String password = r.get("password").asString();
+                    int role = r.get("role").asInt();
+                    User user = new User(firstName, lastName, picture, username, password, role);
+                    user.setFollower(r.get("follower").asInt());
+                    user.setFollowing(r.get("following").asInt());
+                    user.setNumRecipes(r.get("numRecipes").asInt());
+                    users.add(user);
+                }
+                return null;
+            });
+        }
+        return users;
     }
 }

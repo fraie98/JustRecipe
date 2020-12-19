@@ -15,8 +15,8 @@ public class UserSnapshotController {
     @FXML private ImageView userSnapImg;
     @FXML private Label userSnapUsername;
     @FXML private Label userSnapFollower;
-    @FXML private Label userSnapFollowing;
-    @FXML private Label userSnapRecipes;
+    @FXML private Label userSnapFirstName;
+    @FXML private Label userSnapLastName;
 
     public void initialize()
     {
@@ -34,7 +34,7 @@ public class UserSnapshotController {
 
         userSnapUsername.setText(u.getUsername());
         userSnapFollower.setText(Integer.toString(u.getFollower()));
-        userSnapFollowing.setText(Integer.toString(u.getFollowing()));
-        userSnapRecipes.setText(Integer.toString(u.getNumRecipes()));
+        userSnapFirstName.setText(u.getFirstName());
+        userSnapLastName.setText(u.getLastName());
     }
 }
