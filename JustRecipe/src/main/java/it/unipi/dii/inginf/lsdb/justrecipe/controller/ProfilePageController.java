@@ -34,6 +34,7 @@ public class ProfilePageController {
     @FXML private Text recipesNumber;
     @FXML private Button nextButton;
     @FXML private Button previousButton;
+    @FXML private ImageView addFollow;
 
     public void initialize ()
     {
@@ -42,6 +43,8 @@ public class ProfilePageController {
         mongoDBDriver = MongoDBDriver.getInstance();
 //        Utils.addRecipesSnap(recipeVbox, neo4jDriver.getRecipeSnap(0,HOW_MANY_SNAPSHOT_TO_SHOW, appSession.getLoggedUser().getUsername()));
         userName.setText(appSession.getLoggedUser().getUsername());
+        if(userName.getText().equals(appSession.getLoggedUser().getUsername()))
+            addFollow.setVisible(false);
 //        if (appSession.getLoggedUser().getRole() == 0)
 //            profileDeleteUser.setVisible(false);
 //        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollower(userName.getText())));

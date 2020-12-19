@@ -87,9 +87,9 @@
                            <children>
                               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Text fx:id="recipeTitle" focusTraversable="true" layoutX="20.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisu" wrappingWidth="725.0">
+                                    <Text fx:id="recipeTitle" focusTraversable="true" layoutX="20.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Tiramisu" wrappingWidth="725.0">
                                        <font>
-                                          <Font size="48.0" />
+                                          <Font size="46.0" />
                                        </font>
                                     </Text>
                                  </children>
