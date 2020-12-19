@@ -225,6 +225,11 @@ public class Neo4jDriver implements DatabaseDriver{
         return howMany("match (a:User)<-[r:FOLLOWS]-(b:User{username:$placeholder}) return count(a)",user);
     }
 
+    public int howManyRecipesAdded(String user)
+    {
+        return howMany("match (p:Recipe)<-[r:ADDS]-(b:User{username:$placeholder}) return count(p)",user);
+    }
+
     /**
      * It counts the number of likes of a given recipe
      * @param recipeTitle  Title of the given recipe
