@@ -11,24 +11,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class DiscoveryPageController {
@@ -41,11 +32,14 @@ public class DiscoveryPageController {
     @FXML private TextField searchBarTextField;
     @FXML private ComboBox searchComboBox;
     @FXML private VBox discoveryVBox;
+    @FXML private Button nextButton;
+    @FXML private Button previousButton;
 
     private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20;
     private final int HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW = 5;
     private final int HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY = 4;
     private final int HOW_MANY_COMMENTS_TO_SHOW = 20;
+    private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
 
     public void initialize ()
     {
@@ -54,6 +48,7 @@ public class DiscoveryPageController {
         homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
         profilePageIcon.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
+        page = 0;
 
         // Initializing the options of the ComboBox
         ObservableList<String> options =
@@ -71,8 +66,11 @@ public class DiscoveryPageController {
                         "Last comments" // To show only if the user is a moderator
                 );
         searchComboBox.setItems(options);
-
         searchButton.setOnAction(actionEvent -> search(actionEvent));
+
+        nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
+        previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
+        previousButton.setVisible(false); //in the first page it is not visible
 
         List<User> users = new ArrayList<>();
         users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
@@ -90,12 +88,15 @@ public class DiscoveryPageController {
         Utils.removeAllFromPane(discoveryVBox);
         if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))
         {
-            List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(), 0, HOW_MANY_SNAPSHOT_TO_SHOW);
+            List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(),
+                    HOW_MANY_SNAPSHOT_TO_SHOW*page, HOW_MANY_SNAPSHOT_TO_SHOW);
             Utils.addRecipesSnap(discoveryVBox, recipes);
         }
         else if (String.valueOf(searchComboBox.getValue()).equals("Most common recipe categories"))
         {
-            List<String> mostCommonRecipeCategories = mongoDBDriver.searchMostCommonRecipeCategories(HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW);
+            List<String> mostCommonRecipeCategories = mongoDBDriver.searchMostCommonRecipeCategories(
+                            HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW*page,
+                            HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW);
             for (String category: mostCommonRecipeCategories)
             {
                 Label categoryName = new Label();
@@ -109,9 +110,8 @@ public class DiscoveryPageController {
         // For the moderator
         else if (String.valueOf(searchComboBox.getValue()).equals("Last comments"))
         {
-            List<Comment> comments = mongoDBDriver.searchAllComments(0, HOW_MANY_COMMENTS_TO_SHOW);
-            comments.add(new Comment("Pippo", "Hello world!", new Date()));
-            comments.add(new Comment("Pippo", "Hello world!", new Date()));
+            List<Comment> comments = mongoDBDriver.searchAllComments(
+                    HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
             Utils.showComments(discoveryVBox, comments);
         }
     }
@@ -149,5 +149,27 @@ public class DiscoveryPageController {
                     Utils.changeScene("/profilePage.fxml", mouseEvent);
             profilePageController.setProfile(Session.getInstance().getLoggedUser());
         }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+    }
+
+    /**
+     * Handler for the next button
+     * @param mouseEvent    Events that leads to this function
+     */
+    private void clickOnNext(MouseEvent mouseEvent) {
+        page++;
+        if (page > 0)
+            previousButton.setVisible(true);
+        searchButton.fire(); // simulate the click of the button
+    }
+
+    /**
+     * Handler for the previous button
+     * @param mouseEvent    Events that leads to this function
+     */
+    private void clickOnPrevious(MouseEvent mouseEvent) {
+        page--;
+        if (page < 1)
+            previousButton.setVisible(false);
+        searchButton.fire(); // simulate the click of the button
     }
 }

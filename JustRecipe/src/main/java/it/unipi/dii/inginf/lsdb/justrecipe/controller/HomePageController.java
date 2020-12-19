@@ -1,22 +1,25 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
+
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
+
+import java.awt.*;
 import java.util.List;
 
 public class HomePageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
+    private Session session;
     @FXML private VBox mainPage;
     @FXML private ImageView profileImg;
     @FXML private ImageView discoveryImg;
@@ -34,7 +37,8 @@ public class HomePageController {
     {
         neo4jDriver = Neo4jDriver.getInstance();
         mongoDBDriver = MongoDBDriver.getInstance();
-        Utils.addRecipesSnap(mainPage, mongoDBDriver.getHomepageRecipe(0, HOW_MANY_SNAPSHOT_TO_SHOW, new ArrayList<>()));
+        session = Session.getInstance();
+        Utils.addRecipesSnap(mainPage, neo4jDriver.getHomepageRecipeSnap(0, HOW_MANY_SNAPSHOT_TO_SHOW, session.getLoggedUser().getUsername()));
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
@@ -84,8 +88,8 @@ public class HomePageController {
         if (page < 1)
             previousButton.setVisible(false);
         Utils.addRecipesSnap(mainPage,
-                mongoDBDriver.getHomepageRecipe(HOW_MANY_SNAPSHOT_TO_SHOW*page,
-                        HOW_MANY_SNAPSHOT_TO_SHOW, new ArrayList<>()));
+                neo4jDriver.getHomepageRecipeSnap(HOW_MANY_SNAPSHOT_TO_SHOW*page,
+                        HOW_MANY_SNAPSHOT_TO_SHOW, session.getLoggedUser().getUsername()));
     }
 
     private void clickOnNext(MouseEvent mouseEvent){
@@ -94,8 +98,8 @@ public class HomePageController {
         if (page > 0)
             previousButton.setVisible(true);
         Utils.addRecipesSnap(mainPage,
-                mongoDBDriver.getHomepageRecipe(HOW_MANY_SNAPSHOT_TO_SHOW*page,
-                        HOW_MANY_SNAPSHOT_TO_SHOW, new ArrayList<>()));
+                neo4jDriver.getHomepageRecipeSnap(HOW_MANY_SNAPSHOT_TO_SHOW*page,
+                        HOW_MANY_SNAPSHOT_TO_SHOW, session.getLoggedUser().getUsername()));
     }
 
 }

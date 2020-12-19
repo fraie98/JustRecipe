@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -47,8 +48,8 @@ public class WelcomePageController {
      */
     public void initialize()
     {
-        loginButton.setOnAction(actionEvent -> handleLoginButtonAction(actionEvent));
-        registrationButton.setOnAction(actionEvent -> handleRegisterButtonAction(actionEvent));
+        loginButton.setOnMouseClicked(mouseEvent -> handleLoginButtonAction(mouseEvent));
+        registrationButton.setOnMouseClicked(mouseEvent -> handleRegisterButtonAction(mouseEvent));
         neo4jDriver = Neo4jDriver.getInstance();
 
         usernameLoginTextField.setText("oliver.smith");
@@ -59,7 +60,7 @@ public class WelcomePageController {
      * Method used to handle the Login button click event
      * @param actionEvent   The event that occurs when the user click the Login button
      */
-    private void handleLoginButtonAction(ActionEvent actionEvent) {
+    private void handleLoginButtonAction(MouseEvent actionEvent) {
         if (usernameLoginTextField.getText().equals("") || passwordLoginTextField.getText().equals(""))
         {
             Utils.showErrorAlert("You need to insert all the values!");
@@ -82,7 +83,7 @@ public class WelcomePageController {
      * Method used to handle the Register button click event
      * @param actionEvent   The event that occurs when the user click the Register button
      */
-    private void handleRegisterButtonAction(ActionEvent actionEvent) {
+    private void handleRegisterButtonAction(MouseEvent actionEvent) {
         if ((firstNameRegistrationTextField.getText().equals("") ||
                 lastNameRegistrationTextField.getText().equals("") ||
                 usernameRegistrationTextField.getText().equals("") ||

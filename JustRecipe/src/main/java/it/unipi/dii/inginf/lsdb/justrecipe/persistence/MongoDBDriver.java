@@ -9,16 +9,12 @@ import com.mongodb.client.model.Accumulators;
 import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
-import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
-import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
-import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
+import it.unipi.dii.inginf.lsdb.justrecipe.model.*;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
-
-import javax.print.Doc;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.function.Consumer;
@@ -113,38 +109,6 @@ public class MongoDBDriver implements DatabaseDriver{
         collection = database.getCollection(name);
     }
 
-    /**
-     * Function used to get the list of Recipe to show in the homepage
-     * @param howManySkip       how many to skip
-     * @param howMany           how many recipe we want obtain
-     * @param follower          list of follower of the user, used to choose the interest recipes
-     * @return                  The list of element to show, in descendent order from creationTime
-     */
-    public List<Recipe> getHomepageRecipe (int howManySkip, int howMany, List<User> follower)
-    {
-        List<Recipe> recipes = new ArrayList<>();
-        Gson gson = new Gson();
-        List<Document> results = new ArrayList<>();
-        if (follower.size() != 0)
-        {
-            // TO DO
-            // Check for the recipe done by the following of the user
-        }
-        else
-        {
-            Bson sort = sort(descending("creationTime"));
-            Bson skip = skip(howManySkip);
-            Bson limit = limit(howMany);
-            results = (List<Document>) collection.aggregate(Arrays.asList(sort, skip, limit))
-                    .into(new ArrayList<>());
-        }
-
-        // This is important for deserialize the results in a list of recipe
-        Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
-        recipes = gson.fromJson(gson.toJson(results), recipeListType);
-        return recipes;
-    }
-
     public List<Recipe> getRecipesFromAuthorUsername(int howManySkip, int howMany, String username){
         List<Recipe> recipes = new ArrayList<>();
         Gson gson = new Gson();
@@ -160,6 +124,11 @@ public class MongoDBDriver implements DatabaseDriver{
         return recipes;
     }
 
+    /**
+     * Function that return the recipe given the title
+     * @param title     Title of the recipe
+     * @return          The recipe
+     */
     public Recipe getRecipeFromTitle(String title){
         Recipe recipe = null;
         Gson gson = new Gson();
@@ -194,19 +163,21 @@ public class MongoDBDriver implements DatabaseDriver{
 
     /**
      * Function that return the most common categories (the top one used)
+     * @param howManySkip           How many to skip
      * @param howManyCategories     How many category to consider in the rank
      * @return                      The category ordered by the number of recipes in which it is used
      */
-    public List<String> searchMostCommonRecipeCategories (int howManyCategories)
+    public List<String> searchMostCommonRecipeCategories (int howManySkip, int howManyCategories)
     {
         List<String> mostCommonCategories = new ArrayList<>();
         Bson unwind = unwind("$categories");
         Bson group = group("$categories", Accumulators.sum("numberOfRecipes", 1));
         Bson project = project(fields(computed("categories", "$_id"), excludeId(), include("numberOfRecipes")));
         Bson sort = sort(descending("numberOfRecipes"));
+        Bson skip = skip(howManySkip);
         Bson limit = limit(howManyCategories);
         List<Document> results = (List<Document>)
-                collection.aggregate(Arrays.asList(unwind, group, project, sort, limit)).into(new ArrayList());
+                collection.aggregate(Arrays.asList(unwind, group, project, sort, skip, limit)).into(new ArrayList());
 
         for (Document document: results)
         {
@@ -260,8 +231,8 @@ public class MongoDBDriver implements DatabaseDriver{
         }
         return comments;
     }
+
     public void updateComments(String title, List<Comment> comments){
-//        chooseCollection("recipe");
         collection = collection.withCodecRegistry(pojoCodecRegistry);
         Bson update = new Document("comments", comments);
         Bson updateOperation = new Document("$set", update);
