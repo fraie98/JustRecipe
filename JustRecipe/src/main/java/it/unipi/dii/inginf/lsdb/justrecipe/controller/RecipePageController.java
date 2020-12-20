@@ -58,7 +58,6 @@ public class RecipePageController {
     @FXML private Button cancelButton;
 
     private Recipe recipe;
-   // private String username;
     private Session appSession;
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
@@ -75,6 +74,23 @@ public class RecipePageController {
         mongoDBDriver = MongoDBDriver.getInstance();
         sendButton.setOnAction(actionEvent -> handleSendButtonAction(actionEvent));
         cancelButton.setOnAction(actionEvent -> handleCancelButtonAction(actionEvent));
+        recipeLikeImg.setOnMouseClicked(mouseEvent -> handleClickOnLike());
+    }
+
+    private void handleClickOnLike()
+    {
+        if(neo4jDriver.isThisRecipeLikedByOne(recipeTitle.getText(),appSession.getLoggedUser().getUsername()))
+        {
+            neo4jDriver.unlike(appSession.getLoggedUser().getUsername(),recipeTitle.getText());
+            recipeLikeImg.setImage(new Image("img/like.png"));
+        }
+        else
+        {
+            neo4jDriver.like(appSession.getLoggedUser().getUsername(),recipeTitle.getText());
+            recipeLikeImg.setImage(new Image("img/alreadyliked.png"));
+        }
+
+        recipeLikes.setText(String.valueOf(neo4jDriver.howManyLikes(recipeTitle.getText())));
     }
 
     /**
@@ -140,7 +156,10 @@ public class RecipePageController {
         recipeIngredients.setText(Utils.fromListToString(recipe.getIngredients()));
         recipeDate.setText("Published on: " + Utils.fromDateToString(recipe.getCreationTime()));
         //TO DO
-        recipeLikes.setText("Likes: 0");
+        recipeLikes.setText(String.valueOf(neo4jDriver.howManyLikes(recipe.getTitle())));
+        if(neo4jDriver.isThisRecipeLikedByOne(recipe.getTitle(),appSession.getLoggedUser().getUsername()))
+            recipeLikeImg.setImage(new Image("img/alreadyliked.png"));
+        
         if(recipe.getComments() != null) {
             Label commentsTitle = new Label("Comments:");
             commentsTitle.setFont(Font.font(24));
