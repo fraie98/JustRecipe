@@ -43,7 +43,21 @@ public class ProfilePageController {
         appSession = Session.getInstance();
         neo4jDriver = Neo4jDriver.getInstance();
         mongoDBDriver = MongoDBDriver.getInstance();
-        userName.setText(appSession.getLoggedUser().getUsername());
+        homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
+        discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
+        logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
+        addRecipeImg.setOnMouseClicked(mouseEvent -> clickOnAddRecipeImg(mouseEvent));
+        nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
+        previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
+    }
+
+    /**
+     * Set the profile page for the user U
+     * @param u  User who owns the profile page
+     */
+    public void setProfile(User u)
+    {
+        userName.setText(u.getUsername());
         if(userName.getText().equals(appSession.getLoggedUser().getUsername()))
             addFollow.setVisible(false);
         else
@@ -61,18 +75,9 @@ public class ProfilePageController {
         followingNumber.setText(String.valueOf(neo4jDriver.howManyFollowing(userName.getText())));
         recipesNumber.setText(String.valueOf(neo4jDriver.howManyRecipesAdded(userName.getText())));
         page = 0;
-        Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, appSession.getLoggedUser().getUsername()));
-        homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
-        discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
-        logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
-        addRecipeImg.setOnMouseClicked(mouseEvent -> clickOnAddRecipeImg(mouseEvent));
-        nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
-        previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
+        Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
         previousButton.setVisible(false); //in the first page it is not visible
-    }
 
-    public void setProfile(User u)
-    {
         if(appSession.getLoggedUser().getRole()!=3 && !appSession.getLoggedUser().getUsername().equals(u.getUsername()))
             profileDeleteUser.setVisible(false);
         else
@@ -113,6 +118,10 @@ public class ProfilePageController {
             neo4jDriver.follow(appSession.getLoggedUser().getUsername(),userName.getText());
             addFollow.setImage(new Image("img/alreadyFollowed_profile.png"));
         }
+
+        // Update the numbers of follower/following
+        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollower(userName.getText())));
+        followingNumber.setText(String.valueOf(neo4jDriver.howManyFollowing(userName.getText())));
     }
 
     /**

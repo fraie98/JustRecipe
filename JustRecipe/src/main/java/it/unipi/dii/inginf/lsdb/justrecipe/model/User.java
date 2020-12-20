@@ -28,6 +28,11 @@ public class User {
         this(firstName, lastName, null, username, password, 0);
     }
 
+    public User (String firstName, String lastName, String username)
+    {
+        this(firstName, lastName, null, username, null, 0);
+    }
+
 
     //Getters
     public String getFirstName() {

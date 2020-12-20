@@ -408,6 +408,27 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
+     * Give information about the user given the username
+     * @param username  Given username
+     * @return  The object username with the necessary information
+     */
+    public User getUserInfo(String username)
+    {
+        User user;
+        try(Session session = driver.session())
+        {
+            user = session.readTransaction((TransactionWork<User>) tx -> {
+                Result r = tx.run("match (a:User{username:$name}) return a.firstName, a.lastName, a.username",
+                        parameters("name",username));
+                Record rec = r.next();
+                return new User(rec.get(0).asString(), rec.get(1).asString(), rec.get(2).asString());
+            });
+        }
+        return user;
+    }
+
+
+    /**
      * Function that returns the recipe snapshots of one user
      * @param howManySkip   How many to skip
      * @param howMany       How many to obtain
