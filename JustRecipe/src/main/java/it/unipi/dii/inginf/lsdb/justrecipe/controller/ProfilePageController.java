@@ -71,9 +71,9 @@ public class ProfilePageController {
         if (appSession.getLoggedUser().getRole() == 0)
             profileDeleteUser.setVisible(false);
 
-        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollower(userName.getText())));
-        followingNumber.setText(String.valueOf(neo4jDriver.howManyFollowing(userName.getText())));
-        recipesNumber.setText(String.valueOf(neo4jDriver.howManyRecipesAdded(userName.getText())));
+        followerNumber.setText(String.valueOf(u.getFollower()));
+        followingNumber.setText(String.valueOf(u.getFollowing()));
+        recipesNumber.setText(String.valueOf(u.getNumRecipes()));
         page = 0;
         Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
         previousButton.setVisible(false); //in the first page it is not visible
@@ -111,17 +111,15 @@ public class ProfilePageController {
             // I want to unfollow an user
             neo4jDriver.unfollow(appSession.getLoggedUser().getUsername(),userName.getText());
             addFollow.setImage(new Image("img/follow_profile.png"));
+            followerNumber.setText(String.valueOf(Integer.parseInt(followerNumber.getText()) - 1));
         }
         else
         {
             // I want to follow a user
             neo4jDriver.follow(appSession.getLoggedUser().getUsername(),userName.getText());
             addFollow.setImage(new Image("img/alreadyFollowed_profile.png"));
+            followerNumber.setText(String.valueOf(Integer.parseInt(followerNumber.getText()) + 1));
         }
-
-        // Update the numbers of follower/following
-        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollower(userName.getText())));
-        followingNumber.setText(String.valueOf(neo4jDriver.howManyFollowing(userName.getText())));
     }
 
     /**

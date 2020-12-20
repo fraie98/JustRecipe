@@ -91,7 +91,7 @@ public class WelcomePageController {
                 confirmPasswordRegistrationTextField.getText().equals(""))
             || (!passwordRegistrationTextField.getText().equals(confirmPasswordRegistrationTextField.getText())))
         {
-            Utils.showErrorAlert("You need to insert all the values!");
+            Utils.showErrorAlert("You need to insert all the values! Pay attention that the passwords must be equals!");
         }
         else
         {
@@ -99,14 +99,19 @@ public class WelcomePageController {
                     usernameRegistrationTextField.getText(), passwordRegistrationTextField.getText()))
             {
                 Session newSession = Session.getInstance();
-                User registered = new User(firstNameRegistrationTextField.getText(),lastNameRegistrationTextField.getText(),null,usernameRegistrationTextField.getText(),passwordRegistrationTextField.getText(),0);
+                User registered = new User(firstNameRegistrationTextField.getText(),
+                        lastNameRegistrationTextField.getText(),null,
+                        usernameRegistrationTextField.getText(), passwordRegistrationTextField.getText(),
+                        0);
+                registered.setFollowing(0);
+                registered.setNumRecipes(0);
+                registered.setFollower(0);
                 newSession.setLoggedUser(registered);
-                HomePageController homePageController = (HomePageController)
-                        Utils.changeScene("/homepage.fxml", actionEvent);
+                Utils.changeScene("/homepage.fxml", actionEvent);
             }
             else
             {
-                Utils.showErrorAlert("Registration failed!");
+                Utils.showErrorAlert("Registration failed! Username not available..");
             }
         }
     }
@@ -119,11 +124,11 @@ public class WelcomePageController {
      */
     private boolean login (final String username, final String password)
     {
-        User isPresent = neo4jDriver.login(username, password);
-        if(isPresent!=null)
+        User user = neo4jDriver.login(username, password);
+        if(user!=null)
         {
             Session newSession = Session.getInstance();
-            newSession.setLoggedUser(isPresent);
+            newSession.setLoggedUser(user);
             return true;
         }
         else
@@ -143,12 +148,14 @@ public class WelcomePageController {
     private boolean register (final String firsName, final String lastName, final String username,
                            final String password)
     {
-        // I need to check if it is possible to use this username
-        if (!neo4jDriver.isRegistered(username)) // If it wasn't previously used
+        try // Try to register the user, if the username is used by another one than the exception will be throw
         {
             neo4jDriver.addUser(firsName, lastName, username, password);
             return true;
         }
-        return false;
+        catch (org.neo4j.driver.exceptions.ClientException clientException)
+        {
+            return false;
+        }
     }
 }

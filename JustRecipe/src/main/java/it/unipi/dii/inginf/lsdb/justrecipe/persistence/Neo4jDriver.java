@@ -108,7 +108,7 @@ public class Neo4jDriver implements DatabaseDriver{
         try ( Session session = driver.session())
         {
             session.writeTransaction((TransactionWork<Void>) tx -> {
-                tx.run( "MERGE (u:User {firstName: $firstName, lastName: $lastName, username: $username," +
+                tx.run( "CREATE (u:User {firstName: $firstName, lastName: $lastName, username: $username," +
                                 "password: $password, role:0})",
                         parameters( "firstName", firstName, "lastName", lastName, "username",
                                 username, "password", password ) );
@@ -117,40 +117,13 @@ public class Neo4jDriver implements DatabaseDriver{
         }
     }
 
-
-
-    /**
-     * It controls that a user with the given username exists or not
-     * @param username  username of the user that I want to control
-     * @return true if the user is registered, false otherwise
-     */
-    public boolean isRegistered (final String username)
-    {
-        Boolean isPresent;
-        try ( Session session = driver.session())
-        {
-             isPresent = session.readTransaction((TransactionWork<Boolean>) tx -> {
-                 Result result = tx.run( "MATCH (u:User) " +
-                                 "WHERE u.username = $username " +
-                                 "RETURN u " +
-                                 "LIMIT 1",
-                        parameters( "username", username) );
-                 if (result.stream().count() != 0)
-                    return true;
-                 else
-                     return false;
-            });
-        }
-        return isPresent;
-    }
-
     /**
      * It performs the login with the given username and password
      * @param username  Username of the target user
-     * @param pw  Password of the target user
+     * @param password  Password of the target user
      * @return The object user if the login is done successfully, otherwise null
      */
-    public User login(final String username, final String pw)
+    public User login(final String username, final String password)
     {
         User u = null;
         try ( Session session = driver.session())
@@ -159,21 +132,36 @@ public class Neo4jDriver implements DatabaseDriver{
                 Result result = tx.run( "MATCH (u:User) " +
                                 "WHERE u.username = $username " +
                                 "AND u.password = $password " +
-                                "RETURN u.firstName, u.lastName, u.username, u.password, u.role  " +
-                                "LIMIT 1",
-                        parameters( "username", username,"password",pw) );
-                User log = null;
+                                "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
+                                "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
+                                "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +
+                                "RETURN u.firstName AS firstName, u.lastName AS lastName, u.picture AS picture, " +
+                                "u.username AS username, u.password AS password, u.role AS role, " +
+                                "COUNT(DISTINCT f1) AS follower, COUNT (DISTINCT f2) AS following, " +
+                                "COUNT (DISTINCT a) AS numRecipes ",
+                        parameters( "username", username,"password",password) );
+                User user = null;
                 try
                 {
                     Record r = result.next();
-                    log = new User(r.get(0).asString(),r.get(1).asString(),null,r.get(2).asString(),r.get(3).asString(),r.get(4).asInt());
+                    String firstName = r.get("firstName").asString();
+                    String lastName = r.get("lastName").asString();
+                    String picture = null;
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    int role = r.get("role").asInt();
+                    user = new User(firstName, lastName, picture, username, password, role);
+                    user.setFollower(r.get("follower").asInt());
+                    user.setFollowing(r.get("following").asInt());
+                    user.setNumRecipes(r.get("numRecipes").asInt());
                 }
                 catch (NoSuchElementException ex)
                 {
-                    log = null;
+                    user = null;
                 }
-
-                return log;
+                return user;
             });
         }
         return u;
@@ -619,5 +607,48 @@ public class Neo4jDriver implements DatabaseDriver{
             });
         }
         return users;
+    }
+
+    /**
+     * Function that returns all the info about an User, given the username
+     * @param username      Username of the user
+     * @return              User instance
+     */
+    public User getUserByUsername (String username)
+    {
+        User user = null;
+        try (Session session = driver.session()) {
+           user = session.readTransaction((TransactionWork<User>) tx -> {
+                Result result = tx.run("MATCH (u:User) " +
+                                "WHERE u.username = $username" +
+                                "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
+                                "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
+                                "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +
+                                "RETURN u.firstName AS firstName, u.lastName AS lastName, u.picture AS picture, " +
+                                "u.username AS username, u.password AS password, u.role AS role, " +
+                                "COUNT(DISTINCT f1) AS follower, COUNT (DISTINCT f2) AS following, COUNT (DISTINCT a) AS numRecipes ",
+                        parameters("username", username));
+
+                User u = null;
+                if(result.hasNext()){
+                    Record r = result.next();
+                    String firstName = r.get("firstName").asString();
+                    String lastName = r.get("lastName").asString();
+                    String picture = null;
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    String password = r.get("password").asString();
+                    int role = r.get("role").asInt();
+                    u = new User(firstName, lastName, picture, username, password, role);
+                    u.setFollower(r.get("follower").asInt());
+                    u.setFollowing(r.get("following").asInt());
+                    u.setNumRecipes(r.get("numRecipes").asInt());
+                }
+                return u;
+            });
+        }
+        return user;
     }
 }

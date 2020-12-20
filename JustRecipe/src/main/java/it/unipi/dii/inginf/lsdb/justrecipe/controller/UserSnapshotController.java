@@ -22,6 +22,8 @@ public class UserSnapshotController {
     @FXML private Label userSnapLastName;
     @FXML private AnchorPane userSnapMain;
 
+    private User user;
+
     public void initialize()
     {
         neo4jDriver = Neo4jDriver.getInstance();
@@ -35,6 +37,7 @@ public class UserSnapshotController {
      */
     public void setUserSnap(User u)
     {
+        this.user = u;
         String urlPicture = u.getPicture();
         if(urlPicture==null || urlPicture.isEmpty())
             userSnapImg.setImage(new Image("/img/genericUser.png"));
@@ -57,7 +60,7 @@ public class UserSnapshotController {
         {
             ProfilePageController profilePageController = (ProfilePageController)
                     Utils.changeScene("/profilePage.fxml", mouseEvent);
-            profilePageController.setProfile(neo4jDriver.getUserInfo(userSnapUsername.getText()));
+            profilePageController.setProfile(user);
         }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
     }
 }
