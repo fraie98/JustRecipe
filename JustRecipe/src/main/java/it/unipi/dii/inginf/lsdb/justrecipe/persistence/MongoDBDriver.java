@@ -193,6 +193,29 @@ public class MongoDBDriver implements DatabaseDriver{
     }
 
     /**
+     * Function that returns a list of recipes that contains the category passed (or one piece of that)
+     * @param category          Category to search
+     * @param howManySkip       How many to skip
+     * @param howMany           How many to obtain
+     * @return                  The list of recipes
+     */
+    public List<Recipe> searchRecipesFromCategory (String category, int howManySkip, int howMany)
+    {
+        List<Recipe> recipes = new ArrayList<>();
+        Gson gson = new Gson();
+        Pattern pattern = Pattern.compile("^.*" + category + ".*$", Pattern.CASE_INSENSITIVE);
+        Bson match = match(Filters.regex("categories", pattern));
+        Bson sort = sort(descending("creationTime"));
+        Bson skip = skip(howManySkip);
+        Bson limit = limit(howMany);
+        List<Document> results = (List<Document>) collection.aggregate(Arrays.asList(match, sort, skip, limit))
+                .into(new ArrayList<>());
+        Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
+        recipes = gson.fromJson(gson.toJson(results), recipeListType);
+        return recipes;
+    }
+
+    /**
      * Function that return the most common categories (the top one used)
      * @param howManySkip           How many to skip
      * @param howManyCategories     How many category to consider in the rank

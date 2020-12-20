@@ -74,17 +74,6 @@ public class DiscoveryPageController {
         nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
         previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
         previousButton.setVisible(false); //in the first page it is not visible
-
-        List<User> users = new ArrayList<>();
-        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
-        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
-        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
-        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
-        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
-        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
-        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
-        users.add(new User("Pippo", "Pippo", "Pippo", "Pippo"));
-        Utils.addUsersSnap(discoveryVBox, users);
     }
 
     private void search(ActionEvent actionEvent) {
@@ -92,6 +81,12 @@ public class DiscoveryPageController {
         if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))
         {
             List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(),
+                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
+            Utils.addRecipesSnap(discoveryVBox, recipes);
+        }
+        if (String.valueOf(searchComboBox.getValue()).equals("Recipe category"))
+        {
+            List<Recipe> recipes = mongoDBDriver.searchRecipesFromCategory (searchBarTextField.getText(),
                     HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
             Utils.addRecipesSnap(discoveryVBox, recipes);
         }
