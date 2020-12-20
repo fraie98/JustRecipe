@@ -90,6 +90,13 @@ public class DiscoveryPageController {
                     HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
             Utils.addRecipesSnap(discoveryVBox, recipes);
         }
+        if (String.valueOf(searchComboBox.getValue()).equals("Recipe ingredients"))
+        {
+            List<String> ingredientsList = Utils.fromStringToList(searchBarTextField.getText());
+            List<Recipe> recipes = mongoDBDriver.searchRecipesFromIngredients (ingredientsList,
+                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
+            Utils.addRecipesSnap(discoveryVBox, recipes);
+        }
         else if (String.valueOf(searchComboBox.getValue()).equals("Most common recipe categories"))
         {
             List<String> mostCommonRecipeCategories = mongoDBDriver.searchMostCommonRecipeCategories(

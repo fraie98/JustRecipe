@@ -33,9 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class that contains some useful method
@@ -140,6 +138,18 @@ public class Utils {
             }
         }
         return string;
+    }
+
+    /**
+     * Function used to transform a string in an list of string, divided by comma
+     * @param string        String to consider
+     * @return              A list of the substring
+     */
+    public static List<String> fromStringToList (String string)
+    {
+        List<String> list = new ArrayList<>();
+        list = Arrays.asList(string.split(","));
+        return list;
     }
 
     /**

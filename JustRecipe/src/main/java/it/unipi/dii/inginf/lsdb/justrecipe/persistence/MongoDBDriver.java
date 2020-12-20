@@ -216,6 +216,33 @@ public class MongoDBDriver implements DatabaseDriver{
     }
 
     /**
+     * Function that returns the recipes that contains the ingredients passed as argument
+     * @param ingredients       Ingredients to check
+     * @param howManySkip       How many recipe to skip
+     * @param howMany           How many recipe to obtain
+     * @return                  List of recipes
+     */
+    public List<Recipe> searchRecipesFromIngredients (List<String> ingredients, int howManySkip, int howMany)
+    {
+        List<Recipe> recipes = new ArrayList<>();
+        Gson gson = new Gson();
+        List<Bson> bsons = new ArrayList<Bson>();
+        for (String ingredient: ingredients)
+        {
+            Pattern pattern = Pattern.compile("^.*" + ingredient + ".*$", Pattern.CASE_INSENSITIVE);
+            bsons.add(match(Filters.regex("ingredients", pattern)));
+        }
+        bsons.add(sort(descending("creationTime")));
+        bsons.add(skip(howManySkip));
+        bsons.add(limit(howMany));
+        List<Document> results = (List<Document>) collection.aggregate(bsons)
+                .into(new ArrayList<>());
+        Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
+        recipes = gson.fromJson(gson.toJson(results), recipeListType);
+        return recipes;
+    }
+
+    /**
      * Function that return the most common categories (the top one used)
      * @param howManySkip           How many to skip
      * @param howManyCategories     How many category to consider in the rank
