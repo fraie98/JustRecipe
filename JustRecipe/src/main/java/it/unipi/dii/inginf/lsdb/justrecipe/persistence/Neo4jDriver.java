@@ -8,10 +8,7 @@ import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
 import org.neo4j.driver.types.Node;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import static org.neo4j.driver.Values.NULL;
 import static org.neo4j.driver.Values.parameters;
@@ -63,6 +60,41 @@ public class Neo4jDriver implements DatabaseDriver{
     {
         if (driver != null)
             driver.close();
+    }
+
+
+    /**
+     * Add a recipe in Neo4j databases
+     * @param r  Object recipe that will be added
+     */
+    public void addRecipe(Recipe r)
+    {
+        try ( Session session = driver.session())
+        {
+            Map<String,Object> query = new HashMap<>();
+            query.put("title",r.getTitle());
+            if(r.getCalories()!=-1)
+                query.put("calories",r.getCalories());
+            if(r.getFat()!=-1)
+                query.put("fat",r.getFat());
+            if(r.getProtein()!=-1)
+                query.put("protein",r.getProtein());
+            if(r.getCarbs()!=-1)
+                query.put("carbs",r.getCarbs());
+
+            //System.out.println(query);
+
+            session.writeTransaction((TransactionWork<Void>) tx -> {
+                tx.run( "UNWIND $props as rnew " +
+                                "MATCH (u:User{username:$name}) " +
+                                "MERGE (rec:Recipe{title:rnew.title,calories:rnew.calories,fat:rnew.fat," +
+                                "protein:rnew.protein,carbs:rnew.carbs}) " +
+                                "MERGE (u)-[ad:ADDS]->(rec) " +
+                                "SET ad.when=$ts",
+                        parameters( "props", query, "name", r.getAuthorUsername(), "ts", r.getCreationTime().getTime()) );
+                return null;
+            });
+        }
     }
 
     /**

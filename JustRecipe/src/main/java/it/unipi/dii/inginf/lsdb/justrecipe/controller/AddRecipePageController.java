@@ -98,7 +98,7 @@ public class AddRecipePageController {
             Recipe newRec = new Recipe(addTitle.getText(), addInstructions.getText(), ingr, categ, calo, fat, proteins, carbs, ts, addUrl.getText(), creator, null);
 
             //neo4jDriver.addRecipe(newRec);
-            mongoDBDriver.addRecipe(newRec);
+            //mongoDBDriver.addRecipe(newRec);
 
             Utils.showInfoAlert("Recipe succesfully added");
             clearAllFields();
