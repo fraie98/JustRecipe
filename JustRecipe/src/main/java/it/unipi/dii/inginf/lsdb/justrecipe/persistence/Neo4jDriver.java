@@ -1,12 +1,10 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import org.neo4j.driver.*;
-import org.neo4j.driver.types.Node;
 
 import java.util.*;
 

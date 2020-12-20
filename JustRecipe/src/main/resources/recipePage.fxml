@@ -172,12 +172,12 @@
                                                 <Image url="@img/edit.png" />
                                              </image>
                                           </ImageView>
-                                          <Label fx:id="recipeLikes" layoutX="14.0" layoutY="23.0" text="Like:">
+                                          <Label layoutX="14.0" layoutY="23.0" text="Like:">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="recipeDate" layoutX="108.0" layoutY="23.0" text="Published on:">
+                                          <Label fx:id="recipeDate" layoutX="110.0" layoutY="23.0" text="Published on:">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -187,6 +187,11 @@
                                                 <Image url="@img/delete.png" />
                                              </image>
                                           </ImageView>
+                                          <Label fx:id="recipeLikes" layoutX="54.0" layoutY="23.0" text="x">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </Pane>
                                  </children>
