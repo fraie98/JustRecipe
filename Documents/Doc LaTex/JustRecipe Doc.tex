@@ -343,7 +343,52 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 \section{Main Packages and Classes}
 \section{Most Relevant Queries}
 \subsection{MongoDB}
+\subsubsection{Recipes of the user X - Campilongo }
+
+\lstset{ language=C++}
+\begin{lstlisting}
+db.recipe.find({"title":"Pasta"});
+\end{lstlisting}
+\subsubsection{Search for recipe title X - Daniele }
+\subsubsection{Search for recipe category X - Iemma}
+\subsubsection{Search for recipe ingredients X -  Campilongo }
+\subsubsection{Most common recipe categories X - Daniele}
+\subsubsection{Last Comments X - Iemma}
+
+
 \subsection{Neo4J}
+\emph{Tabella con dominio grafo e descrizione}
+\subsubsection{Suggested Recipes}
+We have three levels of suggestions with different relevance.
+\begin{itemize}
+	\item First Level
+	
+	\noindent Recipe \emph{R} is a first level suggestion for the user \emph{X} if \emph{R} has been added by the user \emph{Y} where \emph{Y} is followed by \emph{X} ($X \rightarrow Y$). Or \emph{R} has been added by \emph{Z} where \emph{Z} is followed by \emph{Y} ($ X \rightarrow Y \rightarrow Z$).
+	
+	\item Second Level
+	
+	\noindent Recipe \emph{R} is a second level suggestion for the user \emph{X} if \emph{R} has been added by the user \emph{Y} where \emph{Y} is the owner of at least N recipes liked by \emph{X}.
+	
+	\item Third Level
+	
+	\noindent Recipe \emph{R} is a third level suggestion for the user \emph{X} if \emph{R} has been commented by the user \emph{Y} where \emph{Y} is followed by \emph{X} ($X \rightarrow Y$).
+	\noindent 
+	
+\end{itemize}
+
+\subsubsection{Recipes of following users X - Campilongo }
+\lstset{ language=java}
+\begin{lstlisting}
+	MATCH (n:User)
+	RETURN n;
+\end{lstlisting}  
+\subsubsection{Most followed and active users}
+\subsubsection{Top Commentators}
+\subsubsection{Most liked users}
+\subsubsection{Best Recipes}
+\subsubsection{Search for username X - Daniele}
+\subsubsection{Search for user's fullname X - Iemma}
+
 \section{Unit Test}
 \section{Tests and Statistical Analysis}
 
