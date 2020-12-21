@@ -130,7 +130,8 @@ public class DiscoveryPageController {
         {
             List<Comment> comments = mongoDBDriver.searchAllComments(
                     HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
-            Utils.showComments(discoveryVBox, comments);
+            Utils.showComments(discoveryVBox, comments, new String());
+            //new String where should be recipeName,which here is useless o point out the correct recipe name
         }
     }
 

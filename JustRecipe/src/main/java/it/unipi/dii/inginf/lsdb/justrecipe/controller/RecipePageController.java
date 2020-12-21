@@ -1,5 +1,6 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
@@ -103,8 +104,6 @@ public class RecipePageController {
             Utils.showErrorAlert("No Comments in the CommentsArea");
             return;
         }
-//        System.out.println(recipe.getComments());
-//        System.out.println(recipe.getTitle());
         Comment comment = new Comment(appSession.getLoggedUser().getUsername(), commentsArea.getText(), new Date());
         if(recipe.getComments() != null)
             recipe.addComments(comment);
@@ -113,9 +112,8 @@ public class RecipePageController {
             comments.add(comment);
             recipe.setComments(comments);
         }
-        Utils.showComment(recipeVBox, comment);
-//        System.out.println(recipe.getComments());
-        mongoDBDriver.updateComments(recipe.getTitle(), recipe.getComments());
+        Utils.showComment(recipeVBox, comment, recipe.getTitle());
+        mongoDBDriver.addComment(recipe.getTitle(), comment);
     }
 
     /**
@@ -155,23 +153,12 @@ public class RecipePageController {
         if(neo4jDriver.isThisRecipeLikedByOne(recipe.getTitle(),appSession.getLoggedUser().getUsername()))
             recipeLikeImg.setImage(new Image("img/alreadyliked.png"));
 
-        if(recipe.getComments() != null) {
+        if(recipe.getComments() != null && recipe.getComments().size() != 0) {
             Label commentsTitle = new Label("Comments:");
             commentsTitle.setFont(Font.font(24));
             recipeVBox.getChildren().add(commentsTitle);
-            Utils.showComments(recipeVBox, recipe.getComments());
+            Utils.showComments(recipeVBox, recipe.getComments(), recipe.getTitle());
         }
-//        List<Comment> comments = new ArrayList<>();
-//        comments.add(new Comment("Pippo", "Hello World!", new Date()));
-//        comments.add(new Comment("Pluto", "Fantastic recipe!", new Date()));
-//        recipe.setComments(comments);
-//        if (comments != null)
-//        {
-//            Label commentsTitle = new Label("Comments:");
-//            commentsTitle.setFont(Font.font(24));
-//            recipeVBox.getChildren().add(commentsTitle);
-//            Utils.showComments(recipeVBox, recipe.getComments());
-//        }
 
         if(appSession.getLoggedUser().getRole()!=2 && !appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
             recipeDelete.setVisible(false);

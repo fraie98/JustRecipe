@@ -246,13 +246,13 @@ public class Utils {
      * @param vBox      VBox in which I have to show the comments
      * @param comments  Comments to show
      */
-    public static void showComments(VBox vBox, List<Comment> comments) {
+    public static void showComments(VBox vBox, List<Comment> comments, String recipeTitle) {
         Iterator<Comment> iterator = comments.iterator();
         vBox.setSpacing(20);
         while (iterator.hasNext())
         {
             Comment comment = iterator.next();
-            Pane commentPane = loadComment(comment);
+            Pane commentPane = loadComment(comment, recipeTitle);
             vBox.getChildren().add(commentPane);
         }
     }
@@ -262,8 +262,8 @@ public class Utils {
      * @param pane      Pane in which I have to show the comments
      * @param comment  Comments to show
      */
-    public static void showComment(Pane pane, Comment comment){
-        Pane commentPane = loadComment(comment);
+    public static void showComment(Pane pane, Comment comment, String recipeName){
+        Pane commentPane = loadComment(comment, recipeName);
         pane.getChildren().add(commentPane);
     }
 
@@ -272,7 +272,7 @@ public class Utils {
      * @param comment   Comment to show
      * @return          The pane in which I have showed the comment
      */
-    private static Pane loadComment (Comment comment)
+    private static Pane loadComment (Comment comment, String recipeName)
     {
         Pane pane = null;
         try {
@@ -280,7 +280,8 @@ public class Utils {
             pane = (Pane) loader.load();
             CommentController commentController =
                     (CommentController) loader.getController();
-            commentController.setComment(comment);
+            commentController.setComment(comment, recipeName);
+//            commentController.setRecipeName(recipeName);                                                              //DEBUG
         } catch (IOException e) {
             e.printStackTrace();
         }

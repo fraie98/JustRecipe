@@ -1,17 +1,19 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.persistence;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.*;
+import com.mongodb.client.result.UpdateResult;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.*;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
+import org.bson.BsonDocument;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
@@ -313,10 +315,54 @@ public class MongoDBDriver implements DatabaseDriver{
         return comments;
     }
 
+    /**
+     * Function who updates the comments field in recipe
+     * @param title     recipe Title
+     * @param comments  list of comments who will updates the recipe fields
+     */
     public void updateComments(String title, List<Comment> comments){
         collection = collection.withCodecRegistry(pojoCodecRegistry);
         Bson update = new Document("comments", comments);
         Bson updateOperation = new Document("$set", update);
         collection.updateOne(new Document("title", title), updateOperation);
+    }
+
+    /**
+     * Function who removes a comment element from a comment view and calls the updateComments to update
+     * the recipe into mongo
+     * @param title     recipe name to modify
+     * @param comment   comment to delete
+     */
+    public void deleteComment(String title, Comment comment){
+        List<Comment> comments = getRecipeFromTitle(title).getComments();
+        int i=0;
+        int k=0;
+        for (Comment c: comments) {
+            if(c.getCreationTime().equals(comment.getCreationTime()) &&
+                    c.getAuthorUsername().equals(comment.getAuthorUsername())){
+                k=i;
+                break;
+            }
+            i++;
+        }
+        comments.remove(k);
+        updateComments(title, comments);
+    }
+
+    /**
+     * Function who adds a comment element to a list, with all the others comments for the recipe then updates the list
+     * calling the updateComments
+     * @param title     recipe name to modify
+     * @param comment   comment to add
+     */
+    public void addComment(String title, Comment comment){
+        List<Comment> comments = getRecipeFromTitle(title).getComments();
+        if(comments != null)
+            comments.add(comment);
+        else {
+            comments = new ArrayList<>();
+            comments.add(comment);
+        }
+        updateComments(title, comments);
     }
 }

@@ -112,9 +112,9 @@
                                                 <Image url="@img/user.png" />
                                              </image>
                                           </ImageView>
-                                          <Text fx:id="recipeUsername" layoutX="48.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+                                          <Text fx:id="recipeUsername" layoutX="48.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Username">
                                              <font>
-                                                <Font size="22.0" />
+                                                <Font size="16.0" />
                                              </font>
                                           </Text>
                                           <ImageView fitHeight="40.0" fitWidth="40.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
