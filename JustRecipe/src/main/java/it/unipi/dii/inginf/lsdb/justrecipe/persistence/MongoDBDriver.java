@@ -253,7 +253,7 @@ public class MongoDBDriver implements DatabaseDriver{
         List<String> mostCommonCategories = new ArrayList<>();
         Bson unwind = unwind("$categories");
         Bson group = group("$categories", Accumulators.sum("numberOfRecipes", 1));
-        Bson project = project(fields(computed("categories", "$_id"), excludeId(), include("numberOfRecipes")));
+        Bson project = project(fields(computed("category", "$_id"), excludeId(), include("numberOfRecipes")));
         Bson sort = sort(descending("numberOfRecipes"));
         Bson skip = skip(howManySkip);
         Bson limit = limit(howManyCategories);
@@ -262,7 +262,7 @@ public class MongoDBDriver implements DatabaseDriver{
 
         for (Document document: results)
         {
-            mostCommonCategories.add(document.getString("categories"));
+            mostCommonCategories.add(document.getString("category"));
         }
         return mostCommonCategories;
     }

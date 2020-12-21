@@ -386,7 +386,52 @@ db.recipes.aggregate (
 \end{lstlisting} 
 \subsubsection{Search for recipe category X - Iemma}
 \subsubsection{Search for recipe ingredients X -  Campilongo }
-\subsubsection{Most common recipe categories X - Daniele}
+\subsubsection{Most common recipe categories}
+This query allows you to get a ranking of the categories most used by users for their recipes.
+\begin{itemize}
+\item Input: no one.
+\item Output: list with the categories ordered by the number of use.
+\end{itemize}
+\lstset{ language=java}
+\begin{lstlisting}
+db.recipes.aggregate (
+	[
+		{ 
+			$unwind : "$categories" 
+		},
+		{
+			$group :
+			{
+				_id : "$categories",
+			 	numberOfRecipes: 
+				{ 
+					$sum: 1
+				 }
+			}
+		},
+		{
+			$project: 
+			{
+				'category': '$_id',
+				numberOfRecipes: 1,
+				_id: 0
+			}
+		},
+		{ 
+			$sort : 
+			{ 
+				numberOfRecipes : -1 
+			} 
+		},
+		{ 
+			$skip: <howManyToSkip> 
+		},
+		{ 
+			$limit: <howManyToGet> 
+		}	
+	]
+)
+\end{lstlisting}
 \subsubsection{Last Comments X - Iemma}
 
 
