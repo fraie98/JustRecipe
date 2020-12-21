@@ -12,9 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import org.neo4j.driver.internal.InternalPath;
-
-import java.util.ArrayList;
 
 public class ProfilePageController {
     private Neo4jDriver neo4jDriver;
@@ -26,9 +23,10 @@ public class ProfilePageController {
     @FXML private ImageView homepageIcon;
     @FXML private ImageView discoveryImg;
     @FXML private ImageView logoutPic;
-    @FXML private ImageView addRecipeImg;
+    @FXML private ImageView addRecipeOrMyProfileImg;
     @FXML private ImageView profileDeleteUser;
     @FXML private ImageView profileEditUser;
+    @FXML private ImageView profileImg;
     @FXML private VBox recipeVbox;
     @FXML private Text userName;
     @FXML private Text followerNumber;
@@ -46,7 +44,6 @@ public class ProfilePageController {
         homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
-        addRecipeImg.setOnMouseClicked(mouseEvent -> clickOnAddRecipeImg(mouseEvent));
         nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
         previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
     }
@@ -68,12 +65,16 @@ public class ProfilePageController {
             addFollow.setOnMouseClicked(mouseEvent -> clickOnFollow());
         }
 
-        if (appSession.getLoggedUser().getRole() == 0)
-            profileDeleteUser.setVisible(false);
+        if(u.getPicture()!=null)
+            profileImg.setImage(new Image(u.getPicture()));
 
-        followerNumber.setText(String.valueOf(u.getFollower()));
+        /*followerNumber.setText(String.valueOf(u.getFollower()));
         followingNumber.setText(String.valueOf(u.getFollowing()));
-        recipesNumber.setText(String.valueOf(u.getNumRecipes()));
+        recipesNumber.setText(String.valueOf(u.getNumRecipes()));*/
+        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollower(u.getUsername())));
+        followingNumber.setText(String.valueOf(neo4jDriver.howManyFollowing(u.getUsername())));
+        recipesNumber.setText(String.valueOf(neo4jDriver.howManyRecipesAdded(u.getUsername())));
+
         page = 0;
         Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
         previousButton.setVisible(false); //in the first page it is not visible
@@ -87,8 +88,25 @@ public class ProfilePageController {
             profileEditUser.setOnMouseClicked(mouseEvent -> neo4jDriver.editProfile(u.getUsername()));
         else
             profileEditUser.setVisible(false);
+
+        if(appSession.getLoggedUser().getUsername().equals(u.getUsername()))
+            addRecipeOrMyProfileImg.setOnMouseClicked(mouseEvent -> clickOnAddRecipeImg(mouseEvent));
+        else
+        {
+            addRecipeOrMyProfileImg.setImage(new Image("img/user.png"));
+            addRecipeOrMyProfileImg.setOnMouseClicked(mouseEvent -> clickOnMyProfile(mouseEvent));
+        }
     }
 
+    /**
+     * Function used to handle the click on the my profile icon
+     * @param mouseEvent    event that represents the click on the icon
+     */
+    private void clickOnMyProfile(MouseEvent mouseEvent){
+        ProfilePageController profilePageController = (ProfilePageController)
+                Utils.changeScene("/profilePage.fxml", mouseEvent);
+        profilePageController.setProfile(appSession.getLoggedUser());
+    }
     /**
      * Function that let the navigation into the ui ---> homepage
      * @param mouseEvent event that represents the click on the icon

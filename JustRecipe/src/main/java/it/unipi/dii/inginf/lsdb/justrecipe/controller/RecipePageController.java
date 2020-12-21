@@ -75,6 +75,7 @@ public class RecipePageController {
         sendButton.setOnAction(actionEvent -> handleSendButtonAction(actionEvent));
         cancelButton.setOnAction(actionEvent -> handleCancelButtonAction(actionEvent));
         recipeLikeImg.setOnMouseClicked(mouseEvent -> handleClickOnLike());
+        recipeUsername.setOnMouseClicked(mouseEvent -> handleClickOnUsername(mouseEvent));
     }
 
     private void handleClickOnLike()
@@ -159,7 +160,7 @@ public class RecipePageController {
         recipeLikes.setText(String.valueOf(neo4jDriver.howManyLikes(recipe.getTitle())));
         if(neo4jDriver.isThisRecipeLikedByOne(recipe.getTitle(),appSession.getLoggedUser().getUsername()))
             recipeLikeImg.setImage(new Image("img/alreadyliked.png"));
-        
+
         if(recipe.getComments() != null) {
             Label commentsTitle = new Label("Comments:");
             commentsTitle.setFont(Font.font(24));
@@ -191,6 +192,16 @@ public class RecipePageController {
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
         HomePageController homePageController = (HomePageController)
                 Utils.changeScene("/homepage.fxml", mouseEvent);
+    }
+
+    /**
+     * Function used to handle the click on the recipe's owner
+     * @param mouseEvent    event that represents the click on the recipe's owner
+     */
+    private void handleClickOnUsername(MouseEvent mouseEvent){
+        ProfilePageController profilePageController = (ProfilePageController)
+                Utils.changeScene("/profilePage.fxml", mouseEvent);
+        profilePageController.setProfile(neo4jDriver.getUserInfo(recipeUsername.getText()));
     }
 
     /**

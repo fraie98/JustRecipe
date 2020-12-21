@@ -36,9 +36,9 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ImageView fitHeight="144.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="profileImg" fitHeight="144.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@img/user.png" />
+                              <Image url="@img/genericUser.png" />
                            </image>
                            <VBox.margin>
                               <Insets left="20.0" top="10.0" />
@@ -92,7 +92,7 @@
          <right>
             <VBox prefHeight="124.0" prefWidth="45.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="addRecipeImg" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="addRecipeOrMyProfileImg" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/addRecipe.png" />
                      </image>
