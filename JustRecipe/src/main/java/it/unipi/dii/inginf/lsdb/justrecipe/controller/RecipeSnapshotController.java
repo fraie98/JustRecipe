@@ -43,6 +43,11 @@ public class RecipeSnapshotController {
      * @param mouseEvent    The event that leads to show the recipe completely (click of the mouse in the pane)
      */
     private void showMoreInformation(MouseEvent mouseEvent) {
+        if(recipe.getInstructions() == null) {
+            System.out.println("Snap from Neo ---> getting recipes from MongoDB!");                                     //DEBUG
+            Recipe recipeMongoDB = MongoDBDriver.getInstance().getRecipeFromTitle(recipe.getTitle());
+            this.recipe = recipeMongoDB;
+        }
         RecipePageController recipePageController =
                 (RecipePageController) Utils.changeScene("/recipePage.fxml", mouseEvent);
         recipePageController.setRecipe(recipe);

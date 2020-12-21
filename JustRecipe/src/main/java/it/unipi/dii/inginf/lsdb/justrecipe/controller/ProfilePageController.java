@@ -55,6 +55,13 @@ public class ProfilePageController {
     public void setProfile(User u)
     {
         userName.setText(u.getUsername());
+
+        if(u.getPicture()!=null)
+            profileImg.setImage(new Image(u.getPicture()));
+
+        followerNumber.setText(String.valueOf(u.getFollower()));
+        followingNumber.setText(String.valueOf(u.getFollowing()));
+        recipesNumber.setText(String.valueOf(u.getNumRecipes()));
         if(userName.getText().equals(appSession.getLoggedUser().getUsername()))
             addFollow.setVisible(false);
         else
@@ -64,16 +71,7 @@ public class ProfilePageController {
 
             addFollow.setOnMouseClicked(mouseEvent -> clickOnFollow());
         }
-
-        if(u.getPicture()!=null)
-            profileImg.setImage(new Image(u.getPicture()));
-
-        followerNumber.setText(String.valueOf(u.getFollower()));
-        followingNumber.setText(String.valueOf(u.getFollowing()));
-        recipesNumber.setText(String.valueOf(u.getNumRecipes()));
-
         page = 0;
-        Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
         previousButton.setVisible(false); //in the first page it is not visible
 
         if(appSession.getLoggedUser().getRole()!=3 && !appSession.getLoggedUser().getUsername().equals(u.getUsername()))
@@ -93,6 +91,8 @@ public class ProfilePageController {
             addRecipeOrMyProfileImg.setImage(new Image("img/user.png"));
             addRecipeOrMyProfileImg.setOnMouseClicked(mouseEvent -> clickOnMyProfile(mouseEvent));
         }
+
+        Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
     }
 
     /**

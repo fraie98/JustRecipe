@@ -39,7 +39,7 @@
             <Image url="@img/protein1.png" />
          </image>
       </ImageView>
-      <Label fx:id="snapTitle" alignment="CENTER" layoutX="9.0" layoutY="25.0" maxWidth="406.0" prefHeight="36.0" prefWidth="406.0" style="-fx-font-weight: bold;" text="Tiramisù">
+      <Label fx:id="snapTitle" alignment="CENTER" layoutX="9.0" layoutY="25.0" maxWidth="406.0" prefHeight="36.0" prefWidth="406.0" text="Tiramisù">
          <font>
             <Font name="Liberation Sans" size="20.0" />
          </font>

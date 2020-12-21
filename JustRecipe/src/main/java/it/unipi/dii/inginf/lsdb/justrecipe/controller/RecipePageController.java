@@ -131,13 +131,7 @@ public class RecipePageController {
      * @param r    Recipe to show
      */
     public void setRecipe(Recipe r) {
-        String title = r.getTitle();
-        if(r.getInstructions() == null){
-            System.out.println("Snap from Neo ---> getting recipes from MongoDB!");                                     //DEBUG
-            Recipe recipeMongoDB = MongoDBDriver.getInstance().getRecipeFromTitle(title);
-            this.recipe = recipeMongoDB;
-        }else
-            this.recipe = r;
+        this.recipe = r;
         recipeTitle.setText(recipe.getTitle());
         recipeInstructions.setText(recipe.getInstructions());
         if (recipe.getPicture() != null)
