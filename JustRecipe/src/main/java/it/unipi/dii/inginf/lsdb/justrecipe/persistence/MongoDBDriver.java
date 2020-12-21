@@ -69,7 +69,7 @@ public class MongoDBDriver implements DatabaseDriver{
         this.password = configurationParameters.getMongoPassword();
         this.dbName = configurationParameters.getMongoDbName();
         initConnection();
-        chooseCollection("recipe");
+        chooseCollection("recipes");
     }
 
     /**
