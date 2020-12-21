@@ -394,11 +394,12 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
-     * Give information about the user given the username
+     * Give information about the user given the username (for more see getUserByUsername)
      * @param username  Given username
      * @return  The object username with the necessary information
      */
-    public User getUserInfo(String username)
+    @Deprecated
+    public User getBasicUserInfo(String username)
     {
         User user;
         try(Session session = driver.session())
@@ -620,7 +621,7 @@ public class Neo4jDriver implements DatabaseDriver{
         try (Session session = driver.session()) {
            user = session.readTransaction((TransactionWork<User>) tx -> {
                 Result result = tx.run("MATCH (u:User) " +
-                                "WHERE u.username = $username" +
+                                "WHERE u.username = $username " +
                                 "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
                                 "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
                                 "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +

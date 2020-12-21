@@ -201,7 +201,7 @@ public class RecipePageController {
     private void handleClickOnUsername(MouseEvent mouseEvent){
         ProfilePageController profilePageController = (ProfilePageController)
                 Utils.changeScene("/profilePage.fxml", mouseEvent);
-        profilePageController.setProfile(neo4jDriver.getUserInfo(recipeUsername.getText()));
+        profilePageController.setProfile(neo4jDriver.getUserByUsername(recipeUsername.getText()));
     }
 
     /**

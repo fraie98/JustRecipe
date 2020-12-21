@@ -68,12 +68,9 @@ public class ProfilePageController {
         if(u.getPicture()!=null)
             profileImg.setImage(new Image(u.getPicture()));
 
-        /*followerNumber.setText(String.valueOf(u.getFollower()));
+        followerNumber.setText(String.valueOf(u.getFollower()));
         followingNumber.setText(String.valueOf(u.getFollowing()));
-        recipesNumber.setText(String.valueOf(u.getNumRecipes()));*/
-        followerNumber.setText(String.valueOf(neo4jDriver.howManyFollower(u.getUsername())));
-        followingNumber.setText(String.valueOf(neo4jDriver.howManyFollowing(u.getUsername())));
-        recipesNumber.setText(String.valueOf(neo4jDriver.howManyRecipesAdded(u.getUsername())));
+        recipesNumber.setText(String.valueOf(u.getNumRecipes()));
 
         page = 0;
         Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
