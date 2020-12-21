@@ -349,7 +349,41 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 \begin{lstlisting}
 db.recipe.find({"title":"Pasta"});
 \end{lstlisting}
-\subsubsection{Search for recipe title X - Daniele }
+\subsubsection{Search for recipe title X}
+Given a portion of the title, this query is capable of returning as a result a set of recipes whose titles contain it. Research must be case insensitive (see \emph{options:"i"} in the regexMatch step of the aggregation)
+\begin{itemize}
+\item Input: portion of the title, how many recipes to skip and how many recipes to get.
+\item Output: set of recipes.	
+\end{itemize}
+\lstset{ language=java}
+\begin{lstlisting}
+db.recipes.aggregate (
+	[
+		{ 
+			$match : 
+			{ 
+				title: 
+				{
+					$regex: /^.*<portionOfTheTitle>.*$/,
+					$options: "i"
+				} 
+			}  
+		},
+		{ 
+			$sort : 
+			{ 
+				creationTime : -1 
+			} 
+		},
+		{ 
+			$skip: <howManyToSkip> 
+		},
+		{ 
+			$limit: <howManyToGet> 
+		}	
+	]
+)
+\end{lstlisting} 
 \subsubsection{Search for recipe category X - Iemma}
 \subsubsection{Search for recipe ingredients X -  Campilongo }
 \subsubsection{Most common recipe categories X - Daniele}
@@ -386,7 +420,27 @@ We have three levels of suggestions with different relevance.
 \subsubsection{Top Commentators}
 \subsubsection{Most liked users}
 \subsubsection{Best Recipes}
-\subsubsection{Search for username X - Daniele}
+\subsubsection{Search for username}
+Given a portion of the username, this query is able to return all users whose usernames contain it. The search must be case insensitive, so the toLower function is used. 
+\begin{itemize}
+\item Input: portion of the username, how many users to skip and how many users to get.
+\item Output: set of users.	
+\end{itemize}
+\lstset{ language=java}
+\begin{lstlisting}
+	MATCH (u:User)
+	WHERE toLower(u.username) CONTAINS toLower($username)
+	OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User)
+	OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User)
+	OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe)
+	RETURN u.firstName AS firstName, u.lastName AS lastName, 
+	u.picture AS picture, u.username AS username, 
+	u.password AS password, u.role AS role, 
+	COUNT(DISTINCT f1) AS follower,
+	COUNT (DISTINCT f2) AS following, 
+	COUNT (DISTINCT a) AS numRecipes
+	SKIP $skip LIMIT $limit
+\end{lstlisting} 
 \subsubsection{Search for user's fullname X - Iemma}
 
 \section{Unit Test}
