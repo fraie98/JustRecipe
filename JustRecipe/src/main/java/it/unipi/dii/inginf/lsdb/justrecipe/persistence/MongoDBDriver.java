@@ -378,7 +378,6 @@ public class MongoDBDriver implements DatabaseDriver{
     public void addComment(Recipe recipe, Comment comment){
         List<Comment> comments = recipe.getComments();
         comments.add(comment);
-        System.out.println(comments);
         updateComments(recipe.getTitle(), comments);
     }
 }
