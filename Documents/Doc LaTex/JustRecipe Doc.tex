@@ -342,7 +342,15 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 \section{Main Modules}
 \section{Main Packages and Classes}
 \section{Most Relevant Queries}
+In the following section will be presented the most relevant query performed with MongoDB and Neo4J. 
+\noindent Some important point must be underlined:
+\begin{itemize}
+	\item The operation of \emph{skip} and \emph{limit}, use in the most of the following queries, are necessary due  to implementation reasons. In fact the results are not shown all in the same page (because of the size of the database the output can be huge) but only a subset of the result are shown (for instance, the first X) and in order to go on and see the other result, the query will be performed with different value of \emph{<howManyToSkip>} (the first time is 0, the second is X) and \emph{<howManyToGet>} (it's a fixed number, must be equal to the previous X)
+	\item In Neo4J part, due to performance reasons, some queries compute also followers, followings and recipes added by each user. This is necessary because when the user is given as result this information must be showed and if we don't compute it here we have to do another query for each user.
+\end{itemize}
+
 \subsection{MongoDB}
+
 \subsubsection{Recipes of the user X - Campilongo }
 
 \lstset{ language=C++}
@@ -384,7 +392,44 @@ db.recipes.aggregate (
 	]
 )
 \end{lstlisting} 
-\subsubsection{Search for recipe category X - Iemma}
+\subsubsection{Search for recipe category}
+Given the category, or a part of this, the query returns recipes that belong to it. The search is case insensitive.
+
+\noindent It's important to point out that a recipe belongs to more than one categories, so a recipe can be part of the result of the search of two different categories (this is normal and it is allowed). 
+
+\begin{itemize}
+	\item Input: portion of the category or the entire one \emph{<portionOfTheCategory>}, how many recipes to skip \emph{<howManyToSkip>} and how many to get \emph{<howManyToGet>}.
+	\item Output: set of recipes belonging to the given category
+\end{itemize}
+\begin{lstlisting}
+db.recipes.aggregate (
+	[
+		{ 
+			$match : 
+			{ 
+				categories: 
+				{
+					$regex: /^.*<portionOfTheCategory>.*$/,
+					$options: "i"
+				} 
+			}  
+		},
+	{ 
+		$sort : 
+		{ 
+			creationTime : -1 
+		} 
+	},
+	{ 
+		$skip: <howManyToSkip> 
+	},
+	{ 
+		$limit: <howManyToGet> 
+	}	
+	]
+)
+\end{lstlisting}
+
 \subsubsection{Search for recipe ingredients X -  Campilongo }
 \subsubsection{Most common recipe categories}
 This query allows you to get a ranking of the categories most used by users for their recipes.
@@ -432,8 +477,36 @@ db.recipes.aggregate (
 	]
 )
 \end{lstlisting}
-\subsubsection{Last Comments X - Iemma}
 
+\subsubsection{Last Comments}
+The query returns the last comments sorted for creation time, in order to have the most recent as first and the most old as last.
+
+\begin{itemize}
+	\item Input: \emph{howManyToGet} and \emph{howManyToSkip}
+	\item Output: set of the last comments sorted by creation time in descendant order.
+\end{itemize}
+
+\begin{lstlisting}
+db.recipes.aggregate (
+	[
+		{ 
+			$unwind : "$comments" 
+		},
+		{ 
+			$sort : 
+			{ 
+				creationTime : -1 
+			} 
+		},
+		{ 
+			$skip: <howManyToSkip> 
+		},
+		{ 
+			$limit: <howManyToGet> 
+		}	
+	]
+)
+\end{lstlisting}
 
 \subsection{Neo4J}
 \emph{Tabella con dominio grafo e descrizione}
@@ -486,7 +559,31 @@ Given a portion of the username, this query is able to return all users whose us
 	COUNT (DISTINCT a) AS numRecipes
 	SKIP $skip LIMIT $limit
 \end{lstlisting} 
-\subsubsection{Search for user's fullname X - Iemma}
+\subsubsection{Search for user's full-name}
+Given the full-name or a part of it, the query returns the users that contains in their full-name the given input. The query is case-insensitive.
+\begin{itemize}
+	\item Input: The full-name (\emph{\$fullName}), how many users to skip (\emph{\$skip}) and how many users to get (\emph{\$limit}).
+	\item Output: The users that contains in their full-name the given input \emph{\$fullName}.
+\end{itemize}
+\begin{lstlisting}
+	 MATCH (u:User) 
+	 WHERE
+	 toLower(u.firstName+' '+u.lastName)
+	 CONTAINS toLower($fullName)
+	 OR
+	 toLower(u.lastName + ' ' + u.firstName)
+	 CONTAINS toLower($fullName)
+	 OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User)
+	 OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User)
+	 OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe)
+	 RETURN u.firstName AS firstName, u.lastName AS lastName,
+	 u.picture AS picture, u.username AS username,
+	 u.password AS password, u.role AS role,
+	 COUNT (DISTINCT f1) AS follower,
+	 COUNT (DISTINCT f2) AS following,
+	 COUNT (DISTINCT a) AS numRecipes
+	 SKIP $skip LIMIT $limit
+\end{lstlisting} 
 
 \section{Unit Test}
 \section{Tests and Statistical Analysis}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  21 DEC 2020 17:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  22 DEC 2020 10:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -365,18 +365,19 @@ File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) [10
 
 ] [11]
+[12] [13] [14]
 Chapter 4.
-[12
+[15
 
 ] (./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 6815 strings out of 481239
- 105210 string characters out of 5920376
+ 6903 strings out of 481239
+ 106276 string characters out of 5920376
  743319 words of memory out of 5000000
- 22012 multiletter control sequences out of 15000+600000
+ 22100 multiletter control sequences out of 15000+600000
  544390 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,7n,60p,595b,1193s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 50i,7n,60p,608b,1643s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t
 1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
@@ -390,10 +391,10 @@ hare/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/typ
 e1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
 fti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.pfb></usr/sh
 are/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on "JustRecipe Doc.pdf" (13 pages, 650992 bytes).
+Output written on "JustRecipe Doc.pdf" (16 pages, 664893 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 78 compressed objects within 1 object stream
+ 125 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
