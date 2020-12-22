@@ -19,7 +19,7 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgb(237, 160, 66);">
          <center>
-            <LineChart prefHeight="201.0" prefWidth="914.0" title="Week calories!" BorderPane.alignment="CENTER">
+            <LineChart prefHeight="259.0" prefWidth="864.0" title="Week calories!" BorderPane.alignment="CENTER">
               <xAxis>
                 <CategoryAxis label="Days" prefHeight="17.0" prefWidth="869.0" side="BOTTOM" />
               </xAxis>
@@ -29,6 +29,9 @@
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
+               <padding>
+                  <Insets right="30.0" />
+               </padding>
             </LineChart>
          </center>
          <left>
@@ -64,19 +67,30 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                            <children>
                               <ImageView fx:id="profileDeleteUser" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/delete.png" />
                                  </image>
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="10.0" />
+                                 </HBox.margin>
                               </ImageView>
                               <ImageView fx:id="profileEditUser" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@img/edit.png" />
                                  </image>
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets left="5.0" right="10.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fx:id="profileGoAdminPage" fitHeight="50.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/adminIcon.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
                                  </HBox.margin>
                               </ImageView>
                            </children>
@@ -97,7 +111,7 @@
                         <Image url="@img/addRecipe.png" />
                      </image>
                      <VBox.margin>
-                        <Insets />
+                        <Insets right="15.0" />
                      </VBox.margin>
                   </ImageView>
                   <ImageView fx:id="discoveryImg" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">

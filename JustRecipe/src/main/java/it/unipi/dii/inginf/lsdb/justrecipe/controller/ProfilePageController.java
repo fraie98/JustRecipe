@@ -27,6 +27,7 @@ public class ProfilePageController {
     @FXML private ImageView profileDeleteUser;
     @FXML private ImageView profileEditUser;
     @FXML private ImageView profileImg;
+    @FXML private ImageView profileGoAdminPage;
     @FXML private VBox recipeVbox;
     @FXML private Text userName;
     @FXML private Text followerNumber;
@@ -46,6 +47,7 @@ public class ProfilePageController {
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
         nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
         previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
+        profileGoAdminPage.setOnMouseClicked(mouseEvent -> clickOnAdminPage(mouseEvent));
     }
 
     /**
@@ -71,6 +73,10 @@ public class ProfilePageController {
 
             addFollow.setOnMouseClicked(mouseEvent -> clickOnFollow());
         }
+
+        if(appSession.getLoggedUser().getRole()==0)
+            profileGoAdminPage.setVisible(false);
+
         page = 0;
         previousButton.setVisible(false); //in the first page it is not visible
 
@@ -93,6 +99,16 @@ public class ProfilePageController {
         }
 
         Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
+    }
+
+    /**
+     * Handle the click on the administration page icon
+     * @param mouseEvent
+     */
+    private void clickOnAdminPage(MouseEvent mouseEvent)
+    {
+        AdministrationPageController administrationPageController = (AdministrationPageController)
+                Utils.changeScene("/adminPage.fxml", mouseEvent);
     }
 
     /**
