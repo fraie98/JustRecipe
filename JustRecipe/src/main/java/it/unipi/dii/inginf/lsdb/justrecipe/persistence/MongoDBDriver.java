@@ -385,6 +385,8 @@ public class MongoDBDriver implements DatabaseDriver{
      * @param comment   comment to add
      */
     public void addComment(Recipe recipe, Comment comment){
+        if (recipe.getComments() == null)
+            recipe.setComments(new ArrayList<>());
         List<Comment> comments = recipe.getComments();
         comments.add(comment);
         updateComments(recipe.getTitle(), comments);

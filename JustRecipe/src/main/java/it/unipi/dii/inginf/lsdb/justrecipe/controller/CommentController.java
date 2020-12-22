@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.Date;
@@ -48,9 +49,8 @@ public class CommentController {
      * Trigger the delete comment action (from DB), and remove it from the UI
      */
     public void deleteButtonAction(){
-        commentVBox.getChildren().remove(0,commentVBox.getChildren().size());
-        commentVBox.setVisible(false);
         MongoDBDriver.getInstance().deleteComment(recipe, comment);
+        ((VBox) commentVBox.getParent()).getChildren().remove(commentVBox);
     }
 
     /**
