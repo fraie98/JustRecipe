@@ -113,6 +113,12 @@ public class DiscoveryPageController {
                 Utils.addRecipesSnap(discoveryVBox, recipes);
             }
         }
+        else if (String.valueOf(searchComboBox.getValue()).equals("Best recipes"))
+        {
+            List<Recipe> recipes = neo4jDriver.searchBestRecipes(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page,
+                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
+            Utils.addRecipesSnap(discoveryVBox, recipes);
+        }
         else if (String.valueOf(searchComboBox.getValue()).equals("User username"))
         {
             List<User> users = neo4jDriver.searchUserByUsername(HOW_MANY_USER_SNAPSHOT_TO_SHOW*page,
