@@ -148,11 +148,6 @@ public class AdministrationPageController {
         List<List<Object>> objects = mongoDBDriver.searchAllComments(
                 HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
         Utils.showAllComments(adminPageBox, objects);
-
-        /*List<Comment> comments = mongoDBDriver.searchAllComments(
-                HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
-        Utils.showComments(adminPageBox, comments, new Recipe());*/
-        //new String where should be recipeName,which here is useless
     }
 
     /**

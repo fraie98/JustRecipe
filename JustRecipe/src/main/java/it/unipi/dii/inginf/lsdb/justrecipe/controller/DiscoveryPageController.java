@@ -134,12 +134,9 @@ public class DiscoveryPageController {
         // For the moderator
         else if (String.valueOf(searchComboBox.getValue()).equals("Last comments"))
         {
-            /*List<Comment> comments = mongoDBDriver.searchAllComments(
-                    HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);*/
             List<List<Object>> objects = mongoDBDriver.searchAllComments(
                     HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
             Utils.showAllComments(discoveryVBox, objects);
-            //new String where should be recipeName,which here is useless o point out the correct recipe name
         }
     }
 
