@@ -139,7 +139,7 @@ public class RecipePageController {
             Label commentsTitle = new Label("Comments:");
             commentsTitle.setFont(Font.font(24));
             recipeVBox.getChildren().add(commentsTitle);
-            Utils.showComments(recipeVBox, recipe.getComments(), recipe);
+            Utils.showCommentsOfRecipe(recipeVBox, recipe.getComments(), recipe);
         }
 
         if(appSession.getLoggedUser().getRole()!=2 && !appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))

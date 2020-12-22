@@ -145,9 +145,13 @@ public class AdministrationPageController {
      */
     private void clickOnAllComments()
     {
-        List<Comment> comments = mongoDBDriver.searchAllComments(
+        List<List<Object>> objects = mongoDBDriver.searchAllComments(
                 HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
-        Utils.showComments(adminPageBox, comments, new Recipe());
+        Utils.showAllComments(adminPageBox, objects);
+
+        /*List<Comment> comments = mongoDBDriver.searchAllComments(
+                HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
+        Utils.showComments(adminPageBox, comments, new Recipe());*/
         //new String where should be recipeName,which here is useless
     }
 
