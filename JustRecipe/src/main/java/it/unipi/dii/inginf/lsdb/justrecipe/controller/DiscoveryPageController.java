@@ -63,8 +63,7 @@ public class DiscoveryPageController {
                         "User full name",
                         "Most followed and active user",
                         "Top Commentators",
-                        "Most liked user",
-                        "Last comments" // To show only if the user is a moderator
+                        "Most liked user"
                 );
         searchComboBox.setItems(options);
         // if some changes happens to the combobox
@@ -124,14 +123,6 @@ public class DiscoveryPageController {
             List<User> users = neo4jDriver.searchUserByFullName(HOW_MANY_USER_SNAPSHOT_TO_SHOW*page,
                     HOW_MANY_USER_SNAPSHOT_TO_SHOW, searchBarTextField.getText());
             Utils.addUsersSnap(discoveryVBox, users);
-        }
-        // For the moderator
-        else if (String.valueOf(searchComboBox.getValue()).equals("Last comments"))
-        {
-            List<Comment> comments = mongoDBDriver.searchAllComments(
-                    HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
-            Utils.showComments(discoveryVBox, comments, new String());
-            //new String where should be recipeName,which here is useless o point out the correct recipe name
         }
     }
 

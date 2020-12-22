@@ -74,7 +74,8 @@ public class ProfilePageController {
             addFollow.setOnMouseClicked(mouseEvent -> clickOnFollow());
         }
 
-        if(appSession.getLoggedUser().getRole()==0)
+        // The admin page must be showed only in the admin/moderator profile page
+        if(appSession.getLoggedUser().getRole()==0 || !appSession.getLoggedUser().getUsername().equals(u.getUsername()))
             profileGoAdminPage.setVisible(false);
 
         page = 0;
