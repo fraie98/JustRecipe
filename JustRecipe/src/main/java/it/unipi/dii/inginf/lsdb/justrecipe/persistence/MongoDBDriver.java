@@ -330,11 +330,11 @@ public class MongoDBDriver implements DatabaseDriver{
     /**
      * Function who removes a comment element from a comment view and calls the updateComments to update
      * the recipe into mongo
-     * @param title     recipe name to modify
+     * @param recipe     recipe name to modify
      * @param comment   comment to delete
      */
-    public void deleteComment(String title, Comment comment){
-        List<Comment> comments = getRecipeFromTitle(title).getComments();
+    public void deleteComment(Recipe recipe, Comment comment){
+        List<Comment> comments = recipe.getComments();
         int i=0;
         int k=0;
         for (Comment c: comments) {
@@ -346,23 +346,39 @@ public class MongoDBDriver implements DatabaseDriver{
             i++;
         }
         comments.remove(k);
-        updateComments(title, comments);
+        updateComments(recipe.getTitle(), comments);
+    }
+
+    /**
+     * Gets all the comments of a recipe, modify the one who has to be changed and make an upload
+     * @param recipe
+     * @param comment
+     */
+    public void modifyComment(Recipe recipe, Comment comment){
+        List<Comment> comments = recipe.getComments();
+        int i=0;
+        for (Comment c: comments
+             ) {
+            if(c.getAuthorUsername().equals(comment.getAuthorUsername()) && c.getCreationTime().equals(
+                    comment.getCreationTime())){
+                comments.set(i, comment);
+                break;
+            }
+            i++;
+        }
+        updateComments(recipe.getTitle(), comments);
     }
 
     /**
      * Function who adds a comment element to a list, with all the others comments for the recipe then updates the list
      * calling the updateComments
-     * @param title     recipe name to modify
+     * @param recipe     recipe  to modify
      * @param comment   comment to add
      */
-    public void addComment(String title, Comment comment){
-        List<Comment> comments = getRecipeFromTitle(title).getComments();
-        if(comments != null)
-            comments.add(comment);
-        else {
-            comments = new ArrayList<>();
-            comments.add(comment);
-        }
-        updateComments(title, comments);
+    public void addComment(Recipe recipe, Comment comment){
+        List<Comment> comments = recipe.getComments();
+        comments.add(comment);
+        System.out.println(comments);
+        updateComments(recipe.getTitle(), comments);
     }
 }

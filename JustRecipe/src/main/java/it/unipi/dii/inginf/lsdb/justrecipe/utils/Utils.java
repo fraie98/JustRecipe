@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jdk.management.jfr.RecordingInfo;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import javax.xml.XMLConstants;
@@ -246,13 +247,13 @@ public class Utils {
      * @param vBox      VBox in which I have to show the comments
      * @param comments  Comments to show
      */
-    public static void showComments(VBox vBox, List<Comment> comments, String recipeTitle) {
+    public static void showComments(VBox vBox, List<Comment> comments, Recipe recipe) {
         Iterator<Comment> iterator = comments.iterator();
         vBox.setSpacing(20);
         while (iterator.hasNext())
         {
             Comment comment = iterator.next();
-            Pane commentPane = loadComment(comment, recipeTitle);
+            Pane commentPane = loadComment(comment, recipe);
             vBox.getChildren().add(commentPane);
         }
     }
@@ -262,8 +263,8 @@ public class Utils {
      * @param pane      Pane in which I have to show the comments
      * @param comment  Comments to show
      */
-    public static void showComment(Pane pane, Comment comment, String recipeName){
-        Pane commentPane = loadComment(comment, recipeName);
+    public static void showComment(Pane pane, Comment comment, Recipe recipe){
+        Pane commentPane = loadComment(comment, recipe);
         pane.getChildren().add(commentPane);
     }
 
@@ -272,7 +273,7 @@ public class Utils {
      * @param comment   Comment to show
      * @return          The pane in which I have showed the comment
      */
-    private static Pane loadComment (Comment comment, String recipeName)
+    private static Pane loadComment (Comment comment, Recipe recipe)
     {
         Pane pane = null;
         try {
@@ -280,7 +281,7 @@ public class Utils {
             pane = (Pane) loader.load();
             CommentController commentController =
                     (CommentController) loader.getController();
-            commentController.setComment(comment, recipeName);
+            commentController.setComment(comment, recipe);
 //            commentController.setRecipeName(recipeName);                                                              //DEBUG
         } catch (IOException e) {
             e.printStackTrace();

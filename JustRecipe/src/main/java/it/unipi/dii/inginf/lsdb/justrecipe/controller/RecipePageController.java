@@ -1,33 +1,24 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.AccessibleAction;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Controller for the page of the recipe
@@ -73,8 +64,8 @@ public class RecipePageController {
         appSession = Session.getInstance();
         neo4jDriver = Neo4jDriver.getInstance();
         mongoDBDriver = MongoDBDriver.getInstance();
-        sendButton.setOnAction(actionEvent -> handleSendButtonAction(actionEvent));
-        cancelButton.setOnAction(actionEvent -> handleCancelButtonAction(actionEvent));
+        sendButton.setOnAction(actionEvent -> handleSendButtonAction());
+        cancelButton.setOnAction(actionEvent -> handleCancelButtonAction());
         recipeLikeImg.setOnMouseClicked(mouseEvent -> handleClickOnLike());
         recipeUsername.setOnMouseClicked(mouseEvent -> handleClickOnUsername(mouseEvent));
     }
@@ -97,30 +88,21 @@ public class RecipePageController {
 
     /**
      * Function who handle the adding comments, and upload on mongoDB
-     * @param actionEvent pressing the button
      */
-    private void handleSendButtonAction(ActionEvent actionEvent){
+    private void handleSendButtonAction(){
         if(commentsArea.getText().equals("")) {
             Utils.showErrorAlert("No Comments in the CommentsArea");
             return;
         }
         Comment comment = new Comment(appSession.getLoggedUser().getUsername(), commentsArea.getText(), new Date());
-        if(recipe.getComments() != null)
-            recipe.addComments(comment);
-        else{
-            List<Comment> comments= new ArrayList<>();
-            comments.add(comment);
-            recipe.setComments(comments);
-        }
-        Utils.showComment(recipeVBox, comment, recipe.getTitle());
-        mongoDBDriver.addComment(recipe.getTitle(), comment);
+        Utils.showComment(recipeVBox, comment, recipe);
+        mongoDBDriver.addComment(recipe, comment);
     }
 
     /**
      * Cancelling the comment textArea by clicking on the cancel Button
-     * @param actionEvent pressing the button
      */
-    private void handleCancelButtonAction(ActionEvent actionEvent){
+    private void handleCancelButtonAction(){
         if(!commentsArea.getText().equals("")) commentsArea.setText("");
     }
 
@@ -157,7 +139,7 @@ public class RecipePageController {
             Label commentsTitle = new Label("Comments:");
             commentsTitle.setFont(Font.font(24));
             recipeVBox.getChildren().add(commentsTitle);
-            Utils.showComments(recipeVBox, recipe.getComments(), recipe.getTitle());
+            Utils.showComments(recipeVBox, recipe.getComments(), recipe);
         }
 
         if(appSession.getLoggedUser().getRole()!=2 && !appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
