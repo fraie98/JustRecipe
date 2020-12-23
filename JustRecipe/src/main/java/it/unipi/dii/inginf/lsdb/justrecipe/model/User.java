@@ -112,8 +112,5 @@ public class User {
         this.numRecipes = numRecipes;
     }
 
-    public void setRole(int role) {
-        this.role = role;
-    }
 }
 

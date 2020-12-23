@@ -346,6 +346,51 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
+     * Elect moderator the given user
+     * @param username
+     */
+    public void electModerator(String username)
+    {
+        changeRole(username,1);
+    }
+
+    /**
+     * Elect admin the given user
+     * @param username
+     */
+    public void electAdmin(String username)
+    {
+        changeRole(username,2);
+    }
+
+    /**
+     * Downgrade to normal user of the given user
+     * @param username
+     */
+    public void downgradeToNormalUser(String username)
+    {
+        changeRole(username,0);
+    }
+
+    /**
+     * Change the role of the user given the username
+     * @param username  username of the target user
+     * @param newRole  new role
+     */
+    private void changeRole(String username, int newRole)
+    {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Boolean>) tx -> {
+                tx.run("MATCH (u:User{username:$u} SET u.role = $r", parameters("u", username, "r", newRole));
+                return true;
+            } );
+        }
+    }
+
+
+
+    /**
      * It deletes the user with the given username
      * @param username username of the user that I want to delete
      */
