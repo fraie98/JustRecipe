@@ -1,14 +1,14 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  22 DEC 2020 10:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2020.12.23)  23 DEC 2020 18:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **"JustRecipe Doc.tex"
 (./JustRecipe Doc.tex
-LaTeX2e <2020-02-02> patch level 2
-L3 programming layer <2020-02-14>
-(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-06-03>
+(/usr/share/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2019/12/20 v1.4l Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+(/usr/share/texmf-dist/tex/latex/base/size10.clo
 File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 )
 \c@part=\count167
@@ -24,51 +24,49 @@ File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen134
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+(/usr/share/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/share/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks14
-\inpenc@posthook=\toks15
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 )
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/02/14 3.40 The Babel package
+(/usr/share/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2020/05/13 3.44 The Babel package
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
-File: switch.def 2020/02/14 3.40 Babel switching mechanism
-)
-(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
-Language: english 2017/06/06 v3.3r English support from the babel system
-
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/02/14 3.40 Babel common definitions
+(/usr/share/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2020/05/13 3.44 Babel common definitions
 \babel@savecnt=\count176
 \U@D=\dimen135
+\l@babelnohyphens=\language86
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+(/usr/share/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count177
 )
+\bbl@dirlevel=\count177
+
+(/usr/share/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: \l@canadian = using hyphenrules for english
 (babel)             (\language0) on input line 102.
 Package babel Info: \l@australian = using hyphenrules for ukenglish
-(babel)             (\language8) on input line 105.
+(babel)             (\language21) on input line 105.
 Package babel Info: \l@newzealand = using hyphenrules for ukenglish
-(babel)             (\language8) on input line 108.
+(babel)             (\language21) on input line 108.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/share/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 )
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/share/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2019/11/07 v1.0c TeX engine tests
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
 \Gm@cnth=\count178
 \Gm@cntv=\count179
@@ -81,36 +79,36 @@ Package: iftex 2019/11/07 v1.0c TeX engine tests
 \Gm@layoutheight=\dimen141
 \Gm@layouthoffset=\dimen142
 \Gm@layoutvoffset=\dimen143
-\Gm@dimlist=\toks17
+\Gm@dimlist=\toks18
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/share/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen144
 \Gin@req@width=\dimen145
 )
-(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+(/usr/share/texmf-dist/tex/latex/subfig/subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+(/usr/share/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/05/10 v3.4j Customizing captions (AR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+(/usr/share/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/05/10 v1.11 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
 \captionmargin=\dimen146
 \captionmargin@=\dimen147
@@ -138,64 +136,43 @@ Package caption Info: Standard document class detected.
 \sf@top=\skip52
 \sf@bottom=\skip53
 )
-(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
-(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-02-14 L3 programming layer (loader) 
-
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count190
-\l__pdf_internal_box=\box45
-))
-(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2020-02-14 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count191
-\g__xparse_grabber_int=\count192
-\l__xparse_m_args_int=\count193
-\l__xparse_v_nesting_int=\count194
-)
-Package: lipsum 2019/01/02 v2.2 150 paragraphs of Lorem Ipsum dummy text
-
-(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
-File: lipsum.ltd.tex 2019/01/02 v2.2 The Lorem ipsum dummy text
-))
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+(/usr/share/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count195
-\lst@gtempboxa=\box46
-\lst@token=\toks18
-\lst@length=\count196
+(/usr/share/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count190
+\lst@gtempboxa=\box45
+\lst@token=\toks19
+\lst@length=\count191
 \lst@currlwidth=\dimen154
-\lst@column=\count197
-\lst@pos=\count198
+\lst@column=\count192
+\lst@pos=\count193
 \lst@lostspace=\dimen155
 \lst@width=\dimen156
-\lst@newlines=\count199
-\lst@lineno=\count266
+\lst@newlines=\count194
+\lst@lineno=\count195
 \lst@maxwidth=\dimen157
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-\c@lstnumber=\count267
-\lst@skipnumbers=\count268
-\lst@framebox=\box47
+(/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count196
+\lst@skipnumbers=\count197
+\lst@framebox=\box46
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2019/09/10 1.8c listings configuration
+(/usr/share/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
-Package: listings 2019/09/10 1.8c (Carsten Heinz)
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
 
-(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -210,18 +187,21 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
+(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
+(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+(/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+)
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-06-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count198
+\l__pdf_internal_box=\box47
 )
 (./JustRecipe Doc.aux)
-\openout1 = `"JustRecipe Doc.aux"'.
-
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
 LaTeX Font Info:    ... okay on input line 73.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
@@ -244,17 +224,16 @@ LaTeX Font Info:    ... okay on input line 73.
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* bindingoffset: 14.22636pt
-* modes: heightrounded 
-* h-part:(L,W,R)=(85.35826pt, 412.56499pt, 85.35826pt)
-* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* modes: 
+* h-part:(L,W,R)=(89.62709pt, 418.25368pt, 89.6271pt)
+* v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=412.56499pt
-* \textheight=706.0pt
-* \oddsidemargin=27.31464pt
-* \evensidemargin=13.08827pt
-* \topmargin=-38.1381pt
+* \textwidth=418.25368pt
+* \textheight=591.5302pt
+* \oddsidemargin=17.3571pt
+* \evensidemargin=17.3571pt
+* \topmargin=-7.86334pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -272,25 +251,25 @@ LaTeX Font Info:    ... okay on input line 73.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count269
+\scratchcounter=\count199
 \scratchdimen=\dimen158
 \scratchbox=\box48
-\nofMPsegments=\count270
-\nofMParguments=\count271
-\everyMPshowfont=\toks19
-\MPscratchCnt=\count272
+\nofMPsegments=\count266
+\nofMParguments=\count267
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count268
 \MPscratchDim=\dimen159
-\MPnumerator=\count273
-\makeMPintoPDFobject=\count274
-\everyMPtoPDFconversion=\toks20
-) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+\MPnumerator=\count269
+\makeMPintoPDFobject=\count270
+\everyMPtoPDFconversion=\toks21
+) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
@@ -298,25 +277,22 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count275
+\c@lstlisting=\count271
 <img/unipi.png, id=1, 1204.5pt x 1229.59375pt>
 File: img/unipi.png Graphic file (type png)
 <use img/unipi.png>
 Package pdftex.def Info: img/unipi.png  used on input line 78.
-(pdftex.def)             Requested size: 185.65298pt x 189.51563pt.
+(pdftex.def)             Requested size: 188.21288pt x 192.12355pt.
+ [1
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/unipi.png>]
-(./JustRecipe Doc.toc
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/unipi.png>] (./JustR
+ecipe Doc.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
 )
 \tf@toc=\write3
-\openout3 = `"JustRecipe Doc.toc"'.
-
  [1
 
 ] [2
@@ -329,72 +305,73 @@ Chapter 1.
 Chapter 2.
 [4
 
-]
-<img/UseCaseDiagram.png, id=32, 1138.2525pt x 1116.17pt>
+] [5]
+<img/UseCaseDiagram.png, id=35, 1138.2525pt x 1116.17pt>
 File: img/UseCaseDiagram.png Graphic file (type png)
 <use img/UseCaseDiagram.png>
 Package pdftex.def Info: img/UseCaseDiagram.png  used on input line 239.
 (pdftex.def)             Requested size: 478.0628pt x 468.78821pt.
 
-Overfull \hbox (65.49782pt too wide) in paragraph at lines 239--240
+Overfull \hbox (59.80913pt too wide) in paragraph at lines 239--240
  [][] 
  []
 
-[5] [6 <./img/UseCaseDiagram.png>]
-<img/ClassDiagram_generaliz.png, id=41, 734.745pt x 421.575pt>
+<img/ClassDiagram_generaliz.png, id=36, 734.745pt x 421.575pt>
 File: img/ClassDiagram_generaliz.png Graphic file (type png)
 <use img/ClassDiagram_generaliz.png>
 Package pdftex.def Info: img/ClassDiagram_generaliz.png  used on input line 265
 .
 (pdftex.def)             Requested size: 367.3716pt x 210.78697pt.
-<img/ClassDiagram.png, id=42, 667.49374pt x 421.575pt>
+<img/ClassDiagram.png, id=37, 667.49374pt x 421.575pt>
 File: img/ClassDiagram.png Graphic file (type png)
 <use img/ClassDiagram.png>
 Package pdftex.def Info: img/ClassDiagram.png  used on input line 273.
 (pdftex.def)             Requested size: 333.74606pt x 210.78697pt.
- [7 <./img/ClassDiagram_generaliz.png> <./img/ClassDiagram.png>]
+[6] [7 <./img/UseCaseDiagram.png>] [8 <./img/ClassDiagram_generaliz.png> <./img
+/ClassDiagram.png>]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
 81.
- (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+ (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-[8] [9]
+) [9]
+[10]
 Chapter 3.
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-) [10
+[11
 
-] [11]
-[12] [13] [14]
+] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+) [12] [13] [14]
+[15] [16] [17] [18]
 Chapter 4.
-[15
+[19
 
 ] (./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 6903 strings out of 481239
- 106276 string characters out of 5920376
- 743319 words of memory out of 5000000
- 22100 multiletter control sequences out of 15000+600000
+ 6511 strings out of 480478
+ 92849 string characters out of 5905958
+ 632904 words of memory out of 5000000
+ 22482 multiletter control sequences out of 15000+600000
  544390 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,7n,60p,608b,1643s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t
-1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/t
-ype1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super
-/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/
-share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/ty
-pe1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/
-sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/s
-hare/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/typ
-e1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
-fti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.pfb></usr/sh
-are/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on "JustRecipe Doc.pdf" (16 pages, 664893 bytes).
+ 47i,7n,60p,608b,1718s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-su
+per-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</u
+sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
+uper/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.p
+fb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/
+texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf-dist/font
+s/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/
+cm-super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm10
+00.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfti1728.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sftt1000.pfb>
+Output written on "JustRecipe Doc.pdf" (20 pages, 669364 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 138 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

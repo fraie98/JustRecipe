@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{lipsum}
- }\geometry{a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=3cm,%
+\geometry{a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=3cm,%
 	heightrounded,bindingoffset=5mm}
 
 \usepackage{color}
@@ -351,39 +351,14 @@ In the following section will be presented the most relevant query performed wit
 
 \subsection{MongoDB}
 
-\subsubsection{Recipes of the user}
+\subsubsection{Recipes of the user X - Campilongo }
 
-This query gives the opportunity to collect all the recipes written by a specific User through checking the author username field. This search is case sensitive cause we are using the username.
-\begin{itemize}
-	\item Input: a string who rapresent an username (unique through the users), how many recipe to skip, and how many to get.
-	\item Output: a list of recipes, all added by the user erlier selected, ordered by the .
-\end{itemize}
+prova
 \lstset{ language=C++}
 \begin{lstlisting}
-db.recipes.aggregate (
-	[
-		{ 
-			$match : 
-			{ 
-				authorUsername: <authorUsername>
-			}  
-		},
-		{ 
-				$sort : 
-			{ 
-				creationTime : -1 
-			} 
-		},
-		{ 
-			$skip: <howManyToSkip> 
-		},
-		{ 
-			$limit: <howManyToGet> 
-		}	
-		]
-)
+db.recipe.find({"title":"Pasta"});
 \end{lstlisting}
-\subsubsection{Search for recipe title}
+\subsubsection{Search for recipe title X}
 Given a portion of the title, this query is capable of returning as a result a set of recipes whose titles contain it. Research must be case insensitive (see \emph{options:"i"} in the regexMatch step of the aggregation)
 \begin{itemize}
 \item Input: portion of the title, how many recipes to skip and how many recipes to get.
@@ -456,42 +431,7 @@ db.recipes.aggregate (
 )
 \end{lstlisting}
 
-\subsubsection{Search for recipe ingredients}
-This query give the possibility to find a specific number of recipes given some of the recipe ingredients. The search is case insensitive for a more easy to use experience.
-\begin{itemize}
-	\item Input: a list of ingredients, how many recipes to skip and how many recipe to show.
-	\item Output: a list of recipes, all of them have at least all the ingredients spicified before. The results are ordered from the newer to the older recipe.
-\end{itemize}
-
-\lstset{ language=java}
-\begin{lstlisting}
-	db.recipes.aggregate (
-	[
-	{ 
-		$match : 
-		{ 
-			ingredients: 
-			{
-				$regex: /^.*<ingredients>.*$/,
-				$options: "i"
-			} 
-		}  
-	},
-	{ 
-		$sort : 
-		{ 
-			creationTime : -1 
-		} 
-	},
-	{ 
-		$skip: <howManyToSkip> 
-	},
-	{ 
-		$limit: <howManyToGet> 
-	}	
-	]
- )
-\end{lstlisting} 
+\subsubsection{Search for recipe ingredients X -  Campilongo }
 \subsubsection{Most common recipe categories}
 This query allows you to get a ranking of the categories most used by users for their recipes.
 \begin{itemize}
@@ -589,18 +529,12 @@ We have three levels of suggestions with different relevance.
 	
 \end{itemize}
 
-\subsubsection{Recipes of following users}
-This query returns all the recipes of the following users of a specific user.
-\begin{itemize}
-	\item Input: How many recipe name to skip, how many recipe name to show and a string who represents a specific username.
-	\item Output: A set of recipe name of the specific user's following users have added.
-\end{itemize}
+\subsubsection{Recipes of following users X - Campilongo }
 \lstset{ language=java}
 \begin{lstlisting}
-	MATCH (u1:User{username:$username})-[:FOLLOWS]->(u2:User)-[a:ADDS]->(r:Recipe)
-	RETURN r.title AS title, r.calories AS calories, r.fat AS fat, r.protein AS protein, r.carbs AS carbs, r.picture AS picture, u2.username AS authorUsername 
-	ORDER BY a.when DESC SKIP $skip LIMIT $limit
-\end{lstlisting}
+	MATCH (n:User)
+	RETURN n;
+\end{lstlisting}  
 \subsubsection{Most followed and active users}
 \subsubsection{Top Commentators}
 \subsubsection{Most liked users}
