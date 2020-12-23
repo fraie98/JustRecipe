@@ -113,6 +113,12 @@ public class DiscoveryPageController {
                 Utils.addRecipesSnap(discoveryVBox, recipes);
             }
         }
+        else if (String.valueOf(searchComboBox.getValue()).equals("Best recipes"))
+        {
+            List<Recipe> recipes = neo4jDriver.searchBestRecipes(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page,
+                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
+            Utils.addRecipesSnap(discoveryVBox, recipes);
+        }
         else if (String.valueOf(searchComboBox.getValue()).equals("User username"))
         {
             List<User> users = neo4jDriver.searchUserByUsername(HOW_MANY_USER_SNAPSHOT_TO_SHOW*page,
@@ -128,10 +134,9 @@ public class DiscoveryPageController {
         // For the moderator
         else if (String.valueOf(searchComboBox.getValue()).equals("Last comments"))
         {
-            List<Comment> comments = mongoDBDriver.searchAllComments(
+            List<List<Object>> objects = mongoDBDriver.searchAllComments(
                     HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
-            Utils.showComments(discoveryVBox, comments, new Recipe());
-            //new String where should be recipeName,which here is useless o point out the correct recipe name
+            Utils.showAllComments(discoveryVBox, objects);
         }
     }
 

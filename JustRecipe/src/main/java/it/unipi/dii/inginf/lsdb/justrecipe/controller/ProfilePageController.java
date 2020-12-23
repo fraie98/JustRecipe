@@ -52,12 +52,20 @@ public class ProfilePageController {
 
     /**
      * Set the profile page for the user U
-     * @param u  User who owns the profile page
+     * @param user  User who owns the profile page
      */
-    public void setProfile(User u)
+    public void setProfile(User user)
     {
-        userName.setText(u.getUsername());
+        userName.setText(user.getUsername());
 
+        if(user.getUsername().equals(appSession.getLoggedUser().getUsername()))
+        {
+            // Update Forced
+            user = neo4jDriver.getUserByUsername(appSession.getLoggedUser().getUsername());
+            appSession.updateLoggedUserInfo(user);
+        }
+
+        final User u = user;
         if(u.getPicture()!=null)
             profileImg.setImage(new Image(u.getPicture()));
 

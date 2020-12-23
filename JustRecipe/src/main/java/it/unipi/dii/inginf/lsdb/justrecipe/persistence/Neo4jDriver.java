@@ -346,6 +346,51 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
+     * Elect moderator the given user
+     * @param username
+     */
+    public void electModerator(String username)
+    {
+        changeRole(username,1);
+    }
+
+    /**
+     * Elect admin the given user
+     * @param username
+     */
+    public void electAdmin(String username)
+    {
+        changeRole(username,2);
+    }
+
+    /**
+     * Downgrade to normal user of the given user
+     * @param username
+     */
+    public void downgradeToNormalUser(String username)
+    {
+        changeRole(username,0);
+    }
+
+    /**
+     * Change the role of the user given the username
+     * @param username  username of the target user
+     * @param newRole  new role
+     */
+    private void changeRole(String username, int newRole)
+    {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Boolean>) tx -> {
+                tx.run("MATCH (u:User{username:$u} SET u.role = $r", parameters("u", username, "r", newRole));
+                return true;
+            } );
+        }
+    }
+
+
+
+    /**
      * It deletes the user with the given username
      * @param username username of the user that I want to delete
      */
@@ -515,6 +560,61 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
+     * This function is used to obtain the best recipes (most liked ones)
+     * @param howManySkip   How many to skip
+     * @param howMany       How many to obtain
+     * @return              List of the best recipes
+     */
+    public List<Recipe> searchBestRecipes (int howManySkip, int howMany)
+    {
+        List<Recipe> recipes = new ArrayList<>();
+        try(Session session = driver.session()) {
+            session.readTransaction(tx -> {
+                // In this query we first match the pattern (:User)--[:LIKES]->(:Recipe)
+                // because we avoid to consider the recipes which have not at least one like
+                // The second match is used to find the user that adds the recipe, for the authorUsername field
+                Result result = tx.run("MATCH (:User)-[l:LIKES]->(r:Recipe) " +
+                                            "MATCH (u:User)-[:ADDS]->(r) " +
+                                            "RETURN r.title AS title, r.calories AS calories, r.fat AS fat, " +
+                                            "r.protein AS protein, r.carbs AS carbs, r.picture AS picture, " +
+                                            "u.username AS authorUsername, " +
+                                            "COUNT(l) AS likes " +
+                                            "ORDER BY likes DESC " +
+                                            "SKIP $skip LIMIT $limit",
+                        parameters( "skip", howManySkip, "limit", howMany));
+
+                while(result.hasNext()){
+                    Record r = result.next();
+                    String title = r.get("title").asString();
+                    int calories = 0;
+                    int protein = 0;
+                    int fat = 0;
+                    int carbs = 0;
+                    String picture = null;
+                    String authorUsername = r.get("authorUsername").asString();
+                    if(r.get("calories") != NULL)
+                        calories = r.get("calories").asInt();
+                    if(r.get("Fat") != NULL)
+                        fat = r.get("fat").asInt();
+                    if(r.get("protein") != NULL)
+                        protein = r.get("protein").asInt();
+                    if(r.get("carbs") != NULL)
+                        carbs = r.get("carbs").asInt();
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    Recipe recipe = new Recipe(title, fat, calories, protein, carbs, picture);
+                    recipe.setAuthorUsername(authorUsername);
+                    recipes.add(recipe);
+                }
+                return null;
+            });
+        }
+        return recipes;
+    }
+
+    /**
      * Function that returns a list of the users that contains in their username the word passed
      * @param howManySkip           How many to skip
      * @param howMany               How many to return
@@ -609,6 +709,43 @@ public class Neo4jDriver implements DatabaseDriver{
         }
         return users;
     }
+
+    /**
+     * Find the users of the application
+     * @param howManyToSkip
+     * @param howManyToGet
+     * @return  The List of the users
+     */
+    public List<User> searchAllUsers(int howManyToSkip, int howManyToGet)
+    {
+        List<User> users = new ArrayList<>();
+
+        try(Session session = driver.session())
+        {
+            users = session.readTransaction((TransactionWork<List<User>>)  tx -> {
+                Result r = tx.run("MATCH (u:User) " +
+                        "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
+                        "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
+                        "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +
+                        "RETURN u.firstName, u.lastName, u.username, COUNT(DISTINCT f1) AS follower, " +
+                        "COUNT(DISTINCT f2) AS following, COUNT(DISTINCT a) AS added " +
+                        "SKIP $howManyToSkip LIMIT $howManyToGet",
+                        parameters("howManyToSkip", howManyToSkip, "howManyToGet", howManyToGet));
+                List<User> listOfUsers = new ArrayList<>();
+                while(r.hasNext())
+                {
+                    Record rec = r.next();
+                    listOfUsers.add(new User(
+                            rec.get(0).asString(), rec.get(1).asString(), rec.get(2).asString(),
+                            rec.get("follower").asInt(), rec.get("following").asInt(),rec.get("added").asInt())
+                    );
+                }
+                return listOfUsers;
+            });
+        }
+        return users;
+    }
+
 
     /**
      * Function that returns all the info about an User, given the username

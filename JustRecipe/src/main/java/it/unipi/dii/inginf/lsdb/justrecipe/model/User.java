@@ -33,6 +33,14 @@ public class User {
         this(firstName, lastName, null, username, null, 0);
     }
 
+    public User(String firstName, String lastName, String username, int follower, int following, int added)
+    {
+        this(firstName,lastName,username);
+        this.follower = follower;
+        this.following = following;
+        this.numRecipes = added;
+    }
+
 
     //Getters
     public String getFirstName() {
@@ -104,8 +112,5 @@ public class User {
         this.numRecipes = numRecipes;
     }
 
-    public void setRole(int role) {
-        this.role = role;
-    }
 }
 

@@ -15,6 +15,7 @@ public class Session {
     public static void setLoggedUser(User loggedUser) {
         instance.loggedUser = loggedUser;
     }
+    public void updateLoggedUserInfo(User u) {instance.loggedUser = u;}
     public User getLoggedUser() {
         return loggedUser;
     }

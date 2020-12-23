@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import jdk.management.jfr.RecordingInfo;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import javax.xml.XMLConstants;
@@ -243,16 +242,35 @@ public class Utils {
     }
 
     /**
-     * Function used to show the comments
+     * Function used to show the comments of a recipe
      * @param vBox      VBox in which I have to show the comments
      * @param comments  Comments to show
+     * @param recipe    Recipe of the comments
      */
-    public static void showComments(VBox vBox, List<Comment> comments, Recipe recipe) {
+    public static void showCommentsOfRecipe(VBox vBox, List<Comment> comments, Recipe recipe) {
         Iterator<Comment> iterator = comments.iterator();
         vBox.setSpacing(20);
         while (iterator.hasNext())
         {
             Comment comment = iterator.next();
+            Pane commentPane = loadComment(comment, recipe);
+            vBox.getChildren().add(commentPane);
+        }
+    }
+
+    /**
+     * Function used for the feature of showing all comments in the administration page
+     * @param vBox                          VBox in which i have to show those recipes
+     * @param commentsAndRecipesList        List of complex object formed by a Comment and the Recipe which it is related on
+     */
+    public static void showAllComments(VBox vBox, List<List<Object>> commentsAndRecipesList) {
+        Iterator<List<Object>> iterator = commentsAndRecipesList.iterator();
+        vBox.setSpacing(20);
+        while (iterator.hasNext())
+        {
+            List<Object> objects = iterator.next();
+            Comment comment = (Comment) objects.get(0);
+            Recipe recipe = (Recipe) objects.get(1);
             Pane commentPane = loadComment(comment, recipe);
             vBox.getChildren().add(commentPane);
         }

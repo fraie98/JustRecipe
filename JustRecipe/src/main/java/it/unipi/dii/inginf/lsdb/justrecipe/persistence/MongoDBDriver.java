@@ -18,6 +18,8 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
+
+import javax.print.Doc;
 import java.lang.reflect.Type;
 import java.util.*;
 import java.util.function.Consumer;
@@ -270,6 +272,27 @@ public class MongoDBDriver implements DatabaseDriver{
     }
 
     /**
+     * Give the recipes in the db in the interval [howManyToSkip, howManyToGet+howManyToSkip]
+     * @param howManyToSkip
+     * @param howManyToGet
+     * @return  The list of recipes
+     */
+    public List<Recipe> searchAllRecipes(int howManyToSkip, int howManyToGet)
+    {
+        List<Recipe> listOfRecipes = new ArrayList<>();
+        Bson sort = sort(descending("creationTime"));
+        Bson skip = skip(howManyToSkip);
+        Bson limit = limit(howManyToGet);
+        Bson proj = project(fields(excludeId(), include("title","instructions","ingredients","creationTime","authorUsername")));
+        List<Document> results = (List<Document>) collection.aggregate(Arrays.asList(sort,skip,limit,proj)).into(new ArrayList());
+
+        Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
+        Gson gson = new Gson();
+        listOfRecipes = gson.fromJson(gson.toJson(results), recipeListType);
+        return listOfRecipes;
+    }
+
+    /**
      * Function that returns "howMany" recipes of one category
      * @param category      The category to consider
      * @param howMany       How many recipes to return
@@ -290,15 +313,14 @@ public class MongoDBDriver implements DatabaseDriver{
     }
 
     /**
-     * Function for searching all the comments, ordered by the creationTime (first the last)
-     * The list will be useful for the moderators
-     * @param howManySkip   How many to skip
-     * @param howMany       How many comments we want obtain
-     * @return              The list of the comments
+     * Function that returns a list of lists, each one composed by two object, the comment and the recipe which it is related on
+     * @param howManySkip       How many comments to skip
+     * @param howMany           How many comments to get
+     * @return                  List of lists of object
      */
-    public List<Comment> searchAllComments (int howManySkip, int howMany)
+    public List<List<Object>> searchAllComments (int howManySkip, int howMany)
     {
-        List<Comment> comments = new ArrayList<>();
+        List<List<Object>> objects = new ArrayList<>();
         Gson gson = new Gson();
         Bson unwind = unwind("$comments");
         Bson sort = sort(descending("creationTime"));
@@ -308,11 +330,19 @@ public class MongoDBDriver implements DatabaseDriver{
                 collection.aggregate(Arrays.asList(unwind, sort, skip, limit)).iterator();
         while (iterator.hasNext())
         {
-            Document document = (Document) iterator.next().get("comments");
-            Comment comment = gson.fromJson(gson.toJson(document), Comment.class);
-            comments.add(comment);
+            Document document = iterator.next();
+            Document commentDocument = (Document) document.get("comments");
+            Comment comment = gson.fromJson(gson.toJson(commentDocument), Comment.class);
+            // I need to re-obtain the full recipe
+            Recipe recipe = getRecipeFromTitle(document.getString("title"));
+
+            List<Object> objectList = new ArrayList<>();
+            objectList.add(comment);
+            objectList.add(recipe);
+
+            objects.add(objectList);
         }
-        return comments;
+        return objects;
     }
 
     /**
@@ -376,6 +406,8 @@ public class MongoDBDriver implements DatabaseDriver{
      * @param comment   comment to add
      */
     public void addComment(Recipe recipe, Comment comment){
+        if (recipe.getComments() == null)
+            recipe.setComments(new ArrayList<>());
         List<Comment> comments = recipe.getComments();
         comments.add(comment);
         updateComments(recipe.getTitle(), comments);
