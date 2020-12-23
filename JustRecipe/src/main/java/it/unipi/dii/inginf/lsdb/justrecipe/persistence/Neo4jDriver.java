@@ -666,6 +666,43 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
+     * Find the users of the application
+     * @param howManyToSkip
+     * @param howManyToGet
+     * @return  The List of the users
+     */
+    public List<User> searchAllUsers(int howManyToSkip, int howManyToGet)
+    {
+        List<User> users = new ArrayList<>();
+
+        try(Session session = driver.session())
+        {
+            users = session.readTransaction((TransactionWork<List<User>>)  tx -> {
+                Result r = tx.run("MATCH (u:User) " +
+                        "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
+                        "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
+                        "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +
+                        "RETURN u.firstName, u.lastName, u.username, COUNT(DISTINCT f1) AS follower, " +
+                        "COUNT(DISTINCT f2) AS following, COUNT(DISTINCT a) AS added " +
+                        "SKIP $howManyToSkip LIMIT $howManyToGet",
+                        parameters("howManyToSkip", howManyToSkip, "howManyToGet", howManyToGet));
+                List<User> listOfUsers = new ArrayList<>();
+                while(r.hasNext())
+                {
+                    Record rec = r.next();
+                    listOfUsers.add(new User(
+                            rec.get(0).asString(), rec.get(1).asString(), rec.get(2).asString(),
+                            rec.get("follower").asInt(), rec.get("following").asInt(),rec.get("added").asInt())
+                    );
+                }
+                return listOfUsers;
+            });
+        }
+        return users;
+    }
+
+
+    /**
      * Function that returns all the info about an User, given the username
      * @param username      Username of the user
      * @return              User instance

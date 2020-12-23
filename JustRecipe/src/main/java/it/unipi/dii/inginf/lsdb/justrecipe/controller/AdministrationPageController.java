@@ -129,7 +129,9 @@ public class AdministrationPageController {
      */
     private void clickOnAllUsers()
     {
-
+        Utils.removeAllFromPane(adminPageBox);
+        List<User> allUsers = neo4jDriver.searchAllUsers(HOW_MANY_USER_SNAPSHOT_TO_SHOW*page, HOW_MANY_USER_SNAPSHOT_TO_SHOW);
+        Utils.addUsersSnap(adminPageBox, allUsers);
     }
 
     /**
@@ -138,6 +140,10 @@ public class AdministrationPageController {
     private void clickOnAllRecipes()
     {
 
+        Utils.removeAllFromPane(adminPageBox);
+        List<Recipe> allRecipes = mongoDBDriver.searchAllRecipes(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
+        Utils.addRecipesSnap(adminPageBox, allRecipes);
+
     }
 
     /**
@@ -145,6 +151,8 @@ public class AdministrationPageController {
      */
     private void clickOnAllComments()
     {
+
+        Utils.removeAllFromPane(adminPageBox);
         List<List<Object>> objects = mongoDBDriver.searchAllComments(
                 HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
         Utils.showAllComments(adminPageBox, objects);

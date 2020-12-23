@@ -272,6 +272,27 @@ public class MongoDBDriver implements DatabaseDriver{
     }
 
     /**
+     * Give the recipes in the db in the interval [howManyToSkip, howManyToGet+howManyToSkip]
+     * @param howManyToSkip
+     * @param howManyToGet
+     * @return  The list of recipes
+     */
+    public List<Recipe> searchAllRecipes(int howManyToSkip, int howManyToGet)
+    {
+        List<Recipe> listOfRecipes = new ArrayList<>();
+        Bson sort = sort(descending("creationTime"));
+        Bson skip = skip(howManyToSkip);
+        Bson limit = limit(howManyToGet);
+        Bson proj = project(fields(excludeId(), include("title","instructions","ingredients","creationTime","authorUsername")));
+        List<Document> results = (List<Document>) collection.aggregate(Arrays.asList(sort,skip,limit,proj)).into(new ArrayList());
+
+        Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
+        Gson gson = new Gson();
+        listOfRecipes = gson.fromJson(gson.toJson(results), recipeListType);
+        return listOfRecipes;
+    }
+
+    /**
      * Function that returns "howMany" recipes of one category
      * @param category      The category to consider
      * @param howMany       How many recipes to return
