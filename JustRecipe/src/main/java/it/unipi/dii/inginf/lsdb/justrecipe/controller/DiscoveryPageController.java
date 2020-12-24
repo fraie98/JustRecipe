@@ -58,13 +58,13 @@ public class DiscoveryPageController {
                         "Recipe category",
                         "Recipe ingredients",
                         "Most common recipe categories",
+                        "Recipes with below average calories",
                         "Best recipes",
                         "User username",
                         "User full name",
-                        "Most followed and active user",
+                        "Most followed and active users",
                         "Top Commentators",
-                        "Most liked user",
-                        "Last comments" // To show only if the user is a moderator
+                        "Most liked users"
                 );
         searchComboBox.setItems(options);
         // if some changes happens to the combobox
@@ -131,12 +131,19 @@ public class DiscoveryPageController {
                     HOW_MANY_USER_SNAPSHOT_TO_SHOW, searchBarTextField.getText());
             Utils.addUsersSnap(discoveryVBox, users);
         }
-        // For the moderator
-        else if (String.valueOf(searchComboBox.getValue()).equals("Last comments"))
+        else if (String.valueOf(searchComboBox.getValue()).equals("Most followed and active users"))
         {
-            List<List<Object>> objects = mongoDBDriver.searchAllComments(
-                    HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
-            Utils.showAllComments(discoveryVBox, objects);
+            List<User> users = neo4jDriver.searchMostFollowedAndActiveUsers(
+                    HOW_MANY_USER_SNAPSHOT_TO_SHOW*page,
+                    HOW_MANY_USER_SNAPSHOT_TO_SHOW);
+            Utils.addUsersSnap(discoveryVBox, users);
+        }
+        else if (String.valueOf(searchComboBox.getValue()).equals("Most liked users"))
+        {
+            List<User> users = neo4jDriver.searchMostLikedUsers(
+                    HOW_MANY_USER_SNAPSHOT_TO_SHOW*page,
+                    HOW_MANY_USER_SNAPSHOT_TO_SHOW);
+            Utils.addUsersSnap(discoveryVBox, users);
         }
     }
 

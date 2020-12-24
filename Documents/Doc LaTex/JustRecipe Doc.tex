@@ -7,7 +7,7 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{lipsum}
- }\geometry{a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=3cm,%
+ \geometry{a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=3cm,%
 	heightrounded,bindingoffset=5mm}
 
 \usepackage{color}
@@ -82,7 +82,7 @@
 		\HRule \\[0.4cm]
 		{ \LARGE 
 			\textbf{JustRecipe}\\[0.4cm]
-			\emph{Group Project for Large Scale and Multi-Strutured Databases}\\[0.4cm]
+			\emph{Group Project for Large Scale and Multi-Structured Databases}\\[0.4cm]
 		}
 		\HRule \\[1.5cm]
 		
@@ -539,6 +539,8 @@ db.recipes.aggregate (
 )
 \end{lstlisting}
 
+\subsubsection{Recipes with below average calories - TO DO}
+
 \subsubsection{Last Comments}
 The query returns the last comments sorted for creation time, in order to have the most recent as first and the most old as last.
 
@@ -571,7 +573,7 @@ db.recipes.aggregate (
 
 \subsection{Neo4J}
 \emph{Tabella con dominio grafo e descrizione}
-\subsubsection{Suggested Recipes}
+\subsubsection{Suggested Recipes - MANCA CODICE}
 We have three levels of suggestions with different relevance.
 \begin{itemize}
 	\item First Level
@@ -598,13 +600,79 @@ This query returns all the recipes of the following users of a specific user.
 \lstset{ language=java}
 \begin{lstlisting}
 	MATCH (u1:User{username:$username})-[:FOLLOWS]->(u2:User)-[a:ADDS]->(r:Recipe)
-	RETURN r.title AS title, r.calories AS calories, r.fat AS fat, r.protein AS protein, r.carbs AS carbs, r.picture AS picture, u2.username AS authorUsername 
-	ORDER BY a.when DESC SKIP $skip LIMIT $limit
+	RETURN r.title AS title, r.calories AS calories,
+		 r.fat AS fat, r.protein AS protein, r.carbs AS carbs,
+		 r.picture AS picture, u2.username AS authorUsername 
+	ORDER BY a.when DESC 
+	SKIP $skip LIMIT $limit
 \end{lstlisting}
 \subsubsection{Most followed and active users}
-\subsubsection{Top Commentators}
+This query returns the list of the most followed and active users, namely the influencers.
+Most followed means that the list is ordered by the number of followers.
+Active means that the list is ordered by the number of recipes added by the user.
+\begin{itemize}
+	\item Input: How many users to skip, how many users to show.
+	\item Output: A list of the most followed and active users.
+\end{itemize}
+\lstset{ language=java}
+\begin{lstlisting}
+	MATCH (u:User)
+	OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User)
+	OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User)
+	OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe)
+	RETURN u.firstName, u.lastName, u.username, 
+		u.firstName AS firstName, u.lastName AS lastName, 
+		u.picture AS picture, u.username AS username,
+		u.password AS password, u.role AS role,
+	COUNT(DISTINCT f1) AS follower,
+	COUNT(DISTINCT f2) AS following,
+	COUNT(DISTINCT a) AS numRecipes
+	ORDER BY follower DESC, numRecipes DESC
+	SKIP $howManySkip LIMIT $howMany
+\end{lstlisting}
+\subsubsection{Top Commentators - TO DO}
 \subsubsection{Most liked users}
+This query returns the list of the most liked users, namely the users who received more like to their recipes.
+\begin{itemize}
+	\item Input: How many users to skip, how many users to show.
+	\item Output: A list of the most liked users.
+\end{itemize}
+\lstset{ language=java}
+\begin{lstlisting}
+	MATCH (u:User)
+	OPTIONAL MATCH (u)-[:ADDS]->(:Recipe)<-[l:LIKES]-(:User)
+	OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User)
+	OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) 
+	OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe)
+	RETURN u.firstName, u.lastName, u.username, 
+		u.firstName AS firstName, u.lastName AS lastName, 
+		u.picture AS picture, u.username AS username, 
+		u.password AS password, u.role AS role, 
+	COUNT(DISTINCT f1) AS follower, 
+	COUNT(DISTINCT f2) AS following, 
+	COUNT(DISTINCT a) AS numRecipes, 
+	COUNT(DISTINCT l) AS totLikes 
+	ORDER BY totLikes DESC 
+	SKIP $howManySkip LIMIT $howMany
+\end{lstlisting}
 \subsubsection{Best Recipes}
+This query returns the list of the best recipes, namely the most liked ones.
+\begin{itemize}
+	\item Input: How many recipes to skip, how many recipes to show.
+	\item Output: A list of the best recipes.
+\end{itemize}
+\lstset{ language=java}
+\begin{lstlisting}
+	MATCH (:User)-[l:LIKES]->(r:Recipe)
+	MATCH (u:User)-[:ADDS]->(r)
+	RETURN r.title AS title, r.calories AS calories,
+		r.fat AS fat, r.protein AS protein, r.carbs AS carbs, 
+		r.picture AS picture, u.username AS authorUsername,
+	COUNT(DISTINCT l) AS likes 
+	ORDER BY likes DESC
+	SKIP $skip LIMIT $limit
+\end{lstlisting}
+To clarify, the first match is used to avoid to consider the recipes which have not at least one like, and the second match is used to find the user that adds the recipe.
 \subsubsection{Search for username}
 Given a portion of the username, this query is able to return all users whose usernames contain it. The search must be case insensitive, so the toLower function is used. 
 \begin{itemize}
@@ -619,11 +687,11 @@ Given a portion of the username, this query is able to return all users whose us
 	OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User)
 	OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe)
 	RETURN u.firstName AS firstName, u.lastName AS lastName, 
-	u.picture AS picture, u.username AS username, 
-	u.password AS password, u.role AS role, 
+		u.picture AS picture, u.username AS username, 
+		u.password AS password, u.role AS role, 
 	COUNT(DISTINCT f1) AS follower,
-	COUNT (DISTINCT f2) AS following, 
-	COUNT (DISTINCT a) AS numRecipes
+	COUNT(DISTINCT f2) AS following, 
+	COUNT(DISTINCT a) AS numRecipes
 	SKIP $skip LIMIT $limit
 \end{lstlisting} 
 \subsubsection{Search for user's full-name}
@@ -644,8 +712,8 @@ Given the full-name or a part of it, the query returns the users that contains i
 	 OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User)
 	 OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe)
 	 RETURN u.firstName AS firstName, u.lastName AS lastName,
-	 u.picture AS picture, u.username AS username,
-	 u.password AS password, u.role AS role,
+	 	u.picture AS picture, u.username AS username,
+	 	u.password AS password, u.role AS role,
 	 COUNT (DISTINCT f1) AS follower,
 	 COUNT (DISTINCT f2) AS following,
 	 COUNT (DISTINCT a) AS numRecipes

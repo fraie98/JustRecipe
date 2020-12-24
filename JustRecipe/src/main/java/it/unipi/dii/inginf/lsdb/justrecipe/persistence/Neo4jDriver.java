@@ -578,7 +578,7 @@ public class Neo4jDriver implements DatabaseDriver{
                                             "RETURN r.title AS title, r.calories AS calories, r.fat AS fat, " +
                                             "r.protein AS protein, r.carbs AS carbs, r.picture AS picture, " +
                                             "u.username AS authorUsername, " +
-                                            "COUNT(l) AS likes " +
+                                            "COUNT(DISTINCT l) AS likes " +
                                             "ORDER BY likes DESC " +
                                             "SKIP $skip LIMIT $limit",
                         parameters( "skip", howManySkip, "limit", howMany));
@@ -705,6 +705,110 @@ public class Neo4jDriver implements DatabaseDriver{
                     users.add(user);
                 }
                 return null;
+            });
+        }
+        return users;
+    }
+
+    /**
+     * Function that returns an ordered list of the most followed and active users
+     * Most followed -> depends on the number of follower
+     * Active user -> depends on the number of recipe added
+     * @param howManySkip       How many users to skip
+     * @param howMany           How many users to get
+     * @return                  A list of the most followed and active users
+     */
+    public List<User> searchMostFollowedAndActiveUsers (int howManySkip, int howMany)
+    {
+        List<User> users = new ArrayList<>();
+        try(Session session = driver.session())
+        {
+            users = session.readTransaction((TransactionWork<List<User>>)  tx -> {
+                Result result = tx.run("MATCH (u:User) " +
+                                "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
+                                "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
+                                "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +
+                                "RETURN u.firstName, u.lastName, u.username, u.firstName AS firstName, " +
+                                "u.lastName AS lastName, u.picture AS picture, " +
+                                "u.username AS username, u.password AS password, u.role AS role, " +
+                                "COUNT(DISTINCT f1) AS follower, " +
+                                "COUNT(DISTINCT f2) AS following, " +
+                                "COUNT(DISTINCT a) AS numRecipes " +
+                                "ORDER BY follower DESC, numRecipes DESC " +
+                                "SKIP $howManySkip LIMIT $howMany",
+                        parameters("howManySkip", howManySkip, "howMany", howMany));
+                List<User> listOfUsers = new ArrayList<>();
+                while(result.hasNext()){
+                    Record r = result.next();
+                    String firstName = r.get("firstName").asString();
+                    String lastName = r.get("lastName").asString();
+                    String picture = null;
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    String username = r.get("username").asString();
+                    String password = r.get("password").asString();
+                    int role = r.get("role").asInt();
+                    User user = new User(firstName, lastName, picture, username, password, role);
+                    user.setFollower(r.get("follower").asInt());
+                    user.setFollowing(r.get("following").asInt());
+                    user.setNumRecipes(r.get("numRecipes").asInt());
+                    listOfUsers.add(user);
+                }
+                return listOfUsers;
+            });
+        }
+        return users;
+    }
+
+    /**
+     * Function that returns the list of the most liked users, ordered by the sum of likes received in their recipes
+     * @param howManySkip       How many users to skip
+     * @param howMany           How many users to get
+     * @return                  The list of users
+     */
+    public List<User> searchMostLikedUsers (final int howManySkip, final int howMany)
+    {
+        List<User> users = new ArrayList<>();
+        try(Session session = driver.session())
+        {
+            users = session.readTransaction((TransactionWork<List<User>>)  tx -> {
+                Result result = tx.run("MATCH (u:User) " +
+                                "OPTIONAL MATCH (u)-[:ADDS]->(:Recipe)<-[l:LIKES]-(:User) " +
+                                "OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) " +
+                                "OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) " +
+                                "OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) " +
+                                "RETURN u.firstName, u.lastName, u.username, u.firstName AS firstName, " +
+                                "u.lastName AS lastName, u.picture AS picture, " +
+                                "u.username AS username, u.password AS password, u.role AS role, " +
+                                "COUNT(DISTINCT f1) AS follower, " +
+                                "COUNT(DISTINCT f2) AS following, " +
+                                "COUNT(DISTINCT a) AS numRecipes, " +
+                                "COUNT(DISTINCT l) AS totLikes " +
+                                "ORDER BY totLikes DESC " +
+                                "SKIP $howManySkip LIMIT $howMany",
+                        parameters("howManySkip", howManySkip, "howMany", howMany));
+                List<User> listOfUsers = new ArrayList<>();
+                while(result.hasNext()){
+                    Record r = result.next();
+                    String firstName = r.get("firstName").asString();
+                    String lastName = r.get("lastName").asString();
+                    String picture = null;
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    String username = r.get("username").asString();
+                    String password = r.get("password").asString();
+                    int role = r.get("role").asInt();
+                    User user = new User(firstName, lastName, picture, username, password, role);
+                    user.setFollower(r.get("follower").asInt());
+                    user.setFollowing(r.get("following").asInt());
+                    user.setNumRecipes(r.get("numRecipes").asInt());
+                    listOfUsers.add(user);
+                }
+                return listOfUsers;
             });
         }
         return users;
