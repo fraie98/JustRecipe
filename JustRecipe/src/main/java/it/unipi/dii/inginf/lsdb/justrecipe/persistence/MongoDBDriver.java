@@ -9,6 +9,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
 import com.mongodb.client.model.*;
+import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.*;
@@ -135,6 +136,25 @@ public class MongoDBDriver implements DatabaseDriver{
 
         collection.insertOne(doc);
     }
+
+    /**
+     * Function that deletes the recipe from the database
+     * @param recipe    Recipe to delete
+     */
+    public void deleteRecipe (Recipe recipe)
+    {
+        collection.deleteOne(eq("title", recipe.getTitle()));
+    }
+
+    /**
+     * Function that deletes all the recipe of on user
+     * @param username  Username of the user
+     */
+    public void deleteAllRecipesOfUser (String username)
+    {
+        collection.deleteMany(eq("authorUsername", username));
+    }
+
     /**
      * Method used to change the collection
      * @param name  name of the new collection

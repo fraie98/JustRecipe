@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import javax.rmi.CORBA.Util;
 import java.util.Date;
 
 /**
@@ -145,7 +146,19 @@ public class RecipePageController {
         if(appSession.getLoggedUser().getRole()!=2 && !appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
             recipeDelete.setVisible(false);
         else
-            recipeDelete.setOnMouseClicked(mouseEvent -> neo4jDriver.deleteRecipe(recipe.getTitle(),recipe.getCreationTime()));
+            recipeDelete.setOnMouseClicked(mouseEvent -> recipeDelete.setOnMouseReleased(event -> handleDeleteButtonAction(event)));
+    }
+
+    /**
+     * Handler for deleting this recipe
+     */
+    private void handleDeleteButtonAction(MouseEvent mouseEvent) {
+        mongoDBDriver.deleteRecipe(recipe);
+        neo4jDriver.deleteRecipe(recipe);
+        // Go to profile page
+        ProfilePageController profilePageController =
+                (ProfilePageController) Utils.changeScene("/profilePage.fxml", mouseEvent);
+        profilePageController.setProfile(appSession.getLoggedUser());
     }
 
     /**

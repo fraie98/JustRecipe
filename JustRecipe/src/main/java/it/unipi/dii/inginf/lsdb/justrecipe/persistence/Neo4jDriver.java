@@ -396,17 +396,46 @@ public class Neo4jDriver implements DatabaseDriver{
      */
     public void deleteUser(String username)
     {
-
+        try ( Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Void>) tx -> {
+                tx.run( "MATCH (u:User) WHERE u.username = $username DETACH DELETE u",
+                        parameters( "username", username) );
+                return null;
+            });
+        }
     }
 
     /**
-     * It deletes a recipe given the title and the creation timestamp (the title is not unique)
-     * @param title  title of the recipe that I want to delete (target recipe)
-     * @param creationTs  creation timestamp of the target recipe
+     * It deletes a recipe given the title
+     * @param recipe    Recipe to delete
      */
-    public void deleteRecipe(String title, Date creationTs)
+    public void deleteRecipe(Recipe recipe)
     {
+        try ( Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Void>) tx -> {
+                tx.run( "MATCH (r:Recipe) WHERE r.title = $title DETACH DELETE r",
+                        parameters( "title", recipe.getTitle()) );
+                return null;
+            });
+        }
+    }
 
+    /**
+     * Function that delete all the recipes of a user
+     * @param username  Username of the user to delete
+     */
+    public void deleteAllRecipesOfUser (String username)
+    {
+        try ( Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Void>) tx -> {
+                tx.run( "MATCH (u:User)-[:ADDS]->(r:Recipe) WHERE u.username = $username DETACH DELETE r",
+                        parameters( "username", username) );
+                return null;
+            });
+        }
     }
 
     /**

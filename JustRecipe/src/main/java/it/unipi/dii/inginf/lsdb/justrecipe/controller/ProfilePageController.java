@@ -19,6 +19,7 @@ public class ProfilePageController {
     private Session appSession;
     private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20;
     private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
+    private User user;
 
     @FXML private ImageView homepageIcon;
     @FXML private ImageView discoveryImg;
@@ -56,8 +57,9 @@ public class ProfilePageController {
      */
     public void setProfile(User user)
     {
-        userName.setText(user.getUsername());
+        this.user = user;
 
+        userName.setText(user.getUsername());
         if(user.getUsername().equals(appSession.getLoggedUser().getUsername()))
         {
             // Update Forced
@@ -89,10 +91,10 @@ public class ProfilePageController {
         page = 0;
         previousButton.setVisible(false); //in the first page it is not visible
 
-        if(appSession.getLoggedUser().getRole()!=3 && !appSession.getLoggedUser().getUsername().equals(u.getUsername()))
+        if(appSession.getLoggedUser().getRole()!=2 && !appSession.getLoggedUser().getUsername().equals(u.getUsername()))
             profileDeleteUser.setVisible(false);
         else
-            profileDeleteUser.setOnMouseClicked(mouseEvent -> neo4jDriver.deleteUser(u.getUsername()));
+            profileDeleteUser.setOnMouseClicked(mouseEvent -> handleDeleteUserEvent(mouseEvent));
 
         if(appSession.getLoggedUser().getUsername().equals(u.getUsername()))
             profileEditUser.setOnMouseClicked(mouseEvent -> neo4jDriver.editProfile(u.getUsername()));
@@ -108,6 +110,27 @@ public class ProfilePageController {
         }
 
         Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
+    }
+
+    /**
+     * Function used to delete the user
+     * @param mouseEvent
+     */
+    private void handleDeleteUserEvent(MouseEvent mouseEvent) {
+        // Delete all his/her recipe
+        neo4jDriver.deleteAllRecipesOfUser(user.getUsername());
+        mongoDBDriver.deleteAllRecipesOfUser(user.getUsername());
+        // Delete the user from DB
+        neo4jDriver.deleteUser(user.getUsername());
+        // If i am the user, go to welcome page
+        if (user.getUsername().equals(appSession.getLoggedUser().getUsername()))
+        {
+            Utils.changeScene("/welcome.fxml", mouseEvent);
+        }
+        else // If i am an administrator and i have deleted another account, go to Administration Page
+        {
+            Utils.changeScene("/adminPage.fxml", mouseEvent);
+        }
     }
 
     /**
