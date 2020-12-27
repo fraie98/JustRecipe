@@ -382,7 +382,7 @@ public class Neo4jDriver implements DatabaseDriver{
         try(Session session = driver.session())
         {
             session.writeTransaction((TransactionWork<Boolean>) tx -> {
-                tx.run("MATCH (u:User{username:$u} SET u.role = $r", parameters("u", username, "r", newRole));
+                tx.run("MATCH (u:User{username:$u}) SET u.role = $r", parameters("u", username, "r", newRole));
                 return true;
             } );
         }
