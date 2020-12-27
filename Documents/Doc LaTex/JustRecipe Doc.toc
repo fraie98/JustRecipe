@@ -7,38 +7,37 @@
 \contentsline {subsection}{\numberline {2.2.2}Functional Requirements}{5}%
 \contentsline {subsubsection}{Features offered to the Unregistered User}{5}%
 \contentsline {subsubsection}{Features offered to the Registered User}{5}%
-\contentsline {subsubsection}{Features offered to the Moderator}{6}%
-\contentsline {subsubsection}{Features offered to the Administrator}{6}%
+\contentsline {subsubsection}{Features offered to the Moderator}{5}%
+\contentsline {subsubsection}{Features offered to the Administrator}{5}%
 \contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}%
 \contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{6}%
-\contentsline {section}{\numberline {2.3}UML Class Diagram}{6}%
-\contentsline {section}{\numberline {2.4}Data Model}{9}%
-\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{9}%
-\contentsline {subsection}{\numberline {2.4.2}GraphDB}{10}%
-\contentsline {section}{\numberline {2.5}Distributed Database Design}{10}%
-\contentsline {subsection}{\numberline {2.5.1}Replicas}{10}%
-\contentsline {subsection}{\numberline {2.5.2}Sharding}{10}%
-\contentsline {section}{\numberline {2.6}Software Architecture}{10}%
-\contentsline {chapter}{\numberline {3}Implementation and Test}{11}%
-\contentsline {section}{\numberline {3.1}Main Modules}{11}%
-\contentsline {section}{\numberline {3.2}Main Packages and Classes}{11}%
-\contentsline {section}{\numberline {3.3}Most Relevant Queries}{11}%
-\contentsline {subsection}{\numberline {3.3.1}MongoDB}{11}%
-\contentsline {subsubsection}{Recipes of the user}{11}%
-\contentsline {subsubsection}{Search for recipe title}{12}%
-\contentsline {subsubsection}{Search for recipe category}{13}%
-\contentsline {subsubsection}{Search for recipe ingredients}{14}%
-\contentsline {subsubsection}{Most common recipe categories}{14}%
-\contentsline {subsubsection}{Last Comments}{15}%
-\contentsline {subsection}{\numberline {3.3.2}Neo4J}{16}%
-\contentsline {subsubsection}{Suggested Recipes}{16}%
-\contentsline {subsubsection}{Recipes of following users}{16}%
-\contentsline {subsubsection}{Most followed and active users}{17}%
-\contentsline {subsubsection}{Top Commentators}{17}%
-\contentsline {subsubsection}{Most liked users}{17}%
-\contentsline {subsubsection}{Best Recipes}{17}%
-\contentsline {subsubsection}{Search for username}{17}%
-\contentsline {subsubsection}{Search for user's full-name}{17}%
-\contentsline {section}{\numberline {3.4}Unit Test}{18}%
-\contentsline {section}{\numberline {3.5}Tests and Statistical Analysis}{18}%
-\contentsline {chapter}{\numberline {4}User Manual}{19}%
+\contentsline {section}{\numberline {2.3}UML Class Diagram}{7}%
+\contentsline {section}{\numberline {2.4}Data Model}{8}%
+\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{8}%
+\contentsline {subsection}{\numberline {2.4.2}GraphDB}{9}%
+\contentsline {section}{\numberline {2.5}Distributed Database Design}{9}%
+\contentsline {subsection}{\numberline {2.5.1}Replicas}{9}%
+\contentsline {subsection}{\numberline {2.5.2}Sharding}{9}%
+\contentsline {section}{\numberline {2.6}Software Architecture}{9}%
+\contentsline {chapter}{\numberline {3}Implementation and Test}{10}%
+\contentsline {section}{\numberline {3.1}Main Modules}{10}%
+\contentsline {section}{\numberline {3.2}Main Packages and Classes}{10}%
+\contentsline {section}{\numberline {3.3}Most Relevant Queries}{10}%
+\contentsline {subsection}{\numberline {3.3.1}MongoDB}{10}%
+\contentsline {subsubsection}{Recipes of the user}{10}%
+\contentsline {subsubsection}{Search for recipe title}{11}%
+\contentsline {subsubsection}{Search for recipe category}{11}%
+\contentsline {subsubsection}{Search for recipe ingredients}{12}%
+\contentsline {subsubsection}{Most common recipe categories}{13}%
+\contentsline {subsubsection}{Recipes with below average calories - TO DO}{13}%
+\contentsline {subsubsection}{Last Comments}{13}%
+\contentsline {subsection}{\numberline {3.3.2}Neo4J}{14}%
+\contentsline {subsubsection}{Suggested Recipes - MANCA CODICE}{14}%
+\contentsline {subsubsection}{Recipes of following users}{14}%
+\contentsline {subsubsection}{Most followed and active users}{15}%
+\contentsline {subsubsection}{Most liked users}{15}%
+\contentsline {subsubsection}{Best Recipes}{15}%
+\contentsline {subsubsection}{Search for username}{16}%
+\contentsline {subsubsection}{Search for user's full-name}{16}%
+\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{17}%
+\contentsline {chapter}{\numberline {4}User Manual}{18}%
