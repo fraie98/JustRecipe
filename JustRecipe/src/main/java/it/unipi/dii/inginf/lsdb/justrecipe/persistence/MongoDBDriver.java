@@ -343,7 +343,7 @@ public class MongoDBDriver implements DatabaseDriver{
         List<List<Object>> objects = new ArrayList<>();
         Gson gson = new Gson();
         Bson unwind = unwind("$comments");
-        Bson sort = sort(descending("creationTime"));
+        Bson sort = sort(descending("comments.creationTime"));
         Bson skip = skip(howManySkip);
         Bson limit = limit(howMany);
         MongoCursor<Document> iterator = (MongoCursor<Document>)
