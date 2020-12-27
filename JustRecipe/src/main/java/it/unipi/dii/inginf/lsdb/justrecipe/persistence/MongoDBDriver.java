@@ -27,6 +27,7 @@ import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 import static com.mongodb.client.model.Aggregates.*;
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Projections.include;
@@ -431,5 +432,36 @@ public class MongoDBDriver implements DatabaseDriver{
         List<Comment> comments = recipe.getComments();
         comments.add(comment);
         updateComments(recipe.getTitle(), comments);
+    }
+
+    /**
+     * Function that returns the recipes of the week added by the user
+     * @param username      Username of the user
+     * @return              A list of recipes
+     */
+    public List<Recipe> getWeeklyRecipes (String username)
+    {
+        List<Recipe> recipes = new ArrayList<>();
+        Gson gson = new Gson();
+        Calendar cal = Calendar.getInstance();
+        cal.setFirstDayOfWeek(Calendar.SUNDAY);
+        cal.set(Calendar.HOUR_OF_DAY, 0); // clear would not reset the hour of day
+        cal.clear(Calendar.MINUTE);
+        cal.clear(Calendar.SECOND);
+        cal.clear(Calendar.MILLISECOND);
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        Date firstDateOfWeek = cal.getTime(); //First date: Sunday
+        // start of the next week
+        cal.add(Calendar.WEEK_OF_YEAR, 1);
+        Date firstDateOfNextWeek = cal.getTime(); //First date of next week: next sunday
+
+        Bson match = match(and(Filters.gte("creationTime", firstDateOfWeek),
+                Filters.lt("creationTime", firstDateOfNextWeek),
+                Filters.eq("authorUsername", username)));
+        List<Document> results = (List<Document>)
+                collection.aggregate(Arrays.asList(match)).into(new ArrayList());
+        Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
+        recipes = gson.fromJson(gson.toJson(results), recipeListType);
+        return recipes;
     }
 }

@@ -19,12 +19,12 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgb(237, 160, 66);">
          <center>
-            <LineChart prefHeight="259.0" prefWidth="864.0" title="Week calories!" BorderPane.alignment="CENTER">
+            <LineChart fx:id="lineChart" animated="false" legendSide="RIGHT" title="How many recipes added during the week!" BorderPane.alignment="CENTER">
               <xAxis>
-                <CategoryAxis label="Days" prefHeight="17.0" prefWidth="869.0" side="BOTTOM" />
+                <CategoryAxis prefHeight="17.0" prefWidth="869.0" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis label="Calories" side="LEFT" />
+                <NumberAxis label=" How many recipes" side="LEFT" />
               </yAxis>
                <BorderPane.margin>
                   <Insets />

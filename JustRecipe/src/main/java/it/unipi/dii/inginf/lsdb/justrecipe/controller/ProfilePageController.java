@@ -1,17 +1,24 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
+import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
 public class ProfilePageController {
     private Neo4jDriver neo4jDriver;
@@ -37,6 +44,9 @@ public class ProfilePageController {
     @FXML private Button nextButton;
     @FXML private Button previousButton;
     @FXML private ImageView addFollow;
+    @FXML private LineChart<String, Number> lineChart;
+    private XYChart.Series series; //single series
+    private final String[] DAY_OF_WEEK = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
 
     public void initialize ()
     {
@@ -49,6 +59,10 @@ public class ProfilePageController {
         nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
         previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
         profileGoAdminPage.setOnMouseClicked(mouseEvent -> clickOnAdminPage(mouseEvent));
+
+        series = new XYChart.Series();
+        series.setName("Daily recipes");
+        lineChart.getData().add(series);
     }
 
     /**
@@ -109,6 +123,28 @@ public class ProfilePageController {
         }
 
         Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
+        updateLineChart();
+    }
+
+    /**
+     * Function used to update the line chart that shows the daily number of recipes added by the user
+     */
+    public void updateLineChart ()
+    {
+        List<Recipe> recipes = mongoDBDriver.getWeeklyRecipes(user.getUsername());
+        int[] counters = new int[DAY_OF_WEEK.length]; //array for the seven counter (one for each day)
+        for (Recipe recipe: recipes)
+        {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(recipe.getCreationTime());
+            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            counters[dayOfWeek-1]++;
+        }
+        series.getData().clear();
+        for (int j=0; j<DAY_OF_WEEK.length; j++)
+        {
+            series.getData().add(new XYChart.Data(DAY_OF_WEEK[j], counters[j]));
+        }
     }
 
     /**
