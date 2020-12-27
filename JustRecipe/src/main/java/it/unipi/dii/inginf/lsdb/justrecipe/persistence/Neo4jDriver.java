@@ -388,6 +388,29 @@ public class Neo4jDriver implements DatabaseDriver{
         }
     }
 
+    /**
+     * Update the information about the user, given the username (username cannot be changed)
+     * @param username  username that identifies the target user
+     * @param newFirst  new first name
+     * @param newLast  new last name
+     * @param newPw  new password
+     */
+    public void updateUser(String username, String newFirst, String newLast, String newPw, String newPic)
+    {
+        try(Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Boolean>) tx -> {
+                tx.run("MATCH (u:User{username:$u}) " +
+                        "SET u.firstName = $f, " +
+                                " u.lastName = $l, " +
+                                " u.password = $p," +
+                                " u.picture = $pic",
+                        parameters("u", username, "f", newFirst, "l", newLast, "p", newPw, "pic", newPic));
+                return true;
+            } );
+        }
+    }
+
 
 
     /**

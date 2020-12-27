@@ -188,11 +188,11 @@ public class Utils {
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(text);
-        alert.setHeaderText("Important Message");
+        alert.setHeaderText("Confirm Message");
         alert.setTitle("Information");
-        ImageView imageView = new ImageView(new Image("/img/info.png"));
-        imageView.setFitHeight(45);
-        imageView.setFitWidth(45);
+        ImageView imageView = new ImageView(new Image("/img/success.png"));
+        imageView.setFitHeight(60);
+        imageView.setFitWidth(60);
         imageView.setPreserveRatio(true);
         alert.setGraphic(imageView);
         alert.show();

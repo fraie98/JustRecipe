@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -32,6 +33,7 @@ public class EditProfilePageController {
     @FXML private Text adv;
     @FXML private Label role;
     @FXML private Label username;
+    @FXML private ImageView profilePic;
 
     public void initialize ()
     {
@@ -42,6 +44,8 @@ public class EditProfilePageController {
         logoutImg.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfileToChangePage(mouseEvent));
         back.setOnMouseClicked(mouseEvent -> clickOnBackButton(mouseEvent));
+        submit.setOnMouseClicked(mouseEvent -> clickOnSubmit());
+        preview.setOnMouseClicked(mouseEvent -> clickOnPreview());
 
         // The page is initialized as if the user that visualizes it is the owner
         adminButton.setDisable(true);
@@ -58,10 +62,14 @@ public class EditProfilePageController {
     public void setEditProfilePage(User u)
     {
         username.setText(u.getUsername());
+
+        if(u.getPicture()!=null)
+            profilePic.setImage(new Image(u.getPicture()));
+
         editFirstname.setText(u.getFirstName());
         editLastname.setText(u.getLastName());
         if(u.getPicture()!=null)
-            editUrlPic.setPromptText(u.getPicture());
+            editUrlPic.setText(u.getPicture());
 
         // it's an admin/moderator and he is not watching his edit profile page
         if(appSession.getLoggedUser().getRole()!=0 && !appSession.getLoggedUser().getUsername().equals(u.getUsername()))
@@ -96,6 +104,44 @@ public class EditProfilePageController {
             default:
                 role.setText("Normal User");
         }
+    }
+
+    /**
+     * Handle the click on the preview button
+     */
+    private void clickOnPreview()
+    {
+        if(!editUrlPic.getText().isEmpty())
+            profilePic.setImage(new Image(editUrlPic.getText()));
+    }
+
+    /**
+     * It handles the click on the submit button
+     */
+    private void clickOnSubmit()
+    {
+        String newPw = new String();
+        String newPic = null;   /* if I don't add a new pic then the correspondent
+                                 * field in neo4j will not be added because this String is null */
+
+        if(editPw.getText().isEmpty() && confirmEditPw.getText().isEmpty()) // I don't wanna change the password
+            newPw = neo4jDriver.getUserByUsername(username.getText()).getPassword();
+        else if(!editPw.getText().isEmpty() && !confirmEditPw.getText().isEmpty() && editPw.getText().equals(confirmEditPw.getText()))
+            newPw = editPw.getText();  // I wanna change the pw
+        else
+            Utils.showErrorAlert("The passwords don't match!");
+
+        if(!editUrlPic.getText().isEmpty())
+            newPic = editUrlPic.getText();
+
+        if(!newPw.isEmpty())
+        {
+            neo4jDriver.updateUser(username.getText(), editFirstname.getText(), editLastname.getText(), newPw, newPic);
+            Utils.showInfoAlert("Changes applied!");
+        }
+
+        editPw.setText("");
+        confirmEditPw.setText("");
     }
 
     /**
