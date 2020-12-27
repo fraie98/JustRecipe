@@ -472,7 +472,7 @@ This query give the possibility to find a specific number of recipes given some 
 		{ 
 			ingredients: 
 			{
-				$regex: /^.*<ingredients>.*$/,
+				$regex: /^.*<ingredients[i]>.*$/,
 				$options: "i"
 			} 
 		}  
@@ -558,7 +558,7 @@ db.recipes.aggregate (
 		{ 
 			$sort : 
 			{ 
-				creationTime : -1 
+				comments.creationTime : -1 
 			} 
 		},
 		{ 
@@ -574,7 +574,7 @@ db.recipes.aggregate (
 \subsection{Neo4J}
 \emph{Tabella con dominio grafo e descrizione}
 \subsubsection{Suggested Recipes - MANCA CODICE}
-We have three levels of suggestions with different relevance.
+We have two levels of suggestions with different relevance.
 \begin{itemize}
 	\item First Level
 	
@@ -582,12 +582,7 @@ We have three levels of suggestions with different relevance.
 	
 	\item Second Level
 	
-	\noindent Recipe \emph{R} is a second level suggestion for the user \emph{X} if \emph{R} has been added by the user \emph{Y} where \emph{Y} is the owner of at least N recipes liked by \emph{X}.
-	
-	\item Third Level
-	
-	\noindent Recipe \emph{R} is a third level suggestion for the user \emph{X} if \emph{R} has been commented by the user \emph{Y} where \emph{Y} is followed by \emph{X} ($X \rightarrow Y$).
-	\noindent 
+	\noindent Recipe \emph{R} is a second level suggestion for the user \emph{X} if \emph{R} has been added by the user \emph{Y} where \emph{Y} is the owner of at least N recipes liked by \emph{X}. 
 	
 \end{itemize}
 
@@ -630,7 +625,6 @@ Active means that the list is ordered by the number of recipes added by the user
 	ORDER BY follower DESC, numRecipes DESC
 	SKIP $howManySkip LIMIT $howMany
 \end{lstlisting}
-\subsubsection{Top Commentators - TO DO}
 \subsubsection{Most liked users}
 This query returns the list of the most liked users, namely the users who received more like to their recipes.
 \begin{itemize}
@@ -720,7 +714,6 @@ Given the full-name or a part of it, the query returns the users that contains i
 	 SKIP $skip LIMIT $limit
 \end{lstlisting} 
 
-\section{Unit Test}
 \section{Tests and Statistical Analysis}
 
 \chapter{User Manual}

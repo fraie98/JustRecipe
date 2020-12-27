@@ -96,10 +96,9 @@ public class ProfilePageController {
         else
             profileDeleteUser.setOnMouseClicked(mouseEvent -> handleDeleteUserEvent(mouseEvent));
 
-        if(appSession.getLoggedUser().getUsername().equals(u.getUsername()))
-            profileEditUser.setOnMouseClicked(mouseEvent -> neo4jDriver.editProfile(u.getUsername()));
-        else
+        if(!appSession.getLoggedUser().getUsername().equals(u.getUsername()) && appSession.getLoggedUser().getRole()==0)
             profileEditUser.setVisible(false);
+        profileEditUser.setOnMouseClicked(mouseEvent -> clickOnEditProfile(mouseEvent,u));
 
         if(appSession.getLoggedUser().getUsername().equals(u.getUsername()))
             addRecipeOrMyProfileImg.setOnMouseClicked(mouseEvent -> clickOnAddRecipeImg(mouseEvent));
@@ -131,6 +130,17 @@ public class ProfilePageController {
         {
             Utils.changeScene("/adminPage.fxml", mouseEvent);
         }
+    }
+
+    /**
+     * Handle the click on the edit profile icon
+     * @param mouseEvent
+     */
+    private void clickOnEditProfile(MouseEvent mouseEvent, User u)
+    {
+        EditProfilePageController editProfilePageController = (EditProfilePageController)
+                Utils.changeScene("/editProfile.fxml", mouseEvent);
+        editProfilePageController.setEditProfilePage(u);
     }
 
     /**
