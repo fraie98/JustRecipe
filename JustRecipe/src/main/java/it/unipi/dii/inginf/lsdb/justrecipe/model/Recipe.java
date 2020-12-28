@@ -1,9 +1,4 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.model;
-
-import com.google.gson.annotations.SerializedName;
-import org.bson.types.ObjectId;
-
-import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

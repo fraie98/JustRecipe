@@ -59,10 +59,22 @@ public class RecipeSnapshotController {
         this.recipe = recipe;
         snapTitle.setText(recipe.getTitle());
         snapUser.setText(recipe.getAuthorUsername());
-        snapCarbs.setText(String.valueOf(recipe.getCarbs()));
-        snapProtein.setText(String.valueOf(recipe.getProtein()));
-        snapFat.setText(String.valueOf(recipe.getFat()));
-        snapCal.setText(String.valueOf(recipe.getCalories()));
+        if (recipe.getCarbs() != 0)
+            snapCarbs.setText(recipe.getCarbs() + " g");
+        else
+            snapCarbs.setText(" -- ");
+        if (recipe.getProtein() != 0)
+            snapProtein.setText(recipe.getProtein() + " g");
+        else
+            snapProtein.setText(" -- ");
+        if (recipe.getFat() != 0)
+            snapFat.setText(recipe.getFat() + " g");
+        else
+            snapFat.setText(" -- ");
+        if (recipe.getCalories() != 0)
+            snapCal.setText(recipe.getCalories() + " Kcal");
+        else
+            snapCal.setText(" -- ");
 
         if (recipe.getPicture() != null)
         {

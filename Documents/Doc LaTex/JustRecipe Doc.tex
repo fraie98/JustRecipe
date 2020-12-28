@@ -274,6 +274,77 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 	\caption{UML Analysis Classes Diagram}
 \end{figure}
 
+\subsubsection{Classes definitions}
+\begin{table}[ht]
+\caption{Classes definitions} % title of Table
+\centering % used for centering table
+\begin{tabular}{c c} % centered columns (2 columns)
+\hline\hline %inserts double horizontal lines
+Class & Description \\ [0.5ex] % inserts table
+%heading
+\hline % inserts single horizontal line
+Registered User &  A standard user (registered one) who can only perform basic operations \\
+Moderator & User who can also check comments and decide to delete them  \\ 
+Administrator & Most powerful user, he can also delete users and recipes, and elect moderator \\
+Comment & Comment posted by a user \\
+Recipe & Recipe added by one user  \\ [1ex] % [1ex] adds vertical space 
+\hline %inserts single line
+\end{tabular}
+\label{table:classes definitions} % is used to refer this table in the text
+\end{table}
+
+\subsubsection{Classes attributes}
+\begin{table}[ht]
+\caption{Classes attributes - User}
+\centering 
+\begin{tabular}{c c c}
+\hline\hline
+Attribute & Type &  Description \\ [0.5ex]
+\hline 
+firstName & String &  First name of the user \\
+lastName & String & Last name of the user  \\ 
+picture & String &  URL of the profile picture \\
+username & String & Username of the user (identifier) \\
+password & String & Password chosen by the user, used for the login phase  \\ 
+role & int & Role of the user (0: Normal User, 1: Moderator, 2: Administrator)\\[1ex] 
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\caption{Classes attributes - Comment}
+\centering 
+\begin{tabular}{c c c}
+\hline\hline
+Attribute & Type &  Description \\ [0.5ex]
+\hline 
+text & String &  Plain text of the comment \\
+creationTime & Date & Creation timestamp of the comment  \\[1ex] 
+\hline 
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\caption{Classes attributes - Recipe}
+\centering 
+\begin{tabular}{c c c}
+\hline\hline
+Attribute & Type &  Description \\ [0.5ex]
+\hline 
+title & String &  Title of the recipe (identifier) \\
+instructions & String & Operations to be performed to make the recipe  \\ 
+ingredients & List<String> &  Ingredients to be used in the recipe \\
+categories & List<String> & Categories to which the recipe belongs \\
+calories & int & Calories contained in the recipe  \\ 
+fat & int & Fat contained in the recipe  \\ 
+protein & int & Protein contained in the recipe  \\ 
+carbs & int & Carbs contained in the recipe  \\ 
+creationTime & Date & Creation timestamp of the recipe \\
+picture & String & URL of the recipe picture \\[1ex] 
+\hline 
+\end{tabular}
+\end{table}
+
 \section{Data Model}
 
 \subsection{DocumentDB}
@@ -340,7 +411,70 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 
 \chapter{Implementation and Test}
 \section{Main Modules}
+The implementation code is divided into two main modules: RecipeReader and JustRecipe.
+ \begin{itemize}
+	\item \emph{RecipeReader}:  is a program we wrote to get our initial dataset, extracting the information that interests us from the two initial datasets (see chapter 1). 
+	\item \emph{JustRecipe}:  is the actual application, whose implementation will be analyzed in more detail in the next sections. The application was developed following the MVC (Model, View, Controller) pattern. The View displays the data contained in the model and was mainly developed using .fxml files, which allow you to write all the graphic components and their properties in separate files. The Model provides methods for accessing data useful for the application. The Controller receives the commands from the user and implements them by changing the status of the other two components. This division allowed us to completely separate the three components, for a more readable and maintainable code.
+\end{itemize}
 \section{Main Packages and Classes}
+In this section will be presented the main packages of JustRecipe module and the respective classes.
+\subsection {it.unipi.dii.inginf.lsdb.justrecipe.config}
+This package is used to handle the configuration parameters, stored in \emph{config.xml}. The schema for the validation is in the file \emph{config.xsd}. The validation is very important to be sure of the correctness of the file \emph{config.xml}.
+
+\noindent Classes:
+ \begin{itemize}
+	\item \emph{ConfigurationParameters}: this class store all the configuration parameters needed by the application. For example the IP for the Neo4j database. These values do not need to be changed, so only get methods are provided. 
+\end{itemize}
+\subsection {it.unipi.dii.inginf.lsdb.justrecipe.main}
+This package contains the Main class, that starts the application.
+
+\noindent Classes:
+ \begin{itemize}
+	\item \emph{Main}: this class extends \emph{Application} and implements the \emph{start} method. 
+\end{itemize}
+\subsection{it.unipi.dii.inginf.lsdb.justrecipe.model}
+This package contains the classes required for the model. These classes are the java bean for our application.
+
+\noindent Classes:
+  \begin{itemize}
+	\item \emph{Comment}: This class stores all the information about a comment, like the text, the username of the author and the timestamp of creation. 
+	\item \emph{Recipe}: This class stores all the information about a recipe, like the title, the ingredients, and so on.
+	\item \emph{User}: This class stores all the information about a user, like the username, the password, and so on.
+	\item \emph{Session}: This class is used to maintain the information of the session, like the logged user. We used the singleton design pattern for this class.
+\end{itemize}
+\subsection {it.unipi.dii.inginf.lsdb.justrecipe.persistence}
+This package deals with managing the persistence of data, in fact it contains the classes used to interface with databases.
+
+\noindent Classes:
+ \begin{itemize}
+	\item \emph{DatabaseDriver}: this \emph{interface} declares all the methods that has to be implemented in a database driver. This methods are \emph{initConnection()} and \emph{closeConnection()}.  
+	\item \emph{MongoDBDriver}: this class implements DatabaseDriver and is responsible for implementing all the queries that have to be run on MongoDB. We used the Singleton design pattern, because a single instance of this driver must be shared by all application classes.
+	\item \emph{Neo4jDriver}: this class implements DatabaseDriver and is responsible for implementing all the queries that have to be run on Neo4j. We used the Singleton design pattern, because a single instance of this driver must be shared by all application classes.
+\end{itemize}
+\subsection {it.unipi.dii.inginf.lsdb.justrecipe.controller}
+This package contains the classes required for the controller part of the MVC pattern. For each different page to be shown to the user, a special controller has been implemented, which manages the events resulting from the actions taken by the user and updates the model and the view.
+
+\noindent Classes:
+ \begin{itemize}
+	\item \emph{WelcomePageController}: this class manages the login/register page of the application.
+	\item \emph{HomePageController}: this class handles the homepage section of the application (shows the recipes of following users and handles the event, like the click on a recipe snapshot).
+	\item \emph{DiscoveryPageController}: this class manages the discovery section of the application. So it is in charge of showing the results of search made by the user.
+	\item \emph{ProfilePageController}: this class manages the profile section of the application. The profile could be either mine or someone else's. Thanks to this class it is possible to manage some events such as following a user, deleting my profile, seeing his recipes, and so on.
+	\item \emph{AdministrationPageController}: this class handles the Administration section of the application. Of course, not all the users can access to this page, only the moderator (for seeing the last comments) and the administrators (for doing all the possible operations) can access.
+	\item \emph{EditProfilPageController}: this class manages the page for editing the personal profile. The user can insert a new profile image, change the personal information, and so on. The administrator can change the role of the user in this page.
+	\item \emph{AddRecipePageController}: this class manages the page of the application used for insert a new recipe. 
+	\item \emph{RecipeSnapshotController}: this class manages the single recipe snapshot, like the click on him.
+	\item \emph{RecipePageController}: this class handles the page in which we show all the information about a recipe. In this page it is possible also to comment a recipe and see the comments already done.
+	\item \emph{CommentController}: this class manages the single comment and all the operations that can be done on him.
+	\item \emph{UserSnapshotController}: this class manages the single snapshot of one user, and all the operations that can be done on him.
+\end{itemize}
+\subsection {it.unipi.dii.inginf.lsdb.justrecipe.utils}
+This package contains a class used to store all the utility functions that we use in the application.
+
+\noindent Classes:
+ \begin{itemize}
+	\item \emph{Utils}: this class is used to contain some utility functions used inside the application (to avoid replicating parts of code).
+\end{itemize}
 \section{Most Relevant Queries}
 In the following section will be presented the most relevant query performed with MongoDB and Neo4J. 
 \noindent Some important point must be underlined:

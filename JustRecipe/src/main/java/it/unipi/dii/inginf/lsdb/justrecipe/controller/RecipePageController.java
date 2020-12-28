@@ -124,14 +124,25 @@ public class RecipePageController {
             recipePicture.setImage(new Image("img/genericRecipe.png"));
         }
         recipeUsername.setText(recipe.getAuthorUsername());
-        recipeCarbs.setText(String.valueOf(recipe.getCarbs()));
-        recipeCalories.setText(String.valueOf(recipe.getCalories()));
-        recipeFat.setText(String.valueOf(recipe.getFat()));
-        recipeProtein.setText(String.valueOf(recipe.getProtein()));
+        if (recipe.getCarbs() != 0)
+            recipeCarbs.setText(recipe.getCarbs() + " g");
+        else
+            recipeCarbs.setText(" -- ");
+        if (recipe.getCalories() != 0)
+            recipeCalories.setText(recipe.getCalories() + " Kcal");
+        else
+            recipeCalories.setText(" -- ");
+        if (recipe.getFat() != 0)
+            recipeFat.setText(recipe.getFat() + " g");
+        else
+            recipeFat.setText(" -- ");
+        if (recipe.getProtein() != 0)
+            recipeProtein.setText(recipe.getProtein() + " g");
+        else
+            recipeProtein.setText(" -- ");
         recipeCategories.setText(Utils.fromListToString(recipe.getCategories()));
         recipeIngredients.setText(Utils.fromListToString(recipe.getIngredients()));
         recipeDate.setText("Published on: " + Utils.fromDateToString(recipe.getCreationTime()));
-        //TO DO
         recipeLikes.setText(String.valueOf(neo4jDriver.howManyLikes(recipe.getTitle())));
         if(neo4jDriver.isThisRecipeLikedByOne(recipe.getTitle(),appSession.getLoggedUser().getUsername()))
             recipeLikeImg.setImage(new Image("img/alreadyliked.png"));

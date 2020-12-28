@@ -39,7 +39,7 @@ public class DiscoveryPageController {
     private final int HOW_MANY_USER_SNAPSHOT_TO_SHOW = 20;
     private final int HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW = 5;
     private final int HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY = 4;
-    private final int HOW_MANY_COMMENTS_TO_SHOW = 20;
+    private final int LIKES_THRESHOLD_SECOND_LEVEL_SUGGESTION = 3;
     private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
 
     public void initialize ()
@@ -63,7 +63,6 @@ public class DiscoveryPageController {
                         "User username",
                         "User full name",
                         "Most followed and active users",
-                        "Top Commentators",
                         "Most liked users"
                 );
         searchComboBox.setItems(options);
@@ -74,6 +73,21 @@ public class DiscoveryPageController {
         nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
         previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
         previousButton.setVisible(false); //in the first page it is not visible
+
+        // At the beginning, we show the suggested recipes
+        List<Recipe> recipes = neo4jDriver.getSecondLevelSuggestedRecipe(
+                Session.getInstance().getLoggedUser().getUsername(), LIKES_THRESHOLD_SECOND_LEVEL_SUGGESTION,
+                HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
+        if (recipes.size() > 0)
+        {
+            Utils.addRecipesSnap(discoveryVBox, recipes);
+        }
+        else // if it is not possible to show something suggested, we show the best ones in general
+        {
+            recipes = neo4jDriver.searchBestRecipes(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page,
+                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
+            Utils.addRecipesSnap(discoveryVBox, recipes);
+        }
     }
 
     private void search(ActionEvent actionEvent) {

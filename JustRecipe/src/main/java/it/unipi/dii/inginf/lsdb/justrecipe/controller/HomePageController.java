@@ -38,7 +38,9 @@ public class HomePageController {
         neo4jDriver = Neo4jDriver.getInstance();
         mongoDBDriver = MongoDBDriver.getInstance();
         session = Session.getInstance();
-        Utils.addRecipesSnap(mainPage, neo4jDriver.getHomepageRecipeSnap(0, HOW_MANY_SNAPSHOT_TO_SHOW, session.getLoggedUser().getUsername()));
+        List<Recipe> recipes = neo4jDriver.getHomepageRecipeSnap(0,
+                HOW_MANY_SNAPSHOT_TO_SHOW, session.getLoggedUser().getUsername());
+        Utils.addRecipesSnap(mainPage, recipes);
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));

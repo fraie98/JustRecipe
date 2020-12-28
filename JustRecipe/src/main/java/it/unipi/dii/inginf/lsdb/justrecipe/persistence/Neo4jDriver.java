@@ -945,4 +945,59 @@ public class Neo4jDriver implements DatabaseDriver{
         }
         return user;
     }
+
+    /**
+     * Function that returns the second level of recipes suggestion
+     * @param username          Username of the user
+     * @param threshold         Threshold on the number of likes
+     * @param howManySkip       How many recipes to skip
+     * @param howMany           How many recipes to obtain
+     * @return                  List of recipes
+     */
+    public List<Recipe> getSecondLevelSuggestedRecipe (final String username, final int threshold,  final int howManySkip, final int howMany)
+    {
+        List<Recipe> recipes = new ArrayList<>();
+        try(Session session = driver.session()) {
+            session.readTransaction(tx -> {
+                Result result = tx.run("MATCH (:User {username: $username})-[l:LIKES]->(:Recipe)<-[:ADDS]-(u:User) "+
+                                // Count the likes for every distinct user, so the likes that the user has added at the recipe of this user
+                                "WITH DISTINCT(u) AS u, COUNT(DISTINCT l) AS numLikes " +
+                                "WHERE numLikes > $threshold " +
+                                "MATCH (u)-[a:ADDS]->(r:Recipe) " +
+                                "RETURN r.title as title, r.calories as calories, r.fat as fat, r.protein as protein, " +
+                                "r.carbs AS carbs, r.picture as picture, u.username as authorUsername " +
+                                "ORDER BY a.when DESC " +
+                                "SKIP $skip LIMIT $limit",
+                        parameters("username",username, "threshold", threshold, "skip", howManySkip, "limit", howMany));
+
+                while(result.hasNext()){
+                    Record r = result.next();
+                    String title = r.get("title").asString();
+                    int calories = 0;
+                    int protein = 0;
+                    int fat = 0;
+                    int carbs = 0;
+                    String picture = null;
+                    String authorUsername = r.get("authorUsername").asString();
+                    if(r.get("calories") != NULL)
+                        calories = r.get("calories").asInt();
+                    if(r.get("Fat") != NULL)
+                        fat = r.get("fat").asInt();
+                    if(r.get("protein") != NULL)
+                        protein = r.get("protein").asInt();
+                    if(r.get("carbs") != NULL)
+                        carbs = r.get("carbs").asInt();
+                    if (r.get("picture") != NULL)
+                    {
+                        picture = r.get("picture").asString();
+                    }
+                    Recipe recipe = new Recipe(title, fat, calories, protein, carbs, picture);
+                    recipe.setAuthorUsername(authorUsername);
+                    recipes.add(recipe);
+                }
+                return null;
+            });
+        }
+        return recipes;
+    }
 }
