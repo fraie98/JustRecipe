@@ -958,14 +958,20 @@ public class Neo4jDriver implements DatabaseDriver{
         List<Recipe> recipes = new ArrayList<>();
         try(Session session = driver.session()) {
             recipes = session.readTransaction((TransactionWork<List<Recipe>>)  tx -> {
-                Result result = tx.run("MATCH path = (r:Recipe)<-[ad:ADDS]-(u:User)<-[:FOLLOWS*]-(me:User{username:$u}) " +
-                                "WITH length(path) AS hopsNumber, r AS recipe, ad AS a, u AS owner " +
+                Result result = tx.run("MATCH path = (recipe:Recipe)<-[a:ADDS]-(owner:User)<-[:FOLLOWS*1..2]-(me:User{username:$u}) " +
+                                "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat," +
+                                " recipe.picture, a.when, owner.username " +
+                                "ORDER BY length(path) ASC, a.when DESC " +
+                                "SKIP $s " +
+                                "LIMIT $l ",
+                /*Result result = tx.run("MATCH path = (r:Recipe)<-[ad:ADDS]-(u:User)<-[:FOLLOWS*]-(me:User{username:$u}) " +
+                                "WITH length(path) as hopsNumber, r as recipe, ad as a, u as owner " +
                                 "WHERE hopsNumber < 4 " +
                                 "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat," +
                                 " recipe.picture, a.when, hopsNumber, owner.username " +
                                 "ORDER BY hopsNumber ASC, a.when DESC " +
                                 "SKIP $s " +
-                                "LIMIT $l ",
+                                "LIMIT $l ",*/
                         parameters("u",username, "s", howManyToSkip, "l", howManyToGet));
 
                 List<Recipe> r = new ArrayList<>();
@@ -1020,8 +1026,8 @@ public class Neo4jDriver implements DatabaseDriver{
                                 "WITH DISTINCT(u) AS u, COUNT(DISTINCT l) AS numLikes " +
                                 "WHERE numLikes > $threshold " +
                                 "MATCH (u)-[a:ADDS]->(r:Recipe) " +
-                                "RETURN r.title AS title, r.calories AS calories, r.fat AS fat, r.protein AS protein, " +
-                                "r.carbs AS carbs, r.picture AS picture, u.username AS authorUsername " +
+                                "RETURN r.title as title, r.calories as calories, r.fat as fat, r.protein as protein, " +
+                                "r.carbs AS carbs, r.picture as picture, u.username as authorUsername " +
                                 "ORDER BY a.when DESC " +
                                 "SKIP $skip LIMIT $limit",
                         parameters("username",username, "threshold", threshold, "skip", howManySkip, "limit", howMany));

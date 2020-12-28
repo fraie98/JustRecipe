@@ -58,6 +58,7 @@ public class DiscoveryPageController {
         // Initializing the options of the ComboBox
         ObservableList<String> options =
                 FXCollections.observableArrayList(
+                        "Suggested recipes",
                         "Recipe title",
                         "Recipe category",
                         "Recipe ingredients",
@@ -70,6 +71,8 @@ public class DiscoveryPageController {
                         "Most liked users"
                 );
         searchComboBox.setItems(options);
+        searchComboBox.setValue("Suggested recipes");
+        showSuggestedRecipes();
         // if some changes happens to the combobox
         searchComboBox.setOnAction(actionEvent -> comboAction((ActionEvent) actionEvent));
         searchButton.setOnAction(actionEvent -> search(actionEvent));
@@ -77,8 +80,10 @@ public class DiscoveryPageController {
         nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
         previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
         previousButton.setVisible(false); //in the first page it is not visible
+    }
 
-        // At the beginning, we show the suggested recipes
+    private void showSuggestedRecipes ()
+    {
         List<Recipe> firstLevelSuggRec = neo4jDriver.getFirstLevelSuggestedRecipe(
                 appSession.getLoggedUser().getUsername(),HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL*page,
                 HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL);
@@ -106,6 +111,10 @@ public class DiscoveryPageController {
 
     private void search(ActionEvent actionEvent) {
         Utils.removeAllFromPane(discoveryVBox);
+        if (String.valueOf(searchComboBox.getValue()).equals("Suggested recipes"))
+        {
+            showSuggestedRecipes();
+        }
         if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))
         {
             List<Recipe> recipes = mongoDBDriver.searchRecipesFromTitle(searchBarTextField.getText(),
