@@ -947,6 +947,62 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
+     * It gives the suggested recipes of the first level
+     * @param username  Username of the user who is the receiver of the suggestions
+     * @param howManyToSkip  how many recipe to skip
+     * @param howManyToGet  how many recipe to get
+     * @return  The list of suggested recipes of the first level
+     */
+    public List<Recipe> getFirstLevelSuggestedRecipe(final String username, final int howManyToSkip, final int howManyToGet)
+    {
+        List<Recipe> recipes = new ArrayList<>();
+        try(Session session = driver.session()) {
+            recipes = session.readTransaction((TransactionWork<List<Recipe>>)  tx -> {
+                Result result = tx.run("MATCH path = (r:Recipe)<-[ad:ADDS]-(u:User)<-[:FOLLOWS*]-(me:User{username:$u}) " +
+                                "WITH length(path) as hopsNumber, r as recipe, ad as a, u as owner " +
+                                "WHERE hopsNumber < 4 " +
+                                "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat," +
+                                " recipe.picture, a.when, hopsNumber, owner.username " +
+                                "ORDER BY hopsNumber ASC, a.when DESC " +
+                                "SKIP $s " +
+                                "LIMIT $l ",
+                        parameters("u",username, "s", howManyToSkip, "l", howManyToGet));
+
+                List<Recipe> r = new ArrayList<>();
+
+                while(result.hasNext())
+                {
+                    Record rec = result.next();
+                    String title = rec.get("recipe.title").asString();
+                    int calories = 0;
+                    int protein = 0;
+                    int fat = 0;
+                    int carbs = 0;
+                    String picture = null;
+                    String authorUsername = rec.get("owner.username").asString();
+                    if(rec.get("recipe.calories") != NULL)
+                        calories = rec.get("recipe.calories").asInt();
+                    if(rec.get("recipe.fat") != NULL)
+                        fat = rec.get("recipe.fat").asInt();
+                    if(rec.get("recipe.protein") != NULL)
+                        protein = rec.get("recipe.protein").asInt();
+                    if(rec.get("recipe.carbs") != NULL)
+                        carbs = rec.get("recipe.carbs").asInt();
+                    if (rec.get("recipe.picture") != NULL)
+                    {
+                        picture = rec.get("recipe.picture").asString();
+                    }
+                    Recipe recipe = new Recipe(title, fat, calories, protein, carbs, picture);
+                    recipe.setAuthorUsername(authorUsername);
+                    r.add(recipe);
+                }
+                return r;
+            });
+        }
+        return recipes;
+    }
+
+    /**
      * Function that returns the second level of recipes suggestion
      * @param username          Username of the user
      * @param threshold         Threshold on the number of likes
@@ -981,7 +1037,7 @@ public class Neo4jDriver implements DatabaseDriver{
                     String authorUsername = r.get("authorUsername").asString();
                     if(r.get("calories") != NULL)
                         calories = r.get("calories").asInt();
-                    if(r.get("Fat") != NULL)
+                    if(r.get("fat") != NULL)
                         fat = r.get("fat").asInt();
                     if(r.get("protein") != NULL)
                         protein = r.get("protein").asInt();

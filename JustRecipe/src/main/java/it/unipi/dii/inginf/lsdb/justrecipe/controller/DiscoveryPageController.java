@@ -25,6 +25,7 @@ import java.util.List;
 public class DiscoveryPageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
+    private Session appSession;
     @FXML private ImageView homepageIcon;
     @FXML private ImageView profilePageIcon;
     @FXML private ImageView logoutPic;
@@ -40,10 +41,13 @@ public class DiscoveryPageController {
     private final int HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW = 5;
     private final int HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY = 4;
     private final int LIKES_THRESHOLD_SECOND_LEVEL_SUGGESTION = 3;
+    private final int HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL = 15;
+    private final int HOW_MANY_SUGGESTED_RECIPES_SECOND_LVL = HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW-HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL;
     private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
 
     public void initialize ()
     {
+        appSession = Session.getInstance();
         neo4jDriver = Neo4jDriver.getInstance();
         mongoDBDriver = MongoDBDriver.getInstance();
         homepageIcon.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
@@ -75,18 +79,28 @@ public class DiscoveryPageController {
         previousButton.setVisible(false); //in the first page it is not visible
 
         // At the beginning, we show the suggested recipes
-        List<Recipe> recipes = neo4jDriver.getSecondLevelSuggestedRecipe(
-                Session.getInstance().getLoggedUser().getUsername(), LIKES_THRESHOLD_SECOND_LEVEL_SUGGESTION,
-                HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
-        if (recipes.size() > 0)
+        List<Recipe> firstLevelSuggRec = neo4jDriver.getFirstLevelSuggestedRecipe(
+                appSession.getLoggedUser().getUsername(),HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL*page,
+                HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL);
+
+        List<Recipe> secondLevelSuggRec = neo4jDriver.getSecondLevelSuggestedRecipe(
+                appSession.getLoggedUser().getUsername(), LIKES_THRESHOLD_SECOND_LEVEL_SUGGESTION,
+                HOW_MANY_SUGGESTED_RECIPES_SECOND_LVL*page, HOW_MANY_SUGGESTED_RECIPES_SECOND_LVL);
+
+        List<Recipe> suggRec = new ArrayList<>();
+        // Concatenation of the two queries
+        suggRec.addAll(firstLevelSuggRec);
+        suggRec.addAll(secondLevelSuggRec);
+
+        if (suggRec.size() > 0)
         {
-            Utils.addRecipesSnap(discoveryVBox, recipes);
+            Utils.addRecipesSnap(discoveryVBox, suggRec);
         }
         else // if it is not possible to show something suggested, we show the best ones in general
         {
-            recipes = neo4jDriver.searchBestRecipes(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page,
+            suggRec = neo4jDriver.searchBestRecipes(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page,
                     HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
-            Utils.addRecipesSnap(discoveryVBox, recipes);
+            Utils.addRecipesSnap(discoveryVBox, suggRec);
         }
     }
 
