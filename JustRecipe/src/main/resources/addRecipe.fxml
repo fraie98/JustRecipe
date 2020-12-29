@@ -114,7 +114,7 @@
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="addCal" layoutX="495.0" layoutY="134.0" />
+                              <TextField fx:id="addCal" layoutX="495.0" layoutY="134.0" prefHeight="26.0" prefWidth="110.0" />
                               <Label layoutX="55.0" layoutY="173.0" text="Insert Carbs:">
                                  <font>
                                     <Font size="26.0" />
@@ -154,9 +154,13 @@
                                     <Font size="17.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="328.0" layoutY="628.0" mnemonicParsing="false" text="Clear" />
+                              <Button fx:id="clear" layoutX="328.0" layoutY="628.0" mnemonicParsing="false" text="Clear" />
                               <Button fx:id="submit" layoutX="403.0" layoutY="628.0" mnemonicParsing="false" text="Submit" />
                               <TextArea fx:id="addIngr" layoutX="55.0" layoutY="392.0" prefHeight="214.0" prefWidth="325.0" />
+                              <Text layoutX="617.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kcal" />
+                              <Text layoutX="617.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="g" />
+                              <Text layoutX="617.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="g" />
+                              <Text layoutX="617.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="g" />
                            </children>
                         </Pane>
                      </content>

@@ -19,6 +19,7 @@ public class AddRecipePageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
     private Session appSession;
+    private Recipe recipe;
     @FXML private ImageView homeImg;
     @FXML private ImageView profileImg;
     @FXML private ImageView discoveryImg;
@@ -33,6 +34,7 @@ public class AddRecipePageController {
     @FXML private TextArea addIngr;
     @FXML private TextArea addInstructions;
     @FXML private Button submit;
+    @FXML private Button clear;
 
 
 
@@ -46,8 +48,41 @@ public class AddRecipePageController {
         logoutImg.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfileToChangePage(mouseEvent));
         submit.setOnMouseClicked(mouseEvent -> submitNewRecipe(mouseEvent));
+        clear.setOnMouseClicked(mouseEvent -> clearAllFields());
     }
 
+    public void setRecipe(Recipe recipe){
+        this.recipe = recipe;
+        addTitle.setText(recipe.getTitle());
+        addTitle.setEditable(false);
+        addUrl.setText(recipe.getPicture());
+        addCal.setText(String.valueOf(recipe.getCalories()));
+        addCarbs.setText(String.valueOf(recipe.getCarbs()));
+        addFat.setText(String.valueOf(recipe.getFat()));
+        addProt.setText(String.valueOf(recipe.getProtein()));
+        String categories = new String();
+        for (String k: recipe.getCategories()) {
+            if(!k.isEmpty()){
+                categories += k;
+                categories += ",";
+            }
+        }
+        addCateg.setText(categories);
+        String ingredients = new String();
+        for (String k: recipe.getIngredients()) {
+            if(!k.isEmpty()) {
+                ingredients += k;
+                ingredients += ",";
+            }
+        }
+        addIngr.setText(ingredients);
+        addInstructions.setText(recipe.getInstructions());
+    }
+
+
+    public void setFocus(){
+        addUrl.requestFocus();
+    }
     /**
      * Control the fields and add new recipe in the DBs
      */
@@ -97,17 +132,24 @@ public class AddRecipePageController {
 
             Recipe newRec = new Recipe(addTitle.getText(), addInstructions.getText(), ingr, categ, calo, fat, proteins, carbs, ts, addUrl.getText(), creator, null);
 
-            neo4jDriver.addRecipe(newRec);
-            mongoDBDriver.addRecipe(newRec);
-
-            Utils.showInfoAlert("Recipe succesfully added");
+            if(addTitle.isEditable()) {
+                neo4jDriver.newRecipe(newRec);
+                mongoDBDriver.addRecipe(newRec);
+                Utils.showInfoAlert("Recipe succesfully added");
+            }else{
+                neo4jDriver.newRecipe(newRec);
+                mongoDBDriver.editRecipe(newRec);
+                addTitle.setEditable(true);
+                Utils.showInfoAlert("Recipe succesfully edited");
+            }
             clearAllFields();
         }
     }
 
     private void clearAllFields()
     {
-        addTitle.setText("");
+        if (addTitle.isEditable())
+            addTitle.setText("");
         addUrl.setText("");
         addCal.setText("");
         addCarbs.setText("");

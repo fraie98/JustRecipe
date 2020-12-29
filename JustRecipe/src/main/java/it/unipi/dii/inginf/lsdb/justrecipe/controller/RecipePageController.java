@@ -69,6 +69,7 @@ public class RecipePageController {
         cancelButton.setOnAction(actionEvent -> handleCancelButtonAction());
         recipeLikeImg.setOnMouseClicked(mouseEvent -> handleClickOnLike());
         recipeUsername.setOnMouseClicked(mouseEvent -> handleClickOnUsername(mouseEvent));
+        recipeEditImg.setOnMouseClicked(mouseEvent -> clickOneEditButton(mouseEvent));
     }
 
     private void handleClickOnLike()
@@ -98,6 +99,13 @@ public class RecipePageController {
         Comment comment = new Comment(appSession.getLoggedUser().getUsername(), commentsArea.getText(), new Date());
         Utils.showComment(recipeVBox, comment, recipe);
         mongoDBDriver.addComment(recipe, comment);
+    }
+
+    private void clickOneEditButton(MouseEvent mouseEvent){
+        AddRecipePageController addRecipePageController = (AddRecipePageController)
+                Utils.changeScene("/addRecipe.fxml", mouseEvent);
+        addRecipePageController.setRecipe(recipe);
+        addRecipePageController.setFocus();
     }
 
     /**

@@ -65,7 +65,7 @@ public class Neo4jDriver implements DatabaseDriver{
      * Add a recipe in Neo4j databases
      * @param r  Object recipe that will be added
      */
-    public void addRecipe(Recipe r)
+    public void newRecipe(Recipe r)
     {
         try ( Session session = driver.session())
         {
@@ -85,7 +85,7 @@ public class Neo4jDriver implements DatabaseDriver{
             session.writeTransaction((TransactionWork<Void>) tx -> {
                 tx.run( "UNWIND $props as rnew " +
                                 "MATCH (u:User{username:$name}) " +
-                                "CREATE (rec:Recipe{title:rnew.title,calories:rnew.calories,fat:rnew.fat," +
+                                "MERGE (rec:Recipe{title:rnew.title,calories:rnew.calories,fat:rnew.fat," +
                                 "protein:rnew.protein,carbs:rnew.carbs}) " +
                                 "CREATE (u)-[ad:ADDS]->(rec) " +
                                 "SET ad.when=$ts",
