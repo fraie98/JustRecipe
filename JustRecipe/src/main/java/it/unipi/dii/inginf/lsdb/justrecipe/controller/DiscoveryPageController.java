@@ -1,6 +1,5 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
-import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
@@ -68,7 +67,8 @@ public class DiscoveryPageController {
                         "User username",
                         "User full name",
                         "Most followed and active users",
-                        "Most liked users"
+                        "Most liked users",
+                        "Most versatile user recipes"
                 );
         searchComboBox.setItems(options);
         searchComboBox.setValue("Suggested recipes");
@@ -114,6 +114,12 @@ public class DiscoveryPageController {
         if (String.valueOf(searchComboBox.getValue()).equals("Suggested recipes"))
         {
             showSuggestedRecipes();
+        }
+        if(String.valueOf(searchComboBox.getValue()).equals("Most versatile user recipes")){
+            String mostVersatileUser = mongoDBDriver.mostVersatileUserRecipes();
+            List<Recipe> recipes = mongoDBDriver.getRecipesFromAuthorUsername(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page,
+                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW, mostVersatileUser);
+            Utils.addRecipesSnap(discoveryVBox, recipes);
         }
         if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))
         {

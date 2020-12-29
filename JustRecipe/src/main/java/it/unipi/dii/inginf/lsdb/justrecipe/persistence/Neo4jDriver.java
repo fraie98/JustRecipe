@@ -4,6 +4,8 @@ import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
+import org.bson.BsonMaximumSizeExceededException;
+import org.bson.conversions.Bson;
 import org.neo4j.driver.*;
 
 import java.util.*;
@@ -62,7 +64,7 @@ public class Neo4jDriver implements DatabaseDriver{
 
 
     /**
-     * Add a recipe in Neo4j databases
+     * Add a recipe in Neo4j databases, used the match in order to have no code replications for the editRecipe
      * @param r  Object recipe that will be added
      */
     public void newRecipe(Recipe r)

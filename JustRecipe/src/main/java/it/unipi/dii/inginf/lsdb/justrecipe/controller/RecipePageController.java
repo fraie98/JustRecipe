@@ -69,7 +69,7 @@ public class RecipePageController {
         cancelButton.setOnAction(actionEvent -> handleCancelButtonAction());
         recipeLikeImg.setOnMouseClicked(mouseEvent -> handleClickOnLike());
         recipeUsername.setOnMouseClicked(mouseEvent -> handleClickOnUsername(mouseEvent));
-        recipeEditImg.setOnMouseClicked(mouseEvent -> clickOneEditButton(mouseEvent));
+        recipeEditImg.setOnMouseClicked(mouseEvent -> clickOnEditButton(mouseEvent));
     }
 
     private void handleClickOnLike()
@@ -101,11 +101,14 @@ public class RecipePageController {
         mongoDBDriver.addComment(recipe, comment);
     }
 
-    private void clickOneEditButton(MouseEvent mouseEvent){
+    /**
+     * Function who handle the editButton
+     * @param mouseEvent
+     */
+    private void clickOnEditButton(MouseEvent mouseEvent){
         AddRecipePageController addRecipePageController = (AddRecipePageController)
                 Utils.changeScene("/addRecipe.fxml", mouseEvent);
         addRecipePageController.setRecipe(recipe);
-        addRecipePageController.setFocus();
     }
 
     /**

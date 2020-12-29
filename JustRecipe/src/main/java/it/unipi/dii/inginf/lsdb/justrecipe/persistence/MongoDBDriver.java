@@ -19,6 +19,8 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
+import static com.mongodb.client.model.Accumulators.addToSet;
+import static com.mongodb.client.model.Accumulators.sum;
 
 import javax.print.Doc;
 import java.lang.reflect.Type;
@@ -27,8 +29,7 @@ import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 import static com.mongodb.client.model.Aggregates.*;
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Projections.include;
 import static com.mongodb.client.model.Sorts.ascending;
@@ -138,6 +139,10 @@ public class MongoDBDriver implements DatabaseDriver{
         collection.insertOne(doc);
     }
 
+    /**
+     * Edit an already present recipe
+     * @param r the new recipe to replace the old one
+     */
     public void editRecipe(Recipe r){
         Document doc = new Document("title",r.getTitle())
                 .append("instructions",r.getInstructions())
@@ -154,7 +159,7 @@ public class MongoDBDriver implements DatabaseDriver{
         if(r.getCarbs()!=-1)
             doc.append("carbs",r.getCarbs());
         // Automatic fields
-        doc.append("creationTime",new Date(r.getCreationTime().getTime()))
+        doc.append("creationTime", r.getCreationTime())
                 .append("authorUsername",r.getAuthorUsername());
         // Other option field
         if(r.getPicture() != null)
@@ -491,5 +496,25 @@ public class MongoDBDriver implements DatabaseDriver{
         Type recipeListType = new TypeToken<ArrayList<Recipe>>(){}.getType();
         recipes = gson.fromJson(gson.toJson(results), recipeListType);
         return recipes;
+    }
+
+    public String mostVersatileUserRecipes(){
+        List<Recipe> recipes = new ArrayList<>();
+        Bson unwind = unwind("$categories");
+        Bson group = new Document("$group", new Document("_id", new Document("author", "$authorUsername").append("category",
+                "$categories")).append("numRecipe", new Document("$sum", 1)));
+        Bson match = match(gte("numRecipe",5));
+        Bson group2 = group("$_id.author", sum("distinctCategories", 1));
+        Bson sort = sort(descending("distinctCategories"));
+//        Bson skip = skip(howManySkip);
+        Bson limit = limit(8);
+        collection.aggregate(Arrays.asList(unwind, group, match, group2, sort, limit)).forEach(printDocuments);
+        Object o = collection.aggregate(Arrays.asList(unwind, group, match, group2, sort, limit)).first();
+        String mostVersatileUser = o.toString();
+        mostVersatileUser=mostVersatileUser.substring(mostVersatileUser.indexOf("=")+1);
+        mostVersatileUser=mostVersatileUser.substring(0, mostVersatileUser.indexOf(","));
+        System.out.println(mostVersatileUser);
+//        recipes = getRecipesFromAuthorUsername(howManySkip, howMany, mostVersatileUser);
+        return mostVersatileUser;
     }
 }

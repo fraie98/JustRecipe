@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import org.neo4j.driver.internal.InternalPath;
 
 import java.beans.EventHandler;
 import java.util.Arrays;
@@ -51,38 +52,25 @@ public class AddRecipePageController {
         clear.setOnMouseClicked(mouseEvent -> clearAllFields());
     }
 
+    /**
+     * Using the recipe (argument) to fill the form in order to edit an already present recipe
+     * @param recipe
+     */
     public void setRecipe(Recipe recipe){
         this.recipe = recipe;
         addTitle.setText(recipe.getTitle());
         addTitle.setEditable(false);
+        addUrl.requestFocus();
         addUrl.setText(recipe.getPicture());
         addCal.setText(String.valueOf(recipe.getCalories()));
         addCarbs.setText(String.valueOf(recipe.getCarbs()));
         addFat.setText(String.valueOf(recipe.getFat()));
         addProt.setText(String.valueOf(recipe.getProtein()));
-        String categories = new String();
-        for (String k: recipe.getCategories()) {
-            if(!k.isEmpty()){
-                categories += k;
-                categories += ",";
-            }
-        }
-        addCateg.setText(categories);
-        String ingredients = new String();
-        for (String k: recipe.getIngredients()) {
-            if(!k.isEmpty()) {
-                ingredients += k;
-                ingredients += ",";
-            }
-        }
-        addIngr.setText(ingredients);
+        addCateg.setText(Utils.fromListToString(recipe.getCategories()));
+        addIngr.setText(Utils.fromListToString(recipe.getIngredients()));
         addInstructions.setText(recipe.getInstructions());
     }
 
-
-    public void setFocus(){
-        addUrl.requestFocus();
-    }
     /**
      * Control the fields and add new recipe in the DBs
      */
@@ -103,7 +91,11 @@ public class AddRecipePageController {
 
             //Date ts = new Date(System.currentTimeMillis());
             //Date ts = new Date(new Date().getTime());
-            Date ts = new Date();
+            Date ts;
+            if (addTitle.isEditable())
+                ts = new Date();
+            else
+                ts = recipe.getCreationTime();
             String creator = appSession.getLoggedUser().getUsername();
 
             int calo, fat, carbs, proteins;
