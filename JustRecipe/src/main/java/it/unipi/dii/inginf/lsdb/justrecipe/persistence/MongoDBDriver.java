@@ -507,7 +507,12 @@ public class MongoDBDriver implements DatabaseDriver{
         return recipes;
     }
 
-    public String mostVersatileUser(int howMany){
+    /**
+     * Search and return the most versatile user (by his/her username)
+     * @param howMany
+     * @return
+     */
+    public String searchMostVersatileUser(int howMany){
         Bson unwind = unwind("$categories");
         Bson group = new Document("$group", new Document("_id", new Document("author", "$authorUsername").append("category",
                 "$categories")).append("numRecipe", new Document("$sum", 1)));
@@ -517,10 +522,10 @@ public class MongoDBDriver implements DatabaseDriver{
         Bson limit = limit(howMany);
         collection.aggregate(Arrays.asList(unwind, group, match, group2, sort, limit)).forEach(printDocuments);
         Object o = collection.aggregate(Arrays.asList(unwind, group, match, group2, sort, limit)).first();
-        String mostVersatileUser = o.toString();
-        mostVersatileUser=mostVersatileUser.substring(mostVersatileUser.indexOf("=")+1);
-        mostVersatileUser=mostVersatileUser.substring(0, mostVersatileUser.indexOf(","));
-        System.out.println(mostVersatileUser);
-        return mostVersatileUser;
+        String mostVersatileUsername = o.toString();
+        mostVersatileUsername=mostVersatileUsername.substring(mostVersatileUsername.indexOf("=")+1);
+        mostVersatileUsername=mostVersatileUsername.substring(0, mostVersatileUsername.indexOf(","));
+        System.out.println(mostVersatileUsername);
+        return mostVersatileUsername;
     }
 }

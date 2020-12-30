@@ -33,7 +33,7 @@
 \contentsline {subsection}{\numberline {3.3.1}MongoDB}{15}%
 \contentsline {subsubsection}{Recipes of the user}{15}%
 \contentsline {subsubsection}{Search for recipe title}{16}%
-\contentsline {subsubsection}{Most Versatile User}{16}%
+\contentsline {subsubsection}{Search Most Versatile User}{16}%
 \contentsline {subsubsection}{Search for recipe category}{17}%
 \contentsline {subsubsection}{Search for recipe ingredients}{18}%
 \contentsline {subsubsection}{Most common recipe categories}{19}%
