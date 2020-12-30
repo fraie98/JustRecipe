@@ -960,20 +960,12 @@ public class Neo4jDriver implements DatabaseDriver{
         List<Recipe> recipes = new ArrayList<>();
         try(Session session = driver.session()) {
             recipes = session.readTransaction((TransactionWork<List<Recipe>>)  tx -> {
-                Result result = tx.run("MATCH path = (recipe:Recipe)<-[a:ADDS]-(owner:User)<-[:FOLLOWS*1..2]-(me:User{username:$u}) " +
+                Result result = tx.run("MATCH path = (recipe:Recipe)<-[a:ADDS]-(owner:User)<-[:FOLLOWS*2..3]-(me:User{username:$u}) " +
                                 "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat," +
                                 " recipe.picture, a.when, owner.username " +
                                 "ORDER BY length(path) ASC, a.when DESC " +
                                 "SKIP $s " +
                                 "LIMIT $l ",
-                /*Result result = tx.run("MATCH path = (r:Recipe)<-[ad:ADDS]-(u:User)<-[:FOLLOWS*]-(me:User{username:$u}) " +
-                                "WITH length(path) as hopsNumber, r as recipe, ad as a, u as owner " +
-                                "WHERE hopsNumber < 4 " +
-                                "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat," +
-                                " recipe.picture, a.when, hopsNumber, owner.username " +
-                                "ORDER BY hopsNumber ASC, a.when DESC " +
-                                "SKIP $s " +
-                                "LIMIT $l ",*/
                         parameters("u",username, "s", howManyToSkip, "l", howManyToGet));
 
                 List<Recipe> r = new ArrayList<>();

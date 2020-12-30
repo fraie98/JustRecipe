@@ -10,34 +10,42 @@
 \contentsline {subsubsection}{Features offered to the Moderator}{5}%
 \contentsline {subsubsection}{Features offered to the Administrator}{5}%
 \contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}%
-\contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{6}%
-\contentsline {section}{\numberline {2.3}UML Class Diagram}{7}%
-\contentsline {section}{\numberline {2.4}Data Model}{8}%
-\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{8}%
-\contentsline {subsection}{\numberline {2.4.2}GraphDB}{9}%
-\contentsline {section}{\numberline {2.5}Distributed Database Design}{9}%
-\contentsline {subsection}{\numberline {2.5.1}Replicas}{9}%
-\contentsline {subsection}{\numberline {2.5.2}Sharding}{9}%
-\contentsline {section}{\numberline {2.6}Software Architecture}{9}%
-\contentsline {chapter}{\numberline {3}Implementation and Test}{10}%
-\contentsline {section}{\numberline {3.1}Main Modules}{10}%
-\contentsline {section}{\numberline {3.2}Main Packages and Classes}{10}%
-\contentsline {section}{\numberline {3.3}Most Relevant Queries}{10}%
-\contentsline {subsection}{\numberline {3.3.1}MongoDB}{10}%
-\contentsline {subsubsection}{Recipes of the user}{10}%
-\contentsline {subsubsection}{Search for recipe title}{11}%
-\contentsline {subsubsection}{Search for recipe category}{11}%
-\contentsline {subsubsection}{Search for recipe ingredients}{12}%
-\contentsline {subsubsection}{Most common recipe categories}{13}%
-\contentsline {subsubsection}{Recipes with below average calories - TO DO}{13}%
-\contentsline {subsubsection}{Last Comments}{13}%
-\contentsline {subsection}{\numberline {3.3.2}Neo4J}{14}%
-\contentsline {subsubsection}{Suggested Recipes - MANCA CODICE}{14}%
-\contentsline {subsubsection}{Recipes of following users}{14}%
-\contentsline {subsubsection}{Most followed and active users}{15}%
-\contentsline {subsubsection}{Most liked users}{15}%
-\contentsline {subsubsection}{Best Recipes}{15}%
-\contentsline {subsubsection}{Search for username}{16}%
-\contentsline {subsubsection}{Search for user's full-name}{16}%
-\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{17}%
-\contentsline {chapter}{\numberline {4}User Manual}{18}%
+\contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{7}%
+\contentsline {section}{\numberline {2.3}UML Class Diagram}{8}%
+\contentsline {subsubsection}{Classes definitions}{9}%
+\contentsline {subsubsection}{Classes attributes}{9}%
+\contentsline {section}{\numberline {2.4}Data Model}{9}%
+\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{9}%
+\contentsline {subsection}{\numberline {2.4.2}GraphDB}{11}%
+\contentsline {section}{\numberline {2.5}Distributed Database Design}{12}%
+\contentsline {subsection}{\numberline {2.5.1}Replicas}{12}%
+\contentsline {subsection}{\numberline {2.5.2}Sharding}{12}%
+\contentsline {section}{\numberline {2.6}Software Architecture}{12}%
+\contentsline {chapter}{\numberline {3}Implementation and Test}{13}%
+\contentsline {section}{\numberline {3.1}Main Modules}{13}%
+\contentsline {section}{\numberline {3.2}Main Packages and Classes}{13}%
+\contentsline {subsection}{\numberline {3.2.1}it.unipi.dii.inginf.lsdb.justrecipe.config}{13}%
+\contentsline {subsection}{\numberline {3.2.2}it.unipi.dii.inginf.lsdb.justrecipe.main}{13}%
+\contentsline {subsection}{\numberline {3.2.3}it.unipi.dii.inginf.lsdb.justrecipe.model}{13}%
+\contentsline {subsection}{\numberline {3.2.4}it.unipi.dii.inginf.lsdb.justrecipe.persistence}{14}%
+\contentsline {subsection}{\numberline {3.2.5}it.unipi.dii.inginf.lsdb.justrecipe.controller}{14}%
+\contentsline {subsection}{\numberline {3.2.6}it.unipi.dii.inginf.lsdb.justrecipe.utils}{15}%
+\contentsline {section}{\numberline {3.3}Most Relevant Queries}{15}%
+\contentsline {subsection}{\numberline {3.3.1}MongoDB}{15}%
+\contentsline {subsubsection}{Recipes of the user}{15}%
+\contentsline {subsubsection}{Search for recipe title}{16}%
+\contentsline {subsubsection}{Search for recipe category}{16}%
+\contentsline {subsubsection}{Search for recipe ingredients}{17}%
+\contentsline {subsubsection}{Most common recipe categories}{18}%
+\contentsline {subsubsection}{Recipes with below average calories - TO DO}{18}%
+\contentsline {subsubsection}{Last Comments}{18}%
+\contentsline {subsection}{\numberline {3.3.2}Neo4J}{19}%
+\contentsline {subsubsection}{Suggested Recipes - MANCA CODICE}{19}%
+\contentsline {subsubsection}{Recipes of following users}{19}%
+\contentsline {subsubsection}{Most followed and active users}{20}%
+\contentsline {subsubsection}{Most liked users}{20}%
+\contentsline {subsubsection}{Best Recipes}{20}%
+\contentsline {subsubsection}{Search for username}{21}%
+\contentsline {subsubsection}{Search for user's full-name}{21}%
+\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{22}%
+\contentsline {chapter}{\numberline {4}User Manual}{23}%

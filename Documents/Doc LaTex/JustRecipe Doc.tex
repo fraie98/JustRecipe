@@ -110,6 +110,15 @@
 \tableofcontents
 
 \chapter*{Introduction}
+In the social network era the large scale databases topic is very relevant. The handling of big data such as informations of users and moreover is a critical asset of our society. In fact, from the viewpoint of the security is very important to handle in the correct way this very huge amount of data because, otherwise, it is possible to have leak of critical information that cause critical issues about users privacy.
+
+\noindent Another problem caused from large amount of data created from the applications used every day from all of us, is the following: \emph{How we can manage this data?}.
+
+\noindent Nowadays we have a lot of tools to do this, the most famous, and maybe the most used, is for sure MongoDB. It allows us to handle a huge amount of data without critical issues and maintaining good performance. Another well-known tool is Neo4J (and so Graph DB) that is in charge of handle the social part of the application, in fact the graph is indeed a network, and so this is the best way to represents a social network where the interactions between users are fundamental and very widespread.
+
+\noindent Our aim is to design and implement a modern application which can handle a huge amount of data maintaining good performance and implementing a social network side in order to exploit the desire for social relations of our society.
+
+
 
 \chapter{Dataset}
 In this first chapter of this document we will talk about searching for the initial dataset.
@@ -230,16 +239,26 @@ The main actors of the application are four:
 	\noindent In order to handle better the application, the admin can elect some users as moderators.
 \end{itemize}
 \subsection{Non-Functional Requirements}
-
+The non-functional requirements of the applications are described in the following lists:
+\begin{itemize}
+	\item \emph{usability}
+	\item \emph{data availability}
+	\item \emph{Tolerance to single point of failure}: if a server crashes another one is available (thanks to replicas). Parlare quindi dell'eventual consistency.
+	\item \emph{dire qualcosa sulla sharding}
+	\item \emph{Reliability}
+	\item \emph{Security and data encryption???}
+\end{itemize}
+\newpage
 \subsection{Actors and Use Cases}
 The use case diagram of the application is described in the figure 2.1
 
 \begin{figure}[htpb]
 	\centering
-	\includegraphics[scale=0.42]{img/UseCaseDiagram.png}
+	\includegraphics[scale=0.4]{img/UseCaseDiagram.png}
 	\caption{Use Case Diagram}
 \end{figure}
-Some observations on the diagram are necessary:
+
+\noindent Some observations on the diagram are necessary:
 \begin{itemize}
 	\item The circles in \underline{blue} are the ones which described actions available only for the owner of the object on which the actions are applied.
 	
@@ -274,7 +293,9 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 	\caption{UML Analysis Classes Diagram}
 \end{figure}
 
+\newpage
 \subsubsection{Classes definitions}
+Classes definitions:
 \begin{table}[ht]
 \caption{Classes definitions} % title of Table
 \centering % used for centering table
@@ -294,6 +315,7 @@ Recipe & Recipe added by one user  \\ [1ex] % [1ex] adds vertical space
 \end{table}
 
 \subsubsection{Classes attributes}
+Classes attributes:
 \begin{table}[ht]
 \caption{Classes attributes - User}
 \centering 
@@ -346,8 +368,9 @@ picture & String & URL of the recipe picture \\[1ex]
 \end{table}
 
 \section{Data Model}
-
+In this section we will discuss about the design choises performed in terms of data model and the databases used in order to handle in the better way our dataset.
 \subsection{DocumentDB}
+The document DB is used in order to handle the large dataset of recipes that we have. In particular, MongoDB allow us to perform fast query even if the size of the dataset is very big and this is the main reason that brings us to choose it. Moreover it is schemaless and this allow us to maintain etherogenous recipes in our database (some recipes have some attributes, instead others have not those). 
 \lstset{ language=json}
 \begin{lstlisting}
 {
@@ -403,6 +426,36 @@ picture & String & URL of the recipe picture \\[1ex]
 }
 \end{lstlisting}  
 \subsection{GraphDB}
+The Graph database is the one that handles the social part of the application. Thanks to it we are able to analyze the relationships among users and their recipes. The graph database that we use is Neo4J.
+
+\noindent We have two type of nodes within the database:
+\begin{itemize}
+	\item \textbf{User}: it is the node that represents the user inside the graph. Its attribute are: \emph{firstName}, \emph{lastName}, \emph{username}, \emph{password}, \emph{picture}\footnote{Only the URL of the picture is saved in this field, otherwise the size of this attribute would be too large}, \emph{role}\footnote{0 for the normal user, 1 for moderator and 2 for the administrator}.
+	
+	\item \textbf{Recipe}: it is the node that represents the recipe within the graph. Its attribute are: \emph{title}, \emph{calories}, \emph{fat}, \emph{carbs}, \emph{protein}, \emph{picture}$^1$
+\end{itemize}
+
+\noindent The information about the user are present only on Neo4J because we handle the social part only with it. Instead some information about recipes are present in both databases, in particular on Neo4J we have info that are already present also in MongoDB, but the opposite is not true.
+
+\noindent The Neo4J relationships are:
+\begin{itemize}
+	\item \textbf{Adds}: if the user \emph{A} has added the recipe \emph{R}, then we have a relationship \emph{:ADDS} from \emph{A} to \emph{R} ($A \rightarrow R$).
+	
+	\noindent We have as property, the one called \emph{when} that is the timestamp which indicates when the recipe has been added.
+	
+	\item \textbf{Follows}: if the user \emph{A} has followed the user \emph{B}, then we have a relationship \emph{:FOLLOWS} from \emph{A} to \emph{B} ($A \rightarrow B$).
+	
+	\item \textbf{Likes}: if the user \emph{A} has liked the recipe \emph{R}, then we have a relationship \emph{:LIKES} from \emph{A} to \emph{R} ($A \rightarrow R$).
+\end{itemize}  
+
+\noindent All the relationships that starts from a node \emph{X} are deleted if \emph{X} has deleted, furthermore if \emph{X} is a user, also the recipes that he has added will be eliminated. In figure 2.4 we can see an example of the nodes, the relationships and the attributes.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.6]{img/graphDbModel.png}
+	\caption{Example of Neo4J nodes and relationships}
+\end{figure}
+
 \section{Distributed Database Design}
 \subsection{Replicas}
 \subsection{Sharding}
@@ -712,7 +765,7 @@ We have two levels of suggestions with different relevance.
 \begin{itemize}
 	\item First Level
 	
-	\noindent Recipe \emph{R} is a first level suggestion for the user \emph{X} if \emph{R} has been added by the user \emph{Y} where \emph{Y} is followed by \emph{X} ($X \rightarrow Y$). Or \emph{R} has been added by \emph{Z} where \emph{Z} is followed by \emph{Y} ($ X \rightarrow Y \rightarrow Z$).
+	\noindent Recipe \emph{R} is a first level suggestion for the user \emph{X}, if \emph{R} has been added by the user \emph{Y} where \emph{Y} is followed by \emph{W} who is followed by \emph{X} ($X \rightarrow W \rightarrow Y$). Or \emph{R} has been added by \emph{Z} where \emph{Z} is followed by \emph{Y} ($ X \rightarrow W \rightarrow Y \rightarrow Z$).
 	
 	\item Second Level
 	
