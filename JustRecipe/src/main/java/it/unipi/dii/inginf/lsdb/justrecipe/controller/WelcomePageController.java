@@ -11,10 +11,12 @@ import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.WindowEvent;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -54,6 +56,7 @@ public class WelcomePageController {
 
         usernameLoginTextField.setText("oliver.smith");
         passwordLoginTextField.setText("oliver.smith");
+
     }
 
     /**

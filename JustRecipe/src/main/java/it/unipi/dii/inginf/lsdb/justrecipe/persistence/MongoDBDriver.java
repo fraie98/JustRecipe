@@ -83,21 +83,30 @@ public class MongoDBDriver implements DatabaseDriver{
      * Method that inits the MongoClient and choose the correct database
      */
     @Override
-    public void initConnection() {
-        ConnectionString connectionString;
-        if (!username.equals("")) // if there are access rules
+    public boolean initConnection() {
+        try
         {
-            connectionString = new ConnectionString("mongodb://" + username + ":" + password
-                    + "@" + ip + ":" + port);
+            ConnectionString connectionString;
+
+            if (!username.equals("")) // if there are access rules
+            {
+                connectionString = new ConnectionString("mongodb://" + username + ":" + password
+                        + "@" + ip + ":" + port);
+            } else // standard access
+            {
+                connectionString = new ConnectionString("mongodb://" + ip + ":" + port);
+            }
+            mongoClient = MongoClients.create(connectionString);
+            database = mongoClient.getDatabase(dbName);
+            pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                    fromProviders(PojoCodecProvider.builder().automatic(true).build()));
         }
-        else // standard access
+        catch (Exception ex)
         {
-            connectionString = new ConnectionString("mongodb://" + ip + ":" + port);
+            System.err.println("MongoDB is not available");
+            return false;
         }
-        mongoClient = MongoClients.create(connectionString);
-        database = mongoClient.getDatabase(dbName);
-        pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+        return true;
     }
 
     /**

@@ -31,7 +31,7 @@ public class Neo4jDriver implements DatabaseDriver{
         this.port = configurationParameters.getNeo4jPort();
         this.username = configurationParameters.getNeo4jUsername();
         this.password = configurationParameters.getNeo4jPassword();
-        initConnection();
+       // initConnection();
     }
 
     public static Neo4jDriver getInstance()
@@ -47,9 +47,18 @@ public class Neo4jDriver implements DatabaseDriver{
      * Method that inits the Driver
      */
     @Override
-    public void initConnection()
+    public boolean initConnection()
     {
-        driver = GraphDatabase.driver( "neo4j://" + ip + ":" + port, AuthTokens.basic( username, password ) );
+        try
+        {
+            driver = GraphDatabase.driver("neo4j://" + ip + ":" + port, AuthTokens.basic(username, password));
+            driver.verifyConnectivity();
+        } catch (Exception e)
+        {
+            System.err.println("Neo4J is not available");
+            return false;
+        }
+            return true;
     }
 
     /**
