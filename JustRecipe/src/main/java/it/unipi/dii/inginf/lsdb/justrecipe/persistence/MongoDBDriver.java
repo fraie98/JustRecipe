@@ -507,23 +507,20 @@ public class MongoDBDriver implements DatabaseDriver{
         return recipes;
     }
 
-    public String mostVersatileUserRecipes(){
-        List<Recipe> recipes = new ArrayList<>();
+    public String mostVersatileUser(int howMany){
         Bson unwind = unwind("$categories");
         Bson group = new Document("$group", new Document("_id", new Document("author", "$authorUsername").append("category",
                 "$categories")).append("numRecipe", new Document("$sum", 1)));
         Bson match = match(gte("numRecipe",5));
         Bson group2 = group("$_id.author", sum("distinctCategories", 1));
         Bson sort = sort(descending("distinctCategories"));
-//        Bson skip = skip(howManySkip);
-        Bson limit = limit(8);
+        Bson limit = limit(howMany);
         collection.aggregate(Arrays.asList(unwind, group, match, group2, sort, limit)).forEach(printDocuments);
         Object o = collection.aggregate(Arrays.asList(unwind, group, match, group2, sort, limit)).first();
         String mostVersatileUser = o.toString();
         mostVersatileUser=mostVersatileUser.substring(mostVersatileUser.indexOf("=")+1);
         mostVersatileUser=mostVersatileUser.substring(0, mostVersatileUser.indexOf(","));
         System.out.println(mostVersatileUser);
-//        recipes = getRecipesFromAuthorUsername(howManySkip, howMany, mostVersatileUser);
         return mostVersatileUser;
     }
 }
