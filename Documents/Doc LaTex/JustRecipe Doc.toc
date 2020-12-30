@@ -12,10 +12,8 @@
 \contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}%
 \contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{7}%
 \contentsline {section}{\numberline {2.3}UML Class Diagram}{8}%
-\contentsline {subsubsection}{Classes definitions}{9}%
-\contentsline {subsubsection}{Classes attributes}{9}%
-\contentsline {section}{\numberline {2.4}Data Model}{9}%
-\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{9}%
+\contentsline {section}{\numberline {2.4}Data Model}{10}%
+\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{10}%
 \contentsline {subsection}{\numberline {2.4.2}GraphDB}{11}%
 \contentsline {section}{\numberline {2.5}Distributed Database Design}{12}%
 \contentsline {subsection}{\numberline {2.5.1}Replicas}{12}%
@@ -34,10 +32,10 @@
 \contentsline {subsection}{\numberline {3.3.1}MongoDB}{15}%
 \contentsline {subsubsection}{Recipes of the user}{15}%
 \contentsline {subsubsection}{Search for recipe title}{16}%
+\contentsline {subsubsection}{Most Versatile User's Recipe}{16}%
 \contentsline {subsubsection}{Search for recipe category}{16}%
 \contentsline {subsubsection}{Search for recipe ingredients}{17}%
 \contentsline {subsubsection}{Most common recipe categories}{18}%
-\contentsline {subsubsection}{Recipes with below average calories - TO DO}{18}%
 \contentsline {subsubsection}{Last Comments}{18}%
 \contentsline {subsection}{\numberline {3.3.2}Neo4J}{19}%
 \contentsline {subsubsection}{Suggested Recipes - MANCA CODICE}{19}%
@@ -48,4 +46,6 @@
 \contentsline {subsubsection}{Search for username}{21}%
 \contentsline {subsubsection}{Search for user's full-name}{21}%
 \contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{22}%
+\contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{22}%
+\contentsline {subsection}{\numberline {3.4.2}Index Analysis}{22}%
 \contentsline {chapter}{\numberline {4}User Manual}{23}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  30 DEC 2020 11:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  30 DEC 2020 17:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -333,10 +333,10 @@ Chapter 2.
 <img/UseCaseDiagram.png, id=39, 1138.2525pt x 1116.17pt>
 File: img/UseCaseDiagram.png Graphic file (type png)
 <use img/UseCaseDiagram.png>
-Package pdftex.def Info: img/UseCaseDiagram.png  used on input line 257.
+Package pdftex.def Info: img/UseCaseDiagram.png  used on input line 261.
 (pdftex.def)             Requested size: 455.29294pt x 446.4601pt.
 
-Overfull \hbox (42.72795pt too wide) in paragraph at lines 257--258
+Overfull \hbox (42.72795pt too wide) in paragraph at lines 261--262
  [][] 
  []
 
@@ -344,34 +344,35 @@ Overfull \hbox (42.72795pt too wide) in paragraph at lines 257--258
 <img/ClassDiagram_generaliz.png, id=44, 734.745pt x 421.575pt>
 File: img/ClassDiagram_generaliz.png Graphic file (type png)
 <use img/ClassDiagram_generaliz.png>
-Package pdftex.def Info: img/ClassDiagram_generaliz.png  used on input line 284
+Package pdftex.def Info: img/ClassDiagram_generaliz.png  used on input line 288
 .
 (pdftex.def)             Requested size: 367.3716pt x 210.78697pt.
 <img/ClassDiagram.png, id=45, 667.49374pt x 421.575pt>
 File: img/ClassDiagram.png Graphic file (type png)
 <use img/ClassDiagram.png>
-Package pdftex.def Info: img/ClassDiagram.png  used on input line 292.
+Package pdftex.def Info: img/ClassDiagram.png  used on input line 296.
 (pdftex.def)             Requested size: 333.74606pt x 210.78697pt.
  [8 <./img/ClassDiagram_generaliz.png> <./img/ClassDiagram.png>]
-Overfull \hbox (19.3632pt too wide) in paragraph at lines 302--315
+Overfull \hbox (19.3632pt too wide) in paragraph at lines 306--319
  [][] 
  []
 
+[9]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
-75.
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+82.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [9] [10]
+) [10]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 433.
+(Font)              <8> on input line 440.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 433.
+(Font)              <6> on input line 440.
 <img/graphDbModel.png, id=59, 587.19376pt x 392.46625pt>
 File: img/graphDbModel.png Graphic file (type png)
 <use img/graphDbModel.png>
-Package pdftex.def Info: img/graphDbModel.png  used on input line 455.
+Package pdftex.def Info: img/graphDbModel.png  used on input line 462.
 (pdftex.def)             Requested size: 352.31897pt x 235.48155pt.
- [11 <./img/graphDbModel.png>] [12]
+ [11] [12 <./img/graphDbModel.png>]
 Chapter 3.
 [13
 
@@ -390,7 +391,7 @@ Here is how much of TeX's memory you used:
  22139 multiletter control sequences out of 15000+600000
  547743 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,9n,60p,745b,1712s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 50i,8n,60p,745b,1712s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t
 1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
@@ -407,7 +408,7 @@ pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texm
 f/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public
 /cm-super/sfti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.p
 fb>
-Output written on "JustRecipe Doc.pdf" (24 pages, 773562 bytes).
+Output written on "JustRecipe Doc.pdf" (24 pages, 778667 bytes).
 PDF statistics:
  165 PDF objects out of 1000 (max. 8388607)
  110 compressed objects within 2 object streams

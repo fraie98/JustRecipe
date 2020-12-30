@@ -241,12 +241,16 @@ The main actors of the application are four:
 \subsection{Non-Functional Requirements}
 The non-functional requirements of the applications are described in the following lists:
 \begin{itemize}
-	\item \emph{usability}
-	\item \emph{data availability}
-	\item \emph{Tolerance to single point of failure}: if a server crashes another one is available (thanks to replicas). Parlare quindi dell'eventual consistency.
-	\item \emph{dire qualcosa sulla sharding}
-	\item \emph{Reliability}
-	\item \emph{Security and data encryption???}
+	\item \emph{Usability}: The application must be user-friendly so a GUI is adopted. A low response time is necessary in order to avoid too long waits for the user.
+	\item \emph{Data Availability}: For modern shared-data systems and for a social network application, the most crucial requirement is that the data must be always available as the service too.
+	\item \emph{Tolerance to single point of failure}: If a server crashes another one is available, this is ensured by the use of replicas.
+	\item \emph{Data Consistency}: The operations must be monotonic and so all the users must see the last version of the data and the update operations must be performed in the same order in which they are issued.
+
+	\item \emph{Reliability}: The application must work without crashes and so it must handle exceptions if they occur.
+	
+	\item \emph{Administration Control}: Administrators must have the possibility of delete users that don't respect the rules of conduct, they are helped by the moderators that are in charge of checking comments of the users. 
+	
+	\item \emph{Flexibility}: Due to the fact that the recipes attribute are not all mandatory, the data must be handled in a flexible way.  
 \end{itemize}
 \newpage
 \subsection{Actors and Use Cases}
@@ -294,14 +298,14 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 \end{figure}
 
 \newpage
-\subsubsection{Classes definitions}
-Classes definitions:
+%\subsubsection{Classes definitions}
+%Classes definitions:
 \begin{table}[ht]
 \caption{Classes definitions} % title of Table
 \centering % used for centering table
 \begin{tabular}{c c} % centered columns (2 columns)
-\hline\hline %inserts double horizontal lines
-Class & Description \\ [0.5ex] % inserts table
+\hline %inserts double horizontal lines
+Class & Description \\ [0.1ex] % inserts table
 %heading
 \hline % inserts single horizontal line
 Registered User &  A standard user (registered one) who can only perform basic operations \\
@@ -314,14 +318,14 @@ Recipe & Recipe added by one user  \\ [1ex] % [1ex] adds vertical space
 \label{table:classes definitions} % is used to refer this table in the text
 \end{table}
 
-\subsubsection{Classes attributes}
-Classes attributes:
+%\subsubsection{Classes attributes}
+%Classes attributes:
 \begin{table}[ht]
 \caption{Classes attributes - User}
 \centering 
 \begin{tabular}{c c c}
-\hline\hline
-Attribute & Type &  Description \\ [0.5ex]
+\hline
+Attribute & Type &  Description \\ [0.1ex]
 \hline 
 firstName & String &  First name of the user \\
 lastName & String & Last name of the user  \\ 
@@ -337,8 +341,8 @@ role & int & Role of the user (0: Normal User, 1: Moderator, 2: Administrator)\\
 \caption{Classes attributes - Comment}
 \centering 
 \begin{tabular}{c c c}
-\hline\hline
-Attribute & Type &  Description \\ [0.5ex]
+\hline
+Attribute & Type &  Description \\ [0.1ex]
 \hline 
 text & String &  Plain text of the comment \\
 creationTime & Date & Creation timestamp of the comment  \\[1ex] 
@@ -350,8 +354,8 @@ creationTime & Date & Creation timestamp of the comment  \\[1ex]
 \caption{Classes attributes - Recipe}
 \centering 
 \begin{tabular}{c c c}
-\hline\hline
-Attribute & Type &  Description \\ [0.5ex]
+\hline
+Attribute & Type &  Description \\ [0.1ex]
 \hline 
 title & String &  Title of the recipe (identifier) \\
 instructions & String & Operations to be performed to make the recipe  \\ 
@@ -367,10 +371,13 @@ picture & String & URL of the recipe picture \\[1ex]
 \end{tabular}
 \end{table}
 
+
+\newpage
+
 \section{Data Model}
-In this section we will discuss about the design choises performed in terms of data model and the databases used in order to handle in the better way our dataset.
+In this section we will discuss about the design choises performed in terms of data model in order to handle in the better way our dataset.
 \subsection{DocumentDB}
-The document DB is used in order to handle the large dataset of recipes that we have. In particular, MongoDB allow us to perform fast query even if the size of the dataset is very big and this is the main reason that brings us to choose it. Moreover it is schemaless and this allow us to maintain etherogenous recipes in our database (some recipes have some attributes, instead others have not those). 
+The document DB is used in order to handle the large dataset of recipes that we have. In particular, it allows us to perform fast query even if the size of the dataset is very big and this is the main reason that brings us to choose it. Moreover, we use a DocumentDB in order to respect the \emph{flexibility} requirement, because it is schema-less and this allow us to maintain heterogeneous recipes in our database (some recipes have some attributes, instead others have not those). 
 \lstset{ language=json}
 \begin{lstlisting}
 {
@@ -426,7 +433,7 @@ The document DB is used in order to handle the large dataset of recipes that we 
 }
 \end{lstlisting}  
 \subsection{GraphDB}
-The Graph database is the one that handles the social part of the application. Thanks to it we are able to analyze the relationships among users and their recipes. The graph database that we use is Neo4J.
+The Graph database is the one that handles the social part of the application. Thanks to it we are able to analyze the relationships among users and their recipes.
 
 \noindent We have two type of nodes within the database:
 \begin{itemize}
@@ -435,9 +442,9 @@ The Graph database is the one that handles the social part of the application. T
 	\item \textbf{Recipe}: it is the node that represents the recipe within the graph. Its attribute are: \emph{title}, \emph{calories}, \emph{fat}, \emph{carbs}, \emph{protein}, \emph{picture}$^1$
 \end{itemize}
 
-\noindent The information about the user are present only on Neo4J because we handle the social part only with it. Instead some information about recipes are present in both databases, in particular on Neo4J we have info that are already present also in MongoDB, but the opposite is not true.
+\noindent The information about the user are present only on the GraphDB because we handle the social part only with it. Instead some information about recipes are present in both databases, in particular on GraphDB we have info that are already present also in the DocumentDB, but the opposite is not true.
 
-\noindent The Neo4J relationships are:
+\noindent The GraphDB relationships are:
 \begin{itemize}
 	\item \textbf{Adds}: if the user \emph{A} has added the recipe \emph{R}, then we have a relationship \emph{:ADDS} from \emph{A} to \emph{R} ($A \rightarrow R$).
 	
@@ -457,10 +464,25 @@ The Graph database is the one that handles the social part of the application. T
 \end{figure}
 
 \section{Distributed Database Design}
+breve introduzione sull'utilità di aver un db distribuito (chiacchiere varie)
 \subsection{Replicas}
-\subsection{Sharding}
-\section{Software Architecture}
+Dire in modo discorsivo come sono state fatte le repliche per mongodb (macchine virtuali ecc...) e per neo4j (per neo4j solo in locale per "not mandatory").
 
+\subsection{Sharding}
+
+
+\section{Software Architecture}
+Solutions to the requirements (as Java Fx for usability requirements).
+
+Client server architecture
+
+The graph database management system that we use is Neo4J. This part of the system handle the so-called \emph{snapshot} for both users and recipes (the info of recipe snap are in both dbs instead user snap are only on neo4j). 
+
+The DocumentDB Management System used is MongoDB.
+
+Vincoli (chiavi ecc....)
+
+\subsection{Inter-Databases Consistency}
 
 \chapter{Implementation and Test}
 \section{Main Modules}
@@ -476,7 +498,7 @@ This package is used to handle the configuration parameters, stored in \emph{con
 
 \noindent Classes:
  \begin{itemize}
-	\item \emph{ConfigurationParameters}: this class store all the configuration parameters needed by the application. For example the IP for the Neo4j database. These values do not need to be changed, so only get methods are provided. 
+	\item \emph{ConfigurationParameters}: this class stores all the configuration parameters needed by the application. For example the IP for the Neo4j database. These values do not need to be changed, so only get methods are provided. 
 \end{itemize}
 \subsection {it.unipi.dii.inginf.lsdb.justrecipe.main}
 This package contains the Main class, that starts the application.
@@ -514,7 +536,7 @@ This package contains the classes required for the controller part of the MVC pa
 	\item \emph{DiscoveryPageController}: this class manages the discovery section of the application. So it is in charge of showing the results of search made by the user.
 	\item \emph{ProfilePageController}: this class manages the profile section of the application. The profile could be either mine or someone else's. Thanks to this class it is possible to manage some events such as following a user, deleting my profile, seeing his recipes, and so on.
 	\item \emph{AdministrationPageController}: this class handles the Administration section of the application. Of course, not all the users can access to this page, only the moderator (for seeing the last comments) and the administrators (for doing all the possible operations) can access.
-	\item \emph{EditProfilPageController}: this class manages the page for editing the personal profile. The user can insert a new profile image, change the personal information, and so on. The administrator can change the role of the user in this page.
+	\item \emph{EditProfilePageController}: this class manages the page for editing the personal profile. The user can insert a new profile image, change the personal information, and so on. The administrator can change the role of the user in this page.
 	\item \emph{AddRecipePageController}: this class manages the page of the application used for insert a new recipe. 
 	\item \emph{RecipeSnapshotController}: this class manages the single recipe snapshot, like the click on him.
 	\item \emph{RecipePageController}: this class handles the page in which we show all the information about a recipe. In this page it is possible also to comment a recipe and see the comments already done.
@@ -526,7 +548,7 @@ This package contains a class used to store all the utility functions that we us
 
 \noindent Classes:
  \begin{itemize}
-	\item \emph{Utils}: this class is used to contain some utility functions used inside the application (to avoid replicating parts of code).
+	\item \emph{Utils}: this class is used for containing some utility functions used inside the application (to avoid code replication).
 \end{itemize}
 \section{Most Relevant Queries}
 In the following section will be presented the most relevant query performed with MongoDB and Neo4J. 
@@ -542,7 +564,7 @@ In the following section will be presented the most relevant query performed wit
 
 This query gives the opportunity to collect all the recipes written by a specific User through checking the author username field. This search is case sensitive cause we are using the username.
 \begin{itemize}
-	\item Input: a string who rapresent an username (unique through the users), how many recipe to skip, and how many to get.
+	\item Input: a string who represent an username (unique through the users), how many recipe to skip, and how many to get.
 	\item Output: a list of recipes, all added by the user erlier selected, ordered by the .
 \end{itemize}
 \lstset{ language=C++}
@@ -605,6 +627,10 @@ db.recipes.aggregate (
 	]
 )
 \end{lstlisting} 
+
+\subsubsection{Most Versatile User's Recipe}
+
+
 \subsubsection{Search for recipe category}
 Given the category, or a part of this, the query returns recipes that belong to it. The search is case insensitive.
 
@@ -725,8 +751,6 @@ db.recipes.aggregate (
 	]
 )
 \end{lstlisting}
-
-\subsubsection{Recipes with below average calories - TO DO}
 
 \subsubsection{Last Comments}
 The query returns the last comments sorted for creation time, in order to have the most recent as first and the most old as last.
@@ -902,6 +926,26 @@ Given the full-name or a part of it, the query returns the users that contains i
 \end{lstlisting} 
 
 \section{Tests and Statistical Analysis}
+\subsection{Queries Analysis}
+read-heavy application
 
+Dare un peso a tutte le query (quanto vengono usate e quanto sono importanti)
+
+\subsection{Index Analysis}
+
+Test senza indici e con indici.
+
+
+Poi dire mi serve questo indice.
+
+
+Indici da considerare:
+\begin{itemize}
+	\item when in relation ADDS of graphDB
+	\item creationTime Recipe
+	\item creationTime Comment
+	\item recipe title MongoDB
+	\item username (anche in modo nascosto facciamo query per username su neo4j e per titolo su mongodb)
+\end{itemize}
 \chapter{User Manual}
 \end{document}
