@@ -39,11 +39,11 @@
 \contentsline {subsubsection}{Most common recipe categories}{19}%
 \contentsline {subsubsection}{Last Comments}{19}%
 \contentsline {subsection}{\numberline {3.3.2}Neo4J}{20}%
-\contentsline {subsubsection}{Suggested Recipes - MANCA CODICE}{20}%
-\contentsline {subsubsection}{Recipes of following users}{20}%
+\contentsline {subsubsection}{Suggested Recipes}{20}%
+\contentsline {subsubsection}{Recipes of following users}{21}%
 \contentsline {subsubsection}{Most followed and active users}{21}%
 \contentsline {subsubsection}{Most liked users}{21}%
-\contentsline {subsubsection}{Best Recipes}{21}%
+\contentsline {subsubsection}{Best Recipes}{22}%
 \contentsline {subsubsection}{Search for username}{22}%
 \contentsline {subsubsection}{Search for user's full-name}{22}%
 \contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{23}%

@@ -836,7 +836,7 @@ db.recipes.aggregate (
 
 \subsection{Neo4J}
 \emph{Tabella con dominio grafo e descrizione}
-\subsubsection{Suggested Recipes - MANCA CODICE}
+\subsubsection{Suggested Recipes}
 We have two levels of suggestions with different relevance.
 \begin{itemize}
 	\item First Level
@@ -845,9 +845,36 @@ We have two levels of suggestions with different relevance.
 	
 	\item Second Level
 	
-	\noindent Recipe \emph{R} is a second level suggestion for the user \emph{X} if \emph{R} has been added by the user \emph{Y} where \emph{Y} is the owner of at least N recipes liked by \emph{X}. 
+	\noindent Recipe \emph{R} is a second level suggestion for the user \emph{X} if \emph{R} has been added by the user \emph{Y} where \emph{Y} is the owner of at least N recipes liked by \emph{X}.
 	
 \end{itemize}
+
+
+\noindent The two level of suggestions are in a single query, the first recipes are the ones related to the first level, then at the end we have the ones related to the second level. The code is show below:
+
+\begin{lstlisting}
+	MATCH path =
+	(recipe:Recipe)<-[a:ADDS]-(owner:User)<-[:FOLLOWS*2..3]
+	-(me:User{username:$u})
+	RETURN recipe.title, recipe.calories, recipe.carbs,
+	recipe.protein, recipe.fat, recipe.picture,
+	a.when, owner.username
+	ORDER BY length(path) ASC, a.when DESC
+	SKIP $howManyToSkipFirstLv
+	LIMIT $howManyToGetFirstLv
+	UNION
+	MATCH (:User{username:$u})-[l:LIKES]->(:Recipe)<-[:ADDS]-
+	(owner:User)
+	WITH DISTINCT(owner) AS owner, COUNT(DISTINCT l) AS numLikes
+	WHERE numLikes > 3
+	MATCH (owner)-[a:ADDS]->(recipe:Recipe)
+	RETURN recipe.title, recipe.calories, recipe.carbs,
+	recipe.protein, recipe.fat, recipe.picture, a.when,
+	owner.username
+	ORDER BY a.when DESC
+	SKIP $howManyToSkipSecondLv
+	LIMIT $howManyToGetSecondLv	
+\end{lstlisting}
 
 \subsubsection{Recipes of following users}
 This query returns all the recipes of the following users of a specific user.
