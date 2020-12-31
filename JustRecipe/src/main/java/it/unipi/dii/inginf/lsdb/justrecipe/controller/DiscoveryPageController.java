@@ -84,18 +84,10 @@ public class DiscoveryPageController {
 
     private void showSuggestedRecipes ()
     {
-        List<Recipe> firstLevelSuggRec = neo4jDriver.getFirstLevelSuggestedRecipe(
-                appSession.getLoggedUser().getUsername(),HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL*page,
-                HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL);
-
-        List<Recipe> secondLevelSuggRec = neo4jDriver.getSecondLevelSuggestedRecipe(
-                appSession.getLoggedUser().getUsername(), LIKES_THRESHOLD_SECOND_LEVEL_SUGGESTION,
-                HOW_MANY_SUGGESTED_RECIPES_SECOND_LVL*page, HOW_MANY_SUGGESTED_RECIPES_SECOND_LVL);
-
-        List<Recipe> suggRec = new ArrayList<>();
-        // Concatenation of the two queries
-        suggRec.addAll(firstLevelSuggRec);
-        suggRec.addAll(secondLevelSuggRec);
+        List<Recipe> suggRec = neo4jDriver.getSuggestedRecipes(
+                appSession.getLoggedUser().getUsername(), LIKES_THRESHOLD_SECOND_LEVEL_SUGGESTION, HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL*page,
+                HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL, HOW_MANY_SUGGESTED_RECIPES_SECOND_LVL*page, HOW_MANY_SUGGESTED_RECIPES_SECOND_LVL
+        );
 
         if (suggRec.size() > 0)
         {

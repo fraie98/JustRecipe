@@ -958,24 +958,38 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
-     * It gives the suggested recipes of the first level
-     * @param username  Username of the user who is the receiver of the suggestions
-     * @param howManyToSkip  how many recipe to skip
-     * @param howManyToGet  how many recipe to get
-     * @return  The list of suggested recipes of the first level
+     * It shows the suggested recipes for the given user (the first level suggested recipes at the beginning and then
+     * the second level ones)
+     * @param username  Username of the user that we want to suggest
+     * @param threshold  likes threshold
+     * @param howManyToSkipFirstLv  how many recipes to skip for the first level suggestion
+     * @param howManyToGetFirstLv  how many recipes to get for the first level suggestion
+     * @param howManyToSkipSecondLv  how many recipes to skip for the second level suggestion
+     * @param howManyToGetSecondLv  how many recipes to get for the second level suggestion
+     * @return  List of suggested recipes
      */
-    public List<Recipe> getFirstLevelSuggestedRecipe(final String username, final int howManyToSkip, final int howManyToGet)
+    public List<Recipe> getSuggestedRecipes(final String username, final int threshold, final int howManyToSkipFirstLv, final int howManyToGetFirstLv,
+                                            final int howManyToSkipSecondLv, final int howManyToGetSecondLv)
     {
         List<Recipe> recipes = new ArrayList<>();
         try(Session session = driver.session()) {
             recipes = session.readTransaction((TransactionWork<List<Recipe>>)  tx -> {
                 Result result = tx.run("MATCH path = (recipe:Recipe)<-[a:ADDS]-(owner:User)<-[:FOLLOWS*2..3]-(me:User{username:$u}) " +
-                                "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat," +
-                                " recipe.picture, a.when, owner.username " +
+                                "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat, recipe.picture, a.when, owner.username " +
                                 "ORDER BY length(path) ASC, a.when DESC " +
-                                "SKIP $s " +
-                                "LIMIT $l ",
-                        parameters("u",username, "s", howManyToSkip, "l", howManyToGet));
+                                "SKIP $firstLvSkip " +
+                                "LIMIT $firstLvGet " +
+                                "UNION " +
+                                "MATCH (:User {username: $u})-[l:LIKES]->(:Recipe)<-[:ADDS]-(owner:User) " +
+                                "WITH DISTINCT(owner) AS owner, COUNT(DISTINCT l) AS numLikes " +
+                                "WHERE numLikes > $treshold " +
+                                "MATCH (owner)-[a:ADDS]->(recipe:Recipe) " +
+                                "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat, recipe.picture, a.when, owner.username " +
+                                "ORDER BY a.when DESC " +
+                                "SKIP $secondLvSkip " +
+                                "LIMIT $secondLvGet ",
+                        parameters("u",username, "firstLvSkip", howManyToSkipFirstLv, "firstLvGet", howManyToGetFirstLv, "treshold", threshold,
+                                "secondLvSkip", howManyToSkipSecondLv, "secondLvGet", howManyToGetSecondLv));
 
                 List<Recipe> r = new ArrayList<>();
 
@@ -1006,61 +1020,6 @@ public class Neo4jDriver implements DatabaseDriver{
                     r.add(recipe);
                 }
                 return r;
-            });
-        }
-        return recipes;
-    }
-
-    /**
-     * Function that returns the second level of recipes suggestion
-     * @param username          Username of the user
-     * @param threshold         Threshold on the number of likes
-     * @param howManySkip       How many recipes to skip
-     * @param howMany           How many recipes to obtain
-     * @return                  List of recipes
-     */
-    public List<Recipe> getSecondLevelSuggestedRecipe (final String username, final int threshold,  final int howManySkip, final int howMany)
-    {
-        List<Recipe> recipes = new ArrayList<>();
-        try(Session session = driver.session()) {
-            session.readTransaction(tx -> {
-                Result result = tx.run("MATCH (:User {username: $username})-[l:LIKES]->(:Recipe)<-[:ADDS]-(u:User) "+
-                                // Count the likes for every distinct user, so the likes that the user has added at the recipe of this user
-                                "WITH DISTINCT(u) AS u, COUNT(DISTINCT l) AS numLikes " +
-                                "WHERE numLikes > $threshold " +
-                                "MATCH (u)-[a:ADDS]->(r:Recipe) " +
-                                "RETURN r.title as title, r.calories as calories, r.fat as fat, r.protein as protein, " +
-                                "r.carbs AS carbs, r.picture as picture, u.username as authorUsername " +
-                                "ORDER BY a.when DESC " +
-                                "SKIP $skip LIMIT $limit",
-                        parameters("username",username, "threshold", threshold, "skip", howManySkip, "limit", howMany));
-
-                while(result.hasNext()){
-                    Record r = result.next();
-                    String title = r.get("title").asString();
-                    int calories = 0;
-                    int protein = 0;
-                    int fat = 0;
-                    int carbs = 0;
-                    String picture = null;
-                    String authorUsername = r.get("authorUsername").asString();
-                    if(r.get("calories") != NULL)
-                        calories = r.get("calories").asInt();
-                    if(r.get("fat") != NULL)
-                        fat = r.get("fat").asInt();
-                    if(r.get("protein") != NULL)
-                        protein = r.get("protein").asInt();
-                    if(r.get("carbs") != NULL)
-                        carbs = r.get("carbs").asInt();
-                    if (r.get("picture") != NULL)
-                    {
-                        picture = r.get("picture").asString();
-                    }
-                    Recipe recipe = new Recipe(title, fat, calories, protein, carbs, picture);
-                    recipe.setAuthorUsername(authorUsername);
-                    recipes.add(recipe);
-                }
-                return null;
             });
         }
         return recipes;
