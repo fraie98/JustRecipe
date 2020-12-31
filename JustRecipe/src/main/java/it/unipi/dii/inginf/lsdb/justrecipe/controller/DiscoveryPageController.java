@@ -108,7 +108,7 @@ public class DiscoveryPageController {
             showSuggestedRecipes();
         }
         if(String.valueOf(searchComboBox.getValue()).equals("Most versatile user recipes")){
-            String mostVersatileUser = mongoDBDriver.mostVersatileUserRecipes();
+            String mostVersatileUser = mongoDBDriver.searchMostVersatileUser(8);
             List<Recipe> recipes = mongoDBDriver.getRecipesFromAuthorUsername(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page,
                     HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW, mostVersatileUser);
             Utils.addRecipesSnap(discoveryVBox, recipes);

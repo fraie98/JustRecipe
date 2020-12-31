@@ -628,8 +628,60 @@ db.recipes.aggregate (
 )
 \end{lstlisting} 
 
-\subsubsection{Most Versatile User's Recipe}
+\subsubsection{Search Most Versatile User}
+This query let select the most versatile user, the one who had covered more recipe categories (added at least 5 different recipe in a \emph{category}, than this \emph{category} is covered).
 
+\begin{itemize}
+	\item Input: howMany, an int who let us select the first howMany most versatile users.
+	\item Output: For this early implementation of this application, we need only the best most versatile user (the first one, his/her username)
+\end{itemize}
+\begin{lstlisting}
+db.recipes.aggregate (
+[
+{ 
+	$unwind : "$categories" 
+},
+{
+	$group :
+	{
+		_id : "$authorUsername",
+		"$categories",
+		numRecipes: 
+		{ 
+			$sum: 1
+		}
+	}
+},
+{
+	$match: 
+	{
+		numRecipe{
+			gte: 5
+		}
+	}
+},
+{
+	$group :
+	{
+		_id : "$author",
+		numDistinctCategories: 
+		{ 
+			$sum: 1
+		}
+	}
+},
+{ 
+	$sort : 
+	{ 
+		numDistinctCategories: -1 
+	} 
+},
+{ 
+	$limit: <howMany> 
+}	
+]
+)
+\end{lstlisting}
 
 \subsubsection{Search for recipe category}
 Given the category, or a part of this, the query returns recipes that belong to it. The search is case insensitive.

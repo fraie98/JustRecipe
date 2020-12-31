@@ -19,6 +19,7 @@
 \contentsline {subsection}{\numberline {2.5.1}Replicas}{12}%
 \contentsline {subsection}{\numberline {2.5.2}Sharding}{12}%
 \contentsline {section}{\numberline {2.6}Software Architecture}{12}%
+\contentsline {subsection}{\numberline {2.6.1}Inter-Databases Consistency}{12}%
 \contentsline {chapter}{\numberline {3}Implementation and Test}{13}%
 \contentsline {section}{\numberline {3.1}Main Modules}{13}%
 \contentsline {section}{\numberline {3.2}Main Packages and Classes}{13}%
@@ -32,20 +33,20 @@
 \contentsline {subsection}{\numberline {3.3.1}MongoDB}{15}%
 \contentsline {subsubsection}{Recipes of the user}{15}%
 \contentsline {subsubsection}{Search for recipe title}{16}%
-\contentsline {subsubsection}{Most Versatile User's Recipe}{16}%
-\contentsline {subsubsection}{Search for recipe category}{16}%
-\contentsline {subsubsection}{Search for recipe ingredients}{17}%
-\contentsline {subsubsection}{Most common recipe categories}{18}%
-\contentsline {subsubsection}{Last Comments}{18}%
-\contentsline {subsection}{\numberline {3.3.2}Neo4J}{19}%
-\contentsline {subsubsection}{Suggested Recipes - MANCA CODICE}{19}%
-\contentsline {subsubsection}{Recipes of following users}{19}%
-\contentsline {subsubsection}{Most followed and active users}{20}%
-\contentsline {subsubsection}{Most liked users}{20}%
-\contentsline {subsubsection}{Best Recipes}{20}%
-\contentsline {subsubsection}{Search for username}{21}%
-\contentsline {subsubsection}{Search for user's full-name}{21}%
-\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{22}%
-\contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{22}%
-\contentsline {subsection}{\numberline {3.4.2}Index Analysis}{22}%
-\contentsline {chapter}{\numberline {4}User Manual}{23}%
+\contentsline {subsubsection}{Search Most Versatile User}{16}%
+\contentsline {subsubsection}{Search for recipe category}{17}%
+\contentsline {subsubsection}{Search for recipe ingredients}{18}%
+\contentsline {subsubsection}{Most common recipe categories}{19}%
+\contentsline {subsubsection}{Last Comments}{19}%
+\contentsline {subsection}{\numberline {3.3.2}Neo4J}{20}%
+\contentsline {subsubsection}{Suggested Recipes - MANCA CODICE}{20}%
+\contentsline {subsubsection}{Recipes of following users}{20}%
+\contentsline {subsubsection}{Most followed and active users}{21}%
+\contentsline {subsubsection}{Most liked users}{21}%
+\contentsline {subsubsection}{Best Recipes}{21}%
+\contentsline {subsubsection}{Search for username}{22}%
+\contentsline {subsubsection}{Search for user's full-name}{22}%
+\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{23}%
+\contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{23}%
+\contentsline {subsection}{\numberline {3.4.2}Index Analysis}{23}%
+\contentsline {chapter}{\numberline {4}User Manual}{24}%
