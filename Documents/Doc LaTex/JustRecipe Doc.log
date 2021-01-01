@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  31 DEC 2020 19:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  1 JAN 2021 12:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -372,16 +372,16 @@ File: img/graphDbModel.png Graphic file (type png)
 <use img/graphDbModel.png>
 Package pdftex.def Info: img/graphDbModel.png  used on input line 462.
 (pdftex.def)             Requested size: 352.31897pt x 235.48155pt.
- [11] [12 <./img/graphDbModel.png>]
+ [11] [12 <./img/graphDbModel.png>] [13]
 Chapter 3.
-[13
+[14
 
-] [14] [15] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+] [15] [16] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
-[16] [17] [18] [19] [20] [21] [22] [23]
+[17] [18] [19] [20] [21] [22] [23] [24]
 Chapter 4.
-[24
+[25
 
 ] (./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
@@ -408,10 +408,10 @@ pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texm
 f/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public
 /cm-super/sfti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.p
 fb>
-Output written on "JustRecipe Doc.pdf" (25 pages, 782707 bytes).
+Output written on "JustRecipe Doc.pdf" (26 pages, 788127 bytes).
 PDF statistics:
- 169 PDF objects out of 1000 (max. 8388607)
- 113 compressed objects within 2 object streams
+ 172 PDF objects out of 1000 (max. 8388607)
+ 115 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

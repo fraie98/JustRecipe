@@ -464,9 +464,28 @@ The Graph database is the one that handles the social part of the application. T
 \end{figure}
 
 \section{Distributed Database Design}
-breve introduzione sull'utilità di aver un db distribuito (chiacchiere varie)
+In our application some of the most important requirements are the \emph{Availability} and the \emph{Consistency}. Thus is very important to us to have a distributed system in order to ensure:
+\begin{itemize}
+	\item An high availability, due to the fact that we have more servers (in our case we have 3 virtual machines provided by University of Pisa\footnote{172.16.3.157 - 172.16.3.107 -  172.16.3.108}) and so we haven't the single point of failure issue.
+	\item An high consistency, because, even if the data on a server would be corrupted (for a server malfunction for instance), we have an update replica that maintains the correct data (see also 2.5.1).
+	\item A low latency, in fact thanks to sharding and replicas the load is balanced among the cluster servers. We have to remark that this is not true always because, in order to maintain consistency, it is possible to have a longer latency with respect to the one that we would achieve without consistency (replicas must be updated and this requires time).
+\end{itemize}
+
+\noindent This two objectives can be reached using replicas (copy of the same data on different servers) and sharding (the dataset is split up into different parts, each part is on a different server of the cluster or on more than one server depending from the design choises performed).
+
+\noindent In the following sections we discuss about these two techniques explaining the design choices performed in order to obtain the best performance achievable and in order to respect the given requirements. 
+ 
 \subsection{Replicas}
-Dire in modo discorsivo come sono state fatte le repliche per mongodb (macchine virtuali ecc...) e per neo4j (per neo4j solo in locale per "not mandatory").
+We decide to use replicas of the same data in order to ensure \emph{availability} and \emph{consistency}. Nevertheless we have to point out that replicas alone don't ensure consistency, because it's possible to have one or more replicas that are not updated, this doesn't happen in our case because \underline{in order to commit a write operation all replicas must be updated}.
+
+\noindent In particular 3 replicas are present in our system: one for each machine of the provided cluster. However in our implementation only for DocumentDB we have three replicas, for Neo4J we have only one instance running on server 172.16.3.107: theoretically speaking the Neo4J replicas must be three but it's a premium feature.
+
+\noindent So, in order to sum up, let's point out in the following list, the most important points about replicas that must be taken into account.
+\begin{itemize}
+	\item 3 replicas for MongoDB, one for each server of the cluster
+	\item 1 instance for Neo4J on 172.16.3.107
+	\item All replicas must be updated in order to commit a write operation
+\end{itemize}
 
 \subsection{Sharding}
 
