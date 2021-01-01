@@ -12,14 +12,19 @@
 \contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}%
 \contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{7}%
 \contentsline {section}{\numberline {2.3}UML Class Diagram}{8}%
-\contentsline {section}{\numberline {2.4}Data Model}{10}%
-\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{10}%
-\contentsline {subsection}{\numberline {2.4.2}GraphDB}{11}%
+\contentsline {section}{\numberline {2.4}Data Model}{9}%
+\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{9}%
+\contentsline {subsection}{\numberline {2.4.2}GraphDB}{10}%
+\contentsline {subsection}{\numberline {2.4.3}Database Management Systems}{11}%
 \contentsline {section}{\numberline {2.5}Distributed Database Design}{12}%
 \contentsline {subsection}{\numberline {2.5.1}Replicas}{12}%
 \contentsline {subsection}{\numberline {2.5.2}Sharding}{13}%
 \contentsline {section}{\numberline {2.6}Software Architecture}{13}%
-\contentsline {subsection}{\numberline {2.6.1}Inter-Databases Consistency}{13}%
+\contentsline {subsection}{\numberline {2.6.1}Client - Server Architecture}{13}%
+\contentsline {subsubsection}{Client Side}{13}%
+\contentsline {subsubsection}{Server side}{13}%
+\contentsline {subsection}{\numberline {2.6.2}Constraints - PROBABILMENTE DA SPOSTARE}{13}%
+\contentsline {subsection}{\numberline {2.6.3}Inter-Databases Consistency}{13}%
 \contentsline {chapter}{\numberline {3}Implementation and Test}{14}%
 \contentsline {section}{\numberline {3.1}Main Modules}{14}%
 \contentsline {section}{\numberline {3.2}Main Packages and Classes}{14}%
@@ -45,7 +50,7 @@
 \contentsline {subsubsection}{Most liked users}{22}%
 \contentsline {subsubsection}{Best Recipes}{23}%
 \contentsline {subsubsection}{Search for username}{23}%
-\contentsline {subsubsection}{Search for user's full-name}{23}%
+\contentsline {subsubsection}{Search for user's full-name}{24}%
 \contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{24}%
 \contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{24}%
 \contentsline {subsection}{\numberline {3.4.2}Index Analysis}{24}%
