@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{lipsum}
+\usepackage[table,xcdraw]{xcolor}
  \geometry{a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=3cm,%
 	heightrounded,bindingoffset=5mm}
 
@@ -298,76 +299,68 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 \end{figure}
 
 \newpage
-%\subsubsection{Classes definitions}
-%Classes definitions:
-\begin{table}[ht]
-\caption{Classes definitions} % title of Table
-\centering % used for centering table
-\begin{tabular}{c c} % centered columns (2 columns)
-\hline %inserts double horizontal lines
-Class & Description \\ [0.1ex] % inserts table
-%heading
-\hline % inserts single horizontal line
-Registered User &  A standard user (registered one) who can only perform basic operations \\
-Moderator & User who can also check comments and decide to delete them  \\ 
-Administrator & Most powerful user, he can also delete users and recipes, and elect moderator \\
-Comment & Comment posted by a user \\
-Recipe & Recipe added by one user  \\ [1ex] % [1ex] adds vertical space 
-\hline %inserts single line
+
+\begin{table}[]
+\caption{Classes definitions}
+\centering 
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{000000} 
+{\color[HTML]{FFFFFF} Class} & {\color[HTML]{FFFFFF} Description}                                            \\ \hline
+Registered User              & A standard user (registered one) who can only perform basic operations        \\ \hline
+Moderator                    & User who can also check comments and decide to delete them                    \\ \hline
+Administrator                & Most powerful user, he can also delete users and recipes, and elect moderator \\ \hline
+Comment                      & Comment posted by a user                                                      \\ \hline
+Recipe                       & Recipe added by one user                                                      \\ \hline
 \end{tabular}
-\label{table:classes definitions} % is used to refer this table in the text
 \end{table}
 
-%\subsubsection{Classes attributes}
-%Classes attributes:
-\begin{table}[ht]
+\begin{table}[]
 \caption{Classes attributes - User}
 \centering 
-\begin{tabular}{c c c}
+\begin{tabular}{|l|l|l|}
 \hline
-Attribute & Type &  Description \\ [0.1ex]
-\hline 
-firstName & String &  First name of the user \\
-lastName & String & Last name of the user  \\ 
-picture & String &  URL of the profile picture \\
-username & String & Username of the user (identifier) \\
-password & String & Password chosen by the user, used for the login phase  \\ 
-role & int & Role of the user (0: Normal User, 1: Moderator, 2: Administrator)\\[1ex] 
-\hline 
+\rowcolor[HTML]{000000} 
+{\color[HTML]{FFFFFF} Attribute} & {\color[HTML]{FFFFFF} Type} & {\color[HTML]{FFFFFF} Description}                                \\ \hline
+firstName                        & String                      & First name of the user                                            \\ \hline
+lastName                         & String                      & Last name of the user                                             \\ \hline
+picture                          & String                      & URL of the picture                                                \\ \hline
+username                         & String                      & Username of the user (identifier)                                 \\ \hline
+password                         & String                      & Password chosen by the user, used for the login phase             \\ \hline
+role                             & int                         & Role of the user (0: Normal User, 1: Moderator, 2: Administrator) \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[ht]
+
+\begin{table}[]
 \caption{Classes attributes - Comment}
-\centering 
-\begin{tabular}{c c c}
+\centering
+\begin{tabular}{|l|l|l|}
 \hline
-Attribute & Type &  Description \\ [0.1ex]
-\hline 
-text & String &  Plain text of the comment \\
-creationTime & Date & Creation timestamp of the comment  \\[1ex] 
-\hline 
+\rowcolor[HTML]{000000} 
+{\color[HTML]{FFFFFF} Attribute} & {\color[HTML]{FFFFFF} Type} & {\color[HTML]{FFFFFF} Description} \\ \hline
+text                             & String                      & Plain text of the comment          \\ \hline
+creationTime                     & Date                        & Creation timestamp of the comment  \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[]
 \caption{Classes attributes - Recipe}
-\centering 
-\begin{tabular}{c c c}
+\centering
+\begin{tabular}{|l|l|l|}
 \hline
-Attribute & Type &  Description \\ [0.1ex]
-\hline 
-title & String &  Title of the recipe (identifier) \\
-instructions & String & Operations to be performed to make the recipe  \\ 
-ingredients & List<String> &  Ingredients to be used in the recipe \\
-categories & List<String> & Categories to which the recipe belongs \\
-calories & int & Calories contained in the recipe  \\ 
-fat & int & Fat contained in the recipe  \\ 
-protein & int & Protein contained in the recipe  \\ 
-carbs & int & Carbs contained in the recipe  \\ 
-creationTime & Date & Creation timestamp of the recipe \\
-picture & String & URL of the recipe picture \\[1ex] 
-\hline 
+\rowcolor[HTML]{000000} 
+{\color[HTML]{FFFFFF} Attribute} & {\color[HTML]{FFFFFF} Type}         & {\color[HTML]{FFFFFF} Description}           \\ \hline
+title                            & String                              & Title of the recipe (identifier)             \\ \hline
+instructions                     & String                              & Operation to be performed to make the recipe \\ \hline
+ingredients                      & List\textless{}String\textgreater{} & Ingredients to be used in the recipe         \\ \hline
+categories                       & List\textless{}String\textgreater{} & Categories to which the recipe belongs       \\ \hline
+calories                         & int                                 & Calories contained in the recipe             \\ \hline
+fat                              & int                                 & Fat contained in the recipe                  \\ \hline
+protein                          & int                                 & Protein contained in the recipe              \\ \hline
+carbs                            & int                                 & Carbs contained in the recipe                \\ \hline
+creationTime                     & Date                                & Creation timestamp of the recipe             \\ \hline
+picture                          & String                              & URL of the recipe picture                    \\ \hline
 \end{tabular}
 \end{table}
 
@@ -491,6 +484,38 @@ We decide to use replicas of the same data in order to ensure \emph{availability
 
 
 \section{Software Architecture}
+In this section the aspects related to the software architecture will be considered, mainly by analyzing the division of tasks between the various modules of the application. The main language used in developing the application is Java.
+\subsection{Client - Server Architecture}
+The application was implemented as a client-server architecture, with middleware implemented on the client side.
+\subsubsection{Client Side}
+The client features can be divided into two modules:
+\begin{itemize}
+\item The front-end module, which consists of a graphical interface based on JavaFX, which allows the users to use the application in the simplest way possible. This is critical to the usability requirement.
+\item A middleware module, needed to interface the client with the server. More precisely, a driver has been implemented to interface with MongoDB and one to interface with Neo4J.
+\end{itemize}
+\noindent The application was developed following the MVC (Model, View, Controller) pattern. The View displays the data contained in the model and was mainly developed using .fxml files, which allow you to write all the graphic components and their properties in separate files. The Model provides methods for accessing data useful for the application. The Controller receives the commands from the user and implements them by changing the status of the other two components. This division allowed us to completely separate the three components, for a more readable and maintainable code.
+
+\subsubsection{Server side}
+The server side, as already mentioned, consists of three virtual machines, on which MongoDB and Neo4J are executed.
+
+
+\subsection{Constraints - PROBABILMENTE DA SPOSTARE}
+Constraints have also been added in the two databases, one for the recipe title and the other for the user's username, which must be unique.
+\begin{itemize}
+\item Constraint on the \emph{title} of the recipe (inserted through the definition of an index): 
+\lstset{ language=java}
+\begin{lstlisting}
+	db.recipes.createIndex({title:1},{unique:true});	
+\end{lstlisting} 
+\item Constraint on the \emph{username} of the user: 
+\lstset{ language=java}
+\begin{lstlisting}
+	CREATE CONSTRAINT ON (u:User) ASSERT u.username IS UNIQUE	
+\end{lstlisting} 
+\end{itemize}
+
+
+COSE DI CUI PARLARE:
 Solutions to the requirements (as Java Fx for usability requirements).
 
 Client server architecture
@@ -508,7 +533,7 @@ Vincoli (chiavi ecc....)
 The implementation code is divided into two main modules: RecipeReader and JustRecipe.
  \begin{itemize}
 	\item \emph{RecipeReader}:  is a program we wrote to get our initial dataset, extracting the information that interests us from the two initial datasets (see chapter 1). 
-	\item \emph{JustRecipe}:  is the actual application, whose implementation will be analyzed in more detail in the next sections. The application was developed following the MVC (Model, View, Controller) pattern. The View displays the data contained in the model and was mainly developed using .fxml files, which allow you to write all the graphic components and their properties in separate files. The Model provides methods for accessing data useful for the application. The Controller receives the commands from the user and implements them by changing the status of the other two components. This division allowed us to completely separate the three components, for a more readable and maintainable code.
+	\item \emph{JustRecipe}:  is the actual application, whose implementation will be analyzed in more details in the next sections. 
 \end{itemize}
 \section{Main Packages and Classes}
 In this section will be presented the main packages of JustRecipe module and the respective classes.
@@ -855,6 +880,19 @@ db.recipes.aggregate (
 
 \subsection{Neo4J}
 \emph{Tabella con dominio grafo e descrizione}
+Now we will talk about the queries on Neo4j, first we need to consider their domain-specific to graph-centric translation.
+\begin{table}[]
+\caption{Graph-Centric Query and Domain-Specific Query}
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{000000} 
+{\color[HTML]{FFFFFF} Graph-Centric Query}                           & {\color[HTML]{FFFFFF} Domain-Specific Query}                          \\ \hline
+How many incoming edges are incident to vertex A?                    & How many users follow one user? How many likes has a recipe received? \\ \hline
+How many hops does it take to get from vertex A to vertex B?         & How many follows relations are between User A and User B?             \\ \hline
+What is the centrality measure of vertex B? (How well connected is?) & Most followed and active users, Best recipes, Most liked users        \\ \hline
+\end{tabular}
+\end{table}
 \subsubsection{Suggested Recipes}
 We have two levels of suggestions with different relevance.
 \begin{itemize}
