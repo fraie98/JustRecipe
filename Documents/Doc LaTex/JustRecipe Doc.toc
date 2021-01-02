@@ -47,13 +47,13 @@
 \contentsline {subsection}{\numberline {3.3.2}Neo4J}{22}%
 \contentsline {subsubsection}{Suggested Recipes}{22}%
 \contentsline {subsubsection}{Recipes of following users}{23}%
-\contentsline {subsubsection}{Most followed and active users}{23}%
+\contentsline {subsubsection}{Most followed and active users}{24}%
 \contentsline {subsubsection}{Most liked users}{24}%
 \contentsline {subsubsection}{Best Recipes}{24}%
 \contentsline {subsubsection}{Search for username}{25}%
 \contentsline {subsubsection}{Search for user's full-name}{25}%
-\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{25}%
-\contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{25}%
+\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{26}%
+\contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{26}%
 \contentsline {subsection}{\numberline {3.4.2}Index Analysis}{26}%
 \contentsline {subsubsection}{Index on Recipe Title}{26}%
 \contentsline {subsubsection}{Index on User Username}{26}%

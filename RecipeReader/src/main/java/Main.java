@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static int HOW_MANY_RECIPES_TO_REMOVE = 30000;
-    public static String PATH_FULL_FORMAT_RECIPES = "C:/Users/danyc/Downloads/full_format_recipes/full_format_recipes.json";
-    public static String PATH_RECIPES_RAW_NOSOURCE_FN = "C:/Users/danyc/Downloads/recipes_raw/recipes_raw_nosource_fn.json";
+    public static String PATH_FULL_FORMAT_RECIPES = "/home/francesco/Scaricati/full_format_recipes/full_format_recipes.json";
+    public static String PATH_RECIPES_RAW_NOSOURCE_FN = "/home/francesco/Scaricati/recipes_raw/recipes_raw_nosource_fn.json";
 
     private static MongoClient mongoClient;
     private static MongoDatabase database;
