@@ -526,18 +526,6 @@ Constraints have also been added in the two databases, one for the recipe title 
 \end{lstlisting} 
 \end{itemize}
 
-
-COSE DI CUI PARLARE:
-Solutions to the requirements (as Java Fx for usability requirements).
-
-Client server architecture
-
-The graph database management system that we use is Neo4J. This part of the system handle the so-called \emph{snapshot} for both users and recipes (the info of recipe snap are in both dbs instead user snap are only on neo4j). 
-
-The DocumentDB Management System used is MongoDB.
-
-Vincoli (chiavi ecc....)
-
 \subsection{Inter-Databases Consistency}
 
 \chapter{Implementation and Test}
@@ -891,20 +879,22 @@ db.recipes.aggregate (
 \end{lstlisting}
 
 \subsection{Neo4J}
-\emph{Tabella con dominio grafo e descrizione}
-Now we will talk about the queries on Neo4j, first we need to consider their domain-specific to graph-centric translation.
+Now we will talk about the queries on Neo4j, but first we need to consider their domain-specific to graph-centric translation.
 \begin{table}[]
 \caption{Graph-Centric Query and Domain-Specific Query}
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|}
 \hline
 \rowcolor[HTML]{000000} 
-{\color[HTML]{FFFFFF} Graph-Centric Query}                           & {\color[HTML]{FFFFFF} Domain-Specific Query}                          \\ \hline
-How many incoming edges are incident to vertex A?                    & How many users follow one user? How many likes has a recipe received? \\ \hline
-How many hops does it take to get from vertex A to vertex B?         & How many follows relations are between User A and User B?             \\ \hline
-What is the centrality measure of vertex B? (How well connected is?) & Most followed and active users, Best recipes, Most liked users        \\ \hline
-\end{tabular}
+{\color[HTML]{FFFFFF} Graph-Centric Query} & {\color[HTML]{FFFFFF} Domain-Specific Query} \\ \hline
+How many incoming edges are incident to vertex A? & How many users follow one user? How many likes has a recipe received? \\ \hline
+How many hops does it take to get from vertex A to vertex B? & \begin{tabular}[c]{@{}l@{}}How many follows relations are between User A and User B?\\ (used within the search for suggested recipes)\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}What is the centrality measure of vertex B? \\ (How well connected is?)\end{tabular} & Most followed and active users, Best recipes, Most liked users \\ \hline
+\end{tabular}%
+}
 \end{table}
+
 \subsubsection{Suggested Recipes}
 We have two levels of suggestions with different relevance.
 \begin{itemize}
@@ -1081,10 +1071,13 @@ Dare un peso a tutte le query (quanto vengono usate e quanto sono importanti)
 
 \subsection{Index Analysis}
 
-Test senza indici e con indici.
+In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand the need or not to use them. For each index will be considered the queries that are in some way affected by its presence. For performance tests we did not consider skips and limits, and test parameters were used. For performance measures, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query
 
+\subsubsection {Index on the title of the Recipe}
+Since a constraint on the recipe title was needed, and this was implemented with an index on it, then the index on the recipe title was not taken into account in these tests, because it is mandatory.
 
-Poi dire mi serve questo indice.
+\subsubsection {Index on the username of the User}
+The constraint on the username is also inserted through an index, so the index on the username is also mandatory.
 
 
 Indici da considerare:
