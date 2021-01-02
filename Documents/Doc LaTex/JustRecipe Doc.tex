@@ -878,6 +878,27 @@ db.recipes.aggregate (
 )
 \end{lstlisting}
 
+\subsubsection{Weekly Recipes per User}
+A query who returns all the recipes between two dates, first day of the week and first day of the next week.
+\begin{itemize}
+	\item Input: \emph{Username} who represent the user.
+	\item Output: set of recipes which the user has added in the current week.
+\end{itemize}
+
+\begin{lstlisting}
+	db.recipes.aggregate {
+		$match: 
+			{ 
+				$and: 
+					[
+						{creationTime{ $gte: <firstDateOfWeek>,
+							 $lt: <firstDateOfNextWeek>}},
+					 	{authorUsername: <username>}
+					]
+			}
+		}
+\end{lstlisting}
+
 \subsection{Neo4J}
 Now we will talk about the queries on Neo4j, but first we need to consider their domain-specific to graph-centric translation.
 \begin{table}[]
@@ -1079,6 +1100,26 @@ Since a constraint on the recipe title was needed, and this was implemented with
 \subsubsection {Index on the username of the User}
 The constraint on the username is also inserted through an index, so the index on the username is also mandatory.
 
+\subsubsection{Index on the creationTime of the Recipe}
+A study of performance has been completed, the results are available in the next table. 
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+	\caption{Test on creationTime Index}
+	\centering
+	\begin{tabular}{|c|c|c|l}
+		\cline{1-3}
+		\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query} & \cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without Index}                           & \cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with Index}                         &  \\ \cline{1-3}
+		Weekly Recipes per User                            & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 64, \\ totalKeysExamined : 0, \\
+		totalDocsExamined : 45349
+		\end{tabular} & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 0 \\ totalKeysExamined : 1, \\
+		totalDocsExamined : 1 \\ 
+			\end{tabular} &  \\ \cline{1-3}
+		&                                                                                                &                                                                                           &  \\ \cline{1-3}
+		&                                                                                                &                                                                                           &  \\ \cline{1-3}
+	\end{tabular}
+\end{table}
 
 Indici da considerare:
 \begin{itemize}

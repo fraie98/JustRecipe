@@ -132,11 +132,6 @@
                                     <Font size="26.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="addProt" layoutX="495.0" layoutY="256.0" prefHeight="23.0" prefWidth="110.0">
-                                 <padding>
-                                    <Insets bottom="10.0" />
-                                 </padding>
-                              </TextField>
                               <Label layoutX="55.0" layoutY="296.0" prefHeight="26.0" prefWidth="389.0" text="Insert Categories (separate with ','):">
                                  <font>
                                     <Font size="21.0" />
@@ -161,6 +156,7 @@
                               <Text layoutX="617.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="g" />
                               <Text layoutX="617.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="g" />
                               <Text layoutX="617.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="g" />
+                              <TextField fx:id="addProt" layoutX="495.0" layoutY="255.0" prefHeight="23.0" prefWidth="110.0" />
                            </children>
                         </Pane>
                      </content>
