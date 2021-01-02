@@ -20,7 +20,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("JustRecipe");
 
-        if(!Neo4jDriver.getInstance().initConnection())
+        if(!Neo4jDriver.getInstance().initConnection() || !MongoDBDriver.getInstance().initConnection())
             primaryStage.setScene(new Scene(loadErrorPage.load()));
         else
             primaryStage.setScene(new Scene(loader.load()));

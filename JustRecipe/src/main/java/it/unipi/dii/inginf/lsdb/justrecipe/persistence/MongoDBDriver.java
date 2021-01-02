@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mongodb.BasicDBObject;
 import com.mongodb.ConnectionString;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
 import com.mongodb.client.model.*;
@@ -98,6 +100,12 @@ public class MongoDBDriver implements DatabaseDriver{
             }
             mongoClient = MongoClients.create(connectionString);
             database = mongoClient.getDatabase(dbName);
+
+            DBObject ping = new BasicDBObject("ping","1");
+
+            // In order to check the connectivity
+            database.runCommand((Bson) ping);
+
             pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                     fromProviders(PojoCodecProvider.builder().automatic(true).build()));
         }
