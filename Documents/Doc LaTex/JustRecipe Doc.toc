@@ -12,50 +12,52 @@
 \contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}%
 \contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{7}%
 \contentsline {section}{\numberline {2.3}UML Class Diagram}{8}%
-\contentsline {section}{\numberline {2.4}Data Model}{9}%
-\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{9}%
-\contentsline {subsection}{\numberline {2.4.2}GraphDB}{10}%
-\contentsline {subsection}{\numberline {2.4.3}Database Management Systems}{11}%
+\contentsline {section}{\numberline {2.4}Data Model}{10}%
+\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{10}%
+\contentsline {subsection}{\numberline {2.4.2}GraphDB}{11}%
+\contentsline {subsection}{\numberline {2.4.3}Data Among Databases}{12}%
 \contentsline {section}{\numberline {2.5}Distributed Database Design}{12}%
-\contentsline {subsection}{\numberline {2.5.1}Replicas}{12}%
+\contentsline {subsection}{\numberline {2.5.1}Replicas}{13}%
 \contentsline {subsection}{\numberline {2.5.2}Sharding}{13}%
 \contentsline {section}{\numberline {2.6}Software Architecture}{13}%
 \contentsline {subsection}{\numberline {2.6.1}Client - Server Architecture}{13}%
 \contentsline {subsubsection}{Client Side}{13}%
 \contentsline {subsubsection}{Server side}{13}%
 \contentsline {subsection}{\numberline {2.6.2}Constraints - PROBABILMENTE DA SPOSTARE}{13}%
-\contentsline {subsection}{\numberline {2.6.3}Inter-Databases Consistency}{13}%
-\contentsline {chapter}{\numberline {3}Implementation and Test}{14}%
-\contentsline {section}{\numberline {3.1}Main Modules}{14}%
-\contentsline {section}{\numberline {3.2}Main Packages and Classes}{14}%
-\contentsline {subsection}{\numberline {3.2.1}it.unipi.dii.inginf.lsdb.justrecipe.config}{14}%
-\contentsline {subsection}{\numberline {3.2.2}it.unipi.dii.inginf.lsdb.justrecipe.main}{14}%
-\contentsline {subsection}{\numberline {3.2.3}it.unipi.dii.inginf.lsdb.justrecipe.model}{14}%
-\contentsline {subsection}{\numberline {3.2.4}it.unipi.dii.inginf.lsdb.justrecipe.persistence}{15}%
-\contentsline {subsection}{\numberline {3.2.5}it.unipi.dii.inginf.lsdb.justrecipe.controller}{15}%
-\contentsline {subsection}{\numberline {3.2.6}it.unipi.dii.inginf.lsdb.justrecipe.utils}{16}%
-\contentsline {section}{\numberline {3.3}Most Relevant Queries}{16}%
-\contentsline {subsection}{\numberline {3.3.1}MongoDB}{16}%
-\contentsline {subsubsection}{Recipes of the user}{16}%
-\contentsline {subsubsection}{Search for recipe title}{17}%
-\contentsline {subsubsection}{Search Most Versatile User}{17}%
-\contentsline {subsubsection}{Search for recipe category}{18}%
-\contentsline {subsubsection}{Search for recipe ingredients}{19}%
-\contentsline {subsubsection}{Most common recipe categories}{20}%
-\contentsline {subsubsection}{Last Comments}{20}%
-\contentsline {subsubsection}{Weekly Recipes per User}{21}%
-\contentsline {subsection}{\numberline {3.3.2}Neo4J}{21}%
-\contentsline {subsubsection}{Suggested Recipes}{21}%
-\contentsline {subsubsection}{Recipes of following users}{22}%
-\contentsline {subsubsection}{Most followed and active users}{22}%
-\contentsline {subsubsection}{Most liked users}{23}%
-\contentsline {subsubsection}{Best Recipes}{23}%
-\contentsline {subsubsection}{Search for username}{24}%
-\contentsline {subsubsection}{Search for user's full-name}{24}%
-\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{24}%
-\contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{24}%
-\contentsline {subsection}{\numberline {3.4.2}Index Analysis}{25}%
-\contentsline {subsubsection}{Index on the title of the Recipe}{25}%
-\contentsline {subsubsection}{Index on the username of the User}{25}%
-\contentsline {subsubsection}{Index on the creationTime of the Recipe}{25}%
-\contentsline {chapter}{\numberline {4}User Manual}{26}%
+\contentsline {subsection}{\numberline {2.6.3}Inter-Databases Consistency}{14}%
+\contentsline {chapter}{\numberline {3}Implementation and Test}{15}%
+\contentsline {section}{\numberline {3.1}Main Modules}{15}%
+\contentsline {section}{\numberline {3.2}Main Packages and Classes}{15}%
+\contentsline {subsection}{\numberline {3.2.1}it.unipi.dii.inginf.lsdb.justrecipe.config}{15}%
+\contentsline {subsection}{\numberline {3.2.2}it.unipi.dii.inginf.lsdb.justrecipe.main}{15}%
+\contentsline {subsection}{\numberline {3.2.3}it.unipi.dii.inginf.lsdb.justrecipe.model}{15}%
+\contentsline {subsection}{\numberline {3.2.4}it.unipi.dii.inginf.lsdb.justrecipe.persistence}{16}%
+\contentsline {subsection}{\numberline {3.2.5}it.unipi.dii.inginf.lsdb.justrecipe.controller}{16}%
+\contentsline {subsection}{\numberline {3.2.6}it.unipi.dii.inginf.lsdb.justrecipe.utils}{17}%
+\contentsline {section}{\numberline {3.3}Most Relevant Queries}{17}%
+\contentsline {subsection}{\numberline {3.3.1}MongoDB}{17}%
+\contentsline {subsubsection}{Recipes of the user}{17}%
+\contentsline {subsubsection}{Search for recipe title}{18}%
+\contentsline {subsubsection}{Search Most Versatile User}{18}%
+\contentsline {subsubsection}{Search for recipe category}{19}%
+\contentsline {subsubsection}{Search for recipe ingredients}{20}%
+\contentsline {subsubsection}{Most common recipe categories}{21}%
+\contentsline {subsubsection}{Last Comments}{21}%
+\contentsline {subsubsection}{Weekly Recipes per User}{22}%
+\contentsline {subsection}{\numberline {3.3.2}Neo4J}{22}%
+\contentsline {subsubsection}{Suggested Recipes}{22}%
+\contentsline {subsubsection}{Recipes of following users}{23}%
+\contentsline {subsubsection}{Most followed and active users}{23}%
+\contentsline {subsubsection}{Most liked users}{24}%
+\contentsline {subsubsection}{Best Recipes}{24}%
+\contentsline {subsubsection}{Search for username}{25}%
+\contentsline {subsubsection}{Search for user's full-name}{25}%
+\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{25}%
+\contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{25}%
+\contentsline {subsection}{\numberline {3.4.2}Index Analysis}{26}%
+\contentsline {subsubsection}{Index on Recipe Title}{26}%
+\contentsline {subsubsection}{Index on User Username}{26}%
+\contentsline {subsubsection}{Index on Recipe Creation Time}{26}%
+\contentsline {subsubsection}{Index on Comment Creation Time}{26}%
+\contentsline {subsubsection}{Index on Recipe Addition Time}{27}%
+\contentsline {chapter}{\numberline {4}User Manual}{28}%

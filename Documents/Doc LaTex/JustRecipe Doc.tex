@@ -298,9 +298,9 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 	\caption{UML Analysis Classes Diagram}
 \end{figure}
 
-\newpage
+Let analyze the attributes for each class in the following tables.
 
-\begin{table}[]
+\begin{table}[htpb]
 \caption{Classes definitions}
 \centering 
 \begin{tabular}{|l|l|}
@@ -315,7 +315,7 @@ Recipe                       & Recipe added by one user                         
 \end{tabular}
 \end{table}
 
-\begin{table}[]
+\begin{table}[htpb]
 \caption{Classes attributes - User}
 \centering 
 \begin{tabular}{|l|l|l|}
@@ -332,7 +332,7 @@ role                             & int                         & Role of the use
 \end{table}
 
 
-\begin{table}[]
+\begin{table}[htpb]
 \caption{Classes attributes - Comment}
 \centering
 \begin{tabular}{|l|l|l|}
@@ -345,32 +345,35 @@ creationTime                     & Date                        & Creation timest
 \end{table}
 
 \begin{table}[]
-\caption{Classes attributes - Recipe}
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-\rowcolor[HTML]{000000} 
-{\color[HTML]{FFFFFF} Attribute} & {\color[HTML]{FFFFFF} Type}         & {\color[HTML]{FFFFFF} Description}           \\ \hline
-title                            & String                              & Title of the recipe (identifier)             \\ \hline
-instructions                     & String                              & Operation to be performed to make the recipe \\ \hline
-ingredients                      & List\textless{}String\textgreater{} & Ingredients to be used in the recipe         \\ \hline
-categories                       & List\textless{}String\textgreater{} & Categories to which the recipe belongs       \\ \hline
-calories                         & int                                 & Calories contained in the recipe             \\ \hline
-fat                              & int                                 & Fat contained in the recipe                  \\ \hline
-protein                          & int                                 & Protein contained in the recipe              \\ \hline
-carbs                            & int                                 & Carbs contained in the recipe                \\ \hline
-creationTime                     & Date                                & Creation timestamp of the recipe             \\ \hline
-picture                          & String                              & URL of the recipe picture                    \\ \hline
-\end{tabular}
+	\caption{Classes attributes - Recipe}
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\rowcolor[HTML]{000000} 
+		{\color[HTML]{FFFFFF} Attribute} & {\color[HTML]{FFFFFF} Type}         & {\color[HTML]{FFFFFF} Description}           \\ \hline
+		title                            & String                              & Title of the recipe (identifier)             \\ \hline
+		instructions                     & String                              & Operation to be performed to make the recipe \\ \hline
+		ingredients                      & List\textless{}String\textgreater{} & Ingredients to be used in the recipe         \\ \hline
+		categories                       & List\textless{}String\textgreater{} & Categories to which the recipe belongs       \\ \hline
+		calories                         & int                                 & Calories contained in the recipe             \\ \hline
+		fat                              & int                                 & Fat contained in the recipe                  \\ \hline
+		protein                          & int                                 & Protein contained in the recipe              \\ \hline
+		carbs                            & int                                 & Carbs contained in the recipe                \\ \hline
+		creationTime                     & Date                                & Creation timestamp of the recipe             \\ \hline
+		picture                          & String                              & URL of the recipe picture                    \\ \hline
+	\end{tabular}
 \end{table}
 
+
+\newpage
 
 \newpage
 
 \section{Data Model}
 In this section we will discuss about the design choises performed in terms of data model in order to handle in the better way our dataset.
 \subsection{DocumentDB}
-The document DB is used in order to handle the large dataset of recipes that we have. In particular, it allows us to perform fast query even if the size of the dataset is very big and this is the main reason that brings us to choose it. Moreover, we use a DocumentDB in order to respect the \emph{flexibility} requirement, because it is schema-less and this allow us to maintain heterogeneous recipes in our database (some recipes have some attributes, instead others have not those). 
+The document database is used in order to deal with a very large amount of data in an easy and fast way. So due to the fact that our dataset is very large this is the best design choice to achieve the \emph{usability} requirement, in particular for what is related to the latency. Moreover, we use a DocumentDB in order to respect the \emph{flexibility} requirement, in fact it is schema-less and this allow us to maintain heterogeneous recipes in our database. For instance the user can insert a recipe without some attributes (carbs and fat for example) and we have no issues due to the schema-less property of DocumentDB. Furthermore this is very important for what concern the comments: in fact comments are embedded in the recipe document and the schema-less approach allow us to add comment in a flexible way and to have recipes without comments.
+
 \lstset{ language=json}
 \begin{lstlisting}
 {
@@ -437,6 +440,12 @@ The Graph database is the one that handles the social part of the application. T
 
 \noindent The information about the user are present only on the GraphDB because we handle the social part only with it. Instead some information about recipes are present in both databases, in particular on GraphDB we have info that are already present also in the DocumentDB, but the opposite is not true.
 
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.6]{img/graphDbModel.png}
+	\caption{Example of GraphDB nodes and relationships}
+\end{figure}
+
 \noindent The GraphDB relationships are:
 \begin{itemize}
 	\item \textbf{Adds}: if the user \emph{A} has added the recipe \emph{R}, then we have a relationship \emph{:ADDS} from \emph{A} to \emph{R} ($A \rightarrow R$).
@@ -450,21 +459,16 @@ The Graph database is the one that handles the social part of the application. T
 
 \noindent All the relationships that starts from a node \emph{X} are deleted if \emph{X} has deleted, furthermore if \emph{X} is a user, also the recipes that he has added will be eliminated. In figure 2.4 we can see an example of the nodes, the relationships and the attributes.
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[scale=0.6]{img/graphDbModel.png}
-	\caption{Example of Neo4J nodes and relationships}
-\end{figure}
 
-\subsection{Database Management Systems}
-In order to accomplish the requirements we use as Document database management system MongoDB and as Graph database management system Neo4J. Let analyze the main reason of this design choices:
+\subsection{Data Among Databases}
+Because of the large amount of information to deal with, it is important to split up them in a way that allow us to handle them in the faster and easiest way, in order to have a good \emph{usability}. Summing up the concepts exploited so far we have the following storing strategy:
 \begin{itemize}
-	\item \textbf{MongoDB}: it allows us to deal with a very large amount of data in an easy and fast way, so due to the fact that our dataset is very large this is the best way to achieve the \emph{usability} requirement, in particular for what is related to the latency.
-	
-	\noindent Moreover we want \emph{flexibility}: the user can inserts a recipe without some attributes (carbs for instance) and so MongoDB ensures also this due to the fact that it is schema-less and so some attributes can be missing without issues. Furthermore this is very important for what concern the comments: in fact comments are embedded in the recipe document and the schema-less approach allow us to add comment in a flexible way and to have recipe without comments.
-	
-	\item \textbf{Neo4J}: it allow us to do very interesting query on the social part of the application, for this reason we store on it also the so-called recipe snapshots, a \emph{snapshot} is a partial view of the recipe (this partial information are present in Neo4j, instead all the info are on MongoDB) or of the user (in this case all the information about the user are on Neo4J but only a part is in the snapshot).
+	\item User: stored only on GraphDB
+	\item Recipe: stored on DocumentDB and partially on GraphDB
 \end{itemize}
+
+\noindent The reason why we store recipes on both databases is because we want to retrieve social network information from it (likes, suggested recipes based on who added it, and so on). Hence we store on Graph DB a part of the recipe information, and the whole information about recipes on DocumentDB. This partial view of the recipe is the so-called \emph{recipe snapshot}. Also for the user exist a snapshot but it exists for implementation reason, in fact in this case all the information about the user are on GraphDB but only a part is in the snapshot. Generally speaking a snapshot is a partial view of an entity (User or recipe). When the user clicks on the snapshot then he will see all the information (so for what concerns the recipes, the snapshot is done with GraphDB and the detailed page with MongoDB).
+
 
 \section{Distributed Database Design}
 In our application some of the most important requirements are the \emph{Availability} and the \emph{Consistency}. Thus is very important to us to have a distributed system in order to ensure:
@@ -865,7 +869,7 @@ db.recipes.aggregate (
 		{ 
 			$sort : 
 			{ 
-				comments.creationTime : -1 
+				"comments.creationTime" : -1 
 			} 
 		},
 		{ 
@@ -901,7 +905,7 @@ A query who returns all the recipes between two dates, first day of the week and
 
 \subsection{Neo4J}
 Now we will talk about the queries on Neo4j, but first we need to consider their domain-specific to graph-centric translation.
-\begin{table}[]
+\begin{table}[htpb]
 \caption{Graph-Centric Query and Domain-Specific Query}
 \centering
 \resizebox{\textwidth}{!}{%
@@ -1092,20 +1096,27 @@ Dare un peso a tutte le query (quanto vengono usate e quanto sono importanti)
 
 \subsection{Index Analysis}
 
-In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand the need or not to use them. For each index will be considered the queries that are in some way affected by its presence. For performance tests we did not consider skips and limits, and test parameters were used. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. For MongoDB, we used the \emph{explain()}.
+In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand their benefit. For each index will be considered the queries that are in some way affected by its presence. For performance tests we did not consider skips and limits, and test parameters were used. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. For MongoDB, we used the \emph{explain()}.
 
-\subsubsection {Index on the title of the Recipe}
+\noindent The following index will be analyzed:
+\begin{itemize}
+	\item Recipe Title (MongoDB)
+	\item User Username (Neo4J)
+	\item Recipe Creation Time (MongoDB)
+	\item Comment Creation Time (MongoDB)
+	\item On attribute \emph{when} on relation ADDS (Neo4J)	
+\end{itemize}
+
+\subsubsection {Index on Recipe Title}
 Since a constraint on the recipe title was needed, and this was implemented with an index on it, then the index on the recipe title was not taken into account in these tests, because it is mandatory.
 
-\subsubsection {Index on the username of the User}
+\subsubsection {Index on User Username}
 The constraint on the username is also inserted through an index, so the index on the username is also mandatory.
 
-\subsubsection{Index on the creationTime of the Recipe}
+\subsubsection{Index on Recipe Creation Time}
 A study of performance has been completed, the results are available in the next table. 
-% Please add the following required packages to your document preamble:
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-\begin{table}[]
+
+\begin{table}[htpb]
 	\caption{Test on creationTime Index}
 	\centering
 	\begin{tabular}{|c|c|c|l}
@@ -1121,13 +1132,62 @@ A study of performance has been completed, the results are available in the next
 	\end{tabular}
 \end{table}
 
-Indici da considerare:
-\begin{itemize}
-	\item when in relation ADDS of graphDB
-	\item creationTime Recipe
-	\item creationTime Comment
-	\item recipe title MongoDB
-	\item username (anche in modo nascosto facciamo query per username su neo4j e per titolo su mongodb)
-\end{itemize}
+
+
+
+\subsubsection{Index on Comment Creation Time}
+A possible index is the one on the creation time of the comment, this index affect the query \emph{Last Comments}. In order to see if the index must be added or not, let analyze the result of the index analysis for this index on that query (see table 3.3)
+
+\begin{table}[htpb]
+	\centering
+	\caption{Statistics about comment creation time index}
+	\begin{tabular}{lllll}
+		\cline{1-3}
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
+		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without index}} &
+		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with index}} &
+		&
+		\\ \cline{1-3}
+		\multicolumn{1}{|l|}{Last Comments} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}executionTimeMillis: 129  \\ totalKeysExamined: 0\\ totalDocsExamined: 45532\end{tabular}} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}executionTimeMillis: 172\\ totalKeysExamined: 45383\\ totalDocsExamined: 45352\end{tabular}} &
+		&
+		\\ \cline{1-3}
+	\end{tabular}
+\end{table}
+\noindent From the result obtained we can see that the addition of that index do not imply a improve in the performance but instead a downgrade of performance. In fact the query with the index require more time with respect to the one without index.
+
+\noindent For this reason we don't create an index on the creation time of the comment.
+
+\noindent The reason for the downgrade of the performance is because MongoDB creates a multi index, so it create an index for recipe and another index for comments. Thus if the index is present it examines a number of keys that is larger than the number of recipes, because it takes into account recipes and comments.
+
+\subsubsection{Index on Recipe Addition Time}
+A possible index is the one on the attribute \emph{when} of the relations \emph{ADDS} in Neo4J database. In order to evaluate the performance of this index let analyze the test results in table 3.4.
+
+\begin{table}[htpb]
+	\centering
+	\caption{Statistics about index on recipe addition time}
+	\begin{tabular}{lllll}
+		\cline{1-3}
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
+		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without index}} &
+		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with index}} &
+		&
+		\\ \cline{1-3}
+		\multicolumn{1}{|l|}{Suggested Recipes} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 125843\\ Execution Time: 179ms\end{tabular}} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 125843\\ Execution Time: 113ms\end{tabular}} &
+		&
+		\\ \cline{1-3}
+		\multicolumn{1}{|l|}{Recipes of Following Users} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 82836\\ Execution Time: 39ms\end{tabular}} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 82836\\ Execution Time: 38ms\end{tabular}} &
+		&
+		\\ \cline{1-3}
+	\end{tabular}
+\end{table}
+
+\noindent As we can see from the table only for the first query we have a good margin of benefit, but this margin is not good enough to justify the addition of this index, because even if it improves the performance on the \emph{Suggested Recipes} query, it deteriorates the writing performance because we have to update the index for each insertion.
+
 \chapter{User Manual}
 \end{document}
