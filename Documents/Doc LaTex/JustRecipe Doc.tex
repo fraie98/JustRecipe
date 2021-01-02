@@ -1092,7 +1092,7 @@ Dare un peso a tutte le query (quanto vengono usate e quanto sono importanti)
 
 \subsection{Index Analysis}
 
-In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand the need or not to use them. For each index will be considered the queries that are in some way affected by its presence. For performance tests we did not consider skips and limits, and test parameters were used. For performance measures, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query
+In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand the need or not to use them. For each index will be considered the queries that are in some way affected by its presence. For performance tests we did not consider skips and limits, and test parameters were used. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. For MongoDB, we used the \emph{explain()}.
 
 \subsubsection {Index on the title of the Recipe}
 Since a constraint on the recipe title was needed, and this was implemented with an index on it, then the index on the recipe title was not taken into account in these tests, because it is mandatory.

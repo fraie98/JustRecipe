@@ -2,6 +2,8 @@ import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.google.gson.Gson;
 import com.mongodb.client.*;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
 import org.bson.Document;
 import org.neo4j.driver.*;
 
@@ -13,8 +15,8 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static int HOW_MANY_RECIPES_TO_REMOVE = 30000;
-    public static String PATH_FULL_FORMAT_RECIPES = "/home/francesco/Scaricati/full_format_recipes/full_format_recipes.json";
-    public static String PATH_RECIPES_RAW_NOSOURCE_FN = "/home/francesco/Scaricati/recipes_raw/recipes_raw_nosource_fn.json";
+    public static String PATH_FULL_FORMAT_RECIPES = "C:/Users/danyc/Downloads/full_format_recipes/full_format_recipes.json";
+    public static String PATH_RECIPES_RAW_NOSOURCE_FN = "C:/Users/danyc/Downloads/recipes_raw/recipes_raw_nosource_fn.json";
 
     private static MongoClient mongoClient;
     private static MongoDatabase database;
@@ -29,10 +31,17 @@ public class Main {
 
         driver = GraphDatabase.driver( "neo4j://localhost:7687", AuthTokens.basic( "neo4j", "justrecipe" ) );
 
+        collection.dropIndexes();
+
         // First of all It is useful to remove the old values (if they exists)
-        // Just for re-execute the algorithm without problem
         collection.drop();
         deleteAllGraph();
+
+        // Create the constraint (as index) on the tile of the recipe
+        IndexOptions indexOptions = new IndexOptions().unique(true);
+        collection.createIndex(Indexes.ascending("title"), indexOptions);
+        // Create the constraint on the username of the User
+        createUsernameConstraintNeo4j();
 
         List<RecipeRaw> rawRecipes = new ArrayList<>();
         addRecipes_full_format(rawRecipes, PATH_FULL_FORMAT_RECIPES);
@@ -263,6 +272,16 @@ public class Main {
         {
             session.writeTransaction((TransactionWork<Void>) tx -> {
                 tx.run( "MATCH (n) DETACH DELETE n");
+                return null;
+            });
+        }
+    }
+
+    private static void createUsernameConstraintNeo4j() {
+        try ( Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Void>) tx -> {
+                tx.run( "CREATE CONSTRAINT IF NOT EXISTS ON (u: User) ASSERT u. username IS UNIQUE");
                 return null;
             });
         }
