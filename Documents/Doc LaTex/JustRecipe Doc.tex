@@ -467,7 +467,10 @@ Because of the large amount of information to deal with, it is important to spli
 	\item Recipe: stored on DocumentDB and partially on GraphDB
 \end{itemize}
 
-\noindent The reason why we store recipes on both databases is because we want to retrieve social network information from it (likes, suggested recipes based on who added it, and so on). Hence we store on Graph DB a part of the recipe information, and the whole information about recipes on DocumentDB. This partial view of the recipe is the so-called \emph{recipe snapshot}. Also for the user exist a snapshot but it exists for implementation reason, in fact in this case all the information about the user are on GraphDB but only a part is in the snapshot. Generally speaking a snapshot is a partial view of an entity (User or recipe). When the user clicks on the snapshot then he will see all the information (so for what concerns the recipes, the snapshot is done with GraphDB and the detailed page with MongoDB).
+\noindent The reason why we store recipes on both databases is because we want to retrieve social network information from it (likes, suggested recipes based on who added it, and so on). Hence we store on Graph DB a part of the recipe information, and the whole information about recipes on DocumentDB. This partial view of the recipe is the so-called \emph{recipe snapshot}. Also for the user exist a snapshot but it exists for implementation reason, in fact in this case all the information about the user are on GraphDB but only a part is in the snapshot. Generally speaking a snapshot is a partial view of an entity (User or recipe). When the user clicks on the snapshot then he will see all the information (so for what concerns the recipes, the snapshot is done with GraphDB and the detailed page with DocumentDB).
+
+
+\noindent Now it is important to say that was chosen MongoDB as DBMS for the DocumentDB and Neo4j as DBMS for the GraphDB.
 
 
 \section{Distributed Database Design}
@@ -487,7 +490,7 @@ In our application some of the most important requirements are the \emph{Availab
 \subsection{Replicas}
 We decide to use replicas of the same data in order to ensure \emph{availability} and \emph{consistency}. Nevertheless we have to point out that replicas alone don't ensure consistency, because it's possible to have one or more replicas that are not updated, this doesn't happen in our case because \underline{in order to commit a write operation all replicas must be updated}.
 
-\noindent In particular 3 replicas are present in our system: one for each machine of the provided cluster. However in our implementation only for DocumentDB we have three replicas, for Neo4J we have only one instance running on server 172.16.3.107: theoretically speaking the Neo4J replicas must be three but it's a premium feature.
+\noindent In particular 3 replicas are present in our system: one for each machine of the provided cluster. However in our implementation only for MongoDB we have three replicas, for Neo4J we have only one instance running on server 172.16.3.107: theoretically speaking the Neo4J replicas must be three but it's a premium feature.
 
 \noindent So, in order to sum up, let's point out in the following list, the most important points about replicas that must be taken into account.
 \begin{itemize}
@@ -507,7 +510,7 @@ The application was implemented as a client-server architecture, with middleware
 The client features can be divided into two modules:
 \begin{itemize}
 \item The front-end module, which consists of a graphical interface based on JavaFX, which allows the users to use the application in the simplest way possible. This is critical to the usability requirement.
-\item A middleware module, needed to interface the client with the server. More precisely, a driver has been implemented to interface with MongoDB and one to interface with Neo4J.
+\item A middleware module, needed to interface the client with the server. More precisely, a driver has been implemented to interface with MongoDB and one to interface with Neo4j.
 \end{itemize}
 \noindent The application was developed following the MVC (Model, View, Controller) pattern. The View displays the data contained in the model and was mainly developed using .fxml files, which allow you to write all the graphic components and their properties in separate files. The Model provides methods for accessing data useful for the application. The Controller receives the commands from the user and implements them by changing the status of the other two components. This division allowed us to completely separate the three components, for a more readable and maintainable code.
 
@@ -516,17 +519,25 @@ The server side, as already mentioned, consists of three virtual machines, on wh
 
 
 \subsection{Constraints - PROBABILMENTE DA SPOSTARE}
-Constraints have also been added in the two databases, one for the recipe title and the other for the user's username, which must be unique.
+Constraints have also been added in the two databases, for the recipe title and for the user's username, which must be unique.
 \begin{itemize}
-\item Constraint on the \emph{title} of the recipe (inserted through the definition of an index): 
+\item Constraint on the \emph{title} of the recipe (on MongoDB): 
 \lstset{ language=java}
 \begin{lstlisting}
-	db.recipes.createIndex({title:1},{unique:true});	
+	db.recipes.createIndex(
+		{title:1},
+		{unique:true, name: "title_constraint"});	
+\end{lstlisting} 
+\item Constraint on the \emph{title} of the recipe (on Neo4j): 
+\begin{lstlisting}
+	CREATE CONSTRAINT title_constraint ON (r:Recipe) 
+		ASSERT r.title IS UNIQUE	
 \end{lstlisting} 
 \item Constraint on the \emph{username} of the user: 
 \lstset{ language=java}
 \begin{lstlisting}
-	CREATE CONSTRAINT ON (u:User) ASSERT u.username IS UNIQUE	
+	CREATE CONSTRAINT username_constraint ON (u:User) 
+		ASSERT u.username IS UNIQUE	
 \end{lstlisting} 
 \end{itemize}
 
@@ -895,9 +906,16 @@ A query who returns all the recipes between two dates, first day of the week and
 			{ 
 				$and: 
 					[
-						{creationTime{ $gte: <firstDateOfWeek>,
-							 $lt: <firstDateOfNextWeek>}},
-					 	{authorUsername: <username>}
+						{
+							creationTime
+							{ 
+								$gte: <firstDateOfWeek>,
+							 	$lt: <firstDateOfNextWeek>
+							}
+						},
+					 	{
+							authorUsername: <username>
+						}
 					]
 			}
 		}
@@ -908,16 +926,14 @@ Now we will talk about the queries on Neo4j, but first we need to consider their
 \begin{table}[htpb]
 \caption{Graph-Centric Query and Domain-Specific Query}
 \centering
-\resizebox{\textwidth}{!}{%
 \begin{tabular}{|l|l|}
 \hline
 \rowcolor[HTML]{000000} 
 {\color[HTML]{FFFFFF} Graph-Centric Query} & {\color[HTML]{FFFFFF} Domain-Specific Query} \\ \hline
-How many incoming edges are incident to vertex A? & How many users follow one user? How many likes has a recipe received? \\ \hline
-How many hops does it take to get from vertex A to vertex B? & \begin{tabular}[c]{@{}l@{}}How many follows relations are between User A and User B?\\ (used within the search for suggested recipes)\end{tabular} \\ \hline
-\begin{tabular}[c]{@{}l@{}}What is the centrality measure of vertex B? \\ (How well connected is?)\end{tabular} & Most followed and active users, Best recipes, Most liked users \\ \hline
-\end{tabular}%
-}
+\begin{tabular}[c]{@{}l@{}}How many incoming edges are incident \\ to vertex A? \end{tabular}& \begin{tabular}[c]{@{}l@{}}How many users follow one user? \\ How many likes has a recipe received?\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}How many hops does it take to get from \\ vertex A to vertex B?\end{tabular} & \begin{tabular}[c]{@{}l@{}}How many follows relations are between \\ User A and User B? \\(used within the search for suggested recipes)\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}What is the centrality measure of vertex B? \\ (How well connected is?)\end{tabular} & \begin{tabular}[c]{@{}l@{}}Most followed and active users, Best recipes,\\ Most liked users\end{tabular} \\ \hline
+\end{tabular}
 \end{table}
 
 \subsubsection{Suggested Recipes}
@@ -1096,7 +1112,7 @@ Dare un peso a tutte le query (quanto vengono usate e quanto sono importanti)
 
 \subsection{Index Analysis}
 
-In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand their benefit. For each index will be considered the queries that are in some way affected by its presence. For performance tests we did not consider skips and limits, and test parameters were used. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. For MongoDB, we used the \emph{explain()}.
+In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand their benefit. For each index will be considered the queries that are in some way affected by its presence. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. For MongoDB, we used the \emph{explain()}.
 
 \noindent The following index will be analyzed:
 \begin{itemize}

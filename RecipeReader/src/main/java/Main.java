@@ -38,10 +38,11 @@ public class Main {
         deleteAllGraph();
 
         // Create the constraint (as index) on the tile of the recipe
-        IndexOptions indexOptions = new IndexOptions().unique(true);
+        IndexOptions indexOptions = new IndexOptions().unique(true).name("title_constraint");
         collection.createIndex(Indexes.ascending("title"), indexOptions);
         // Create the constraint on the username of the User
         createUsernameConstraintNeo4j();
+        createTitleConstraintNeo4j();
 
         List<RecipeRaw> rawRecipes = new ArrayList<>();
         addRecipes_full_format(rawRecipes, PATH_FULL_FORMAT_RECIPES);
@@ -277,11 +278,27 @@ public class Main {
         }
     }
 
+    /**
+     * This function creates the constraint on the username (that must be unique)
+     */
     private static void createUsernameConstraintNeo4j() {
         try ( Session session = driver.session())
         {
             session.writeTransaction((TransactionWork<Void>) tx -> {
-                tx.run( "CREATE CONSTRAINT IF NOT EXISTS ON (u: User) ASSERT u. username IS UNIQUE");
+                tx.run( "CREATE CONSTRAINT username_constraint IF NOT EXISTS ON (u: User) ASSERT u.username IS UNIQUE");
+                return null;
+            });
+        }
+    }
+
+    /**
+     * This function creates the constraint on the recipe title (that must be unique)
+     */
+    private static void createTitleConstraintNeo4j() {
+        try ( Session session = driver.session())
+        {
+            session.writeTransaction((TransactionWork<Void>) tx -> {
+                tx.run( "CREATE CONSTRAINT title_constraint IF NOT EXISTS ON (r: Recipe) ASSERT r.title IS UNIQUE");
                 return null;
             });
         }
