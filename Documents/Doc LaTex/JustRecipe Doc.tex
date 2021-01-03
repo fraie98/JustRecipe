@@ -504,7 +504,7 @@ We decide to use replicas of the same data in order to ensure \emph{availability
 \subsection{Sharding}
 It's possible to use the following fields as shard key (because they are present in all documents of the collection):
 \begin{itemize}
-	\item Object ID (provided by Mongo)
+	\item Object ID (provided by MongoDB)
 	\item Title
 	\item Creation Time
 	\item Instructions
@@ -526,15 +526,24 @@ The client features can be divided into two modules:
 \end{itemize}
 \noindent The application was developed following the MVC (Model, View, Controller) pattern. The View displays the data contained in the model and was mainly developed using .fxml files, which allow you to write all the graphic components and their properties in separate files. The Model provides methods for accessing data useful for the application. The Controller receives the commands from the user and implements them by changing the status of the other two components. This division allowed us to completely separate the three components, for a more readable and maintainable code.
 
+\noindent Maven was used to support the implementation of the application.
+
 \subsubsection{Server side}
 The server side, as already mentioned, consists of three virtual machines, on which MongoDB and Neo4J are executed.
 
 
 \subsection{Inter-Databases Consistency}
-Se la prima non va, non fai la seconda.
-Se la seconda non va, disfai la prima.
+Considering how the data was distributed between the two databases, we must consider the problem of consistency on the information that forms the snapshots of the recipes, which are the only information shared by the two databases.
+The general idea is that if I have to update the data of both databases I have to consider the case where the first update is successful and the second is not (I have to undo the first operation), and the case where the first update is not successful (and therefore I don't even have to do the second).
+The cases that can lead to these inconsistencies are the following:
+\begin{itemize}
+	\item Deleting a recipe
+	\item Adding a recipe
+	\item Update a recipe
+	\item Deleting a user (in this case his recipes must also be deleted)
+\end{itemize}
 
-
+MANCANO I DISEGNI
 
 \chapter{Implementation and Test}
 \section{Main Modules}
