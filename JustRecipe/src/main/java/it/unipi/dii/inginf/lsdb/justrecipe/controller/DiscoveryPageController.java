@@ -62,13 +62,12 @@ public class DiscoveryPageController {
                         "Recipe category",
                         "Recipe ingredients",
                         "Most common recipe categories",
-                        "Recipes with below average calories",
                         "Best recipes",
+                        "Most versatile user recipes",
                         "User username",
                         "User full name",
                         "Most followed and active users",
-                        "Most liked users",
-                        "Most versatile user recipes"
+                        "Most liked users"
                 );
         searchComboBox.setItems(options);
         searchComboBox.setValue("Suggested recipes");

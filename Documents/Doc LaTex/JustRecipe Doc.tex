@@ -473,29 +473,6 @@ Because of the large amount of information to deal with, it is important to spli
 
 \noindent Now it is important to say that was chosen MongoDB as DBMS for the DocumentDB and Neo4j as DBMS for the GraphDB.
 
-\subsection{Constraints}
-Constraints have also been added in the two databases, for the recipe title and for the user's username, which must be unique.
-\begin{itemize}
-	\item Constraint on the \emph{title} of the recipe (on MongoDB): 
-	\lstset{ language=java}
-	\begin{lstlisting}
-		db.recipes.createIndex(
-		{title:1},
-		{unique:true, name: "title_constraint"});	
-	\end{lstlisting} 
-	\item Constraint on the \emph{title} of the recipe (on Neo4j): 
-	\begin{lstlisting}
-		CREATE CONSTRAINT title_constraint ON (r:Recipe) 
-		ASSERT r.title IS UNIQUE	
-	\end{lstlisting} 
-	\item Constraint on the \emph{username} of the user: 
-	\lstset{ language=java}
-	\begin{lstlisting}
-		CREATE CONSTRAINT username_constraint ON (u:User) 
-		ASSERT u.username IS UNIQUE	
-	\end{lstlisting} 
-\end{itemize}
-
 \section{Distributed Database Design}
 In our application some of the most important requirements are the \emph{Availability} and the \emph{Consistency}. Thus is very important to us to have a distributed system in order to ensure:
 \begin{itemize}
@@ -511,7 +488,7 @@ In our application some of the most important requirements are the \emph{Availab
 
 
 \subsection{Replicas}
-We decide to use replicas of the same data in order to ensure \emph{availability} and \emph{consistency}. Nevertheless we have to point out that replicas alone don't ensure consistency, because it's possible to have one or more replicas that are not updated, this doesn't happen in our case because \emph{in order to commit a write operation all replicas must be updated}. This because the application is mainly read-heavy and so we need fast reads operation and, in order to achieve this, we can accept slow writes operations. Moreover this configuration ensures the \emph{Consistency} requirement.
+We decide to use replicas of the same data in order to ensure \emph{availability} and \emph{consistency}. Nevertheless we have to point out that replicas alone don't ensure consistency, because it's possible to have one or more replicas that are not updated, this doesn't happen in our case because \emph{in order to commit a write operation all replicas must be updated}. This because the application is mainly read-heavy and so we need fast reads operation and, in order to achieve this, we can accept slow write operations. Moreover, this configuration ensures the \emph{Consistency} requirement.
 
 \noindent \noindent In particular 3 replicas are present in our system: one for each machine of the provided cluster. However in our implementation only for MongoDB we have three replicas, for Neo4J we have only one instance running on server 172.16.3.107: theoretically speaking the Neo4J replicas must be three but it's a premium feature.
 
@@ -521,6 +498,8 @@ We decide to use replicas of the same data in order to ensure \emph{availability
 	\item 1 instance for Neo4J on 172.16.3.107
 	\item All replicas must be updated in order to commit a write operation
 \end{itemize}
+
+\noindent As it was expressly requested in the project documentation, a local cluster was also implemented, thanks to which it was possible to test the use of the application even with replicas on Neo4j, in addition of course to those for MongoDB.
 
 \subsection{Sharding}
 It's possible to use the following fields as shard key (because they are present in all documents of the collection):
@@ -622,6 +601,37 @@ This package contains a class used to store all the utility functions that we us
 \noindent Classes:
  \begin{itemize}
 	\item \emph{Utils}: this class is used for containing some utility functions used inside the application (to avoid code replication).
+\end{itemize}
+
+\section{Constraints}
+Constraints have been added in the two databases, for the recipe title and for the user's username, which must be unique.
+\begin{itemize}
+	\item Constraint on the \emph{title} of the recipe (on MongoDB): 
+	\lstset{ language=java}
+	\begin{lstlisting}
+	db.recipes.createIndex (
+		{
+			title:1
+		},
+		{
+			unique: true,
+			name: "title_constraint"
+		}
+	)	
+	\end{lstlisting} 
+	\item Constraint on the \emph{title} of the recipe (on Neo4j): 
+	\begin{lstlisting}
+	CREATE CONSTRAINT title_constraint 
+	ON (r:Recipe) 
+	ASSERT r.title IS UNIQUE	
+	\end{lstlisting} 
+	\item Constraint on the \emph{username} of the user: 
+	\lstset{ language=java}
+	\begin{lstlisting}
+	CREATE CONSTRAINT username_constraint 
+	ON (u:User) 
+	ASSERT u.username IS UNIQUE	
+	\end{lstlisting} 
 \end{itemize}
 \section{Most Relevant Queries}
 In the following section will be presented the most relevant query performed with MongoDB and Neo4J. 
@@ -968,6 +978,13 @@ Now we will talk about the queries on Neo4j, but first we need to consider their
 \end{tabular}
 \end{table}
 
+\noindent A partial example of a graph (screenshot made during the execution of the program) is shown in the figure 3.1 , in order to have more clear the concepts that will be expressed later in the implementation of the queries.
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.7]{img/graphScreen.png}
+	\caption{Partial example of the graph in Neo4j}
+\end{figure}
+
 \subsubsection{Suggested Recipes}
 We have two levels of suggestions with different relevance.
 \begin{itemize}
@@ -998,7 +1015,7 @@ We have two levels of suggestions with different relevance.
 	MATCH (:User{username:$u})-[l:LIKES]->(:Recipe)<-[:ADDS]-
 	(owner:User)
 	WITH DISTINCT(owner) AS owner, COUNT(DISTINCT l) AS numLikes
-	WHERE numLikes > $treshold
+	WHERE numLikes > $threshold
 	MATCH (owner)-[a:ADDS]->(recipe:Recipe)
 	RETURN recipe.title, recipe.calories, recipe.carbs,
 	recipe.protein, recipe.fat, recipe.picture, a.when,
