@@ -282,7 +282,7 @@ The use case diagram of the application is described in the figure 2.1
 \section{UML Class Diagram}
 Let analyze the UML Class Diagram. There are three main entities: User, Comment, Recipe.
 
-\noindent It's important to point out that the \textbf{User} of the Use Case Diagram is here the so-called \emph{Registered User} and the \emph{User} of this diagram is the generic user. Then we undeline the fact that, in order to represent the three actors of the use case diagram, a generalization is needed.
+\noindent It's important to point out that the \textbf{User} of the Use Case Diagram is here the so-called \emph{Registered User} and the \emph{User} of this diagram is the generic user. Then we underline the fact that, in order to represent the three actors of the use case diagram, a generalization is needed.
  
 \begin{figure}[htpb]
 	\centering
@@ -373,6 +373,9 @@ creationTime                     & Date                        & Creation timest
 In this section we will discuss about the design choises performed in terms of data model in order to handle in the better way our dataset.
 \subsection{DocumentDB}
 The document database is used in order to deal with a very large amount of data in an easy and fast way. So due to the fact that our dataset is very large this is the best design choice to achieve the \emph{usability} requirement, in particular for what is related to the latency. Moreover, we use a DocumentDB in order to respect the \emph{flexibility} requirement, in fact it is schema-less and this allow us to maintain heterogeneous recipes in our database. For instance the user can insert a recipe without some attributes (carbs and fat for example) and we have no issues due to the schema-less property of DocumentDB. Furthermore this is very important for what concern the comments: in fact comments are embedded in the recipe document and the schema-less approach allow us to add comment in a flexible way and to have recipes without comments.
+So, to summarize, we use only one collection, \emph{recipes}, in which every document is a recipe that contains also the comments. So this is how we decided to implements the \emph{one-to-many} relationship between \emph{Recipe} and \emph{Comment}.
+
+\noindent This is an example of one Recipe that contains all the value (this is not mandatory, like we said before):
 
 \lstset{ language=json}
 \begin{lstlisting}
@@ -467,7 +470,7 @@ Because of the large amount of information to deal with, it is important to spli
 	\item Recipe: stored on DocumentDB and partially on GraphDB
 \end{itemize}
 
-\noindent The reason why we store recipes on both databases is because we want to retrieve social network information from it (likes, suggested recipes based on who added it, and so on). Hence we store on Graph DB a part of the recipe information, and the whole information about recipes on DocumentDB. This partial view of the recipe is the so-called \emph{recipe snapshot}. Also for the user exist a snapshot but it exists for implementation reason, in fact in this case all the information about the user are on GraphDB but only a part is in the snapshot. Generally speaking a snapshot is a partial view of an entity (User or recipe). When the user clicks on the snapshot then he will see all the information (so for what concerns the recipes, the snapshot is done with GraphDB and the detailed page with DocumentDB).
+\noindent The reason why we store recipes on both databases is because we want to retrieve social network information from it (likes, suggested recipes based on who added it, and so on). Hence we store on Graph DB a part of the recipe information, and the whole information about recipes on DocumentDB. This partial view of the recipe is the so-called \emph{recipe snapshot}. Also for the user exist a snapshot but it exists for implementation reason, in fact in this case all the information about the user are on GraphDB but only a part is in the snapshot. Generally speaking a snapshot is a partial view of an entity (User or Recipe). When the user clicks on the snapshot then he will see all the information (so for what concerns the recipes, the snapshot is done with GraphDB and the detailed page with DocumentDB).
 
 
 \noindent Now it is important to say that was chosen MongoDB as DBMS for the DocumentDB and Neo4j as DBMS for the GraphDB.
@@ -478,7 +481,7 @@ In our application some of the most important requirements are the \emph{Availab
 \begin{itemize}
 	\item An high availability, due to the fact that we have more servers (in our case we have 3 virtual machines provided by University of Pisa\footnote{172.16.3.157 - 172.16.3.107 -  172.16.3.108}) and so we haven't the single point of failure issue.
 	\item An high consistency, because, even if the data on a server would be corrupted (for a server malfunction for instance), we have an update replica that maintains the correct data (see also 2.5.2).
-	\item A low latency, in fact thanks to sharding and replicas the load is balanced among the cluster servers. We have to remark that this is not true always because, in order to maintain consistency, it is possible to have a longer latency with respect to the one that we would achieve without consistency (replicas must be updated and this requires time).
+	\item A low latency, in fact thanks to sharding and replicas the load is balanced among the cluster servers. We have to remark that this is not always true because, in order to maintain consistency, it is possible to have a longer latency with respect to the one that we would achieve without consistency (replicas must be updated and this requires time).
 \end{itemize}
 
 \noindent This two objectives can be reached using replicas (copy of the same data on different servers) and sharding (the dataset is split up into different parts, each part is on a different server of the cluster or on more than one server depending from the design choises performed).
@@ -613,7 +616,7 @@ This package contains a class used to store all the utility functions that we us
 In the following section will be presented the most relevant query performed with MongoDB and Neo4J. 
 \noindent Some important point must be underlined:
 \begin{itemize}
-	\item The operation of \emph{skip} and \emph{limit}, use in the most of the following queries, are necessary due  to implementation reasons. In fact the results are not shown all in the same page (because of the size of the database the output can be huge) but only a subset of the result are shown (for instance, the first X) and in order to go on and see the other result, the query will be performed with different value of \emph{<howManyToSkip>} (the first time is 0, the second is X) and \emph{<howManyToGet>} (it's a fixed number, must be equal to the previous X)
+	\item The operation of \emph{skip} and \emph{limit}, use in the most of the following queries, are necessary due  to implementation reasons. In fact the results are not shown all in the same page (because of the size of the database the output can be huge) but only a subset of the result are shown (for instance, the first X) and in order to go on and see the other result, the query will be performed with different value of \emph{<howManyToSkip>} (the first time is 0, the second is X, the third 2X and so on) and \emph{<howManyToGet>} (it's a fixed number, must be equal to the previous X)
 	\item In Neo4J part, due to performance reasons, some queries compute also followers, followings and recipes added by each user. This is necessary because when the user is given as result this information must be showed and if we don't compute it here we have to do another query for each user.
 \end{itemize}
 
@@ -652,7 +655,7 @@ db.recipes.aggregate (
 )
 \end{lstlisting}
 \subsubsection{Search for recipe title}
-Given a portion of the title, this query is capable of returning as a result a set of recipes whose titles contain it. Research must be case insensitive (see \emph{options:"i"} in the regexMatch step of the aggregation)
+Given a portion of the title, this query is capable of returning as a result a set of recipes whose titles contain it. Research must be case insensitive (see \emph{options:"i"} in the match step of the aggregation)
 \begin{itemize}
 \item Input: portion of the title, how many recipes to skip and how many recipes to get.
 \item Output: set of recipes.	
@@ -688,7 +691,7 @@ db.recipes.aggregate (
 \end{lstlisting} 
 
 \subsubsection{Search Most Versatile User}
-This query let select the most versatile user, the one who had covered more recipe categories (added at least 5 different recipe in a \emph{category}, than this \emph{category} is covered).
+This query let select the most versatile user, the one who had covered more recipe categories (if he/she added at least 5 different recipe in a \emph{category}, than this \emph{category} is covered).
 
 \begin{itemize}
 	\item Input: howMany, an int who let us select the first howMany most versatile users.
@@ -781,12 +784,12 @@ db.recipes.aggregate (
 \end{lstlisting}
 
 \subsubsection{Search for recipe ingredients}
-This query give the possibility to find a specific number of recipes given some of the recipe ingredients. The search is case insensitive for a more easy to use experience.
+This query give the possibility to find a specific number of recipes given some of the recipe ingredients (or a portion of them). The search is case insensitive for a more easy to use experience.
 \begin{itemize}
 	\item Input: a list of ingredients, how many recipes to skip and how many recipe to show.
-	\item Output: a list of recipes, all of them have at least all the ingredients spicified before. The results are ordered from the newer to the older recipe.
+	\item Output: a list of recipes, all of them have at least all the ingredients specified before. The results are ordered from the newer to the older recipe.
 \end{itemize}
-
+It is important to say that there will be a \emph{match} step for each ingredients specified by the user.
 \lstset{ language=java}
 \begin{lstlisting}
 	db.recipes.aggregate (
@@ -816,6 +819,7 @@ This query give the possibility to find a specific number of recipes given some 
 	]
  )
 \end{lstlisting} 
+
 \subsubsection{Most common recipe categories}
 This query allows you to get a ranking of the categories most used by users for their recipes.
 \begin{itemize}
