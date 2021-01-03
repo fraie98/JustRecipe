@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  3 JAN 2021 12:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  3 JAN 2021 17:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -342,10 +342,10 @@ Chapter 2.
 <img/UseCaseDiagram.png, id=39, 1138.2525pt x 1116.17pt>
 File: img/UseCaseDiagram.png Graphic file (type png)
 <use img/UseCaseDiagram.png>
-Package pdftex.def Info: img/UseCaseDiagram.png  used on input line 262.
+Package pdftex.def Info: img/UseCaseDiagram.png  used on input line 260.
 (pdftex.def)             Requested size: 455.29294pt x 446.4601pt.
 
-Overfull \hbox (42.72795pt too wide) in paragraph at lines 262--263
+Overfull \hbox (42.72795pt too wide) in paragraph at lines 260--261
  [][] 
  []
 
@@ -353,69 +353,70 @@ Overfull \hbox (42.72795pt too wide) in paragraph at lines 262--263
 <img/ClassDiagram_generaliz.png, id=44, 734.745pt x 421.575pt>
 File: img/ClassDiagram_generaliz.png Graphic file (type png)
 <use img/ClassDiagram_generaliz.png>
-Package pdftex.def Info: img/ClassDiagram_generaliz.png  used on input line 289
+Package pdftex.def Info: img/ClassDiagram_generaliz.png  used on input line 287
 .
 (pdftex.def)             Requested size: 367.3716pt x 210.78697pt.
 <img/ClassDiagram.png, id=45, 667.49374pt x 421.575pt>
 File: img/ClassDiagram.png Graphic file (type png)
 <use img/ClassDiagram.png>
-Package pdftex.def Info: img/ClassDiagram.png  used on input line 297.
+Package pdftex.def Info: img/ClassDiagram.png  used on input line 295.
 (pdftex.def)             Requested size: 333.74606pt x 210.78697pt.
 
-Overfull \hbox (20.56316pt too wide) in paragraph at lines 306--316
+Overfull \hbox (20.56316pt too wide) in paragraph at lines 304--314
  [][] 
  []
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 347.
+               Default added (so using `tbp') on input line 345.
 
 [8 <./img/ClassDiagram_generaliz.png> <./img/ClassDiagram.png>] [9]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
-81.
+79.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [10]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 439.
+(Font)              <8> on input line 437.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 439.
+(Font)              <6> on input line 437.
 <img/graphDbModel.png, id=59, 587.19376pt x 392.46625pt>
 File: img/graphDbModel.png Graphic file (type png)
 <use img/graphDbModel.png>
-Package pdftex.def Info: img/graphDbModel.png  used on input line 448.
+Package pdftex.def Info: img/graphDbModel.png  used on input line 446.
 (pdftex.def)             Requested size: 352.31897pt x 235.48155pt.
- [11 <./img/graphDbModel.png>] [12]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [11 <./img/graphDbModel.png>] (/usr/share/texlive/texmf-dist/tex/latex/listing
+s/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 532.
- [13] [14]
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 484.
+
+[12] [13] [14]
 Chapter 3.
 [15
 
-] [16] [17] [18] [19] [20] [21]
-Overfull \hbox (4.6226pt too wide) in paragraph at lines 933--941
+] [16] [17] [18] [19] [20] [21] [22]
+Overfull \hbox (4.6226pt too wide) in paragraph at lines 961--969
  [][] 
  []
 
-[22] [23] [24] [25]
-Overfull \hbox (4.16756pt too wide) in paragraph at lines 1142--1151
+[23] [24] [25] [26]
+Overfull \hbox (24.30153pt too wide) in paragraph at lines 1196--1205
  [][] 
  []
 
-[26] [27]
+[27] [28]
 Chapter 4.
-[28
+[29
 
 ] (./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 7113 strings out of 481239
- 108740 string characters out of 5920376
+ 7111 strings out of 481239
+ 108722 string characters out of 5920376
  765695 words of memory out of 5000000
- 22298 multiletter control sequences out of 15000+600000
+ 22296 multiletter control sequences out of 15000+600000
  547743 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  50i,17n,60p,890b,1679s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -435,10 +436,10 @@ pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texm
 f/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public
 /cm-super/sfti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.p
 fb>
-Output written on "JustRecipe Doc.pdf" (29 pages, 800421 bytes).
+Output written on "JustRecipe Doc.pdf" (30 pages, 803186 bytes).
 PDF statistics:
- 181 PDF objects out of 1000 (max. 8388607)
- 121 compressed objects within 2 object streams
+ 184 PDF objects out of 1000 (max. 8388607)
+ 123 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

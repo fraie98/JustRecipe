@@ -27,7 +27,7 @@ public class Main extends Application {
 
         primaryStage.centerOnScreen();
         primaryStage.show();
-        //primaryStage.setResizable(false);
+        primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image("/img/icon.png"));
 
 
