@@ -1134,23 +1134,23 @@ Since a constraint on the recipe title was needed, and this was implemented with
 The constraint on the username is also inserted through an index, so the index on the username is also mandatory.
 
 \subsubsection{Index on Recipe Creation Time}
-A study of performance has been completed, the results are available in table 3.2. The table displays that the index on the creation time field is a good index, which improve the performance of the application, by reducing the number of document and keys examined and reducing the execution time, for all the query considered. All the following (the one in table 3.2) query has been tried as they could appear during the natural execution of the application. All of this query are sorted by the creation time (descending) but the first one, this consider the recipes added by a user in a date interval. This results are so good that the index tested has been implemented on MongoDB.
+A study of performance has been completed, the results are available in table 3.2.
 
 \begin{table}[htpb]
-\caption{Test on creationTime Index}
-\centering
-\begin{tabular}{|c|c|c|l}
-	\cline{1-3}
-	\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query} & \cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without Index}                                                     & \cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with Index}                                                        &  \\ \cline{1-3}
-	Weekly Recipes per User                              & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 30,\\ totalKeysExamined : 0,\\ totalDocsExamined : 45348\end{tabular}   & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 2,\\ totalKeysExamined : 0,\\ totalDocsExamined : 0\end{tabular}        &  \\ \cline{1-3}
-	User's Recipes                                       & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 37,\\ totalKeysExamined : 0,\\ totalDocsExamined : 45348\end{tabular}   & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 7,\\ totalKeysExamined : 1280,\\ totalDocsExamined : 1280\end{tabular}  &  \\ \cline{1-3}
-	Search for Recipe Title                              & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 57,\\ totalKeysExamined : 45348,\\ totalDocsExamined : 389\end{tabular} & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 29,\\ totalKeysExamined : 6126,\\ totalDocsExamined : 6126\end{tabular} &  \\ \cline{1-3}
-	Search for recipe category                           & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 75,\\ totalKeysExamined : 0,\\ totalDocsExamined : 45348\end{tabular}   & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 2,\\ totalKeysExamined : 129,\\ totalDocsExamined : 129\end{tabular}    &  \\ \cline{1-3}
-	Search for recipe ingredients                        & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 226,\\ totalKeysExamined : 0,\\ totalDocsExamined : 45348\end{tabular}  & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 32,\\ totalKeysExamined : 4591,\\ totalDocsExamined : 4591\end{tabular} &  \\ \cline{1-3}
-\end{tabular}
+	\caption{Test on creationTime Index}
+	\centering
+	\begin{tabular}{|c|c|c|l}
+		\cline{1-3}
+		\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query} & \cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without Index}                                                     & \cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with Index}                                                        &  \\ \cline{1-3}
+		Weekly Recipes per User                              & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 30,\\ totalKeysExamined : 0,\\ totalDocsExamined : 45348\end{tabular}   & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 2,\\ totalKeysExamined : 0,\\ totalDocsExamined : 0\end{tabular}        &  \\ \cline{1-3}
+		User's Recipes                                       & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 37,\\ totalKeysExamined : 0,\\ totalDocsExamined : 45348\end{tabular}   & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 7,\\ totalKeysExamined : 1280,\\ totalDocsExamined : 1280\end{tabular}  &  \\ \cline{1-3}
+		Search for Recipe Title                              & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 57,\\ totalKeysExamined : 45348,\\ totalDocsExamined : 389\end{tabular} & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 29,\\ totalKeysExamined : 6126,\\ totalDocsExamined : 6126\end{tabular} &  \\ \cline{1-3}
+		Search for recipe category                           & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 75,\\ totalKeysExamined : 0,\\ totalDocsExamined : 45348\end{tabular}   & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 2,\\ totalKeysExamined : 129,\\ totalDocsExamined : 129\end{tabular}    &  \\ \cline{1-3}
+		Search for recipe ingredients                        & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 226,\\ totalKeysExamined : 0,\\ totalDocsExamined : 45348\end{tabular}  & \begin{tabular}[c]{@{}c@{}}executionTimeMillis : 32,\\ totalKeysExamined : 4591,\\ totalDocsExamined : 4591\end{tabular} &  \\ \cline{1-3}
+	\end{tabular}
 \end{table}
 
-
+\noindent The table displays that the index on the creation time field is a good index, which improve the performance of the application, by reducing the number of document and keys examined and reducing the execution time, for all the query considered. All the following (the ones in table 3.2) query has been tried as they could appear during the natural execution of the application. All of this query are sorted by the creation time (descending) but the first one, this consider the recipes added by a user in a date interval. This results are so good that the index tested has been implemented on MongoDB.
 
 
 \subsubsection{Index on Comment Creation Time}
@@ -1159,20 +1159,25 @@ A possible index is the one on the creation time of the comment, this index affe
 \begin{table}[htpb]
 	\centering
 	\caption{Statistics about comment creation time index}
-	\begin{tabular}{lllll}
-		\cline{1-3}
-		\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
-		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without index}} &
-		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with index}} &
-		&
-		\\ \cline{1-3}
-		\multicolumn{1}{|l|}{Last Comments} &
-		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}executionTimeMillis: 129  \\ totalKeysExamined: 0\\ totalDocsExamined: 45532\end{tabular}} &
-		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}executionTimeMillis: 172\\ totalKeysExamined: 45383\\ totalDocsExamined: 45352\end{tabular}} &
-		&
-		\\ \cline{1-3}
-	\end{tabular}
-\end{table}
+		\begin{tabular}{lllll}
+			\cline{1-3}
+			\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
+			\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without index}} &
+			\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with index}} &
+			&
+			\\ \cline{1-3}
+			\multicolumn{1}{|l|}{Suggested Recipes} &
+			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 125843\\ Execution Time: 179ms\end{tabular}} &
+			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 125843\\ Execution Time: 113ms\end{tabular}} &
+			&
+			\\ \cline{1-3}
+			\multicolumn{1}{|l|}{Recipes of Following Users} &
+			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 82836\\ Execution Time: 39ms\end{tabular}} &
+			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 82836\\ Execution Time: 38ms\end{tabular}} &
+			&
+			\\ \cline{1-3} 
+		\end{tabular}
+	\end{table}
 \noindent From the result obtained we can see that the addition of that index do not imply a improve in the performance but instead a downgrade of performance. In fact the query with the index require more time with respect to the one without index.
 
 \noindent For this reason we don't create an index on the creation time of the comment.
