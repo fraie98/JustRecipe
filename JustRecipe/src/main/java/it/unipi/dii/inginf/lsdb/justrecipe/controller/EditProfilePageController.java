@@ -100,6 +100,7 @@ public class EditProfilePageController {
             case 2:
                 role.setText("Administrator");
                 adminButton.setDisable(true);
+                moderatorButton.setDisable(true);
                 break;
             default:
                 role.setText("Normal User");
@@ -176,6 +177,7 @@ public class EditProfilePageController {
         adminButton.setDisable(true);
         role.setText("Administrator");
         moderatorButton.setText("Elect Moderator");
+        moderatorButton.setDisable(true);
     }
 
     /**
