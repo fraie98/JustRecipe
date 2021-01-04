@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static int HOW_MANY_RECIPES_TO_REMOVE = 30000;
-    public static String PATH_FULL_FORMAT_RECIPES = "/home/francesco/Scaricati/full_format_recipes/full_format_recipes.json";
-    public static String PATH_RECIPES_RAW_NOSOURCE_FN = "/home/francesco/Scaricati/recipes_raw/recipes_raw_nosource_fn.json";
+    public static String PATH_FULL_FORMAT_RECIPES = "C:/Users/danyc/Downloads/full_format_recipes/full_format_recipes.json";
+    public static String PATH_RECIPES_RAW_NOSOURCE_FN = "C:/Users/danyc/Downloads/recipes_raw/recipes_raw_nosource_fn.json";
 
     private static MongoClient mongoClient;
     private static MongoDatabase database;
@@ -44,6 +44,10 @@ public class Main {
         createUsernameConstraintNeo4j();
         createTitleConstraintNeo4j();
 
+        // Create the indexes
+        collection.createIndex(Indexes.descending("creationTime"),
+                new IndexOptions().name("creationTime_index"));
+
         List<RecipeRaw> rawRecipes = new ArrayList<>();
         addRecipes_full_format(rawRecipes, PATH_FULL_FORMAT_RECIPES);
         addRecipes_raw(rawRecipes, PATH_RECIPES_RAW_NOSOURCE_FN);
@@ -67,8 +71,8 @@ public class Main {
 
         // List of users present at the initial time of the application
         List<User> users = new ArrayList<>();
-        users.add(new User("Oliver", "Smith", "oliver.smith", "oliver.smith"));
-        users.add(new User("Jack", "Jones", "jack.jones", "jack.jones"));
+        users.add(new User("Oliver", "Smith", "oliver.smith", "oliver.smith", 2));
+        users.add(new User("Jack", "Jones", "jack.jones", "jack.jones", 1));
         users.add(new User("Harry", "Williams", "harry.williams", "harry.williams"));
         users.add(new User("Jacob", "Brown", "jacob.brown", "jacob.brown"));
         users.add(new User("Charlie", "Taylor", "charlie.taylor", "charlie.taylor"));
@@ -157,6 +161,7 @@ public class Main {
             props.put( "lastName", user.getLastName());
             props.put( "username", user.getUsername());
             props.put( "password", user.getPassword());
+            props.put("role", user.getRole());
             list.add(props);
         }
         params.put( "batch", list );
@@ -167,7 +172,7 @@ public class Main {
                 tx.run( "UNWIND $batch AS row " +
                                 "MERGE (u:User {firstName: row.firstName, lastName: row.lastName, " +
                                 "username: row.username," +
-                                "password: row.password, role:0})",
+                                "password: row.password, role: row.role})",
                         params);
                 return null;
             });

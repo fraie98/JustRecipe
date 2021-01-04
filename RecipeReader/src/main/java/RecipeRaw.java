@@ -71,40 +71,4 @@ public class RecipeRaw {
     public List<String> getCategories() {
         return categories;
     }
-
-    public void setCalories(int calories) {
-        this.calories = calories;
-    }
-
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
-
-    public void setDirections(List<String> directions) {
-        this.directions = directions;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setFat(int fat) {
-        this.fat = fat;
-    }
-
-    public void setProtein(int protein) {
-        this.protein = protein;
-    }
-
-    public void setCarbs(int carbs) {
-        this.carbs = carbs;
-    }
-
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
-    }
 }

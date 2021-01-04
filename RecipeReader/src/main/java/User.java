@@ -3,15 +3,21 @@ public class User {
     private String lastName;
     private String username;
     private String password;
+    private int role;
 
     public User(){}
 
-    //Constructor
-    public User(String firstName, String lastName, String username, String password) {
+    public User(String firstName, String lastName, String username, String password, int role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+        this.role = role;
+    }
+
+    public User (String firstName, String lastName, String username, String password)
+    {
+        this (firstName, lastName, username, password, 0);
     }
 
 
@@ -32,21 +38,8 @@ public class User {
         return password;
     }
 
-    //Setters
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public int getRole() {
+        return role;
     }
 }
 
