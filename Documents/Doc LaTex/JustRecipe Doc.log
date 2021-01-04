@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  3 JAN 2021 17:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  4 JAN 2021 10:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -386,40 +386,50 @@ File: img/graphDbModel.png Graphic file (type png)
 <use img/graphDbModel.png>
 Package pdftex.def Info: img/graphDbModel.png  used on input line 446.
 (pdftex.def)             Requested size: 352.31897pt x 235.48155pt.
- [11 <./img/graphDbModel.png>] (/usr/share/texlive/texmf-dist/tex/latex/listing
-s/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-)
-LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 484.
-
-[12] [13] [14]
+ [11 <./img/graphDbModel.png>]
+<img/UML_colorato.png, id=67, 667.49374pt x 421.575pt>
+File: img/UML_colorato.png Graphic file (type png)
+<use img/UML_colorato.png>
+Package pdftex.def Info: img/UML_colorato.png  used on input line 477.
+(pdftex.def)             Requested size: 333.74606pt x 210.78697pt.
+ [12 <./img/UML_colorato.png>] [13] [14]
 Chapter 3.
 [15
 
-] [16] [17] [18] [19] [20] [21] [22]
-Overfull \hbox (4.6226pt too wide) in paragraph at lines 961--969
+] [16] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 635.
+
+[17] [18] [19] [20] [21] [22]
+Overfull \hbox (4.6226pt too wide) in paragraph at lines 989--997
  [][] 
  []
 
-[23] [24] [25] [26]
-Overfull \hbox (24.30153pt too wide) in paragraph at lines 1196--1205
+<img/graphScreen.png, id=106, 382.42876pt x 468.75125pt>
+File: img/graphScreen.png Graphic file (type png)
+<use img/graphScreen.png>
+Package pdftex.def Info: img/graphScreen.png  used on input line 1002.
+(pdftex.def)             Requested size: 267.69829pt x 328.12363pt.
+[23] [24 <./img/graphScreen.png>] [25] [26] [27]
+Overfull \hbox (24.30153pt too wide) in paragraph at lines 1232--1241
  [][] 
  []
 
-[27] [28]
+[28] [29]
 Chapter 4.
-[29
+[30
 
 ] (./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 7111 strings out of 481239
- 108722 string characters out of 5920376
- 765695 words of memory out of 5000000
- 22296 multiletter control sequences out of 15000+600000
+ 7125 strings out of 481239
+ 109004 string characters out of 5920376
+ 766695 words of memory out of 5000000
+ 22308 multiletter control sequences out of 15000+600000
  547743 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,17n,60p,890b,1679s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 50i,17n,60p,890b,1623s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t
 1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
@@ -436,10 +446,10 @@ pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texm
 f/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public
 /cm-super/sfti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.p
 fb>
-Output written on "JustRecipe Doc.pdf" (30 pages, 803186 bytes).
+Output written on "JustRecipe Doc.pdf" (31 pages, 888117 bytes).
 PDF statistics:
- 184 PDF objects out of 1000 (max. 8388607)
- 123 compressed objects within 2 object streams
+ 192 PDF objects out of 1000 (max. 8388607)
+ 126 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
