@@ -1013,7 +1013,7 @@ public class Neo4jDriver implements DatabaseDriver{
                                 "UNION " +
                                 "MATCH (:User {username: $u})-[l:LIKES]->(:Recipe)<-[:ADDS]-(owner:User) " +
                                 "WITH DISTINCT(owner) AS owner, COUNT(DISTINCT l) AS numLikes " +
-                                "WHERE numLikes > $treshold AND owner.username <> $u" +
+                                "WHERE numLikes > $treshold AND owner.username <> $u " +
                                 "MATCH (owner)-[a:ADDS]->(recipe:Recipe) " +
                                 "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat, recipe.picture, a.when, owner.username " +
                                 "ORDER BY a.when DESC " +
