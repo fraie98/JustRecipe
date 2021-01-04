@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  4 JAN 2021 14:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  4 JAN 2021 16:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -237,20 +237,20 @@ File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
 (./JustRecipe Doc.aux)
 \openout1 = `"JustRecipe Doc.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 75.
-LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 105.
+LaTeX Font Info:    ... okay on input line 105.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -317,7 +317,7 @@ Package caption Info: End \AtBeginDocument code.
 <img/unipi.png, id=1, 1204.5pt x 1229.59375pt>
 File: img/unipi.png Graphic file (type png)
 <use img/unipi.png>
-Package pdftex.def Info: img/unipi.png  used on input line 80.
+Package pdftex.def Info: img/unipi.png  used on input line 110.
 (pdftex.def)             Requested size: 185.65298pt x 189.51563pt.
 
 [1
@@ -348,10 +348,10 @@ Chapter 2.
 <img/UseCaseDiagram.png, id=39, 1138.2525pt x 1116.17pt>
 File: img/UseCaseDiagram.png Graphic file (type png)
 <use img/UseCaseDiagram.png>
-Package pdftex.def Info: img/UseCaseDiagram.png  used on input line 261.
+Package pdftex.def Info: img/UseCaseDiagram.png  used on input line 295.
 (pdftex.def)             Requested size: 455.29294pt x 446.4601pt.
 
-Overfull \hbox (42.72795pt too wide) in paragraph at lines 261--262
+Overfull \hbox (42.72795pt too wide) in paragraph at lines 295--296
  [][] 
  []
 
@@ -359,67 +359,70 @@ Overfull \hbox (42.72795pt too wide) in paragraph at lines 261--262
 <img/ClassDiagram_generaliz.png, id=44, 734.745pt x 421.575pt>
 File: img/ClassDiagram_generaliz.png Graphic file (type png)
 <use img/ClassDiagram_generaliz.png>
-Package pdftex.def Info: img/ClassDiagram_generaliz.png  used on input line 288
+Package pdftex.def Info: img/ClassDiagram_generaliz.png  used on input line 322
 .
 (pdftex.def)             Requested size: 367.3716pt x 210.78697pt.
 <img/ClassDiagram.png, id=45, 667.49374pt x 421.575pt>
 File: img/ClassDiagram.png Graphic file (type png)
 <use img/ClassDiagram.png>
-Package pdftex.def Info: img/ClassDiagram.png  used on input line 296.
+Package pdftex.def Info: img/ClassDiagram.png  used on input line 330.
 (pdftex.def)             Requested size: 333.74606pt x 210.78697pt.
 
-Overfull \hbox (20.56316pt too wide) in paragraph at lines 305--315
+Overfull \hbox (20.56316pt too wide) in paragraph at lines 339--349
  [][] 
  []
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 346.
+               Default added (so using `tbp') on input line 380.
 
 [8 <./img/ClassDiagram_generaliz.png> <./img/ClassDiagram.png>] [9]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
-80.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
+14.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [10]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 438.
+(Font)              <8> on input line 472.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 438.
+(Font)              <6> on input line 472.
 <img/graphDbModel.png, id=59, 587.19376pt x 392.46625pt>
 File: img/graphDbModel.png Graphic file (type png)
 <use img/graphDbModel.png>
-Package pdftex.def Info: img/graphDbModel.png  used on input line 447.
+Package pdftex.def Info: img/graphDbModel.png  used on input line 481.
 (pdftex.def)             Requested size: 352.31897pt x 235.48155pt.
  [11 <./img/graphDbModel.png>]
 <img/UML_colorato.png, id=67, 667.49374pt x 421.575pt>
 File: img/UML_colorato.png Graphic file (type png)
 <use img/UML_colorato.png>
-Package pdftex.def Info: img/UML_colorato.png  used on input line 478.
+Package pdftex.def Info: img/UML_colorato.png  used on input line 512.
 (pdftex.def)             Requested size: 333.74606pt x 210.78697pt.
  [12 <./img/UML_colorato.png>] [13] [14]
 Chapter 3.
 [15
 
-] [16] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+) [16]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 636.
-
-[17] [18] [19] [20] [21] [22]
-Overfull \hbox (4.6226pt too wide) in paragraph at lines 990--998
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 685.
+ [17] [18]
+[19] [20] [21] [22] [23]
+Overfull \hbox (4.6226pt too wide) in paragraph at lines 1040--1048
  [][] 
  []
 
-<img/graphScreen.png, id=106, 382.42876pt x 468.75125pt>
+<img/graphScreen.png, id=110, 382.42876pt x 468.75125pt>
 File: img/graphScreen.png Graphic file (type png)
 <use img/graphScreen.png>
-Package pdftex.def Info: img/graphScreen.png  used on input line 1003.
+Package pdftex.def Info: img/graphScreen.png  used on input line 1053.
 (pdftex.def)             Requested size: 267.69829pt x 328.12363pt.
-[23] [24 <./img/graphScreen.png>] [25] [26] [27]
-Overfull \hbox (24.30153pt too wide) in paragraph at lines 1233--1242
+[24 <./img/graphScreen.png>] [25] [26] [27]
+Overfull \hbox (24.30153pt too wide) in paragraph at lines 1284--1293
  [][] 
  []
 
@@ -429,13 +432,13 @@ Chapter 4.
 
 ] (./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 7153 strings out of 481239
- 109493 string characters out of 5920376
- 767326 words of memory out of 5000000
- 22334 multiletter control sequences out of 15000+600000
- 547743 words of font info for 49 fonts, out of 8000000 for 9000
+ 7718 strings out of 481239
+ 115974 string characters out of 5920376
+ 771302 words of memory out of 5000000
+ 22896 multiletter control sequences out of 15000+600000
+ 548509 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,17n,60p,890b,1623s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 50i,17n,60p,890b,1889s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t
 1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/t
 exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
@@ -445,17 +448,17 @@ lic/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx120
 0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/te
 xmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/publ
 ic/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488
-.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/tex
-mf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/publi
-c/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.
-pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texm
-f/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.p
-fb>
-Output written on "JustRecipe Doc.pdf" (31 pages, 887379 bytes).
+.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0500.pfb></usr/share/tex
+mf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/publi
+c/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.
+pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texm
+f/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public
+/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on "JustRecipe Doc.pdf" (31 pages, 921754 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 126 compressed objects within 2 object streams
+ 196 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

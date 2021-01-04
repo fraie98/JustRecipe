@@ -41,20 +41,20 @@
 \contentsline {subsubsection}{Get the username of the most versatile user}{19}%
 \contentsline {subsubsection}{Search for recipe category}{20}%
 \contentsline {subsubsection}{Search for recipe ingredients}{21}%
-\contentsline {subsubsection}{Most common recipe categories}{21}%
+\contentsline {subsubsection}{Most common recipe categories}{22}%
 \contentsline {subsubsection}{Last Comments}{22}%
 \contentsline {subsubsection}{Weekly Recipes per User}{23}%
-\contentsline {subsection}{\numberline {3.4.2}Neo4J}{23}%
+\contentsline {subsection}{\numberline {3.4.2}Neo4J}{24}%
 \contentsline {subsubsection}{Suggested Recipes}{24}%
 \contentsline {subsubsection}{Recipes of following users}{25}%
 \contentsline {subsubsection}{Most followed and active users}{25}%
-\contentsline {subsubsection}{Most liked users}{25}%
+\contentsline {subsubsection}{Most liked users}{26}%
 \contentsline {subsubsection}{Best Recipes}{26}%
-\contentsline {subsubsection}{Search for username}{26}%
+\contentsline {subsubsection}{Search for username}{27}%
 \contentsline {subsubsection}{Search for user's full-name}{27}%
 \contentsline {section}{\numberline {3.5}Tests and Statistical Analysis}{27}%
 \contentsline {subsection}{\numberline {3.5.1}Queries Analysis}{27}%
-\contentsline {subsection}{\numberline {3.5.2}Index Analysis}{27}%
+\contentsline {subsection}{\numberline {3.5.2}Index Analysis}{28}%
 \contentsline {subsubsection}{Index on Recipe Title}{28}%
 \contentsline {subsubsection}{Index on User Username}{28}%
 \contentsline {subsubsection}{Index on Recipe Creation Time}{28}%
