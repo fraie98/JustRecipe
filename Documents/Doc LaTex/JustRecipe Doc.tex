@@ -1298,7 +1298,7 @@ A possible index is the one on the attribute \emph{when} of the relations \emph{
 	\end{tabular}
 \end{table}
 
-\noindent \textbf{DA CONTROLLARE E DECIDERE} As we can see from the table only for the first query we have a good margin of benefit, but this margin is not good enough to justify the addition of this index, because even if it improves the performance on the \emph{Suggested Recipes} query, it deteriorates the writing performance because we have to update the index for each insertion.
+\noindent As we can see from the table only for the first query we have a little margin of benefit (for the first case we can say that the performance are equal), but this margin is not good enough (it's only 30 ms more or less) to justify the addition of this index, because even if it improves a bit the performance on the \emph{Suggested Recipes} query, it deteriorates the writing performance because we have to update the index for each insertion.
 
 \chapter{User Manual}
 \end{document}
