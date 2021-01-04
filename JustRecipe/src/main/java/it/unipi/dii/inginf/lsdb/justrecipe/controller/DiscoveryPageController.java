@@ -42,6 +42,7 @@ public class DiscoveryPageController {
     private final int LIKES_THRESHOLD_SECOND_LEVEL_SUGGESTION = 3;
     private final int HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL = 15;
     private final int HOW_MANY_SUGGESTED_RECIPES_SECOND_LVL = HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW-HOW_MANY_SUGGESTED_RECIPES_FIRST_LVL;
+    private final int NUM_RECIPES_THRESHOLD = 5;
     private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
 
     public void initialize ()
@@ -107,9 +108,9 @@ public class DiscoveryPageController {
             showSuggestedRecipes();
         }
         if(String.valueOf(searchComboBox.getValue()).equals("Most versatile user recipes")){
-            String mostVersatileUser = mongoDBDriver.searchMostVersatileUser();
+            String mostVersatileUsername = mongoDBDriver.searchMostVersatileUsername(NUM_RECIPES_THRESHOLD);
             List<Recipe> recipes = mongoDBDriver.getRecipesFromAuthorUsername(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page,
-                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW, mostVersatileUser);
+                    HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW, mostVersatileUsername);
             Utils.addRecipesSnap(discoveryVBox, recipes);
         }
         if (String.valueOf(searchComboBox.getValue()).equals("Recipe title"))

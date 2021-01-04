@@ -560,22 +560,22 @@ public class MongoDBDriver implements DatabaseDriver{
     }
 
     /**
-     * Search and return the most versatile user (by his/her username)
-     * @return
+     * Search and return the most versatile user
+     * @param recipesThreshold   Min number of recipes for considering the category for the user
+     * @return  Username of the most versatile user
      */
-    public String searchMostVersatileUser(){
+    public String searchMostVersatileUsername(int recipesThreshold){
         Bson unwind = unwind("$categories");
         Bson group = new Document("$group", new Document("_id", new Document("author", "$authorUsername").append("category",
                 "$categories")).append("numRecipe", new Document("$sum", 1)));
-        Bson match = match(gte("numRecipe",5));
+        Bson match = match(gte("numRecipe",recipesThreshold));
         Bson group2 = group("$_id.author", sum("distinctCategories", 1));
         Bson project = project(fields(computed("username", "$_id"), excludeId(), include("distinctCategories")));
         Bson sortNumName = new Document("$sort", new Document("distinctCategories",-1).append("username",1));
         Bson limit = limit(1);
 
         Document doc = (Document) collection.aggregate(Arrays.asList(unwind, group, match, group2, project, sortNumName, limit)).first();
-        String mostVersatileUsername = doc.getString("username");
 
-        return mostVersatileUsername;
+        return doc.getString("username");
     }
 }
