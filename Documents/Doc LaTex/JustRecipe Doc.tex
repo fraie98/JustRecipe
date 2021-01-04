@@ -685,7 +685,7 @@ This package contains a class used to store all the utility functions that we us
 \end{itemize}
 
 \section{Constraints}
-Constraints have been added in the two databases, for the recipe title and for the user's username, which must be unique.
+Constraints have been added in the two databases, for the recipe title and for the user's username, which must be unique and always present.
 \begin{itemize}
 	\item Constraint on the \emph{title} of the recipe (on MongoDB): 
 	\lstset{ language=java}
@@ -704,14 +704,14 @@ Constraints have been added in the two databases, for the recipe title and for t
 	\begin{lstlisting}
 	CREATE CONSTRAINT title_constraint 
 	ON (r:Recipe) 
-	ASSERT r.title IS UNIQUE	
+	ASSERT ( r.title) IS NODE KEY	
 	\end{lstlisting} 
 	\item Constraint on the \emph{username} of the user: 
 	\lstset{ language=java}
 	\begin{lstlisting}
 	CREATE CONSTRAINT username_constraint 
 	ON (u:User) 
-	ASSERT u.username IS UNIQUE	
+	ASSERT (u.username) IS NODE KEY	
 	\end{lstlisting} 
 \end{itemize}
 \section{Most Relevant Queries}

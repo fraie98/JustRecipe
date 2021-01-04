@@ -168,7 +168,7 @@ public class RecipePageController {
         if(appSession.getLoggedUser().getRole()!=2 && !appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
             recipeDelete.setVisible(false);
         else
-            recipeDelete.setOnMouseClicked(mouseEvent -> recipeDelete.setOnMouseReleased(event -> handleDeleteButtonAction(event)));
+            recipeDelete.setOnMouseClicked(mouseEvent -> handleDeleteButtonAction(mouseEvent));
 
         if(!appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
             recipeEditImg.setVisible(false);

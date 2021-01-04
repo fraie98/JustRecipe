@@ -1,6 +1,10 @@
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.google.gson.Gson;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.ReadPreference;
+import com.mongodb.WriteConcern;
 import com.mongodb.client.*;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.Indexes;
@@ -25,11 +29,23 @@ public class Main {
 
     public static void main (String[] arg)
     {
-        mongoClient = MongoClients.create();
+        ConnectionString connectionString =  new ConnectionString("mongodb://172.16.3.157:27020, " +
+                "172.16.3.107:27020, 172.16.3.108:27020");
+        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+                .applyConnectionString(connectionString)
+                .readPreference(ReadPreference.primaryPreferred())
+                .retryWrites(true)
+                .writeConcern(WriteConcern.W3).build();
+        mongoClient = MongoClients.create(mongoClientSettings);
+
+        //mongoClient = MongoClients.create(); //localhost
         database = mongoClient.getDatabase("justrecipe");
         collection = database.getCollection("recipes");
 
-        driver = GraphDatabase.driver( "neo4j://localhost:7687", AuthTokens.basic( "neo4j", "justrecipe" ) );
+        /*driver = GraphDatabase.driver( "neo4j://localhost:7687",
+                AuthTokens.basic( "neo4j", "justrecipe" ) );*/
+        driver = GraphDatabase.driver("neo4j://172.16.3.107:7687",
+                AuthTokens.basic("neo4j", "justrecipe"));
 
         collection.dropIndexes();
 
@@ -41,8 +57,8 @@ public class Main {
         IndexOptions indexOptions = new IndexOptions().unique(true).name("title_constraint");
         collection.createIndex(Indexes.ascending("title"), indexOptions);
         // Create the constraint on the username of the User
-        createUsernameConstraintNeo4j();
-        createTitleConstraintNeo4j();
+        //createUsernameConstraintNeo4j();
+        //createTitleConstraintNeo4j();
 
         // Create the indexes
         collection.createIndex(Indexes.descending("creationTime"),
@@ -284,26 +300,26 @@ public class Main {
     }
 
     /**
-     * This function creates the constraint on the username (that must be unique)
+     * This function creates the constraint on the username (that must be unique and must always exist)
      */
     private static void createUsernameConstraintNeo4j() {
         try ( Session session = driver.session())
         {
             session.writeTransaction((TransactionWork<Void>) tx -> {
-                tx.run( "CREATE CONSTRAINT username_constraint IF NOT EXISTS ON (u: User) ASSERT u.username IS UNIQUE");
+                tx.run( "CREATE CONSTRAINT username_constraint IF NOT EXISTS ON (u: User) ASSERT (u.username) IS NODE KEY");
                 return null;
             });
         }
     }
 
     /**
-     * This function creates the constraint on the recipe title (that must be unique)
+     * This function creates the constraint on the recipe title (that must be unique and must always exist)
      */
     private static void createTitleConstraintNeo4j() {
         try ( Session session = driver.session())
         {
             session.writeTransaction((TransactionWork<Void>) tx -> {
-                tx.run( "CREATE CONSTRAINT title_constraint IF NOT EXISTS ON (r: Recipe) ASSERT r.title IS UNIQUE");
+                tx.run( "CREATE CONSTRAINT title_constraint IF NOT EXISTS ON (r: Recipe) ASSERT (r.title) IS NODE KEY");
                 return null;
             });
         }
