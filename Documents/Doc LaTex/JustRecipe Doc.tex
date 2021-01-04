@@ -513,8 +513,6 @@ Because of the large amount of information to deal with, it is important to spli
 	\caption{Storing Strategy}
 \end{figure}
 
-
-
 \noindent Another important detail on the Data Model is that we have chosen MongoDB as DBMS for the DocumentDB and Neo4j as DBMS for the GraphDB.
 
 \section{Distributed Database Design}
@@ -529,8 +527,6 @@ In our application some of the most important requirements are the \emph{Availab
 
 \noindent In the following sections we discuss about these two techniques explaining the design choices performed in order to obtain the best performance achievable and in order to respect the given requirements. 
 
-
-
 \subsection{Replicas}
 We decide to use replicas of the same data in order to ensure \emph{availability} and \emph{consistency}. Nevertheless we have to point out that replicas alone don't ensure consistency, because it's possible to have one or more replicas that are not updated, this doesn't happen in our case because \emph{in order to commit a write operation all replicas must be updated}. This because the application is mainly read-heavy and so we need fast reads operation and, in order to achieve this, we can accept slow write operations. Moreover, this configuration ensures the \emph{Consistency} requirement.
 
@@ -542,6 +538,40 @@ We decide to use replicas of the same data in order to ensure \emph{availability
 	\item 1 instance for Neo4J on 172.16.3.107
 	\item All replicas must be updated in order to commit a write operation
 \end{itemize}
+
+\noindent The commands that were used to set the cluster configuration for MongoDB on the virtual machines will now be shown. It was decided to give the lowest priority to the machine running Neo4j (172.16.3.107), for load balancing. The highest priority machine is 172.16.3.157, followed by 172.16.3.108.
+\begin{lstlisting}
+	rsconf = 
+	{
+		_id: "lsmdb", 
+		members: 
+		[
+			{
+				_id: 0, 
+				host: "172.16.3.157:27020", 
+				priority: 2
+			}, 
+			{
+				_id:1, 
+				host: "172.16.3.107:27020", 
+				priority: 0.5
+			}, 
+			{
+				_id:2, 
+				host:"172.16.3.108:27020", 
+				priority: 1
+			}
+		], 
+		settings: 
+		{
+			getLastErrorDefaults: 
+			{
+				w: 3, 
+				wtimeout: 5000
+			}
+		}
+	};	
+\end{lstlisting} 
 
 \noindent As it was expressly requested in the project documentation, a local cluster was also implemented, thanks to which it was possible to test the use of the application even with replicas on Neo4j, in addition of course to those for MongoDB.
 
@@ -591,7 +621,7 @@ The cases that can lead to these inconsistencies are the following:
 \section{Main Modules}
 The implementation code is divided into two main modules: RecipeReader and JustRecipe.
  \begin{itemize}
-	\item \emph{RecipeReader}:  is a program we wrote to get our initial dataset, extracting the information that interests us from the two initial datasets (see chapter 1). 
+	\item \emph{RecipeReader}:  is a program we wrote to get our initial dataset, extracting the information that interests us from the two initial datasets (see chapter 1). To make sense of all the recipes that were initially preloaded, 20 users were entered and the recipes were randomly divided among them.
 	\item \emph{JustRecipe}:  is the actual application, whose implementation will be analyzed in more details in the next sections. 
 \end{itemize}
 \section{Main Packages and Classes}
@@ -626,24 +656,7 @@ This package deals with managing the persistence of data, in fact it contains th
 \noindent Classes:
  \begin{itemize}
 	\item \emph{DatabaseDriver}: this \emph{interface} declares all the methods that has to be implemented in a database driver. This methods are \emph{initConnection()} and \emph{closeConnection()}.  
-	\item \emph{MongoDBDriver}: this class implements DatabaseDriver and is responsible for implementing all the queries that have to be run on MongoDB. We used the Singleton design pattern, because a single instance of this driver must be shared by all application classes.
-	\begin{itemize}
-		\item Code of Versatile
-			\lstset{language=code}
-			\begin{lstlisting}
-db.recipes.createIndex (
-{
-	title:1
-},
-{
-	unique: true,
-	name: "title_constraint"
-}
-)	
-			\end{lstlisting} 
-	\end{itemize}
-	
-	
+	\item \emph{MongoDBDriver}: this class implements DatabaseDriver and is responsible for implementing all the queries that have to be run on MongoDB. We used the Singleton design pattern, because a single instance of this driver must be shared by all application classes. 
 	\item \emph{Neo4jDriver}: this class implements DatabaseDriver and is responsible for implementing all the queries that have to be run on Neo4j. We used the Singleton design pattern, because a single instance of this driver must be shared by all application classes.
 \end{itemize}
 \subsection {it.unipi.dii.inginf.lsdb.justrecipe.controller}
@@ -1222,6 +1235,90 @@ Given the full-name or a part of it, the query returns the users that contains i
 	 COUNT (DISTINCT f2) AS following,
 	 COUNT (DISTINCT a) AS numRecipes
 	 SKIP $skip LIMIT $limit
+\end{lstlisting} 
+
+\section {Some snapshots of code}
+Some interesting snapshots of the code will be showed.
+\subsection{Most relevant queries}
+The implementation code in Java language of the most interesting queries among those seen in the previous section will also be shown.
+\subsubsection{Get the username of the most versatile user}
+\lstset{language=code}
+\begin{lstlisting}
+public String searchMostVersatileUser(int recipesThreshold)
+{
+  Bson unwind = unwind("$categories");
+  Bson group = new Document("$group", 
+    new Document("_id", 
+      new Document("author", "$authorUsername")
+        .append("category", "$categories"))
+        .append("numRecipe", new Document("$sum", 1)));
+  Bson match = match(gte("numRecipe", recipesThreshold));
+  Bson group2 = group("$_id.author", sum("distinctCategories", 1));
+  Bson project = project(fields(computed("username", "$_id"), 
+    excludeId(), include("distinctCategories")));
+  Bson sortNumName = new Document("$sort", new Document("distinctCategories", -1).append("username", 1));
+  Bson limit = limit(1);
+
+  Document doc = (Document) collection.aggregate(
+    Arrays.asList(unwind, group, match, group2, project, 
+    sortNumName, limit)).first();
+
+  return doc.getString("username");
+}	
+\end{lstlisting} 
+\subsubsection{Most common recipe categories}
+\lstset{language=code}
+\begin{lstlisting}
+public List<String> searchMostCommonRecipeCategories (int howManySkip, int howManyCategories)
+{
+    List<String> mostCommonCategories = new ArrayList<>();
+    Bson unwind = unwind("$categories");
+    Bson group = group("$categories", Accumulators.sum("numberOfRecipes", 1));
+    Bson project = project(fields(computed("category", "$_id"), 
+      excludeId(), include("numberOfRecipes")));
+    Bson sort = sort(descending("numberOfRecipes"));
+    Bson skip = skip(howManySkip);
+    Bson limit = limit(howManyCategories);
+    List<Document> results = (List<Document>) collection.aggregate(
+      Arrays.asList(unwind, group, project, sort, skip, limit))
+        .into(new ArrayList());
+
+    for (Document document: results)
+    {
+        mostCommonCategories.add(document.getString("category"));
+    }
+    return mostCommonCategories;
+}	
+\end{lstlisting} 
+\subsubsection{Last comments}
+\lstset{language=code}
+\begin{lstlisting}
+public List<List<Object>> searchAllComments (int howManySkip, int howMany)
+{
+	List<List<Object>> objects = new ArrayList<>();
+	Gson gson = new Gson();
+	Bson unwind = unwind("$comments");
+	Bson sort = sort(descending("comments.creationTime"));
+	Bson skip = skip(howManySkip);
+	Bson limit = limit(howMany);
+	MongoCursor<Document> iterator = (MongoCursor<Document>)
+	  collection.aggregate(Arrays.asList(unwind, sort, skip, limit)).iterator();
+	while (iterator.hasNext())
+	{
+		Document document = iterator.next();
+		Document commentDocument = (Document) document.get("comments");
+		Comment comment = gson.fromJson(gson.toJson(commentDocument),Comment.class);
+		// I need to re-obtain the full recipe
+		Recipe recipe = getRecipeFromTitle(document.getString("title"));
+
+		List<Object> objectList = new ArrayList<>();
+		objectList.add(comment);
+		objectList.add(recipe);
+
+		objects.add(objectList);
+	}
+	return objects;
+}
 \end{lstlisting} 
 
 \section{Tests and Statistical Analysis}
