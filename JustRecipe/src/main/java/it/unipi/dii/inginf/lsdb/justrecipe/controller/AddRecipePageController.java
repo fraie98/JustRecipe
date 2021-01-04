@@ -132,16 +132,43 @@ public class AddRecipePageController {
             Recipe newRec = new Recipe(addTitle.getText(), addInstructions.getText(), ingr, categ, calo, fat, proteins, carbs, ts, addUrl.getText(), creator, null);
 
             if(addTitle.isEditable()) {
-                System.out.println("add");
-                neo4jDriver.newRecipe(newRec);
-                mongoDBDriver.addRecipe(newRec);
-                Utils.showInfoAlert("Recipe succesfully added");
+                if(neo4jDriver.newRecipe(newRec))
+                {
+                    //If neo is ok, perform mongo
+                    if(!mongoDBDriver.addRecipe(newRec))
+                    {
+                        // if mongo is not ok, remove the previously added recipe
+                        neo4jDriver.deleteRecipe(newRec);
+                        Utils.showErrorAlert("Error in adding the recipe");
+                    }
+                    else
+                    {
+                        Utils.showInfoAlert("Recipe succesfully added");
+                    }
+                }
                 clearAllFields();
-            }else {
-                System.out.println("edit");
-                neo4jDriver.updateRecipe(newRec);
-                mongoDBDriver.editRecipe(newRec);
-                Utils.showInfoAlert("Recipe succesfully edited");
+            }
+            else {
+                Recipe oldRec = mongoDBDriver.getRecipeFromTitle(newRec.getTitle());
+
+                if(oldRec!=null)
+                {
+                    if(mongoDBDriver.editRecipe(newRec))
+                    {
+                        //If mongo is ok, perform neo
+                        if(!neo4jDriver.updateRecipe(newRec))
+                        {
+                            // if neo is not ok, reset the previously modified recipe
+                            mongoDBDriver.editRecipe(oldRec);
+                            Utils.showErrorAlert("Error in edit the recipe");
+                        }
+                        else
+                        {
+                            Utils.showInfoAlert("Recipe succesfully edited");
+                        }
+
+                    }
+                }
             }
         }
     }

@@ -75,8 +75,9 @@ public class Neo4jDriver implements DatabaseDriver{
     /**
      * Add a recipe in Neo4j databases, used the match in order to have no code replications for the editRecipe
      * @param r  Object recipe that will be added
+     * @return true if operation is successfully executed, false otherwise
      */
-    public void newRecipe(Recipe r)
+    public boolean newRecipe(Recipe r)
     {
         try ( Session session = driver.session())
         {
@@ -103,14 +104,21 @@ public class Neo4jDriver implements DatabaseDriver{
                         parameters( "props", query, "name", r.getAuthorUsername(), "ts", r.getCreationTime().getTime()) );
                 return null;
             });
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.err.println("Error in adding a new recipe in Neo4J");
+            return false;
         }
     }
 
     /**
      * Update a recipe given as parameter
      * @param r
+     * @return  true if operation is successfully executed, false otherwise
      */
-    public void updateRecipe(Recipe r)
+    public boolean updateRecipe(Recipe r)
     {
         try ( Session session = driver.session())
         {
@@ -133,6 +141,12 @@ public class Neo4jDriver implements DatabaseDriver{
                         parameters( "props", query) );
                 return null;
             });
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.err.println("Error in updating recipe on Neo4J");
+            return false;
         }
     }
 
@@ -458,7 +472,7 @@ public class Neo4jDriver implements DatabaseDriver{
      * It deletes the user with the given username
      * @param username username of the user that I want to delete
      */
-    public void deleteUser(String username)
+    public boolean deleteUser(String username)
     {
         try ( Session session = driver.session())
         {
@@ -467,14 +481,20 @@ public class Neo4jDriver implements DatabaseDriver{
                         parameters( "username", username) );
                 return null;
             });
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
         }
     }
 
     /**
      * It deletes a recipe given the title
-     * @param recipe    Recipe to delete
+     * @param recipe  Recipe to delete
+     * @return  true if operation is successfully executed, false otherwise
      */
-    public void deleteRecipe(Recipe recipe)
+    public boolean deleteRecipe(Recipe recipe)
     {
         try ( Session session = driver.session())
         {
@@ -483,14 +503,21 @@ public class Neo4jDriver implements DatabaseDriver{
                         parameters( "title", recipe.getTitle()) );
                 return null;
             });
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.err.println("Error in delete recipe");
+            return false;
         }
     }
 
     /**
      * Function that delete all the recipes of a user
      * @param username  Username of the user to delete
+     * @return  true if operation is successfully executed, false otherwise
      */
-    public void deleteAllRecipesOfUser (String username)
+    public boolean deleteAllRecipesOfUser (String username)
     {
         try ( Session session = driver.session())
         {
@@ -499,6 +526,11 @@ public class Neo4jDriver implements DatabaseDriver{
                         parameters( "username", username) );
                 return null;
             });
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
         }
     }
 

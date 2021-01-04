@@ -169,14 +169,30 @@ public class RecipePageController {
             recipeDelete.setVisible(false);
         else
             recipeDelete.setOnMouseClicked(mouseEvent -> recipeDelete.setOnMouseReleased(event -> handleDeleteButtonAction(event)));
+
+        if(!appSession.getLoggedUser().getUsername().equals(recipe.getAuthorUsername()))
+            recipeEditImg.setVisible(false);
     }
 
     /**
      * Handler for deleting this recipe
      */
     private void handleDeleteButtonAction(MouseEvent mouseEvent) {
-        mongoDBDriver.deleteRecipe(recipe);
-        neo4jDriver.deleteRecipe(recipe);
+        if(mongoDBDriver.deleteRecipe(recipe))
+        {
+            // if mongo operation is successfully executed then the neo4j op is performed
+            if(!neo4jDriver.deleteRecipe(recipe))
+            {
+                // If neo4j fails I have to restore the initial condition in mongo
+                mongoDBDriver.addRecipe(recipe);
+                Utils.showErrorAlert("Error in delete the recipe");
+            }
+            else
+            {
+                Utils.showInfoAlert("Recipe correctly deleted");
+            }
+        }
+
         // Go to profile page
         ProfilePageController profilePageController =
                 (ProfilePageController) Utils.changeScene("/profilePage.fxml", mouseEvent);

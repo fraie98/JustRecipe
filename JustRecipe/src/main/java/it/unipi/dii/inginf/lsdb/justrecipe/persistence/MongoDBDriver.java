@@ -129,87 +129,117 @@ public class MongoDBDriver implements DatabaseDriver{
     /**
      * Add a new recipe in MongoDB
      * @param r The object Recipe which contains all the necessary information about it
+     * @return  true if operation is successfully executed, false otherwise
      */
-    public void addRecipe(Recipe r)
+    public boolean addRecipe(Recipe r)
     {
-        System.out.println("add entry point");
-        Document doc = new Document("title",r.getTitle())
-                .append("instructions",r.getInstructions())
-                .append("ingredients",r.getIngredients());
-        // Optional fields
-        if(!r.getCategories().isEmpty())
-            doc.append("categories",r.getCategories());
-        if(r.getCalories()!=-1)
-            doc.append("calories",r.getCalories());
-        if(r.getFat()!=-1)
-            doc.append("fat",r.getFat());
-        if(r.getProtein()!=-1)
-            doc.append("protein",r.getProtein());
-        if(r.getCarbs()!=-1)
-            doc.append("carbs",r.getCarbs());
-        // Automatic fields
-        doc.append("creationTime",new Date(r.getCreationTime().getTime()))
-                .append("authorUsername",r.getAuthorUsername());
-        // Other option field
-        if(!r.getPicture().isEmpty())
-            doc.append("picture",r.getPicture());
+        try {
+            System.out.println("add entry point");
+            Document doc = new Document("title", r.getTitle())
+                    .append("instructions", r.getInstructions())
+                    .append("ingredients", r.getIngredients());
+            // Optional fields
+            if (!r.getCategories().isEmpty())
+                doc.append("categories", r.getCategories());
+            if (r.getCalories() != -1)
+                doc.append("calories", r.getCalories());
+            if (r.getFat() != -1)
+                doc.append("fat", r.getFat());
+            if (r.getProtein() != -1)
+                doc.append("protein", r.getProtein());
+            if (r.getCarbs() != -1)
+                doc.append("carbs", r.getCarbs());
+            // Automatic fields
+            doc.append("creationTime", new Date(r.getCreationTime().getTime()))
+                    .append("authorUsername", r.getAuthorUsername());
+            // Other option field
+            if (!r.getPicture().isEmpty())
+                doc.append("picture", r.getPicture());
 
-        collection.insertOne(doc);
+            collection.insertOne(doc);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.err.println("Error in adding a new recipe");
+            return false;
+        }
     }
 
     /**
      * Edit an already present recipe
      * @param r the new recipe to replace the old one
+     * @return  true if operation is successfully executed, false otherwise
      */
-    public void editRecipe(Recipe r){
-        System.out.println("edit recipe entry point");
+    public boolean editRecipe(Recipe r){
+        try {
+            Document doc = new Document("title", r.getTitle())
+                    .append("instructions", r.getInstructions())
+                    .append("ingredients", r.getIngredients());
+            // Optional fields
+            if (!r.getCategories().isEmpty())
+                doc.append("categories", r.getCategories());
+            if (r.getCalories() != -1)
+                doc.append("calories", r.getCalories());
+            if (r.getFat() != -1)
+                doc.append("fat", r.getFat());
+            if (r.getProtein() != -1)
+                doc.append("protein", r.getProtein());
+            if (r.getCarbs() != -1)
+                doc.append("carbs", r.getCarbs());
+            // Automatic fields
+            doc.append("creationTime", r.getCreationTime())
+                    .append("authorUsername", r.getAuthorUsername());
+            // Other option field
+            if (r.getPicture() != null)
+                doc.append("picture", r.getPicture());
 
-        Document doc = new Document("title",r.getTitle())
-                .append("instructions",r.getInstructions())
-                .append("ingredients",r.getIngredients());
-        // Optional fields
-        if(!r.getCategories().isEmpty())
-            doc.append("categories",r.getCategories());
-        if(r.getCalories()!=-1)
-            doc.append("calories",r.getCalories());
-        if(r.getFat()!=-1)
-            doc.append("fat",r.getFat());
-        if(r.getProtein()!=-1)
-            doc.append("protein",r.getProtein());
-        if(r.getCarbs()!=-1)
-            doc.append("carbs",r.getCarbs());
-        // Automatic fields
-        doc.append("creationTime", r.getCreationTime())
-                .append("authorUsername",r.getAuthorUsername());
-        // Other option field
-        if(r.getPicture() != null)
-            doc.append("picture",r.getPicture());
+            Bson updateOperation = new Document("$set", doc);
 
-        Bson updateOperation = new Document("$set", doc);
-        Gson g = new Gson();
-        System.out.println("ciao");
-        System.out.println(g.toJson(updateOperation)); // non viene stampato
-
-        collection.updateOne(new Document("title", r.getTitle()), updateOperation);
+            collection.updateOne(new Document("title", r.getTitle()), updateOperation);
 //        collection.replaceOne(Filters.eq("title", r.getTitle()), doc);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.err.println("Error in updating recipe on MongoDB");
+            return false;
+        }
     }
 
     /**
      * Function that deletes the recipe from the database
      * @param recipe    Recipe to delete
+     * @return true if operation is successfully executed, false otherwise
      */
-    public void deleteRecipe (Recipe recipe)
+    public boolean deleteRecipe (Recipe recipe)
     {
-        collection.deleteOne(eq("title", recipe.getTitle()));
+        try {
+            collection.deleteOne(eq("title", recipe.getTitle()));
+            return true;
+        }
+        catch (Exception ex)
+        {
+            System.err.println("Error in delete recipe");
+            return false;
+        }
     }
 
     /**
      * Function that deletes all the recipe of on user
      * @param username  Username of the user
+     * @return true if operation is successfully executed, false otherwise
      */
-    public void deleteAllRecipesOfUser (String username)
+    public boolean deleteAllRecipesOfUser (String username)
     {
-        collection.deleteMany(eq("authorUsername", username));
+        try{
+            collection.deleteMany(eq("authorUsername", username));
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
     }
 
     /**
@@ -239,15 +269,23 @@ public class MongoDBDriver implements DatabaseDriver{
     /**
      * Function that return the recipe given the title
      * @param title     Title of the recipe
-     * @return          The recipe
+     * @return          The recipe or null if there is no recipe with the given title or an error occurs
      */
     public Recipe getRecipeFromTitle(String title){
-        Recipe recipe = null;
-        Gson gson = new Gson();
-        Type recipeType = new TypeToken<Recipe>(){}.getType();
-        Document myDoc =(Document) collection.find(eq("title", title)).first();
-        recipe = gson.fromJson(gson.toJson(myDoc), recipeType);
-        return recipe;
+        try {
+            Recipe recipe = null;
+
+            Gson gson = new Gson();
+            Type recipeType = new TypeToken<Recipe>() {
+            }.getType();
+            Document myDoc = (Document) collection.find(eq("title", title)).first();
+            recipe = gson.fromJson(gson.toJson(myDoc), recipeType);
+            return recipe;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
     }
 
     /**

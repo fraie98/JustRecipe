@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -153,10 +154,63 @@ public class ProfilePageController {
      */
     private void handleDeleteUserEvent(MouseEvent mouseEvent) {
         // Delete all his/her recipe
-        neo4jDriver.deleteAllRecipesOfUser(user.getUsername());
-        mongoDBDriver.deleteAllRecipesOfUser(user.getUsername());
-        // Delete the user from DB
-        neo4jDriver.deleteUser(user.getUsername());
+        boolean restore = false;
+        int howManyRecipes = neo4jDriver.howManyRecipesAdded(user.getUsername());
+
+        List<Recipe> recipesOfOldUser = new ArrayList<>();
+        if(howManyRecipes!=0)
+            recipesOfOldUser = neo4jDriver.getRecipeSnaps(0,howManyRecipes,user.getUsername());
+
+        if(howManyRecipes == 0)
+        {
+            // Delete the user from DB
+            if(!neo4jDriver.deleteUser(user.getUsername()))
+            {
+                restore = true;
+                Utils.showErrorAlert("Error in deleting the user and/or his recipes");
+            }
+            else
+            {
+                Utils.showInfoAlert("User and his recipes correctly deleted");
+            }
+        }
+        if(neo4jDriver.deleteAllRecipesOfUser(user.getUsername()))
+        {
+            // if neo is ok then perform mongo
+            if(!mongoDBDriver.deleteAllRecipesOfUser(user.getUsername()))
+            {
+                // if mongo is not ok then restore the previous state
+                restore = true;
+                Utils.showErrorAlert("Error in deleting the user and/or his recipes");
+            }
+            else
+            {
+                // if the user's recipes are deleted then
+                // Delete the user from DB
+                if(!neo4jDriver.deleteUser(user.getUsername()))
+                {
+                    restore = true;
+                    Utils.showErrorAlert("Error in deleting the user and/or his recipes");
+                }
+                else
+                {
+                    Utils.showInfoAlert("User and his recipes correctly deleted");
+                }
+            }
+        }
+        else
+        {
+            Utils.showErrorAlert("Error in deleting the user and/or his recipes");
+        }
+
+        if(restore)
+        {
+            for(Recipe r:recipesOfOldUser) {
+                neo4jDriver.newRecipe(r);
+            }
+        }
+
+
         // If i am the user, go to welcome page
         if (user.getUsername().equals(appSession.getLoggedUser().getUsername()))
         {
