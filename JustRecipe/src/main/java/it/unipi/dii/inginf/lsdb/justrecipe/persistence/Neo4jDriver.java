@@ -107,6 +107,36 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
+     * Update a recipe given as parameter
+     * @param r
+     */
+    public void updateRecipe(Recipe r)
+    {
+        try ( Session session = driver.session())
+        {
+            Map<String,Object> query = new HashMap<>();
+            query.put("title",r.getTitle());
+            if(r.getCalories()!=-1)
+                query.put("calories",r.getCalories());
+            if(r.getFat()!=-1)
+                query.put("fat",r.getFat());
+            if(r.getProtein()!=-1)
+                query.put("protein",r.getProtein());
+            if(r.getCarbs()!=-1)
+                query.put("carbs",r.getCarbs());
+
+            session.writeTransaction((TransactionWork<Void>) tx -> {
+                tx.run( "UNWIND $props as rnew " +
+                                "MATCH (r:Recipe{title:rnew.title}) " +
+                                "SET r.title = rnew.title, r.calories = rnew.calories, r.fat = rnew.fat," +
+                                "r.protein = rnew.protein, r.carbs = rnew.carbs ",
+                        parameters( "props", query) );
+                return null;
+            });
+        }
+    }
+
+    /**
      * Method that creates a new node in the graphDB with the information of the new user
      * @param firstName     first name of the new user
      * @param lastName      last name of the new user

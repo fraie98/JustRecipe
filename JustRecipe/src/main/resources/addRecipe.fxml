@@ -21,7 +21,7 @@
          <center>
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconOfTitlePage" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/addRecipe.png" />
                      </image>
@@ -29,7 +29,7 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Recipe">
+                  <Text fx:id="titlePage" strokeType="OUTSIDE" strokeWidth="0.0" text="New Recipe">
                      <font>
                         <Font size="40.0" />
                      </font>

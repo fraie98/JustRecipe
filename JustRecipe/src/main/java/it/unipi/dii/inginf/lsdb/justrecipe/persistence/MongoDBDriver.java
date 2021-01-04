@@ -132,6 +132,7 @@ public class MongoDBDriver implements DatabaseDriver{
      */
     public void addRecipe(Recipe r)
     {
+        System.out.println("add entry point");
         Document doc = new Document("title",r.getTitle())
                 .append("instructions",r.getInstructions())
                 .append("ingredients",r.getIngredients());
@@ -161,6 +162,8 @@ public class MongoDBDriver implements DatabaseDriver{
      * @param r the new recipe to replace the old one
      */
     public void editRecipe(Recipe r){
+        System.out.println("edit recipe entry point");
+
         Document doc = new Document("title",r.getTitle())
                 .append("instructions",r.getInstructions())
                 .append("ingredients",r.getIngredients());
@@ -183,8 +186,11 @@ public class MongoDBDriver implements DatabaseDriver{
             doc.append("picture",r.getPicture());
 
         Bson updateOperation = new Document("$set", doc);
-        collection.updateOne(new Document("title", r.getTitle()), updateOperation);
+        Gson g = new Gson();
+        System.out.println("ciao");
+        System.out.println(g.toJson(updateOperation)); // non viene stampato
 
+        collection.updateOne(new Document("title", r.getTitle()), updateOperation);
 //        collection.replaceOne(Filters.eq("title", r.getTitle()), doc);
     }
 

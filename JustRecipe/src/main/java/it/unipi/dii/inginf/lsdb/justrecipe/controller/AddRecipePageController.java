@@ -7,8 +7,10 @@ import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import org.neo4j.driver.internal.InternalPath;
 
 import java.beans.EventHandler;
@@ -36,6 +38,8 @@ public class AddRecipePageController {
     @FXML private TextArea addInstructions;
     @FXML private Button submit;
     @FXML private Button clear;
+    @FXML private Text titlePage;
+    @FXML private ImageView iconOfTitlePage;
 
 
 
@@ -56,7 +60,10 @@ public class AddRecipePageController {
      * Using the recipe (argument) to fill the form in order to edit an already present recipe
      * @param recipe
      */
-    public void setRecipe(Recipe recipe){
+    public void setRecipeToUpdate(Recipe recipe)
+    {
+        titlePage.setText("Update Recipe");
+        iconOfTitlePage.setImage(new Image("img/edit.png"));
         this.recipe = recipe;
         addTitle.setText(recipe.getTitle());
         addTitle.setEditable(false);
@@ -125,16 +132,17 @@ public class AddRecipePageController {
             Recipe newRec = new Recipe(addTitle.getText(), addInstructions.getText(), ingr, categ, calo, fat, proteins, carbs, ts, addUrl.getText(), creator, null);
 
             if(addTitle.isEditable()) {
+                System.out.println("add");
                 neo4jDriver.newRecipe(newRec);
                 mongoDBDriver.addRecipe(newRec);
                 Utils.showInfoAlert("Recipe succesfully added");
-            }else{
-                neo4jDriver.newRecipe(newRec);
+                clearAllFields();
+            }else {
+                System.out.println("edit");
+                neo4jDriver.updateRecipe(newRec);
                 mongoDBDriver.editRecipe(newRec);
-                addTitle.setEditable(true);
                 Utils.showInfoAlert("Recipe succesfully edited");
             }
-            clearAllFields();
         }
     }
 

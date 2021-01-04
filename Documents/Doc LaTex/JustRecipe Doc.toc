@@ -59,5 +59,4 @@
 \contentsline {subsubsection}{Index on User Username}{28}%
 \contentsline {subsubsection}{Index on Recipe Creation Time}{28}%
 \contentsline {subsubsection}{Index on Comment Creation Time}{29}%
-\contentsline {subsubsection}{Index on Recipe Addition Time}{29}%
 \contentsline {chapter}{\numberline {4}User Manual}{30}%

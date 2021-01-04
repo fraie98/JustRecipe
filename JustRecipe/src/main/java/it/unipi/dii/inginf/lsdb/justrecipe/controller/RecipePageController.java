@@ -108,7 +108,7 @@ public class RecipePageController {
     private void clickOnEditButton(MouseEvent mouseEvent){
         AddRecipePageController addRecipePageController = (AddRecipePageController)
                 Utils.changeScene("/addRecipe.fxml", mouseEvent);
-        addRecipePageController.setRecipe(recipe);
+        addRecipePageController.setRecipeToUpdate(recipe);
     }
 
     /**
