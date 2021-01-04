@@ -975,6 +975,7 @@ public class Neo4jDriver implements DatabaseDriver{
         try(Session session = driver.session()) {
             recipes = session.readTransaction((TransactionWork<List<Recipe>>)  tx -> {
                 Result result = tx.run("MATCH path = (recipe:Recipe)<-[a:ADDS]-(owner:User)<-[:FOLLOWS*2..3]-(me:User{username:$u}) " +
+                                "WHERE owner.username <> $u " +
                                 "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat, recipe.picture, a.when, owner.username " +
                                 "ORDER BY length(path) ASC, a.when DESC " +
                                 "SKIP $firstLvSkip " +
@@ -982,7 +983,7 @@ public class Neo4jDriver implements DatabaseDriver{
                                 "UNION " +
                                 "MATCH (:User {username: $u})-[l:LIKES]->(:Recipe)<-[:ADDS]-(owner:User) " +
                                 "WITH DISTINCT(owner) AS owner, COUNT(DISTINCT l) AS numLikes " +
-                                "WHERE numLikes > $treshold " +
+                                "WHERE numLikes > $treshold AND owner.username <> $u" +
                                 "MATCH (owner)-[a:ADDS]->(recipe:Recipe) " +
                                 "RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, recipe.fat, recipe.picture, a.when, owner.username " +
                                 "ORDER BY a.when DESC " +

@@ -470,8 +470,17 @@ Because of the large amount of information to deal with, it is important to spli
 
 \noindent The reason why we store recipes on both databases is because we want to retrieve social network information from it (likes, suggested recipes based on who added it, and so on). Hence we store on Graph DB a part of the recipe information, and the whole information about recipes on DocumentDB. This partial view of the recipe is the so-called \emph{recipe snapshot}. Also for the user exist a snapshot but it exists for implementation reason, in fact in this case all the information about the user are on GraphDB but only a part is in the snapshot. Generally speaking a snapshot is a partial view of an entity (User or Recipe). When the user clicks on the snapshot then he will see all the information (so for what concerns the recipes, the snapshot is done with GraphDB and the detailed page with DocumentDB).
 
+\noindent We can see the storing strategy also in figure 2.5.
 
-\noindent Now it is important to say that was chosen MongoDB as DBMS for the DocumentDB and Neo4j as DBMS for the GraphDB.
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.5]{img/UML_colorato.png}
+	\caption{Storing Strategy}
+\end{figure}
+
+
+
+\noindent Another important detail on the Data Model is that we have chosen MongoDB as DBMS for the DocumentDB and Neo4j as DBMS for the GraphDB.
 
 \section{Distributed Database Design}
 In our application some of the most important requirements are the \emph{Availability} and the \emph{Consistency}. Thus is very important to us to have a distributed system in order to ensure:
@@ -993,7 +1002,7 @@ Now we will talk about the queries on Neo4j, but first we need to consider their
 	\includegraphics[scale=0.7]{img/graphScreen.png}
 	\caption{Partial example of the graph in Neo4j}
 \end{figure}
-
+\newpage
 \subsubsection{Suggested Recipes}
 We have two levels of suggestions with different relevance.
 \begin{itemize}
@@ -1014,6 +1023,7 @@ We have two levels of suggestions with different relevance.
 	MATCH path =
 	(recipe:Recipe)<-[a:ADDS]-(owner:User)<-[:FOLLOWS*2..3]
 	-(me:User{username:$u})
+	WHERE owner.username <> $u
 	RETURN recipe.title, recipe.calories, recipe.carbs,
 	recipe.protein, recipe.fat, recipe.picture,
 	a.when, owner.username
@@ -1024,7 +1034,7 @@ We have two levels of suggestions with different relevance.
 	MATCH (:User{username:$u})-[l:LIKES]->(:Recipe)<-[:ADDS]-
 	(owner:User)
 	WITH DISTINCT(owner) AS owner, COUNT(DISTINCT l) AS numLikes
-	WHERE numLikes > $threshold
+	WHERE numLikes > $threshold AND owner.username <> $u
 	MATCH (owner)-[a:ADDS]->(recipe:Recipe)
 	RETURN recipe.title, recipe.calories, recipe.carbs,
 	recipe.protein, recipe.fat, recipe.picture, a.when,
@@ -1164,7 +1174,7 @@ Given the full-name or a part of it, the query returns the users that contains i
 
 \section{Tests and Statistical Analysis}
 \subsection{Queries Analysis}
-The most queries consist in read operations and so we can say that the application is read-heavy. In the table ?.? we can see the frequency of each query. 
+The most queries consist in read operations and so we can say that the application is read-heavy. In the table 3.2 we can see the frequency of each query. 
 
 \begin{table}[htpb]
 	\centering
@@ -1196,7 +1206,7 @@ The most queries consist in read operations and so we can say that the applicati
 
 \subsection{Index Analysis}
 
-In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand their benefit. For each index will be considered the queries that are in some way affected by its presence. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. For MongoDB, we used the \emph{explain()}.
+In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand their benefit. For each index will be considered the queries that are in some way affected by its presence. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. We have to underline that in using \emph{PROFILE} we have to neglect the first value of execution time, because this is affected by the time that Neo4J spends in executing the statistical information and he graphical output given by the command, from the second execution the time execution is reliable (the most of the previous information are already computed). For MongoDB, we used the \emph{explain()}.
 
 \noindent The following index will be analyzed:
 \begin{itemize}

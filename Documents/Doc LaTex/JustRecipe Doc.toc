@@ -16,7 +16,6 @@
 \contentsline {subsection}{\numberline {2.4.1}DocumentDB}{10}%
 \contentsline {subsection}{\numberline {2.4.2}GraphDB}{11}%
 \contentsline {subsection}{\numberline {2.4.3}Data Among Databases}{12}%
-\contentsline {subsection}{\numberline {2.4.4}Constraints}{12}%
 \contentsline {section}{\numberline {2.5}Distributed Database Design}{13}%
 \contentsline {subsection}{\numberline {2.5.1}Replicas}{13}%
 \contentsline {subsection}{\numberline {2.5.2}Sharding}{13}%
@@ -34,30 +33,31 @@
 \contentsline {subsection}{\numberline {3.2.4}it.unipi.dii.inginf.lsdb.justrecipe.persistence}{16}%
 \contentsline {subsection}{\numberline {3.2.5}it.unipi.dii.inginf.lsdb.justrecipe.controller}{16}%
 \contentsline {subsection}{\numberline {3.2.6}it.unipi.dii.inginf.lsdb.justrecipe.utils}{17}%
-\contentsline {section}{\numberline {3.3}Most Relevant Queries}{17}%
-\contentsline {subsection}{\numberline {3.3.1}MongoDB}{17}%
-\contentsline {subsubsection}{Search Recipes given a username}{17}%
+\contentsline {section}{\numberline {3.3}Constraints}{17}%
+\contentsline {section}{\numberline {3.4}Most Relevant Queries}{17}%
+\contentsline {subsection}{\numberline {3.4.1}MongoDB}{18}%
+\contentsline {subsubsection}{Search Recipes given a username}{18}%
 \contentsline {subsubsection}{Search for recipe title}{18}%
-\contentsline {subsubsection}{Get the username of the most versatile user}{18}%
+\contentsline {subsubsection}{Get the username of the most versatile user}{19}%
 \contentsline {subsubsection}{Search for recipe category}{20}%
-\contentsline {subsubsection}{Search for recipe ingredients}{20}%
+\contentsline {subsubsection}{Search for recipe ingredients}{21}%
 \contentsline {subsubsection}{Most common recipe categories}{21}%
 \contentsline {subsubsection}{Last Comments}{22}%
-\contentsline {subsubsection}{Weekly Recipes per User}{22}%
-\contentsline {subsection}{\numberline {3.3.2}Neo4J}{23}%
-\contentsline {subsubsection}{Suggested Recipes}{23}%
-\contentsline {subsubsection}{Recipes of following users}{24}%
-\contentsline {subsubsection}{Most followed and active users}{24}%
-\contentsline {subsubsection}{Most liked users}{24}%
-\contentsline {subsubsection}{Best Recipes}{25}%
-\contentsline {subsubsection}{Search for username}{25}%
-\contentsline {subsubsection}{Search for user's full-name}{25}%
-\contentsline {section}{\numberline {3.4}Tests and Statistical Analysis}{26}%
-\contentsline {subsection}{\numberline {3.4.1}Queries Analysis}{26}%
-\contentsline {subsection}{\numberline {3.4.2}Index Analysis}{26}%
-\contentsline {subsubsection}{Index on Recipe Title}{27}%
-\contentsline {subsubsection}{Index on User Username}{27}%
-\contentsline {subsubsection}{Index on Recipe Creation Time}{27}%
-\contentsline {subsubsection}{Index on Comment Creation Time}{27}%
-\contentsline {subsubsection}{Index on Recipe Addition Time}{28}%
-\contentsline {chapter}{\numberline {4}User Manual}{29}%
+\contentsline {subsubsection}{Weekly Recipes per User}{23}%
+\contentsline {subsection}{\numberline {3.4.2}Neo4J}{23}%
+\contentsline {subsubsection}{Suggested Recipes}{24}%
+\contentsline {subsubsection}{Recipes of following users}{25}%
+\contentsline {subsubsection}{Most followed and active users}{25}%
+\contentsline {subsubsection}{Most liked users}{25}%
+\contentsline {subsubsection}{Best Recipes}{26}%
+\contentsline {subsubsection}{Search for username}{26}%
+\contentsline {subsubsection}{Search for user's full-name}{27}%
+\contentsline {section}{\numberline {3.5}Tests and Statistical Analysis}{27}%
+\contentsline {subsection}{\numberline {3.5.1}Queries Analysis}{27}%
+\contentsline {subsection}{\numberline {3.5.2}Index Analysis}{27}%
+\contentsline {subsubsection}{Index on Recipe Title}{28}%
+\contentsline {subsubsection}{Index on User Username}{28}%
+\contentsline {subsubsection}{Index on Recipe Creation Time}{28}%
+\contentsline {subsubsection}{Index on Comment Creation Time}{29}%
+\contentsline {subsubsection}{Index on Recipe Addition Time}{29}%
+\contentsline {chapter}{\numberline {4}User Manual}{30}%
