@@ -31,7 +31,6 @@ public class Neo4jDriver implements DatabaseDriver{
         this.port = configurationParameters.getNeo4jPort();
         this.username = configurationParameters.getNeo4jUsername();
         this.password = configurationParameters.getNeo4jPassword();
-       // initConnection();
     }
 
     public static Neo4jDriver getInstance()
@@ -1044,6 +1043,7 @@ public class Neo4jDriver implements DatabaseDriver{
                                 "LIMIT $firstLvGet " +
                                 "UNION " +
                                 "MATCH (:User {username: $u})-[l:LIKES]->(:Recipe)<-[:ADDS]-(owner:User) " +
+                                "WHERE owner.username <> $u " +
                                 "WITH DISTINCT(owner) AS owner, COUNT(DISTINCT l) AS numLikes " +
                                 "WHERE numLikes > $treshold AND owner.username <> $u " +
                                 "MATCH (owner)-[a:ADDS]->(recipe:Recipe) " +

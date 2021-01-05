@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mongodb.BasicDBObject;
-import com.mongodb.ConnectionString;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClientSettings;
+import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.model.*;
 import com.mongodb.client.result.DeleteResult;
@@ -49,8 +46,12 @@ public class MongoDBDriver implements DatabaseDriver{
     private MongoDatabase database;
     private MongoCollection collection;
     private CodecRegistry pojoCodecRegistry;
-    private String ip;
-    private int port;
+    private String firstIp;
+    private int firstPort;
+    private String secondIp;
+    private int secondPort;
+    private String thirdIp;
+    private int thirdPort;
     private String username;
     private String password;
     private String dbName;
@@ -72,8 +73,12 @@ public class MongoDBDriver implements DatabaseDriver{
 
     private MongoDBDriver (ConfigurationParameters configurationParameters)
     {
-        this.ip = configurationParameters.getMongoIp();
-        this.port = configurationParameters.getMongoPort();
+        this.firstIp = configurationParameters.getMongoFirstIp();
+        this.firstPort = configurationParameters.getMongoFirstPort();
+        this.secondIp = configurationParameters.getMongoSecondIp();
+        this.secondPort = configurationParameters.getMongoSecondPort();
+        this.thirdIp = configurationParameters.getMongoThirdIp();
+        this.thirdPort = configurationParameters.getMongoThirdPort();
         this.username = configurationParameters.getMongoUsername();
         this.password = configurationParameters.getMongoPassword();
         this.dbName = configurationParameters.getMongoDbName();
@@ -88,17 +93,21 @@ public class MongoDBDriver implements DatabaseDriver{
     public boolean initConnection() {
         try
         {
-            ConnectionString connectionString;
-
+            String string = "mongodb://";
             if (!username.equals("")) // if there are access rules
             {
-                connectionString = new ConnectionString("mongodb://" + username + ":" + password
-                        + "@" + ip + ":" + port);
-            } else // standard access
-            {
-                connectionString = new ConnectionString("mongodb://" + ip + ":" + port);
+                string += username + ":" + password + "@";
             }
-            mongoClient = MongoClients.create(connectionString);
+            string += firstIp + ":" + firstPort + ", " + secondIp + ":" + secondPort + ", " + thirdIp + ":" + thirdPort;
+
+            ConnectionString connectionString = new ConnectionString(string);
+            MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
+                    .applyConnectionString(connectionString)
+                    .readPreference(ReadPreference.secondaryPreferred())
+                    .retryWrites(true)
+                    .writeConcern(WriteConcern.W3).build();
+            mongoClient = MongoClients.create(mongoClientSettings);
+
             database = mongoClient.getDatabase(dbName);
 
             DBObject ping = new BasicDBObject("ping","1");

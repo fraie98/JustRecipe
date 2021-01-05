@@ -3,8 +3,12 @@
     <xs:element name="it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="mongoIp" type="xs:string"/>
-				<xs:element name="mongoPort" type="xs:int"/>
+				<xs:element name="mongoFirstIp" type="xs:string"/>
+				<xs:element name="mongoFirstPort" type="xs:int"/>
+				<xs:element name="mongoSecondIp" type="xs:string"/>
+				<xs:element name="mongoSecondPort" type="xs:int"/>
+				<xs:element name="mongoThirdIp" type="xs:string"/>
+				<xs:element name="mongoThirdPort" type="xs:int"/>
 				<xs:element name="mongoUsername" type="xs:string"/>
 				<xs:element name="mongoPassword" type="xs:string"/>
 				<xs:element name="mongoDbName" type="xs:string"/>
