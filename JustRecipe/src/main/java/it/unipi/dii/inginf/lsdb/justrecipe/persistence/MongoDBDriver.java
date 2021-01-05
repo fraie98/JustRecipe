@@ -530,13 +530,21 @@ public class MongoDBDriver implements DatabaseDriver{
      * calling the updateComments
      * @param recipe     recipe  to modify
      * @param comment   comment to add
+     * @return  true if the operation is successfully updated, false otherwise
      */
-    public void addComment(Recipe recipe, Comment comment){
-        if (recipe.getComments() == null)
-            recipe.setComments(new ArrayList<>());
-        List<Comment> comments = recipe.getComments();
-        comments.add(comment);
-        updateComments(recipe.getTitle(), comments);
+    public boolean addComment(Recipe recipe, Comment comment){
+        try {
+            if (recipe.getComments() == null)
+                recipe.setComments(new ArrayList<>());
+            List<Comment> comments = recipe.getComments();
+            comments.add(comment);
+            updateComments(recipe.getTitle(), comments);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
     }
 
     /**

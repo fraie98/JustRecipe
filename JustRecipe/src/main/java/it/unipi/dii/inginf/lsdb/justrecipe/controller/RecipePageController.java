@@ -98,7 +98,12 @@ public class RecipePageController {
         }
         Comment comment = new Comment(appSession.getLoggedUser().getUsername(), commentsArea.getText(), new Date());
         Utils.showComment(recipeVBox, comment, recipe);
-        mongoDBDriver.addComment(recipe, comment);
+
+        if(mongoDBDriver.addComment(recipe, comment))
+        {
+            Utils.showInfoAlert("Comment successfully added");
+            commentsArea.setText("");
+        }
     }
 
     /**
