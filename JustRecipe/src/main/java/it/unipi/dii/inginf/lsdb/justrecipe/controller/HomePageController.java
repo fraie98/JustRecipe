@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 
 import java.awt.*;
 import java.util.List;
@@ -41,6 +42,14 @@ public class HomePageController {
         List<Recipe> recipes = neo4jDriver.getHomepageRecipeSnap(0,
                 HOW_MANY_SNAPSHOT_TO_SHOW, session.getLoggedUser().getUsername());
         Utils.addRecipesSnap(mainPage, recipes);
+
+        if(recipes.size()==0)
+        {
+            Text adv = new Text("No users are followed - starts from Discovery");
+            adv.setStyle("-fx-padding: 5px; -fx-font-size: 2em");
+            mainPage.getChildren().add(adv);
+        }
+
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfImgToChangePage(mouseEvent));
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));

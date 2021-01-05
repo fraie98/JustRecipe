@@ -1451,4 +1451,176 @@ A possible index is the one on the attribute \emph{when} of the relations \emph{
 \end{comment}
 
 \chapter{User Manual}
+In this chapter we discuss how to use the application from the user's point of view.
+\section{How To Configure The System}
+In order to configure the application an XML file is provided, this file contains configuration parameters that can affect the proper work of the application so only in particular cases must be changed. In any case the XML file will be validated and the application doesn't work if this validation fails. The file contains the following code.
+
+\lstset{language=code}
+\begin{lstlisting}
+	<?xml version="1.0" encoding="UTF-8"?>
+	<it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters>
+		<mongoFirstIp>172.16.3.157</mongoFirstIp>
+		<mongoFirstPort>27020</mongoFirstPort>
+		<mongoSecondIp>172.16.3.107</mongoSecondIp>
+		<mongoSecondPort>27020</mongoSecondPort>
+		<mongoThirdIp>172.16.3.108</mongoThirdIp>
+		<mongoThirdPort>27020</mongoThirdPort>
+		<mongoUsername></mongoUsername>
+		<mongoPassword></mongoPassword>
+		<mongoDbName>justrecipe</mongoDbName>
+		<neo4jIp>172.16.3.107</neo4jIp>
+		<neo4jPort>7687</neo4jPort>
+		<neo4jUsername>neo4j</neo4jUsername>
+		<neo4jPassword>justrecipe</neo4jPassword>
+	</it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters>
+\end{lstlisting}
+
+\section{How To Launch The Application}
+\newpage
+\section{Login And Registration}
+At the first launch of the application the window in figure 4.1 is shown:
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.3]{img/user_manual/login.png}
+	\caption{First window of the application}
+\end{figure}
+
+\noindent Now the user has two possibilities:
+\begin{itemize}
+	\item \textbf{if} he is already registered he can do the login
+	\item \textbf{if} he is not registered yet, then he must sign-up to use the application.
+\end{itemize}
+
+\noindent Let suppose that we are in the second case. So we have to compile the registering section as is shown in the figure 4.2. Where we register the user \emph{Albert Einstein} with username \emph{a.einstein} and password \emph{a.einstein}. 
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.3]{img/user_manual/register.png}
+	\caption{Registering section}
+\end{figure}
+
+\noindent If the user click on \textbf{Register} the user will be registered and the login is performed automatically.
+
+\noindent If the user is already registered then he can directly sign-in using the login section as in figure 4.3.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.3]{img/user_manual/loginsection.png}
+	\caption{Login section}
+\end{figure}
+
+\newpage
+\section{Homepage, Discovery and First Steps}
+Let continue with the user \emph{a.einstein}. After the login the homepage will be shown. In the homepage there are the recipes of the following users, due to the fact that the logged user is a new user, he doesn't follow anyone and so he see nothing (see figure 4.4).
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.25]{img/user_manual/blank-homepage.png}
+	\caption{Initial page}
+\end{figure}
+
+\noindent In order to follow other users and starts to read recipes, the user must click on the icon that represents the \textbf{Discovery} page, as shown in figure 4.5.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.3]{img/user_manual/discovery-icon.png}
+	\caption{Discovery Icon}
+\end{figure}
+
+\noindent After the click on this icon the discovery page will be showed. In this page it's possible to do a lot of searches. As default one the user will see their suggested recipes computed considering his relationships with others users of the social. If the user is a new one his suggested recipes will be the best ones, as we can see in figure 4.6.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.25]{img/user_manual/first-discovery.png}
+	\caption{Discovery Page First Access}
+\end{figure}
+
+%\newpage
+\noindent If the user wants to see the detail of a recipe he can click on its snapshot, where the snapshot is the one showed in figure 4.7.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.35]{img/user_manual/snap.png}
+	\caption{Example of a snapshot}
+\end{figure}
+
+\noindent If he clicks on the snapshot the recipe page will be showed, as we can see in figure 4.8.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.35]{img/user_manual/recipepage.png}
+	\caption{Recipe page}
+\end{figure}
+
+\noindent Here near the image we can see in order: the username of who has added the recipe, carbs, calories, fat, protein. In the right part we can see how many likes the recipe has, when it was added and then there is the icon that allow us to like the recipe.
+
+\noindent If the user clicks on the heart-like icon, he likes the recipes and the icon will be colored in red in order to show that the logged user has liked this recipe. We can see it in figure 4.9 and 4.10.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.31]{img/user_manual/beforelike.png}
+	\caption{Before Like}
+\end{figure}
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.31]{img/user_manual/afterlike.png}
+	\caption{After Like}
+\end{figure}
+
+\newpage
+
+
+\noindent Another possibility is that I can follow the user that has added this recipes, in order to do this I must access to his profile page, so I have to click on the user icon or on the user's name as is shown in figure 4.11.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.38]{img/user_manual/user-icon.png}
+	\caption{User Icon}
+\end{figure}
+
+\noindent Then the user page will be shown as we can see in figure 4.12.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.38]{img/user_manual/generic-user-page.png}
+	\caption{User Page}
+\end{figure}
+
+\noindent If the user wants to follow this user he can click on the correspondent icon near the name of the user as is shown in figure 4.13. After the click the icon changes in order to notify that the logged user has started to follow this user.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.35]{img/user_manual/howToFollow.png}
+	\caption{Before Follow}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.35]{img/user_manual/afterfollow.png}
+	\caption{After follow}
+\end{figure}
+
+\newpage
+\noindent Now if we go back to the homepage we will see the recipes added by \emph{oliver.smith} because we follow him. So we can click on the home-like icon and go to the homepage as it is shown in the figure 4.15 and 4.16.
+
+\noindent Only the first 20 recipes are shown, so if we scroll until the end we can click on the button \textbf{Next} to see the next 20, and then the button \textbf{Previous} to see the previous 20. We can see this in figure 4.17 and 4.18.
+
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.37]{img/user_manual/nextbutton.png}
+	\caption{Next Button}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[scale=0.37]{img/user_manual/previousbutton.png}
+	\caption{Previous Button}
+\end{figure}
+
+\newpage
+\section{User Profile}
+
 \end{document}

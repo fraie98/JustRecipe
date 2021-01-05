@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  4 JAN 2021 16:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  5 JAN 2021 11:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -398,67 +398,194 @@ File: img/UML_colorato.png Graphic file (type png)
 <use img/UML_colorato.png>
 Package pdftex.def Info: img/UML_colorato.png  used on input line 512.
 (pdftex.def)             Requested size: 333.74606pt x 210.78697pt.
- [12 <./img/UML_colorato.png>] [13] [14]
+ [12 <./img/UML_colorato.png>] [13] [14] [15]
 Chapter 3.
-[15
+[16
 
-] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-) [16]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+] [17] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 685.
- [17] [18]
-[19] [20] [21] [22] [23]
-Overfull \hbox (4.6226pt too wide) in paragraph at lines 1040--1048
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 698.
+
+[18] [19] [20] [21] [22] [23] [24]
+Overfull \hbox (4.6226pt too wide) in paragraph at lines 1053--1061
  [][] 
  []
 
-<img/graphScreen.png, id=110, 382.42876pt x 468.75125pt>
+<img/graphScreen.png, id=113, 382.42876pt x 468.75125pt>
 File: img/graphScreen.png Graphic file (type png)
 <use img/graphScreen.png>
-Package pdftex.def Info: img/graphScreen.png  used on input line 1053.
+Package pdftex.def Info: img/graphScreen.png  used on input line 1066.
 (pdftex.def)             Requested size: 267.69829pt x 328.12363pt.
-[24 <./img/graphScreen.png>] [25] [26] [27]
-Overfull \hbox (24.30153pt too wide) in paragraph at lines 1284--1293
+[25 <./img/graphScreen.png>] [26] [27]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+) [28] [29]
+[30]
+Overfull \hbox (24.30153pt too wide) in paragraph at lines 1381--1390
  [][] 
  []
 
-[28] [29]
+[31] [32]
 Chapter 4.
-[30
+[33
 
-] (./JustRecipe Doc.aux) ) 
+]
+<img/user_manual/login.png, id=145, 604.2575pt x 440.64626pt>
+File: img/user_manual/login.png Graphic file (type png)
+<use img/user_manual/login.png>
+Package pdftex.def Info: img/user_manual/login.png  used on input line 1484.
+(pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
+<img/user_manual/register.png, id=146, 604.2575pt x 440.64626pt>
+File: img/user_manual/register.png Graphic file (type png)
+<use img/user_manual/register.png>
+Package pdftex.def Info: img/user_manual/register.png  used on input line 1498.
+
+(pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
+<img/user_manual/loginsection.png, id=147, 604.2575pt x 440.64626pt>
+File: img/user_manual/loginsection.png Graphic file (type png)
+<use img/user_manual/loginsection.png>
+Package pdftex.def Info: img/user_manual/loginsection.png  used on input line 1
+508.
+(pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
+ [34 <./img/user_manual/login.png> <./img/user_manual/register.png> <./img/user
+_manual/loginsection.png>]
+<img/user_manual/blank-homepage.png, id=154, 1205.50375pt x 828.09375pt>
+File: img/user_manual/blank-homepage.png Graphic file (type png)
+<use img/user_manual/blank-homepage.png>
+Package pdftex.def Info: img/user_manual/blank-homepage.png  used on input line
+ 1518.
+(pdftex.def)             Requested size: 301.3752pt x 207.02293pt.
+<img/user_manual/discovery-icon.png, id=155, 209.78375pt x 74.2775pt>
+File: img/user_manual/discovery-icon.png Graphic file (type png)
+<use img/user_manual/discovery-icon.png>
+Package pdftex.def Info: img/user_manual/discovery-icon.png  used on input line
+ 1526.
+(pdftex.def)             Requested size: 62.9356pt x 22.28342pt.
+<img/user_manual/first-discovery.png, id=156, 1205.50375pt x 828.09375pt>
+File: img/user_manual/first-discovery.png Graphic file (type png)
+<use img/user_manual/first-discovery.png>
+Package pdftex.def Info: img/user_manual/first-discovery.png  used on input lin
+e 1534.
+(pdftex.def)             Requested size: 301.3752pt x 207.02293pt.
+<img/user_manual/snap.png, id=157, 436.63126pt x 332.24126pt>
+File: img/user_manual/snap.png Graphic file (type png)
+<use img/user_manual/snap.png>
+Package pdftex.def Info: img/user_manual/snap.png  used on input line 1543.
+(pdftex.def)             Requested size: 152.82323pt x 116.28618pt.
+ [35 <./img/user_manual/blank-homepage.png> <./img/user_manual/discovery-icon.p
+ng> <./img/user_manual/first-discovery.png>]
+<img/user_manual/recipepage.png, id=164, 1221.56375pt x 828.09375pt>
+File: img/user_manual/recipepage.png Graphic file (type png)
+<use img/user_manual/recipepage.png>
+Package pdftex.def Info: img/user_manual/recipepage.png  used on input line 155
+1.
+(pdftex.def)             Requested size: 427.55373pt x 289.83716pt.
+
+Overfull \hbox (14.98874pt too wide) in paragraph at lines 1551--1552
+ [][] 
+ []
+
+<img/user_manual/beforelike.png, id=165, 315.1775pt x 104.39pt>
+File: img/user_manual/beforelike.png Graphic file (type png)
+<use img/user_manual/beforelike.png>
+Package pdftex.def Info: img/user_manual/beforelike.png  used on input line 156
+1.
+(pdftex.def)             Requested size: 97.70401pt x 32.36055pt.
+<img/user_manual/afterlike.png, id=166, 324.21124pt x 105.39375pt>
+File: img/user_manual/afterlike.png Graphic file (type png)
+<use img/user_manual/afterlike.png>
+Package pdftex.def Info: img/user_manual/afterlike.png  used on input line 1568
+.
+(pdftex.def)             Requested size: 100.50444pt x 32.6717pt.
+[36 <./img/user_manual/snap.png> <./img/user_manual/recipepage.png> <./img/user
+_manual/beforelike.png>]
+<img/user_manual/user-icon.png, id=174, 187.70125pt x 232.87pt>
+File: img/user_manual/user-icon.png Graphic file (type png)
+<use img/user_manual/user-icon.png>
+Package pdftex.def Info: img/user_manual/user-icon.png  used on input line 1579
+.
+(pdftex.def)             Requested size: 71.32721pt x 88.4915pt.
+<img/user_manual/generic-user-page.png, id=175, 1203.49625pt x 820.06375pt>
+File: img/user_manual/generic-user-page.png Graphic file (type png)
+<use img/user_manual/generic-user-page.png>
+Package pdftex.def Info: img/user_manual/generic-user-page.png  used on input l
+ine 1587.
+(pdftex.def)             Requested size: 457.33333pt x 311.62746pt.
+
+Overfull \hbox (44.76834pt too wide) in paragraph at lines 1587--1588
+ [][] 
+ []
+
+<img/user_manual/howToFollow.png, id=176, 192.72pt x 188.705pt>
+File: img/user_manual/howToFollow.png Graphic file (type png)
+<use img/user_manual/howToFollow.png>
+Package pdftex.def Info: img/user_manual/howToFollow.png  used on input line 15
+95.
+(pdftex.def)             Requested size: 67.453pt x 66.04773pt.
+<img/user_manual/afterfollow.png, id=177, 179.67125pt x 186.6975pt>
+File: img/user_manual/afterfollow.png Graphic file (type png)
+<use img/user_manual/afterfollow.png>
+Package pdftex.def Info: img/user_manual/afterfollow.png  used on input line 16
+01.
+(pdftex.def)             Requested size: 62.88586pt x 65.3451pt.
+[37 <./img/user_manual/afterlike.png> <./img/user_manual/user-icon.png> <./img/
+user_manual/generic-user-page.png>]
+<img/user_manual/nextbutton.png, id=184, 1205.50375pt x 828.09375pt>
+File: img/user_manual/nextbutton.png Graphic file (type png)
+<use img/user_manual/nextbutton.png>
+Package pdftex.def Info: img/user_manual/nextbutton.png  used on input line 161
+3.
+(pdftex.def)             Requested size: 446.0294pt x 306.3899pt.
+
+Overfull \hbox (33.46442pt too wide) in paragraph at lines 1613--1614
+ [][] 
+ []
+
+<img/user_manual/previousbutton.png, id=185, 1205.50375pt x 828.09375pt>
+File: img/user_manual/previousbutton.png Graphic file (type png)
+<use img/user_manual/previousbutton.png>
+Package pdftex.def Info: img/user_manual/previousbutton.png  used on input line
+ 1619.
+(pdftex.def)             Requested size: 446.0294pt x 306.3899pt.
+
+Overfull \hbox (33.46442pt too wide) in paragraph at lines 1619--1620
+ [][] 
+ []
+
+[38 <./img/user_manual/howToFollow.png> <./img/user_manual/afterfollow.png> <./
+img/user_manual/nextbutton.png>] [39 <./img/user_manual/previousbutton.png>]
+(./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 7718 strings out of 481239
- 115974 string characters out of 5920376
- 771302 words of memory out of 5000000
- 22896 multiletter control sequences out of 15000+600000
+ 8008 strings out of 481239
+ 121564 string characters out of 5920376
+ 958302 words of memory out of 5000000
+ 23169 multiletter control sequences out of 15000+600000
  548509 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,17n,60p,890b,1889s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t
-1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/pub
-lic/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx120
-0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/te
-xmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/publ
-ic/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488
-.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0500.pfb></usr/share/tex
-mf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/publi
-c/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.
-pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texm
-f/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on "JustRecipe Doc.pdf" (31 pages, 921754 bytes).
+ 50i,17n,60p,890b,2165s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.
+enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-su
+per/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></u
+sr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts
+/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-sup
+er/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></us
+r/share/texmf/fonts/type1/public/cm-super/sfrm0500.pfb></usr/share/texmf/fonts/
+type1/public/cm-super/sfrm0600.pfb></usr/share/texmf/fonts/type1/public/cm-supe
+r/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr
+/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/t
+ype1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super
+/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.pfb></usr/
+share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
+Output written on "JustRecipe Doc.pdf" (40 pages, 1534046 bytes).
 PDF statistics:
- 196 PDF objects out of 1000 (max. 8388607)
- 129 compressed objects within 2 object streams
+ 262 PDF objects out of 1000 (max. 8388607)
+ 153 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
