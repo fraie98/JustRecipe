@@ -1,77 +1,80 @@
 \babel@toc {english}{}
-\contentsline {chapter}{\numberline {1}Dataset}{3}{}%
-\contentsline {chapter}{\numberline {2}Design}{4}{}%
-\contentsline {section}{\numberline {2.1}Introduction To The Application}{4}{}%
-\contentsline {section}{\numberline {2.2}Requirements}{4}{}%
-\contentsline {subsection}{\numberline {2.2.1}Main Actors}{4}{}%
-\contentsline {subsection}{\numberline {2.2.2}Functional Requirements}{5}{}%
-\contentsline {subsubsection}{Features offered to the Unregistered User}{5}{}%
-\contentsline {subsubsection}{Features offered to the Registered User}{5}{}%
-\contentsline {subsubsection}{Features offered to the Moderator}{5}{}%
-\contentsline {subsubsection}{Features offered to the Administrator}{5}{}%
-\contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{6}{}%
-\contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{7}{}%
-\contentsline {section}{\numberline {2.3}UML Class Diagram}{8}{}%
-\contentsline {section}{\numberline {2.4}Data Model}{10}{}%
-\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{10}{}%
-\contentsline {subsection}{\numberline {2.4.2}GraphDB}{11}{}%
-\contentsline {subsection}{\numberline {2.4.3}Data Among Databases}{12}{}%
-\contentsline {section}{\numberline {2.5}Distributed Database Design}{13}{}%
-\contentsline {subsection}{\numberline {2.5.1}Replicas}{13}{}%
-\contentsline {subsection}{\numberline {2.5.2}Sharding}{14}{}%
-\contentsline {section}{\numberline {2.6}Software Architecture}{14}{}%
-\contentsline {subsection}{\numberline {2.6.1}Client - Server Architecture}{14}{}%
-\contentsline {subsubsection}{Client Side}{15}{}%
-\contentsline {subsubsection}{Server side}{15}{}%
-\contentsline {subsection}{\numberline {2.6.2}Inter-Databases Consistency}{15}{}%
-\contentsline {chapter}{\numberline {3}Implementation and Test}{16}{}%
-\contentsline {section}{\numberline {3.1}Main Modules}{16}{}%
-\contentsline {section}{\numberline {3.2}Main Packages and Classes}{16}{}%
-\contentsline {subsection}{\numberline {3.2.1}it.unipi.dii.inginf.lsdb.justrecipe.config}{16}{}%
-\contentsline {subsection}{\numberline {3.2.2}it.unipi.dii.inginf.lsdb.justrecipe.main}{16}{}%
-\contentsline {subsection}{\numberline {3.2.3}it.unipi.dii.inginf.lsdb.justrecipe.model}{16}{}%
-\contentsline {subsection}{\numberline {3.2.4}it.unipi.dii.inginf.lsdb.justrecipe.persistence}{17}{}%
-\contentsline {subsection}{\numberline {3.2.5}it.unipi.dii.inginf.lsdb.justrecipe.controller}{17}{}%
-\contentsline {subsection}{\numberline {3.2.6}it.unipi.dii.inginf.lsdb.justrecipe.utils}{18}{}%
-\contentsline {section}{\numberline {3.3}Constraints}{18}{}%
-\contentsline {section}{\numberline {3.4}Most Relevant Queries}{18}{}%
-\contentsline {subsection}{\numberline {3.4.1}MongoDB}{19}{}%
-\contentsline {subsubsection}{Search Recipes given a username}{19}{}%
-\contentsline {subsubsection}{Search for recipe title}{19}{}%
-\contentsline {subsubsection}{Get the username of the most versatile user}{20}{}%
-\contentsline {subsubsection}{Search for recipe category}{21}{}%
-\contentsline {subsubsection}{Search for recipe ingredients}{22}{}%
-\contentsline {subsubsection}{Most common recipe categories}{22}{}%
-\contentsline {subsubsection}{Last Comments}{23}{}%
-\contentsline {subsubsection}{Weekly Recipes per User}{24}{}%
-\contentsline {subsection}{\numberline {3.4.2}Neo4J}{25}{}%
-\contentsline {subsubsection}{Suggested Recipes}{25}{}%
-\contentsline {subsubsection}{Recipes of following users}{26}{}%
-\contentsline {subsubsection}{Most followed and active users}{26}{}%
-\contentsline {subsubsection}{Most liked users}{27}{}%
-\contentsline {subsubsection}{Best Recipes}{27}{}%
-\contentsline {subsubsection}{Search for username}{28}{}%
-\contentsline {subsubsection}{Search for user's full-name}{28}{}%
-\contentsline {section}{\numberline {3.5}Some snapshots of code}{28}{}%
-\contentsline {subsection}{\numberline {3.5.1}Most relevant queries}{28}{}%
-\contentsline {subsubsection}{Get the username of the most versatile user}{29}{}%
-\contentsline {subsubsection}{Most common recipe categories}{29}{}%
-\contentsline {subsubsection}{Last comments}{29}{}%
-\contentsline {subsubsection}{Suggested recipes}{30}{}%
-\contentsline {subsubsection}{Most followed and active users}{31}{}%
-\contentsline {section}{\numberline {3.6}Tests and Statistical Analysis}{31}{}%
-\contentsline {subsection}{\numberline {3.6.1}Queries Analysis}{31}{}%
-\contentsline {subsection}{\numberline {3.6.2}Index Analysis}{31}{}%
-\contentsline {subsubsection}{Index on Recipe Title}{32}{}%
-\contentsline {subsubsection}{Index on User Username}{32}{}%
-\contentsline {subsubsection}{Index on Recipe Creation Time}{32}{}%
-\contentsline {subsubsection}{Index on Comment Creation Time}{33}{}%
-\contentsline {chapter}{\numberline {4}User Manual}{34}{}%
-\contentsline {section}{\numberline {4.1}How To Configure The System}{34}{}%
-\contentsline {section}{\numberline {4.2}Login And Registration}{35}{}%
-\contentsline {section}{\numberline {4.3}Homepage, Discovery and First Steps}{36}{}%
-\contentsline {section}{\numberline {4.4}User Profile}{41}{}%
-\contentsline {section}{\numberline {4.5}How To Handle A Recipe}{43}{}%
-\contentsline {section}{\numberline {4.6}How To Handle Comments}{45}{}%
-\contentsline {section}{\numberline {4.7}Suggested recipes realistic use}{45}{}%
-\contentsline {section}{\numberline {4.8}DiscoveryPage ComboBox Explenation}{46}{}%
+\contentsline {chapter}{\numberline {1}Dataset}{4}{}%
+\contentsline {chapter}{\numberline {2}Design}{5}{}%
+\contentsline {section}{\numberline {2.1}Introduction To The Application}{5}{}%
+\contentsline {section}{\numberline {2.2}Requirements}{5}{}%
+\contentsline {subsection}{\numberline {2.2.1}Main Actors}{5}{}%
+\contentsline {subsection}{\numberline {2.2.2}Functional Requirements}{6}{}%
+\contentsline {subsubsection}{Features offered to the Unregistered User}{6}{}%
+\contentsline {subsubsection}{Features offered to the Registered User}{6}{}%
+\contentsline {subsubsection}{Features offered to the Moderator}{6}{}%
+\contentsline {subsubsection}{Features offered to the Administrator}{6}{}%
+\contentsline {subsection}{\numberline {2.2.3}Non-Functional Requirements}{7}{}%
+\contentsline {subsection}{\numberline {2.2.4}Actors and Use Cases}{8}{}%
+\contentsline {section}{\numberline {2.3}UML Class Diagram}{9}{}%
+\contentsline {section}{\numberline {2.4}Data Model}{11}{}%
+\contentsline {subsection}{\numberline {2.4.1}DocumentDB}{11}{}%
+\contentsline {subsection}{\numberline {2.4.2}GraphDB}{12}{}%
+\contentsline {subsection}{\numberline {2.4.3}Data Among Databases}{13}{}%
+\contentsline {section}{\numberline {2.5}Distributed Database Design}{14}{}%
+\contentsline {subsection}{\numberline {2.5.1}Replicas}{14}{}%
+\contentsline {subsection}{\numberline {2.5.2}Sharding}{15}{}%
+\contentsline {section}{\numberline {2.6}Software Architecture}{15}{}%
+\contentsline {subsection}{\numberline {2.6.1}Client - Server Architecture}{15}{}%
+\contentsline {subsubsection}{Client Side}{16}{}%
+\contentsline {subsubsection}{Server side}{16}{}%
+\contentsline {subsection}{\numberline {2.6.2}Inter-Databases Consistency}{16}{}%
+\contentsline {chapter}{\numberline {3}Implementation and Test}{17}{}%
+\contentsline {section}{\numberline {3.1}Main Modules}{17}{}%
+\contentsline {section}{\numberline {3.2}Main Packages and Classes}{17}{}%
+\contentsline {subsection}{\numberline {3.2.1}it.unipi.dii.inginf.lsdb.justrecipe.config}{17}{}%
+\contentsline {subsection}{\numberline {3.2.2}it.unipi.dii.inginf.lsdb.justrecipe.main}{17}{}%
+\contentsline {subsection}{\numberline {3.2.3}it.unipi.dii.inginf.lsdb.justrecipe.model}{17}{}%
+\contentsline {subsection}{\numberline {3.2.4}it.unipi.dii.inginf.lsdb.justrecipe.persistence}{18}{}%
+\contentsline {subsection}{\numberline {3.2.5}it.unipi.dii.inginf.lsdb.justrecipe.controller}{18}{}%
+\contentsline {subsection}{\numberline {3.2.6}it.unipi.dii.inginf.lsdb.justrecipe.utils}{19}{}%
+\contentsline {section}{\numberline {3.3}Constraints}{19}{}%
+\contentsline {section}{\numberline {3.4}Most Relevant Queries}{19}{}%
+\contentsline {subsection}{\numberline {3.4.1}MongoDB}{20}{}%
+\contentsline {subsubsection}{Search Recipes given a username}{20}{}%
+\contentsline {subsubsection}{Search for recipe title}{20}{}%
+\contentsline {subsubsection}{Get the username of the most versatile user}{21}{}%
+\contentsline {subsubsection}{Search for recipe category}{22}{}%
+\contentsline {subsubsection}{Search for recipe ingredients}{23}{}%
+\contentsline {subsubsection}{Most common recipe categories}{23}{}%
+\contentsline {subsubsection}{Last Comments}{24}{}%
+\contentsline {subsubsection}{Weekly Recipes per User}{25}{}%
+\contentsline {subsection}{\numberline {3.4.2}Neo4J}{26}{}%
+\contentsline {subsubsection}{Suggested Recipes}{26}{}%
+\contentsline {subsubsection}{Recipes of following users}{27}{}%
+\contentsline {subsubsection}{Most followed and active users}{27}{}%
+\contentsline {subsubsection}{Most liked users}{28}{}%
+\contentsline {subsubsection}{Best Recipes}{28}{}%
+\contentsline {subsubsection}{Search for username}{29}{}%
+\contentsline {subsubsection}{Search for user's full-name}{29}{}%
+\contentsline {section}{\numberline {3.5}Some snapshots of code}{29}{}%
+\contentsline {subsection}{\numberline {3.5.1}Most relevant queries}{29}{}%
+\contentsline {subsubsection}{Get the username of the most versatile user}{30}{}%
+\contentsline {subsubsection}{Most common recipe categories}{30}{}%
+\contentsline {subsubsection}{Last comments}{30}{}%
+\contentsline {subsubsection}{Suggested recipes}{31}{}%
+\contentsline {subsubsection}{Most followed and active users}{32}{}%
+\contentsline {section}{\numberline {3.6}Tests and Statistical Analysis}{32}{}%
+\contentsline {subsection}{\numberline {3.6.1}Queries Analysis}{32}{}%
+\contentsline {subsection}{\numberline {3.6.2}Index Analysis}{32}{}%
+\contentsline {subsubsection}{Index on Recipe Title}{33}{}%
+\contentsline {subsubsection}{Index on User Username}{33}{}%
+\contentsline {subsubsection}{Index on Recipe Creation Time}{33}{}%
+\contentsline {subsubsection}{Index on Comment Creation Time}{34}{}%
+\contentsline {chapter}{\numberline {4}User Manual}{35}{}%
+\contentsline {section}{\numberline {4.1}How To Configure The System}{35}{}%
+\contentsline {section}{\numberline {4.2}Login And Registration}{36}{}%
+\contentsline {section}{\numberline {4.3}Homepage, Discovery and First Steps}{37}{}%
+\contentsline {section}{\numberline {4.4}User Profile}{42}{}%
+\contentsline {section}{\numberline {4.5}How To Handle A Recipe}{44}{}%
+\contentsline {section}{\numberline {4.6}How To Handle Comments}{46}{}%
+\contentsline {section}{\numberline {4.7}Suggested recipes realistic use}{46}{}%
+\contentsline {section}{\numberline {4.8}DiscoveryPage ComboBox Explenation}{47}{}%
+\contentsline {section}{\numberline {4.9}Moderator Functions}{47}{}%
+\contentsline {section}{\numberline {4.10}Administrator Functions}{50}{}%
+\contentsline {section}{\numberline {4.11}Logout}{54}{}%
