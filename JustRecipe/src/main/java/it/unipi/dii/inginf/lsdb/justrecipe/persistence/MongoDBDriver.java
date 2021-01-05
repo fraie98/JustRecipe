@@ -172,6 +172,7 @@ public class MongoDBDriver implements DatabaseDriver{
         catch (Exception ex)
         {
             System.err.println("Error in adding a new recipe");
+            ex.printStackTrace();
             return false;
         }
     }

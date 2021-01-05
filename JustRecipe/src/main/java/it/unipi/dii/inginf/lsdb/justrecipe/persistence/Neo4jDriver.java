@@ -96,7 +96,7 @@ public class Neo4jDriver implements DatabaseDriver{
             session.writeTransaction((TransactionWork<Void>) tx -> {
                 tx.run( "UNWIND $props as rnew " +
                                 "MATCH (u:User{username:$name}) " +
-                                "MERGE (rec:Recipe{title:rnew.title,calories:rnew.calories,fat:rnew.fat," +
+                                "CREATE (rec:Recipe{title:rnew.title,calories:rnew.calories,fat:rnew.fat," +
                                 "protein:rnew.protein,carbs:rnew.carbs}) " +
                                 "CREATE (u)-[ad:ADDS]->(rec) " +
                                 "SET ad.when=$ts",
@@ -108,6 +108,7 @@ public class Neo4jDriver implements DatabaseDriver{
         catch (Exception ex)
         {
             System.err.println("Error in adding a new recipe in Neo4J");
+            ex.printStackTrace();
             return false;
         }
     }
