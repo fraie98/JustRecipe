@@ -88,7 +88,9 @@ public class CommentController {
 
         if(appSession.getLoggedUser().getUsername().equals(comment.getAuthorUsername()))
             commentModifyButton.setOnAction(actionEvent -> editButtonAction());
-        else
+        else{
             commentModifyButton.setVisible(false);
+            commentSaveButton.setVisible(false);
+        }
     }
 }
