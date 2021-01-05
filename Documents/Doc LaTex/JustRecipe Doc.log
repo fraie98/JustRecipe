@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  5 JAN 2021 11:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  5 JAN 2021 16:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -422,151 +422,204 @@ Package pdftex.def Info: img/graphScreen.png  used on input line 1066.
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) [28] [29]
-[30]
-Overfull \hbox (24.30153pt too wide) in paragraph at lines 1381--1390
+[30] [31]
+Overfull \hbox (24.30153pt too wide) in paragraph at lines 1500--1509
  [][] 
  []
 
-[31] [32]
+[32] [33]
 Chapter 4.
-[33
+[34
 
 ]
-<img/user_manual/login.png, id=145, 604.2575pt x 440.64626pt>
+<img/user_manual/login.png, id=149, 604.2575pt x 440.64626pt>
 File: img/user_manual/login.png Graphic file (type png)
 <use img/user_manual/login.png>
-Package pdftex.def Info: img/user_manual/login.png  used on input line 1484.
+Package pdftex.def Info: img/user_manual/login.png  used on input line 1598.
 (pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
-<img/user_manual/register.png, id=146, 604.2575pt x 440.64626pt>
+<img/user_manual/register.png, id=150, 604.2575pt x 440.64626pt>
 File: img/user_manual/register.png Graphic file (type png)
 <use img/user_manual/register.png>
-Package pdftex.def Info: img/user_manual/register.png  used on input line 1498.
+Package pdftex.def Info: img/user_manual/register.png  used on input line 1612.
 
 (pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
-<img/user_manual/loginsection.png, id=147, 604.2575pt x 440.64626pt>
+<img/user_manual/loginsection.png, id=151, 604.2575pt x 440.64626pt>
 File: img/user_manual/loginsection.png Graphic file (type png)
 <use img/user_manual/loginsection.png>
 Package pdftex.def Info: img/user_manual/loginsection.png  used on input line 1
-508.
+622.
 (pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
- [34 <./img/user_manual/login.png> <./img/user_manual/register.png> <./img/user
+ [35 <./img/user_manual/login.png> <./img/user_manual/register.png> <./img/user
 _manual/loginsection.png>]
-<img/user_manual/blank-homepage.png, id=154, 1205.50375pt x 828.09375pt>
+<img/user_manual/blank-homepage.png, id=158, 1205.50375pt x 828.09375pt>
 File: img/user_manual/blank-homepage.png Graphic file (type png)
 <use img/user_manual/blank-homepage.png>
 Package pdftex.def Info: img/user_manual/blank-homepage.png  used on input line
- 1518.
+ 1632.
 (pdftex.def)             Requested size: 301.3752pt x 207.02293pt.
-<img/user_manual/discovery-icon.png, id=155, 209.78375pt x 74.2775pt>
+<img/user_manual/discovery-icon.png, id=159, 209.78375pt x 74.2775pt>
 File: img/user_manual/discovery-icon.png Graphic file (type png)
 <use img/user_manual/discovery-icon.png>
 Package pdftex.def Info: img/user_manual/discovery-icon.png  used on input line
- 1526.
+ 1640.
 (pdftex.def)             Requested size: 62.9356pt x 22.28342pt.
-<img/user_manual/first-discovery.png, id=156, 1205.50375pt x 828.09375pt>
+<img/user_manual/first-discovery.png, id=160, 1205.50375pt x 828.09375pt>
 File: img/user_manual/first-discovery.png Graphic file (type png)
 <use img/user_manual/first-discovery.png>
 Package pdftex.def Info: img/user_manual/first-discovery.png  used on input lin
-e 1534.
+e 1648.
 (pdftex.def)             Requested size: 301.3752pt x 207.02293pt.
-<img/user_manual/snap.png, id=157, 436.63126pt x 332.24126pt>
+<img/user_manual/snap.png, id=161, 436.63126pt x 332.24126pt>
 File: img/user_manual/snap.png Graphic file (type png)
 <use img/user_manual/snap.png>
-Package pdftex.def Info: img/user_manual/snap.png  used on input line 1543.
+Package pdftex.def Info: img/user_manual/snap.png  used on input line 1657.
 (pdftex.def)             Requested size: 152.82323pt x 116.28618pt.
- [35 <./img/user_manual/blank-homepage.png> <./img/user_manual/discovery-icon.p
+ [36 <./img/user_manual/blank-homepage.png> <./img/user_manual/discovery-icon.p
 ng> <./img/user_manual/first-discovery.png>]
-<img/user_manual/recipepage.png, id=164, 1221.56375pt x 828.09375pt>
+<img/user_manual/recipepage.png, id=169, 1221.56375pt x 828.09375pt>
 File: img/user_manual/recipepage.png Graphic file (type png)
 <use img/user_manual/recipepage.png>
-Package pdftex.def Info: img/user_manual/recipepage.png  used on input line 155
-1.
+Package pdftex.def Info: img/user_manual/recipepage.png  used on input line 166
+5.
 (pdftex.def)             Requested size: 427.55373pt x 289.83716pt.
 
-Overfull \hbox (14.98874pt too wide) in paragraph at lines 1551--1552
+Overfull \hbox (14.98874pt too wide) in paragraph at lines 1665--1666
  [][] 
  []
 
-<img/user_manual/beforelike.png, id=165, 315.1775pt x 104.39pt>
+<img/user_manual/beforelike.png, id=170, 315.1775pt x 104.39pt>
 File: img/user_manual/beforelike.png Graphic file (type png)
 <use img/user_manual/beforelike.png>
-Package pdftex.def Info: img/user_manual/beforelike.png  used on input line 156
-1.
+Package pdftex.def Info: img/user_manual/beforelike.png  used on input line 167
+5.
 (pdftex.def)             Requested size: 97.70401pt x 32.36055pt.
-<img/user_manual/afterlike.png, id=166, 324.21124pt x 105.39375pt>
+<img/user_manual/afterlike.png, id=171, 324.21124pt x 105.39375pt>
 File: img/user_manual/afterlike.png Graphic file (type png)
 <use img/user_manual/afterlike.png>
-Package pdftex.def Info: img/user_manual/afterlike.png  used on input line 1568
+Package pdftex.def Info: img/user_manual/afterlike.png  used on input line 1682
 .
 (pdftex.def)             Requested size: 100.50444pt x 32.6717pt.
-[36 <./img/user_manual/snap.png> <./img/user_manual/recipepage.png> <./img/user
+[37 <./img/user_manual/snap.png> <./img/user_manual/recipepage.png> <./img/user
 _manual/beforelike.png>]
-<img/user_manual/user-icon.png, id=174, 187.70125pt x 232.87pt>
+<img/user_manual/user-icon.png, id=178, 187.70125pt x 232.87pt>
 File: img/user_manual/user-icon.png Graphic file (type png)
 <use img/user_manual/user-icon.png>
-Package pdftex.def Info: img/user_manual/user-icon.png  used on input line 1579
+Package pdftex.def Info: img/user_manual/user-icon.png  used on input line 1693
 .
 (pdftex.def)             Requested size: 71.32721pt x 88.4915pt.
-<img/user_manual/generic-user-page.png, id=175, 1203.49625pt x 820.06375pt>
+<img/user_manual/generic-user-page.png, id=179, 1203.49625pt x 820.06375pt>
 File: img/user_manual/generic-user-page.png Graphic file (type png)
 <use img/user_manual/generic-user-page.png>
 Package pdftex.def Info: img/user_manual/generic-user-page.png  used on input l
-ine 1587.
+ine 1701.
 (pdftex.def)             Requested size: 457.33333pt x 311.62746pt.
 
-Overfull \hbox (44.76834pt too wide) in paragraph at lines 1587--1588
+Overfull \hbox (44.76834pt too wide) in paragraph at lines 1701--1702
  [][] 
  []
 
-<img/user_manual/howToFollow.png, id=176, 192.72pt x 188.705pt>
+<img/user_manual/howToFollow.png, id=180, 192.72pt x 188.705pt>
 File: img/user_manual/howToFollow.png Graphic file (type png)
 <use img/user_manual/howToFollow.png>
-Package pdftex.def Info: img/user_manual/howToFollow.png  used on input line 15
-95.
-(pdftex.def)             Requested size: 67.453pt x 66.04773pt.
-<img/user_manual/afterfollow.png, id=177, 179.67125pt x 186.6975pt>
+Package pdftex.def Info: img/user_manual/howToFollow.png  used on input line 17
+09.
+(pdftex.def)             Requested size: 115.63287pt x 113.22386pt.
+<img/user_manual/afterfollow.png, id=181, 179.67125pt x 186.6975pt>
 File: img/user_manual/afterfollow.png Graphic file (type png)
 <use img/user_manual/afterfollow.png>
-Package pdftex.def Info: img/user_manual/afterfollow.png  used on input line 16
-01.
-(pdftex.def)             Requested size: 62.88586pt x 65.3451pt.
-[37 <./img/user_manual/afterlike.png> <./img/user_manual/user-icon.png> <./img/
+Package pdftex.def Info: img/user_manual/afterfollow.png  used on input line 17
+15.
+(pdftex.def)             Requested size: 107.80356pt x 112.01935pt.
+[38 <./img/user_manual/afterlike.png> <./img/user_manual/user-icon.png> <./img/
 user_manual/generic-user-page.png>]
-<img/user_manual/nextbutton.png, id=184, 1205.50375pt x 828.09375pt>
-File: img/user_manual/nextbutton.png Graphic file (type png)
-<use img/user_manual/nextbutton.png>
-Package pdftex.def Info: img/user_manual/nextbutton.png  used on input line 161
-3.
-(pdftex.def)             Requested size: 446.0294pt x 306.3899pt.
-
-Overfull \hbox (33.46442pt too wide) in paragraph at lines 1613--1614
- [][] 
- []
-
-<img/user_manual/previousbutton.png, id=185, 1205.50375pt x 828.09375pt>
+<img/user_manual/menu.png, id=188, 68.255pt x 226.8475pt>
+File: img/user_manual/menu.png Graphic file (type png)
+<use img/user_manual/menu.png>
+Package pdftex.def Info: img/user_manual/menu.png  used on input line 1726.
+(pdftex.def)             Requested size: 40.95331pt x 136.10954pt.
+<img/user_manual/previousbutton.png, id=189, 1205.50375pt x 828.09375pt>
 File: img/user_manual/previousbutton.png Graphic file (type png)
 <use img/user_manual/previousbutton.png>
 Package pdftex.def Info: img/user_manual/previousbutton.png  used on input line
- 1619.
-(pdftex.def)             Requested size: 446.0294pt x 306.3899pt.
+ 1732.
+(pdftex.def)             Requested size: 421.93263pt x 289.83716pt.
 
-Overfull \hbox (33.46442pt too wide) in paragraph at lines 1619--1620
+Overfull \hbox (9.36765pt too wide) in paragraph at lines 1732--1733
  [][] 
  []
 
-[38 <./img/user_manual/howToFollow.png> <./img/user_manual/afterfollow.png> <./
-img/user_manual/nextbutton.png>] [39 <./img/user_manual/previousbutton.png>]
+[39 <./img/user_manual/howToFollow.png> <./img/user_manual/afterfollow.png> <./
+img/user_manual/menu.png>] [40 <./img/user_manual/previousbutton.png>]
+<img/user_manual/profile-icon.png, id=200, 209.78375pt x 74.2775pt>
+File: img/user_manual/profile-icon.png Graphic file (type png)
+<use img/user_manual/profile-icon.png>
+Package pdftex.def Info: img/user_manual/profile-icon.png  used on input line 1
+747.
+(pdftex.def)             Requested size: 75.52208pt x 26.73987pt.
+<img/user_manual/myprofile.png, id=201, 1203.49625pt x 820.06375pt>
+File: img/user_manual/myprofile.png Graphic file (type png)
+<use img/user_manual/myprofile.png>
+Package pdftex.def Info: img/user_manual/myprofile.png  used on input line 1754
+.
+(pdftex.def)             Requested size: 276.79831pt x 188.61069pt.
+<img/user_manual/addrecipe.png, id=202, 1203.49625pt x 820.06375pt>
+File: img/user_manual/addrecipe.png Graphic file (type png)
+<use img/user_manual/addrecipe.png>
+Package pdftex.def Info: img/user_manual/addrecipe.png  used on input line 1762
+.
+(pdftex.def)             Requested size: 276.79831pt x 188.61069pt.
+ [41 <./img/user_manual/Profile-icon.png> <./img/user_manual/myprofile.png> <./
+img/user_manual/addrecipe.png>]
+<img/user_manual/afteraddrecipe.png, id=209, 1203.49625pt x 820.06375pt>
+File: img/user_manual/afteraddrecipe.png Graphic file (type png)
+<use img/user_manual/afteraddrecipe.png>
+Package pdftex.def Info: img/user_manual/afteraddrecipe.png  used on input line
+ 1779.
+(pdftex.def)             Requested size: 300.87332pt x 205.01543pt.
+<img/user_manual/editprofile.png, id=210, 1203.49625pt x 820.06375pt>
+File: img/user_manual/editprofile.png Graphic file (type png)
+<use img/user_manual/editprofile.png>
+Package pdftex.def Info: img/user_manual/editprofile.png  used on input line 17
+87.
+(pdftex.def)             Requested size: 300.87332pt x 205.01543pt.
+ [42 <./img/user_manual/afteraddrecipe.png> <./img/user_manual/editprofile.png>
+]
+<img/user_manual/before-click.png, id=217, 634.37pt x 194.7275pt>
+File: img/user_manual/before-click.png Graphic file (type png)
+<use img/user_manual/before-click.png>
+Package pdftex.def Info: img/user_manual/before-click.png  used on input line 1
+797.
+(pdftex.def)             Requested size: 190.31245pt x 58.41869pt.
+File: img/user_manual/before-click.png Graphic file (type png)
+<use img/user_manual/before-click.png>
+Package pdftex.def Info: img/user_manual/before-click.png  used on input line 1
+803.
+(pdftex.def)             Requested size: 190.31245pt x 58.41869pt.
+<img/user_manual/pageOfMyRecipe.png, id=218, 1221.56375pt x 828.09375pt>
+File: img/user_manual/pageOfMyRecipe.png Graphic file (type png)
+<use img/user_manual/pageOfMyRecipe.png>
+Package pdftex.def Info: img/user_manual/pageOfMyRecipe.png  used on input line
+ 1812.
+(pdftex.def)             Requested size: 366.47195pt x 248.43004pt.
+<img/user_manual/editRecipe.png, id=219, 1203.49625pt x 820.06375pt>
+File: img/user_manual/editRecipe.png Graphic file (type png)
+<use img/user_manual/editRecipe.png>
+Package pdftex.def Info: img/user_manual/editRecipe.png  used on input line 182
+1.
+(pdftex.def)             Requested size: 361.05167pt x 246.02103pt.
+ [43 <./img/user_manual/before-click.png> <./img/user_manual/pageOfMyRecipe.png
+>] [44 <./img/user_manual/editrecipe.png>] [45]
 (./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 8008 strings out of 481239
- 121564 string characters out of 5920376
- 958302 words of memory out of 5000000
- 23169 multiletter control sequences out of 15000+600000
- 548509 words of font info for 50 fonts, out of 8000000 for 9000
+ 8120 strings out of 481239
+ 124051 string characters out of 5920376
+ 986302 words of memory out of 5000000
+ 23272 multiletter control sequences out of 15000+600000
+ 548846 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  50i,17n,60p,890b,2165s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.
-enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/tex
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1
+.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/font
@@ -582,10 +635,10 @@ r/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr
 ype1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super
 /sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1728.pfb></usr/
 share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on "JustRecipe Doc.pdf" (40 pages, 1534046 bytes).
+Output written on "JustRecipe Doc.pdf" (46 pages, 1963344 bytes).
 PDF statistics:
- 262 PDF objects out of 1000 (max. 8388607)
- 153 compressed objects within 2 object streams
+ 299 PDF objects out of 1000 (max. 8388607)
+ 168 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 116 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 156 words of extra memory for PDF output out of 10000 (max. 10000000)
 

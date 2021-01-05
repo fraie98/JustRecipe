@@ -1,4 +1,5 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.main;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
@@ -7,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.awt.event.ActionEvent;
 
 /**
  * Class used to start the application
@@ -20,10 +23,12 @@ public class Main extends Application {
 
         primaryStage.setTitle("JustRecipe");
 
-        if(!Neo4jDriver.getInstance().initConnection())
+        Boolean connectionDoneNeo4j = Neo4jDriver.getInstance().initConnection();
+        Boolean connectionDoneMongoDB = MongoDBDriver.getInstance().initConnection();
+        if(!connectionDoneNeo4j || !connectionDoneMongoDB)
+        {
             primaryStage.setScene(new Scene(loadErrorPage.load()));
-        else if(!MongoDBDriver.getInstance().initConnection())
-            primaryStage.setScene(new Scene(loadErrorPage.load()));
+        }
         else
             primaryStage.setScene(new Scene(loader.load()));
 
@@ -35,8 +40,8 @@ public class Main extends Application {
 
         // close the connection to Neo4J and MongoDB when the app closes
         primaryStage.setOnCloseRequest(actionEvent -> {
-            Neo4jDriver.getInstance().closeConnection();
-            MongoDBDriver.getInstance().closeConnection();
+                Neo4jDriver.getInstance().closeConnection();
+                MongoDBDriver.getInstance().closeConnection();
         });
     }
 

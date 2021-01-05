@@ -87,7 +87,7 @@
                            <children>
                               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Text fx:id="recipeTitle" focusTraversable="true" layoutX="20.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tiramisu" wrappingWidth="725.0">
+                                    <Text fx:id="recipeTitle" focusTraversable="true" layoutX="20.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="725.0">
                                        <font>
                                           <Font size="46.0" />
                                        </font>
@@ -112,7 +112,7 @@
                                                 <Image url="@img/user.png" />
                                              </image>
                                           </ImageView>
-                                          <Text fx:id="recipeUsername" layoutX="48.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username">
+                                          <Text fx:id="recipeUsername" layoutX="48.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -132,17 +132,17 @@
                                                 <Image url="@img/fat.png" />
                                              </image>
                                           </ImageView>
-                                          <Text fx:id="recipeCarbs" layoutX="55.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30">
+                                          <Text fx:id="recipeCarbs" layoutX="55.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                              <font>
                                                 <Font size="22.0" />
                                              </font>
                                           </Text>
-                                          <Text fx:id="recipeCalories" layoutX="55.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="20">
+                                          <Text fx:id="recipeCalories" layoutX="55.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                              <font>
                                                 <Font size="22.0" />
                                              </font>
                                           </Text>
-                                          <Text fx:id="recipeFat" layoutX="55.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="40">
+                                          <Text fx:id="recipeFat" layoutX="55.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                              <font>
                                                 <Font size="22.0" />
                                              </font>
@@ -152,7 +152,7 @@
                                                 <Image url="@img/protein1.png" />
                                              </image>
                                           </ImageView>
-                                          <Text fx:id="recipeProtein" layoutX="55.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50">
+                                          <Text fx:id="recipeProtein" layoutX="55.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0">
                                              <font>
                                                 <Font size="22.0" />
                                              </font>
@@ -187,7 +187,7 @@
                                                 <Image url="@img/delete.png" />
                                              </image>
                                           </ImageView>
-                                          <Label fx:id="recipeLikes" layoutX="54.0" layoutY="23.0" text="x">
+                                          <Label fx:id="recipeLikes" layoutX="54.0" layoutY="23.0">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
@@ -206,7 +206,7 @@
                                           <Image url="@img/ingredients1.png" />
                                        </image>
                                     </ImageView>
-                                    <Text fx:id="recipeIngredients" layoutX="114.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="uova, mascarpone, ingr1, ingr2, ingr3, ingr4, ingr5" wrappingWidth="600.0">
+                                    <Text fx:id="recipeIngredients" layoutX="114.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -218,7 +218,7 @@
                               </Pane>
                               <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="770.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Text fx:id="recipeInstructions" layoutX="23.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Anticamente le nonne usavano preparare una colazione che oggi potremmo definirepovera, ma che all’epoca era davvero ricchissima! Ancora oggi la ricetta è immutata,basta rompere in un bicchiere un uovo freschissimo e sbatterlo con dello zucchero ea piacere aggiungere caffè o latte caldo, per i più piccoli, e marsala o anice per i piùgrandicelli. Ed è proprio da questa portentosa crema che nasce la crema al mascarponebase del tiramisù. Il dolce italiano per eccellenza, quello più famoso e amato,ma soprattutto che ha dato vita a tantissime altre versioni, anche tiramisù senza uova!Poi il tiramisù alle fragole o quello alla Nutella, giusto per citarne un paio!Senza contare le rivisitazioni più raffinate come la crostata morbida o la torta al tiramisù." wrappingWidth="725.0" />
+                                    <Text fx:id="recipeInstructions" layoutX="23.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="725.0" />
                                  </children>
                                  <VBox.margin>
                                     <Insets />
@@ -231,7 +231,7 @@
                                           <Image url="@img/tag.png" />
                                        </image>
                                     </ImageView>
-                                    <Text fx:id="recipeCategories" layoutX="117.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="italian, dolce, prova, ciao, mascarpone" wrappingWidth="600.0">
+                                    <Text fx:id="recipeCategories" layoutX="117.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="600.0">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

@@ -82,8 +82,6 @@ public class MongoDBDriver implements DatabaseDriver{
         this.username = configurationParameters.getMongoUsername();
         this.password = configurationParameters.getMongoPassword();
         this.dbName = configurationParameters.getMongoDbName();
-        initConnection();
-        chooseCollection("recipes");
     }
 
     /**
@@ -105,7 +103,8 @@ public class MongoDBDriver implements DatabaseDriver{
                     .applyConnectionString(connectionString)
                     .readPreference(ReadPreference.secondaryPreferred())
                     .retryWrites(true)
-                    .writeConcern(WriteConcern.W3).build();
+                    .writeConcern(WriteConcern.W3)
+                    .build();
             mongoClient = MongoClients.create(mongoClientSettings);
 
             database = mongoClient.getDatabase(dbName);
@@ -117,10 +116,12 @@ public class MongoDBDriver implements DatabaseDriver{
 
             pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                     fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+            chooseCollection("recipes");
         }
         catch (Exception ex)
         {
-            System.err.println("MongoDB is not available");
+            System.out.println("MongoDB is not available");
             return false;
         }
         return true;
@@ -171,6 +172,7 @@ public class MongoDBDriver implements DatabaseDriver{
         catch (Exception ex)
         {
             System.err.println("Error in adding a new recipe");
+            ex.printStackTrace();
             return false;
         }
     }

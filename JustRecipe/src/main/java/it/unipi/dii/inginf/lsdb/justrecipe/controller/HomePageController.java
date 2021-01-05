@@ -28,7 +28,7 @@ public class HomePageController {
     @FXML private Button nextButton;
     @FXML private Button previousButton;
 
-    private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20; //standard case
+    private final int HOW_MANY_SNAPSHOT_TO_SHOW = 10; //standard case
     private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
 
     /**

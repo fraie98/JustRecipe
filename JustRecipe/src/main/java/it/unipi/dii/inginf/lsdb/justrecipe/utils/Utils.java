@@ -37,6 +37,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Class that contains some useful method
  */
@@ -88,6 +90,12 @@ public class Utils {
         }
         else
         {
+            showErrorAlert("Problem with the configuration file!");
+            try {
+                sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.exit(1); //If i can't read the configuration file I can't continue with the program
         }
         return null;
