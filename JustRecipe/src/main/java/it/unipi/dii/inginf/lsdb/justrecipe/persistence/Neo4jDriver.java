@@ -54,7 +54,7 @@ public class Neo4jDriver implements DatabaseDriver{
             driver.verifyConnectivity();
         } catch (Exception e)
         {
-            System.err.println("Neo4J is not available");
+            System.out.println("Neo4J is not available");
             return false;
         }
             return true;
