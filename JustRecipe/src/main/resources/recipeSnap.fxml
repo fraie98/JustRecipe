@@ -39,32 +39,32 @@
             <Image url="@img/protein1.png" />
          </image>
       </ImageView>
-      <Label fx:id="snapTitle" alignment="CENTER" layoutX="9.0" layoutY="25.0" maxWidth="406.0" prefHeight="36.0" prefWidth="406.0" text="Tiramisù">
+      <Label fx:id="snapTitle" alignment="CENTER" layoutX="9.0" layoutY="25.0" maxWidth="406.0" prefHeight="36.0" prefWidth="406.0">
          <font>
             <Font name="Liberation Sans" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="snapUser" layoutX="172.0" layoutY="284.0" maxWidth="159.0" prefHeight="20.0" prefWidth="136.0" text="Username">
+      <Label fx:id="snapUser" layoutX="172.0" layoutY="284.0" maxWidth="159.0" prefHeight="20.0" prefWidth="136.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="snapCarbs" layoutX="345.0" layoutY="98.0" text="20">
+      <Label fx:id="snapCarbs" layoutX="345.0" layoutY="98.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="snapCal" layoutX="345.0" layoutY="137.0" text="30">
+      <Label fx:id="snapCal" layoutX="345.0" layoutY="137.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="snapFat" layoutX="345.0" layoutY="180.0" text="40">
+      <Label fx:id="snapFat" layoutX="345.0" layoutY="180.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="snapProtein" layoutX="345.0" layoutY="220.0" text="50">
+      <Label fx:id="snapProtein" layoutX="345.0" layoutY="220.0">
          <font>
             <Font size="14.0" />
          </font>
