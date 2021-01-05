@@ -25,7 +25,7 @@ public class ProfilePageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
     private Session appSession;
-    private final int HOW_MANY_SNAPSHOT_TO_SHOW = 20;
+    private final int HOW_MANY_SNAPSHOT_TO_SHOW = 10;
     private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
     private User user;
 

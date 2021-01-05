@@ -1244,7 +1244,7 @@ The implementation code in Java language of the most interesting queries among t
 \subsubsection{Get the username of the most versatile user}
 \lstset{language=code}
 \begin{lstlisting}
-public String searchMostVersatileUser(int recipesThreshold)
+public String searchMostVersatileUser(final int recipesThreshold)
 {
   Bson unwind = unwind("$categories");
   Bson group = new Document("$group", 
@@ -1269,7 +1269,7 @@ public String searchMostVersatileUser(int recipesThreshold)
 \subsubsection{Most common recipe categories}
 \lstset{language=code}
 \begin{lstlisting}
-public List<String> searchMostCommonRecipeCategories (int howManySkip, int howManyCategories)
+public List<String> searchMostCommonRecipeCategories (final int howManySkip, final int howManyCategories)
 {
     List<String> mostCommonCategories = new ArrayList<>();
     Bson unwind = unwind("$categories");
@@ -1293,7 +1293,7 @@ public List<String> searchMostCommonRecipeCategories (int howManySkip, int howMa
 \subsubsection{Last comments}
 \lstset{language=code}
 \begin{lstlisting}
-public List<List<Object>> searchAllComments (int howManySkip, int howMany)
+public List<List<Object>> searchAllComments (final int howManySkip,final  int howMany)
 {
 	List<List<Object>> objects = new ArrayList<>();
 	Gson gson = new Gson();
@@ -1320,6 +1320,126 @@ public List<List<Object>> searchAllComments (int howManySkip, int howMany)
 	return objects;
 }
 \end{lstlisting} 
+\subsubsection{Suggested recipes}
+\lstset{language=code}
+\begin{lstlisting}
+public List<Recipe> getSuggestedRecipes(final String username, final int threshold, final int howManyToSkipFirstLv, final int howManyToGetFirstLv, final int howManyToSkipSecondLv, final int howManyToGetSecondLv)
+{
+	List<Recipe> recipes = new ArrayList<>();
+	try(Session session = driver.session()) 
+	{
+		recipes = session.readTransaction((TransactionWork<List<Recipe>>) tx -> 
+		{
+			Result result = tx.run("
+			MATCH path = (recipe:Recipe)<-[a:ADDS]-
+			  (owner:User)<-[:FOLLOWS*2..3]-(me:User{username:$u}) 
+			WHERE owner.username <> $u 
+			RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, 
+			  recipe.fat, recipe.picture, a.when, owner.username 
+			ORDER BY length(path) ASC, a.when DESC 
+			SKIP $firstLvSkip LIMIT $firstLvGet 
+			UNION 
+			MATCH (:User {username: $u})-[l:LIKES]->(:Recipe)
+			  <-[:ADDS]-(owner:User) 
+			WHERE owner.username <> $u 
+			WITH DISTINCT(owner) AS owner, COUNT(DISTINCT l) AS numLikes 
+			WHERE numLikes > $treshold AND owner.username <> $u 
+			MATCH (owner)-[a:ADDS]->(recipe:Recipe) 
+			RETURN recipe.title, recipe.calories, recipe.carbs, recipe.protein, 
+			  recipe.fat, recipe.picture, a.when, owner.username 
+			ORDER BY a.when DESC 
+			SKIP $secondLvSkip LIMIT $secondLvGet",
+			parameters("u",username, "firstLvSkip", howManyToSkipFirstLv, 
+			  "firstLvGet", howManyToGetFirstLv, "treshold", threshold, 
+			  "secondLvSkip", howManyToSkipSecondLv, 
+			  "secondLvGet", howManyToGetSecondLv));
+
+			List<Recipe> r = new ArrayList<>();
+
+			while(result.hasNext())
+			{
+				Record rec = result.next();
+				String title = rec.get("recipe.title").asString();
+				int calories = 0;
+				int protein = 0;
+				int fat = 0;
+				int carbs = 0;
+				String picture = null;
+				String authorUsername = rec.get("owner.username").asString();
+				if(rec.get("recipe.calories") != NULL)
+					calories = rec.get("recipe.calories").asInt();
+				if(rec.get("recipe.fat") != NULL)
+					fat = rec.get("recipe.fat").asInt();
+				if(rec.get("recipe.protein") != NULL)
+					protein = rec.get("recipe.protein").asInt();
+				if(rec.get("recipe.carbs") != NULL)
+					carbs = rec.get("recipe.carbs").asInt();
+				if (rec.get("recipe.picture") != NULL)
+					picture = rec.get("recipe.picture").asString();
+				Recipe recipe = new Recipe(title, fat, calories, protein, carbs, 
+				  picture);
+				recipe.setAuthorUsername(authorUsername);
+				r.add(recipe);
+			}
+			return r;
+		});
+	}
+	return recipes;
+}
+\end{lstlisting} 
+
+\subsubsection{Most followed and active users}
+\lstset{language=code}
+\begin{lstlisting}
+public List<User> searchMostFollowedAndActiveUsers (final int howManySkip, 
+	final int howMany)
+{
+	List<User> users = new ArrayList<>();
+	try(Session session = driver.session())
+	{
+		users = session.readTransaction((TransactionWork<List<User>>)  tx -> 
+		{
+			Result result = tx.run("
+				MATCH (u:User) 
+				OPTIONAL MATCH (u)<-[f1:FOLLOWS]-(:User) 
+				OPTIONAL MATCH (u)-[f2:FOLLOWS]->(:User) 
+				OPTIONAL MATCH (u)-[a:ADDS]->(:Recipe) 
+				RETURN u.firstName, u.lastName, u.username, u.firstName AS firstName, 
+				  u.lastName AS lastName, u.picture AS picture, u.username AS username, 
+				  u.password AS password, u.role AS role, 
+				  COUNT(DISTINCT f1) AS follower, 
+				  COUNT(DISTINCT f2) AS following, 
+				  COUNT(DISTINCT a) AS numRecipes 
+				ORDER BY follower DESC, numRecipes DESC 
+				SKIP $howManySkip LIMIT $howMany",
+				parameters("howManySkip", howManySkip, "howMany", howMany));
+			List<User> listOfUsers = new ArrayList<>();
+			while(result.hasNext())
+			{
+				Record r = result.next();
+				String firstName = r.get("firstName").asString();
+				String lastName = r.get("lastName").asString();
+				String picture = null;
+				if (r.get("picture") != NULL)
+				{
+					picture = r.get("picture").asString();
+				}
+				String username = r.get("username").asString();
+				String password = r.get("password").asString();
+				int role = r.get("role").asInt();
+				User user = new User(firstName, lastName, picture, username, 
+				  password, role);
+				user.setFollower(r.get("follower").asInt());
+				user.setFollowing(r.get("following").asInt());
+				user.setNumRecipes(r.get("numRecipes").asInt());
+				listOfUsers.add(user);
+			}
+			return listOfUsers;
+		});
+	}
+	return users;
+}
+\end{lstlisting}
 
 \section{Tests and Statistical Analysis}
 \subsection{Queries Analysis}
@@ -1363,7 +1483,6 @@ In this subsection the indices for both MongoDB and Neo4J will be considered, an
 	\item User Username (Neo4J)
 	\item Recipe Creation Time (MongoDB)
 	\item Comment Creation Time (MongoDB)
-	\item On attribute \emph{when} on relation ADDS (Neo4J)	
 \end{itemize}
 
 \subsubsection {Index on Recipe Title}

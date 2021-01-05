@@ -170,6 +170,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 return null;
             });
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -219,6 +223,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 return user;
             });
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return u;
     }
 
@@ -230,7 +238,7 @@ public class Neo4jDriver implements DatabaseDriver{
      */
     public Boolean isUserOneFollowedByUserTwo(String one, String two)
     {
-        Boolean relation;
+        Boolean relation = false;
         try(Session session = driver.session())
         {
             relation = session.readTransaction((TransactionWork<Boolean>) tx -> {
@@ -242,6 +250,10 @@ public class Neo4jDriver implements DatabaseDriver{
                     else
                         return true;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return relation;
     }
@@ -262,6 +274,10 @@ public class Neo4jDriver implements DatabaseDriver{
                     return 1;
                 });
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -278,6 +294,10 @@ public class Neo4jDriver implements DatabaseDriver{
                             " delete r",parameters("oldFollower",oldFollower,"oldFollowing",oldFollowing));
                     return 1;
                 });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -328,7 +348,7 @@ public class Neo4jDriver implements DatabaseDriver{
      */
     private int howMany(String query, String userOrRecipe)
     {
-        int howMany;
+        int howMany = 0;
 
         try(Session session = driver.session())
         {
@@ -337,6 +357,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 Record rec = r.next();
                 return rec.get(0).asInt();
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return howMany;
     }
@@ -349,7 +373,7 @@ public class Neo4jDriver implements DatabaseDriver{
      */
     public Boolean isThisRecipeLikedByOne(String recipeTitle, String one)
     {
-        Boolean relation;
+        Boolean relation = false;
         try(Session session = driver.session())
         {
             relation = session.readTransaction((TransactionWork<Boolean>) tx -> {
@@ -361,6 +385,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 else
                     return true;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return relation;
     }
@@ -381,6 +409,10 @@ public class Neo4jDriver implements DatabaseDriver{
                     return 1;
             });
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -397,6 +429,10 @@ public class Neo4jDriver implements DatabaseDriver{
                             " delete r",parameters("u",user,"t",recipeTitle));
                     return 1;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -441,6 +477,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 return true;
             } );
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -463,6 +503,10 @@ public class Neo4jDriver implements DatabaseDriver{
                         parameters("u", username, "f", newFirst, "l", newLast, "p", newPw, "pic", newPic));
                 return true;
             } );
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
@@ -535,35 +579,6 @@ public class Neo4jDriver implements DatabaseDriver{
     }
 
     /**
-     * It deletes a comment given the author and the creationTs
-     * @param author author of the target comment
-     * @param creationTs creation timestamp of the target comment
-     */
-    public void deleteComment(String author, Date creationTs)
-    {
-
-    }
-
-    /**
-     * Edit a user given its username
-     * @param username username of the target user
-     */
-    public void editProfile(String username)
-    {
-
-    }
-
-    /**
-     * It edit a comment given its title and its creation timestamp
-     * @param title
-     * @param creationTs
-     */
-    public void editComment(String title, Date creationTs)
-    {
-
-    }
-
-    /**
      * Give information about the user given the username (for more see getUserByUsername)
      * @param username  Given username
      * @return  The object username with the necessary information
@@ -571,7 +586,7 @@ public class Neo4jDriver implements DatabaseDriver{
     @Deprecated
     public User getBasicUserInfo(String username)
     {
-        User user;
+        User user = null;
         try(Session session = driver.session())
         {
             user = session.readTransaction((TransactionWork<User>) tx -> {
@@ -580,6 +595,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 Record rec = r.next();
                 return new User(rec.get(0).asString(), rec.get(1).asString(), rec.get(2).asString());
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return user;
     }
@@ -631,6 +650,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 return recipes;
             });
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return recipes;
     }
 
@@ -680,6 +703,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 }
                 return null;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return recipes;
     }
@@ -736,6 +763,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 return null;
             });
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return recipes;
     }
 
@@ -782,6 +813,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 }
                 return null;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return users;
     }
@@ -831,6 +866,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 }
                 return null;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return users;
     }
@@ -884,6 +923,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 return listOfUsers;
             });
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return users;
     }
 
@@ -936,6 +979,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 return listOfUsers;
             });
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return users;
     }
 
@@ -971,6 +1018,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 }
                 return listOfUsers;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return users;
     }
@@ -1015,6 +1066,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 }
                 return u;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return user;
     }
@@ -1085,6 +1140,10 @@ public class Neo4jDriver implements DatabaseDriver{
                 }
                 return r;
             });
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         return recipes;
     }

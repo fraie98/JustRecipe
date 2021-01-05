@@ -27,22 +27,22 @@
             <Image url="@img/genericUser.png" />
          </image>
       </ImageView>
-      <Label fx:id="userSnapUsername" layoutX="-7.0" layoutY="14.0" maxWidth="220.0" prefHeight="35.0" prefWidth="220.0" style="-fx-alignment: center;" text="Username">
+      <Label fx:id="userSnapUsername" layoutX="-7.0" layoutY="14.0" maxWidth="220.0" prefHeight="35.0" prefWidth="220.0" style="-fx-alignment: center;">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label fx:id="userSnapFirstName" layoutX="122.0" layoutY="225.0" maxWidth="71.0" prefHeight="27.0" prefWidth="71.0" text="x">
+      <Label fx:id="userSnapFirstName" layoutX="122.0" layoutY="225.0" maxWidth="71.0" prefHeight="27.0" prefWidth="71.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="userSnapLastName" layoutX="123.0" layoutY="251.0" maxWidth="71.0" prefHeight="27.0" prefWidth="71.0" text="x">
+      <Label fx:id="userSnapLastName" layoutX="123.0" layoutY="251.0" maxWidth="71.0" prefHeight="27.0" prefWidth="71.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="userSnapFollower" layoutX="123.0" layoutY="278.0" maxWidth="70.0" prefHeight="27.0" prefWidth="70.0" text="x">
+      <Label fx:id="userSnapFollower" layoutX="123.0" layoutY="278.0" maxWidth="70.0" prefHeight="27.0" prefWidth="70.0">
          <font>
             <Font size="18.0" />
          </font>

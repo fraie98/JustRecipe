@@ -4,19 +4,12 @@ import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
-import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.AccessibleAction;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
-import java.util.Date;
 
 /**
  * Controller for the single comment
@@ -40,8 +33,6 @@ public class CommentController {
     {
         appSession = Session.getInstance();
         commentTextArea.setEditable(false);
-        commentDeleteButton.setOnAction(mouseEvent -> deleteButtonAction());
-        commentModifyButton.setOnAction(actionEvent -> editButtonAction());
         commentSaveButton.setOnAction(actionEvent -> saveButtonAction());
     }
 
@@ -91,12 +82,12 @@ public class CommentController {
         commentTextArea.setText(comment.getText());
 
         if((appSession.getLoggedUser().getRole()!=0) || (appSession.getLoggedUser().getUsername().equals(comment.getAuthorUsername())))
-            commentDeleteButton.setOnMouseClicked(mouseEvent -> Neo4jDriver.getInstance().deleteComment(comment.getAuthorUsername(),comment.getCreationTime()));
+            commentDeleteButton.setOnAction(mouseEvent -> deleteButtonAction());
         else
             commentDeleteButton.setVisible(false);
 
         if(appSession.getLoggedUser().getUsername().equals(comment.getAuthorUsername()))
-            commentModifyButton.setOnMouseClicked(mouseEvent -> Neo4jDriver.getInstance().editComment(comment.getAuthorUsername(),comment.getCreationTime()));
+            commentModifyButton.setOnAction(actionEvent -> editButtonAction());
         else
             commentModifyButton.setVisible(false);
     }
