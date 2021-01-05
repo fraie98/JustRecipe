@@ -57,16 +57,18 @@
 \contentsline {subsubsection}{Get the username of the most versatile user}{29}%
 \contentsline {subsubsection}{Most common recipe categories}{29}%
 \contentsline {subsubsection}{Last comments}{29}%
-\contentsline {section}{\numberline {3.6}Tests and Statistical Analysis}{30}%
-\contentsline {subsection}{\numberline {3.6.1}Queries Analysis}{30}%
-\contentsline {subsection}{\numberline {3.6.2}Index Analysis}{30}%
-\contentsline {subsubsection}{Index on Recipe Title}{31}%
-\contentsline {subsubsection}{Index on User Username}{31}%
-\contentsline {subsubsection}{Index on Recipe Creation Time}{31}%
-\contentsline {subsubsection}{Index on Comment Creation Time}{31}%
-\contentsline {chapter}{\numberline {4}User Manual}{33}%
-\contentsline {section}{\numberline {4.1}How To Configure The System}{33}%
-\contentsline {section}{\numberline {4.2}How To Launch The Application}{33}%
-\contentsline {section}{\numberline {4.3}Login And Registration}{34}%
-\contentsline {section}{\numberline {4.4}Homepage, Discovery and First Steps}{35}%
-\contentsline {section}{\numberline {4.5}User Profile}{39}%
+\contentsline {subsubsection}{Suggested recipes}{30}%
+\contentsline {subsubsection}{Most followed and active users}{31}%
+\contentsline {section}{\numberline {3.6}Tests and Statistical Analysis}{31}%
+\contentsline {subsection}{\numberline {3.6.1}Queries Analysis}{31}%
+\contentsline {subsection}{\numberline {3.6.2}Index Analysis}{31}%
+\contentsline {subsubsection}{Index on Recipe Title}{32}%
+\contentsline {subsubsection}{Index on User Username}{32}%
+\contentsline {subsubsection}{Index on Recipe Creation Time}{32}%
+\contentsline {subsubsection}{Index on Comment Creation Time}{33}%
+\contentsline {chapter}{\numberline {4}User Manual}{34}%
+\contentsline {section}{\numberline {4.1}How To Configure The System}{34}%
+\contentsline {section}{\numberline {4.2}Login And Registration}{35}%
+\contentsline {section}{\numberline {4.3}Homepage, Discovery and First Steps}{36}%
+\contentsline {section}{\numberline {4.4}User Profile}{41}%
+\contentsline {section}{\numberline {4.5}How To Handle A Recipe}{43}%
