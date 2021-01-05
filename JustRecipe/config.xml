@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters>
-	<mongoIp>127.0.0.1</mongoIp>
-	<mongoPort>27017</mongoPort>
+	<mongoFirstIp>172.16.3.157</mongoFirstIp>
+	<mongoFirstPort>27020</mongoFirstPort>
+	<mongoSecondIp>172.16.3.107</mongoSecondIp>
+	<mongoSecondPort>27020</mongoSecondPort>
+	<mongoThirdIp>172.16.3.108</mongoThirdIp>
+	<mongoThirdPort>27020</mongoThirdPort>
 	<mongoUsername></mongoUsername>
 	<mongoPassword></mongoPassword>
 	<mongoDbName>justrecipe</mongoDbName>
-	<neo4jIp>127.0.0.1</neo4jIp>
+	<neo4jIp>172.16.3.107</neo4jIp>
 	<neo4jPort>7687</neo4jPort>
 	<neo4jUsername>neo4j</neo4jUsername>
 	<neo4jPassword>justrecipe</neo4jPassword>

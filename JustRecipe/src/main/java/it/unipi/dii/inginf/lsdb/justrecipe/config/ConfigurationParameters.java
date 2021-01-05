@@ -5,8 +5,12 @@ package it.unipi.dii.inginf.lsdb.justrecipe.config;
  * There is no need to modify this value, so there are only the getters methods
  */
 public class ConfigurationParameters {
-    private String mongoIp;
-    private int mongoPort;
+    private String mongoFirstIp;
+    private int mongoFirstPort;
+    private String mongoSecondIp;
+    private int mongoSecondPort;
+    private String mongoThirdIp;
+    private int mongoThirdPort;
     private String mongoUsername;
     private String mongoPassword;
     private String mongoDbName;
@@ -15,12 +19,28 @@ public class ConfigurationParameters {
     private String neo4jUsername;
     private String neo4jPassword;
 
-    public String getMongoIp() {
-        return mongoIp;
+    public int getMongoFirstPort() {
+        return mongoFirstPort;
     }
 
-    public int getMongoPort() {
-        return mongoPort;
+    public int getMongoSecondPort() {
+        return mongoSecondPort;
+    }
+
+    public int getMongoThirdPort() {
+        return mongoThirdPort;
+    }
+
+    public String getMongoFirstIp() {
+        return mongoFirstIp;
+    }
+
+    public String getMongoSecondIp() {
+        return mongoSecondIp;
+    }
+
+    public String getMongoThirdIp() {
+        return mongoThirdIp;
     }
 
     public String getMongoUsername() {
