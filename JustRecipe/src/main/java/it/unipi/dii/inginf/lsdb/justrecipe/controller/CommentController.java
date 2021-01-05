@@ -91,6 +91,7 @@ public class CommentController {
         else{
             commentModifyButton.setVisible(false);
             commentSaveButton.setVisible(false);
+
         }
     }
 }
