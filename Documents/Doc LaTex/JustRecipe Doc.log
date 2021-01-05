@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  5 JAN 2021 16:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  5 JAN 2021 18:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -138,27 +138,6 @@ Package caption Info: Standard document class detected.
 \sf@top=\skip52
 \sf@bottom=\skip53
 )
-(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
-(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-02-14 L3 programming layer (loader) 
-
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count190
-\l__pdf_internal_box=\box45
-))
-(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2020-02-14 L3 Experimental document command parser
-\l__xparse_current_arg_int=\count191
-\g__xparse_grabber_int=\count192
-\l__xparse_m_args_int=\count193
-\l__xparse_v_nesting_int=\count194
-)
-Package: lipsum 2019/01/02 v2.2 150 paragraphs of Lorem Ipsum dummy text
-
-(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex
-File: lipsum.ltd.tex 2019/01/02 v2.2 The Lorem ipsum dummy text
-))
 (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
 \every@verbatim=\toks18
@@ -179,17 +158,17 @@ Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 \col@sep=\dimen154
-\ar@mcellbox=\box46
+\ar@mcellbox=\box45
 \extrarowheight=\dimen155
 \NC@list=\toks20
 \extratabsurround=\skip54
 \backup@length=\skip55
-\ar@cellbox=\box47
+\ar@cellbox=\box46
 )
 \everycr=\toks21
 \minrowclearance=\skip56
 )
-\rownum=\count195
+\rownum=\count190
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
 Package xcolor Info: Model `RGB' extended on input line 1364.
@@ -201,24 +180,24 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count196
-\lst@gtempboxa=\box48
+\lst@mode=\count191
+\lst@gtempboxa=\box47
 \lst@token=\toks22
-\lst@length=\count197
+\lst@length=\count192
 \lst@currlwidth=\dimen156
-\lst@column=\count198
-\lst@pos=\count199
+\lst@column=\count193
+\lst@pos=\count194
 \lst@lostspace=\dimen157
 \lst@width=\dimen158
-\lst@newlines=\count266
-\lst@lineno=\count267
+\lst@newlines=\count195
+\lst@lineno=\count196
 \lst@maxwidth=\dimen159
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-\c@lstnumber=\count268
-\lst@skipnumbers=\count269
-\lst@framebox=\box49
+\c@lstnumber=\count197
+\lst@skipnumbers=\count198
+\lst@framebox=\box48
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2019/09/10 1.8c listings configuration
@@ -233,6 +212,11 @@ File: lstlang1.sty 2019/09/10 1.8c listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count199
+\l__pdf_internal_box=\box49
 )
 (./JustRecipe Doc.aux)
 \openout1 = `"JustRecipe Doc.aux"'.
@@ -289,16 +273,16 @@ LaTeX Font Info:    ... okay on input line 105.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count270
+\scratchcounter=\count266
 \scratchdimen=\dimen160
 \scratchbox=\box50
-\nofMPsegments=\count271
-\nofMParguments=\count272
+\nofMPsegments=\count267
+\nofMParguments=\count268
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count273
+\MPscratchCnt=\count269
 \MPscratchDim=\dimen161
-\MPnumerator=\count274
-\makeMPintoPDFobject=\count275
+\MPnumerator=\count270
+\makeMPintoPDFobject=\count271
 \everyMPtoPDFconversion=\toks24
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -313,7 +297,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count276
+\c@lstlisting=\count272
 <img/unipi.png, id=1, 1204.5pt x 1229.59375pt>
 File: img/unipi.png Graphic file (type png)
 <use img/unipi.png>
@@ -611,10 +595,10 @@ Package pdftex.def Info: img/user_manual/editRecipe.png  used on input line 182
 >] [44 <./img/user_manual/editrecipe.png>] [45]
 (./JustRecipe Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 8120 strings out of 481239
- 124051 string characters out of 5920376
- 986302 words of memory out of 5000000
- 23272 multiletter control sequences out of 15000+600000
+ 7565 strings out of 481239
+ 108336 string characters out of 5920376
+ 877350 words of memory out of 5000000
+ 22731 multiletter control sequences out of 15000+600000
  548846 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  50i,17n,60p,890b,2165s stack positions out of 5000i,500n,10000p,200000b,80000s
