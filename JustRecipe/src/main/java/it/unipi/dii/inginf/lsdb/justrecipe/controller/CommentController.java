@@ -69,7 +69,7 @@ public class CommentController {
      */
     public void saveButtonAction(){
         if(!commentTextArea.isEditable()){
-            Utils.showErrorAlert("You have first to press the 'modify' button!");
+            Utils.showInfoAlert("You have first to press the 'modify' button!");
             return;
         }
         comment.setText(commentTextArea.getText());
