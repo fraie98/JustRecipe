@@ -8,9 +8,10 @@ public class Session {
     {
         if(instance==null)
             instance = new Session();
-
         return instance;
     }
+
+    private Session () {}
 
     public static void setLoggedUser(User loggedUser) {
         instance.loggedUser = loggedUser;

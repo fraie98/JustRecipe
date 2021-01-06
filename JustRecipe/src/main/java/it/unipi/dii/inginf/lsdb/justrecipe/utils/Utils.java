@@ -158,7 +158,8 @@ public class Utils {
     public static List<String> fromStringToList (String string)
     {
         List<String> list = new ArrayList<>();
-        list = Arrays.asList(string.split(","));
+        if (string != null)
+            list = Arrays.asList(string.split(","));
         return list;
     }
 
@@ -169,6 +170,9 @@ public class Utils {
      */
     public static String fromDateToString (Date date)
     {
+        if (date == null)
+            return null;
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(date);
     }
@@ -310,7 +314,6 @@ public class Utils {
             CommentController commentController =
                     (CommentController) loader.getController();
             commentController.setComment(comment, recipe);
-//            commentController.setRecipeName(recipeName);                                                              //DEBUG
         } catch (IOException e) {
             e.printStackTrace();
         }
