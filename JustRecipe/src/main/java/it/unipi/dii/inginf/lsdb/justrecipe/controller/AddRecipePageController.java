@@ -105,27 +105,50 @@ public class AddRecipePageController {
                 ts = recipe.getCreationTime();
             String creator = appSession.getLoggedUser().getUsername();
 
-            int calo, fat, carbs, proteins;
+            int calo=0;
+            int fat = 0;
+            int carbs = 0;
+            int proteins = 0;
 
             if(addCal.getText().isEmpty())
                 calo = -1;
             else
-                calo = Integer.parseInt(addCal.getText());
+                try {
+                    calo = Integer.parseInt(addCal.getText());
+                }catch (NumberFormatException e){
+                    Utils.showErrorAlert("Error!\nThe Calories field must conteins only numbers!");
+                    return;
+                }
 
             if(addFat.getText().isEmpty())
                 fat = -1;
             else
-                fat = Integer.parseInt(addFat.getText());
+                try {
+                    fat = Integer.parseInt(addFat.getText());
+                }catch (NumberFormatException e){
+                    Utils.showErrorAlert("Error!\nThe Fat field must conteins only numbers!");
+                    return;
+                }
 
             if(addCarbs.getText().isEmpty())
                 carbs = -1;
             else
-                carbs = Integer.parseInt(addCarbs.getText());
+                try {
+                    carbs = Integer.parseInt(addCarbs.getText());
+                }catch (NumberFormatException e){
+                    Utils.showErrorAlert("Error!\nThe Carbs field must conteins only numbers!");
+                    return;
+                }
 
             if(addProt.getText().isEmpty())
                 proteins = -1;
             else
-                proteins = Integer.parseInt(addProt.getText());
+                try {
+                    proteins = Integer.parseInt(addProt.getText());
+                }catch (NumberFormatException e){
+                    Utils.showErrorAlert("Error!\nThe Protein field must conteins only numbers!");
+                    return;
+                }
 
             System.out.println(calo + " " + fat + " " + carbs +" "+ proteins);
 

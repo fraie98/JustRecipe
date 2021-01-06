@@ -187,7 +187,7 @@ public class Utils {
         alert.setContentText(text);
         alert.setHeaderText("Ops.. Something went wrong..");
         alert.setTitle("Error");
-        ImageView imageView = new ImageView(new Image("/img/emoticon-cry.png"));
+        ImageView imageView = new ImageView(new Image("/img/error.png"));
         alert.setGraphic(imageView);
         alert.show();
     }

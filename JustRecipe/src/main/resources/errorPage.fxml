@@ -6,12 +6,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="304.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="115.0" fitWidth="131.0" layoutX="196.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/emoticon-cry.png" />
+            <Image url="@img/error.png" />
          </image>
       </ImageView>
       <Text fill="#ff0707" layoutX="40.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Service is not available" wrappingWidth="427.10546875">
