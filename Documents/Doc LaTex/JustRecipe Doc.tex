@@ -288,12 +288,13 @@ The non-functional requirements of the applications are described in the followi
 \end{itemize}
 \newpage
 \subsection{Actors and Use Cases}
-The use case diagram of the application is described in the figure 2.1
+The use case diagram of the application is described in the figure \ref{img: Use Case Diagram}
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[scale=0.4]{img/UseCaseDiagram.png}
 	\caption{Use Case Diagram}
+	\label {img: Use Case Diagram}
 \end{figure}
 
 \noindent Some observations on the diagram are necessary:
@@ -321,9 +322,10 @@ Let analyze the UML Class Diagram. There are three main entities: User, Comment,
 	\centering
 	\includegraphics[scale=0.5]{img/ClassDiagram_generaliz.png}
 	\caption{UML Analysis Classes Diagram with generalization unsolved}
+	\label {img: UML1}
 \end{figure}
 
-\noindent Observing the figure 2.2 it's possible to understand that we can resolve the generalization putting an attribute in the entity \emph{User}. It is an integer and we call it \emph{role}: if it's a \emph{Normal User} role is 0; if \emph{Moderator} then 1; if \emph{Administrator} then 2.
+\noindent Observing the figure \ref{img: UML1} it's possible to understand that we can resolve the generalization putting an attribute in the entity \emph{User}. It is an integer and we call it \emph{role}: if it's a \emph{Normal User} role is 0; if \emph{Moderator} then 1; if \emph{Administrator} then 2.
 
 \begin{figure}[htpb]
 	\centering
@@ -480,6 +482,7 @@ The Graph database is the one that handles the social part of the application. T
 	\centering
 	\includegraphics[scale=0.6]{img/graphDbModel.png}
 	\caption{Example of GraphDB nodes and relationships}
+	\label{img: Example of GraphDB nodes and relationships}
 \end{figure}
 
 \noindent The GraphDB relationships are:
@@ -493,7 +496,7 @@ The Graph database is the one that handles the social part of the application. T
 	\item \textbf{Likes}: if the user \emph{A} has liked the recipe \emph{R}, then we have a relationship \emph{:LIKES} from \emph{A} to \emph{R} ($A \rightarrow R$).
 \end{itemize}  
 
-\noindent All the relationships that starts from a node \emph{X} are deleted if \emph{X} has deleted, furthermore if \emph{X} is a user, also the recipes that he has added will be eliminated. In figure 2.4 we can see an example of the nodes, the relationships and the attributes.
+\noindent All the relationships that starts from a node \emph{X} are deleted if \emph{X} has deleted, furthermore if \emph{X} is a user, also the recipes that he has added will be eliminated. In figure \ref{img: Example of GraphDB nodes and relationships} we can see an example of the nodes, the relationships and the attributes.
 
 
 \subsection{Data Among Databases}
@@ -505,12 +508,13 @@ Because of the large amount of information to deal with, it is important to spli
 
 \noindent The reason why we store recipes on both databases is because we want to retrieve social network information from it (likes, suggested recipes based on who added it, and so on). Hence we store on Graph DB a part of the recipe information, and the whole information about recipes on DocumentDB. This partial view of the recipe is the so-called \emph{recipe snapshot}. Also for the user exist a snapshot but it exists for implementation reason, in fact in this case all the information about the user are on GraphDB but only a part is in the snapshot. Generally speaking a snapshot is a partial view of an entity (User or Recipe). When the user clicks on the snapshot then he will see all the information (so for what concerns the recipes, the snapshot is done with GraphDB and the detailed page with DocumentDB).
 
-\noindent We can see the storing strategy also in figure 2.5.
+\noindent We can see the storing strategy also in figure \ref{img: Storing Strategy}.
 
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[scale=0.5]{img/UML_colorato.png}
 	\caption{Storing Strategy}
+	\label{img: Storing Strategy}
 \end{figure}
 
 \noindent Another important detail on the Data Model is that we have chosen MongoDB as DBMS for the DocumentDB and Neo4j as DBMS for the GraphDB.
@@ -519,7 +523,7 @@ Because of the large amount of information to deal with, it is important to spli
 In our application some of the most important requirements are the \emph{Availability} and the \emph{Consistency}. Thus is very important to us to have a distributed system in order to ensure:
 \begin{itemize}
 	\item An high availability, due to the fact that we have more servers (in our case we have 3 virtual machines provided by University of Pisa\footnote{172.16.3.157 - 172.16.3.107 -  172.16.3.108}) and so we haven't the single point of failure issue.
-	\item An high consistency, because, even if the data on a server would be corrupted (for a server malfunction for instance), we have an update replica that maintains the correct data (see also 2.5.2).
+	\item An high consistency, because, even if the data on a server would be corrupted (for a server malfunction for instance), we have an update replica that maintains the correct data.
 	\item A low latency, in fact thanks to sharding and replicas the load is balanced among the cluster servers. We have to remark that this is not always true because, in order to maintain consistency, it is possible to have a longer latency with respect to the one that we would achieve without consistency (replicas must be updated and this requires time).
 \end{itemize}
 
@@ -622,6 +626,37 @@ The cases that can lead to these inconsistencies are the following:
 The implementation code is divided into two main modules: RecipeReader and JustRecipe.
  \begin{itemize}
 	\item \emph{RecipeReader}:  is a program we wrote to get our initial dataset, extracting the information that interests us from the two initial datasets (see chapter 1). To make sense of all the recipes that were initially preloaded, 20 users were entered and the recipes were randomly divided among them.
+The user's list will be shown in the table \ref{table:list of users}.
+\begin{table}[]
+\centering
+\caption{List of initial users}
+\label{table:list of users}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\rowcolor[HTML]{000000} 
+{\color[HTML]{FFFFFF} First name} & {\color[HTML]{FFFFFF} Last name} & {\color[HTML]{FFFFFF} Username} & {\color[HTML]{FFFFFF} Password} & {\color[HTML]{FFFFFF} Role} \\ \hline
+Oliver & Smith & oliver.smith & oliver.smith & Administrator \\ \hline
+Jack & Jones & jack.jones & jack.jones & Moderator \\ \hline
+Harry & Williams & harry.williams & harry.williams & User \\ \hline
+Jacob & Brown & jacob.brown & jacob.brown & User \\ \hline
+Charlie & Taylor & charlie.taylor & charlie.taylor & User \\ \hline
+Thomas & Davies & thomas.davies & thomas.davies & User \\ \hline
+George & Wilson & george.wilson & george.wilson & User \\ \hline
+Oscar & Evans & oscar.evans & oscar.evans & User \\ \hline
+James & Thomas & james.thomas & james.thomas & User \\ \hline
+William & Roberts & william.roberts & william.roberts & User \\ \hline
+Amelia & Murphy & amelia.murphy & amelia.murphy & User \\ \hline
+Olivia & Johnson & olivia.johnson & olivia.johnson & User \\ \hline
+Isla & Williams & isla.williams & isla.williams & User \\ \hline
+Emily & Walsh & emily.walsh & emily.walsh & User \\ \hline
+Poppy & Taylor & poppy.taylor & poppy.taylor & User \\ \hline
+Ava & Miller & ava.miller & ava.miller & User \\ \hline
+Isabella & Byrne & isabella.byrne & isabella.byrne & User \\ \hline
+Jessica & Evans & jessica.evans & jessica.evans & User \\ \hline
+Lily & Rodriguez & lily.rodriguez & lily.rodriguez & User \\ \hline
+Sophie & Roberts & sophie.roberts & sophie.roberts & User \\ \hline
+\end{tabular}
+\end{table}
 	\item \emph{JustRecipe}:  is the actual application, whose implementation will be analyzed in more details in the next sections. 
 \end{itemize}
 \section{Main Packages and Classes}
@@ -706,7 +741,7 @@ Constraints have been added in the two databases, for the recipe title and for t
 	ON (r:Recipe) 
 	ASSERT ( r.title) IS NODE KEY	
 	\end{lstlisting} 
-	\item Constraint on the \emph{username} of the user: 
+	\item Constraint on the \emph{username} of the user (on Neo4j): 
 	\lstset{ language=java}
 	\begin{lstlisting}
 	CREATE CONSTRAINT username_constraint 
@@ -714,6 +749,8 @@ Constraints have been added in the two databases, for the recipe title and for t
 	ASSERT (u.username) IS NODE KEY	
 	\end{lstlisting} 
 \end{itemize}
+\noindent As previously mentioned, the Community Edition of Neo4j is used in the cluster on the virtual machines, because the Enterprise version is not free. This implies that on the virtual cluster we cannot define the constraints, and therefore not all functions work correctly, because they are based (as it should be) on the use of constraints.
+
 \section{Most Relevant Queries}
 In the following section will be presented the most relevant query performed with MongoDB and Neo4J. 
 \noindent Some important point must be underlined:
@@ -1046,10 +1083,11 @@ A query who returns all the recipes between two dates, first day of the week and
 
 \newpage
 \subsection{Neo4J}
-Now we will talk about the queries on Neo4j, but first we need to consider their domain-specific to graph-centric translation.
+Now we will talk about the queries on Neo4j, but first we need to consider their domain-specific to graph-centric translation in the table \ref{table: Graph-Centric Query and Domain-Specific Query}
 \begin{table}[htpb]
 \caption{Graph-Centric Query and Domain-Specific Query}
 \centering
+\label {table: Graph-Centric Query and Domain-Specific Query}
 \begin{tabular}{|l|l|}
 \hline
 \rowcolor[HTML]{000000} 
@@ -1060,11 +1098,12 @@ Now we will talk about the queries on Neo4j, but first we need to consider their
 \end{tabular}
 \end{table}
 
-\noindent A partial example of a graph (screenshot made during the execution of the program) is shown in the figure 3.1 , in order to have more clear the concepts that will be expressed later in the implementation of the queries.
+\noindent A partial example of a graph (screenshot made during the execution of the program) is shown in the figure \ref{img: Partial example of the graph in Neo4j}, in order to have more clear the concepts that will be expressed later in the implementation of the queries.
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[scale=0.7]{img/graphScreen.png}
 	\caption{Partial example of the graph in Neo4j}
+	\label{img: Partial example of the graph in Neo4j}
 \end{figure}
 
 
@@ -1443,11 +1482,12 @@ public List<User> searchMostFollowedAndActiveUsers (final int howManySkip,
 
 \section{Tests and Statistical Analysis}
 \subsection{Queries Analysis}
-The most queries consist in read operations and so we can say that the application is read-heavy. In the table 3.2 we can see the frequency of each query. 
+The most queries consist in read operations and so we can say that the application is read-heavy. In the table \ref{table: Queries Frequency} we can see the frequency of each query. 
 
 \begin{table}[htpb]
 	\centering
 	\caption{Queries Frequency}
+	\label{table: Queries Frequency}
 	\begin{tabular}{|c|c|lll}
 		\cline{1-2}
 		\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query} &
@@ -1475,7 +1515,7 @@ The most queries consist in read operations and so we can say that the applicati
 
 \subsection{Index Analysis}
 
-In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand their benefit. For each index will be considered the queries that are in some way affected by its presence. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. We have to underline that in using \emph{PROFILE} we have to neglect the first value of execution time, because this is affected by the time that Neo4J spends in executing the statistical information and he graphical output given by the command, from the second execution the time execution is reliable (the most of the previous information are already computed). For MongoDB, we used the \emph{explain()}.
+In this subsection the indices for both MongoDB and Neo4J will be considered, and statistical tests will be performed to understand their benefit. For each index will be considered the queries that are in some way affected by its presence. For performance measures of Neo4j queries, the keyword \emph{PROFILE} was used at the beginning of the query, which allows you to see the steps behind the execution of the query. We have to underline that in using \emph{PROFILE} we have to neglect the first value of execution time, because this is affected by the time that Neo4J spends in executing the statistical information and the graphical output given by the command, from the second execution the time execution is reliable (the most of the previous information are already computed). For MongoDB, we used the \emph{explain()}.
 
 \noindent The following index will be analyzed:
 \begin{itemize}
@@ -1492,10 +1532,11 @@ Since a constraint on the recipe title was needed, and this was implemented with
 The constraint on the username is also inserted through an index, so the index on the username is also mandatory.
 
 \subsubsection{Index on Recipe Creation Time}
-A study of performance has been completed, the results are available in table 3.2. The table displays that the index on the creation time field is a good index, which improve the performance of the application, by reducing the number of document and keys examined and reducing the execution time, for all the query considered. All the following (the ones in table 3.2) query has been tried as they could appear during the natural execution of the application. All of this query are sorted by the creation time (descending) but the first one, this consider the recipes added by a user in a date interval. This results are so good that the index tested has been implemented on MongoDB.
+A study of performance has been completed, the results are available in table \ref{table: Test on creationTime Index}. The table displays that the index on the creation time field is a good index, which improve the performance of the application, by reducing the number of document and keys examined and reducing the execution time, for all the query considered. All the following query has been tried as they could appear during the natural execution of the application. All of this query are sorted by the creation time (descending) but the first one, this consider the recipes added by a user in a date interval. This results are so good that the index tested has been implemented on MongoDB.
 
 \begin{table}[htpb]
 	\caption{Test on creationTime Index}
+	\label{table: Test on creationTime Index} 
 	\centering
 	\begin{tabular}{|c|c|c|l}
 		\cline{1-3}
@@ -1510,11 +1551,12 @@ A study of performance has been completed, the results are available in table 3.
 
 
 \subsubsection{Index on Comment Creation Time}
-A possible index is the one on the creation time of the comment, this index affect the query \emph{Last Comments}. In order to see if the index must be added or not, let analyze the result of the index analysis for this index on that query (see table 3.3)
+A possible index is the one on the creation time of the comment, this index affect the query \emph{Last Comments}. In order to see if the index must be added or not, let analyze the result of the index analysis for this index on that query (see table \ref{table: Statistics about comment creation time index})
 
 \begin{table}[htpb]
 	\centering
 	\caption{Statistics about comment creation time index}
+	\label{table: Statistics about comment creation time index}
 		\begin{tabular}{lllll}
 			\cline{1-3}
 			\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
@@ -1524,7 +1566,7 @@ A possible index is the one on the creation time of the comment, this index affe
 			\\ \cline{1-3}
 			\multicolumn{1}{|l|}{Last Comments} &
 			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 284ms\\ TotalKeysExamined: 0\\ TotalDocsExamined: 45352\end{tabular}} &
-			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 166ms\\ TotalKeysExamined: 45383\\ TotalDocsExamined: 45352\end{tabular}} &
+			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 290ms\\ TotalKeysExamined: 45383\\ TotalDocsExamined: 45352\end{tabular}} &
 			&
 			\\ \cline{1-3}
 		\end{tabular}
