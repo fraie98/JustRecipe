@@ -1,4 +1,5 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.model;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,13 +18,11 @@ public class Recipe {
     private String authorUsername;
     private List<Comment> comments;
 
-    //Blank constructor
     public Recipe(){}
 
-    //Constructor
     public Recipe(String title, String instructions, List<String> ingredients, List<String> categories,
-                  int calories, int fat, int protein, int carbs, Date creationTime, String picture, String authorUsername,
-                  List<Comment> comments)
+                  int calories, int fat, int protein, int carbs, Date creationTime, String picture,
+                  String authorUsername, List<Comment> comments)
     {
         this.title = title;
         this.picture = picture;
@@ -55,9 +54,6 @@ public class Recipe {
         this( title, instructions, ingredients, categories, calories, fat, protein, carbs,
                 creationTime, picture, authorUsername, new ArrayList<Comment>());
     }
-
-
-    //Getters
 
     public String getTitle() {
         return title;
@@ -107,7 +103,7 @@ public class Recipe {
         return comments;
     }
 
-    //Setters
+
     public void setTitle(String title) {
         this.title = title;
     }

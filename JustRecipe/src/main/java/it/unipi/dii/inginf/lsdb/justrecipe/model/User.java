@@ -9,11 +9,10 @@ public class User {
     private int follower;
     private int following;
     private int numRecipes;
-    private int role; // 0:user, 1:moderator, 2:admin
+    private int role; // 0: user, 1: moderator, 2: admin
 
     public User(){}
 
-    //Constructor
     public User(String firstName, String lastName, String picture, String username, String password, int role) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +41,6 @@ public class User {
     }
 
 
-    //Getters
     public String getFirstName() {
         return firstName;
     }
@@ -79,7 +77,7 @@ public class User {
         return numRecipes;
     }
 
-    //Setters
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

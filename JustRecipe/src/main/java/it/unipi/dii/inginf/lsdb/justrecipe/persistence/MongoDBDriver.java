@@ -23,7 +23,6 @@ import static com.mongodb.client.model.Aggregates.*;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Projections.*;
 import static com.mongodb.client.model.Projections.include;
-import static com.mongodb.client.model.Sorts.ascending;
 import static com.mongodb.client.model.Sorts.descending;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -93,7 +92,7 @@ public class MongoDBDriver implements DatabaseDriver{
             ConnectionString connectionString = new ConnectionString(string);
             MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                     .applyConnectionString(connectionString)
-                    .readPreference(ReadPreference.primary())
+                    .readPreference(ReadPreference.secondaryPreferred())
                     .retryWrites(true)
                     .writeConcern(WriteConcern.W3)
                     .build();
@@ -200,7 +199,6 @@ public class MongoDBDriver implements DatabaseDriver{
             Bson updateOperation = new Document("$set", doc);
 
             collection.updateOne(new Document("title", r.getTitle()), updateOperation);
-//        collection.replaceOne(Filters.eq("title", r.getTitle()), doc);
             return true;
         }
         catch (Exception ex)
@@ -277,12 +275,9 @@ public class MongoDBDriver implements DatabaseDriver{
     public Recipe getRecipeFromTitle(String title){
         try {
             Recipe recipe = null;
-
             Gson gson = new Gson();
-            Type recipeType = new TypeToken<Recipe>() {
-            }.getType();
             Document myDoc = (Document) collection.find(eq("title", title)).first();
-            recipe = gson.fromJson(gson.toJson(myDoc), recipeType);
+            recipe = gson.fromJson(gson.toJson(myDoc), Recipe.class);
             return recipe;
         }
         catch (Exception ex)

@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 
 public class UserSnapshotController {
     private Neo4jDriver neo4jDriver;
@@ -24,6 +23,9 @@ public class UserSnapshotController {
 
     private User user;
 
+    /**
+     * Initialization functions
+     */
     public void initialize()
     {
         neo4jDriver = Neo4jDriver.getInstance();
@@ -32,7 +34,7 @@ public class UserSnapshotController {
     }
 
     /**
-     * Set the snapshot eith the given user
+     * Set the snapshot with the given user
      * @param u  Object user with the given information necessary to the snap
      */
     public void setUserSnap(User u)
@@ -52,15 +54,12 @@ public class UserSnapshotController {
 
     /**
      * Handle the click on the snap and it changes page going in the profile page of the user of the clicked snap
-     * @param mouseEvent
+     * @param mouseEvent    Event that leads to the handler
      */
     private void handleClickOnSnap(MouseEvent mouseEvent)
     {
-        try
-        {
-            ProfilePageController profilePageController = (ProfilePageController)
-                    Utils.changeScene("/profilePage.fxml", mouseEvent);
-            profilePageController.setProfile(user);
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        ProfilePageController profilePageController = (ProfilePageController)
+                Utils.changeScene("/profilePage.fxml", mouseEvent);
+        profilePageController.setProfile(user);
     }
 }

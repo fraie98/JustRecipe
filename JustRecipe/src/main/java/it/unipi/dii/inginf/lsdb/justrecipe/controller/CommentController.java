@@ -29,6 +29,9 @@ public class CommentController {
     private Session appSession;
 
 
+    /**
+     * Initialization functions
+     */
     public void initialize ()
     {
         appSession = Session.getInstance();
@@ -91,7 +94,6 @@ public class CommentController {
         else{
             commentModifyButton.setVisible(false);
             commentSaveButton.setVisible(false);
-
         }
     }
 }

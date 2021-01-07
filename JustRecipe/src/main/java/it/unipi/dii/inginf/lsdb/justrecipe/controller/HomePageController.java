@@ -5,16 +5,12 @@ import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
-
-import java.awt.*;
 import java.util.List;
 
 public class HomePageController {
@@ -54,8 +50,8 @@ public class HomePageController {
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
         logoutPic.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
         page = 0;
-        nextButton.setOnMouseClicked(mouseEvent -> clickOnNext(mouseEvent));
-        previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious(mouseEvent));
+        nextButton.setOnMouseClicked(mouseEvent -> clickOnNext());
+        previousButton.setOnMouseClicked(mouseEvent -> clickOnPrevious());
         previousButton.setVisible(false); //in the first page it is not visible
     }
 
@@ -64,11 +60,9 @@ public class HomePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnProfImgToChangePage(MouseEvent mouseEvent){
-        try {
-            ProfilePageController profilePageController = (ProfilePageController)
-                    Utils.changeScene("/profilePage.fxml", mouseEvent);
-            profilePageController.setProfile(Session.getInstance().getLoggedUser());
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        ProfilePageController profilePageController = (ProfilePageController)
+                Utils.changeScene("/profilePage.fxml", mouseEvent);
+        profilePageController.setProfile(Session.getInstance().getLoggedUser());
     }
 
     /**
@@ -76,10 +70,7 @@ public class HomePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnLogoutImg(MouseEvent mouseEvent){
-        try {
-            WelcomePageController welcomePageController = (WelcomePageController)
-                Utils.changeScene("/welcome.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        Utils.changeScene("/welcome.fxml", mouseEvent);
     }
 
     /**
@@ -87,13 +78,13 @@ public class HomePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
-        try{
-            DiscoveryPageController discoveryPageController = (DiscoveryPageController)
-                    Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        Utils.changeScene("/discoveryPage.fxml", mouseEvent);
     }
 
-    private void clickOnPrevious(MouseEvent mouseEvent){
+    /**
+     * Function called when the user click on the previous button
+     */
+    private void clickOnPrevious(){
         Utils.removeAllFromPane(mainPage);
         page--;
         if (page < 1)
@@ -103,7 +94,10 @@ public class HomePageController {
                         HOW_MANY_SNAPSHOT_TO_SHOW, session.getLoggedUser().getUsername()));
     }
 
-    private void clickOnNext(MouseEvent mouseEvent){
+    /**
+     * Function called when the user click on the next button
+     */
+    private void clickOnNext(){
         Utils.removeAllFromPane(mainPage);
         page++;
         if (page > 0)

@@ -35,6 +35,9 @@ public class EditProfilePageController {
     @FXML private Label username;
     @FXML private ImageView profilePic;
 
+    /**
+     * Initialization functions
+     */
     public void initialize ()
     {
         neo4jDriver = Neo4jDriver.getInstance();
@@ -122,12 +125,13 @@ public class EditProfilePageController {
     private void clickOnSubmit()
     {
         String newPw = new String();
-        String newPic = null;   /* if I don't add a new pic then the correspondent
-                                 * field in neo4j will not be added because this String is null */
+        // If I don't add a new pic then the correspondent field in neo4j will not be added because this String is null
+        String newPic = null;
 
         if(editPw.getText().isEmpty() && confirmEditPw.getText().isEmpty()) // I don't wanna change the password
             newPw = neo4jDriver.getUserByUsername(username.getText()).getPassword();
-        else if(!editPw.getText().isEmpty() && !confirmEditPw.getText().isEmpty() && editPw.getText().equals(confirmEditPw.getText()))
+        else if(!editPw.getText().isEmpty() && !confirmEditPw.getText().isEmpty()
+                && editPw.getText().equals(confirmEditPw.getText()))
             newPw = editPw.getText();  // I wanna change the pw
         else
             Utils.showErrorAlert("The passwords don't match!");
@@ -164,7 +168,8 @@ public class EditProfilePageController {
         }
 
         // if the viewer is an admin, he's not watching his own edit page
-        if(appSession.getLoggedUser().getRole()==2 && !appSession.getLoggedUser().getUsername().equals(username.getText()))
+        if(appSession.getLoggedUser().getRole()==2
+                && !appSession.getLoggedUser().getUsername().equals(username.getText()))
             adminButton.setDisable(false);
     }
 
@@ -196,10 +201,7 @@ public class EditProfilePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
-        try{
-            HomePageController homePageController = (HomePageController)
-                    Utils.changeScene("/homepage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        Utils.changeScene("/homepage.fxml", mouseEvent);
     }
 
     /**
@@ -207,10 +209,7 @@ public class EditProfilePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnLogoutImg(MouseEvent mouseEvent){
-        try {
-            WelcomePageController welcomePageController = (WelcomePageController)
-                    Utils.changeScene("/welcome.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        Utils.changeScene("/welcome.fxml", mouseEvent);
     }
 
     /**
@@ -218,10 +217,7 @@ public class EditProfilePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
-        try{
-            DiscoveryPageController discoveryPageController = (DiscoveryPageController)
-                    Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("DiscoveryPageController is null!!!!");}
+        Utils.changeScene("/discoveryPage.fxml", mouseEvent);
     }
 
     /**

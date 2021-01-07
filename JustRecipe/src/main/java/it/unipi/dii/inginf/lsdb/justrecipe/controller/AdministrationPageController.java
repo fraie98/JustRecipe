@@ -1,6 +1,5 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.controller;
 
-import it.unipi.dii.inginf.lsdb.justrecipe.model.Comment;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Session;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
@@ -40,10 +39,11 @@ public class AdministrationPageController {
     private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
     private final int HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW = 20;
     private final int HOW_MANY_USER_SNAPSHOT_TO_SHOW = 20;
-    private final int HOW_MANY_MOST_COMMON_CATEGORIES_TO_SHOW = 5;
-    private final int HOW_MANY_SNAPSHOT_FOR_EACH_COMMON_CATEGORY = 4;
     private final int HOW_MANY_COMMENTS_TO_SHOW = 20;
 
+    /**
+     * Initialization functions
+     */
     public void initialize()
     {
         neo4jDriver = Neo4jDriver.getInstance();
@@ -92,7 +92,7 @@ public class AdministrationPageController {
     /**
      * Handle the click on the search button
      */
-    private  void clickOnSearchButton()
+    private void clickOnSearchButton()
     {
         Utils.removeAllFromPane(adminPageBox);
         if (String.valueOf(chooseQuery.getValue()).equals("Recipe title"))
@@ -139,11 +139,9 @@ public class AdministrationPageController {
      */
     private void clickOnAllRecipes()
     {
-
         Utils.removeAllFromPane(adminPageBox);
         List<Recipe> allRecipes = mongoDBDriver.searchAllRecipes(HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW*page, HOW_MANY_RECIPE_SNAPSHOT_TO_SHOW);
         Utils.addRecipesSnap(adminPageBox, allRecipes);
-
     }
 
     /**
@@ -151,7 +149,6 @@ public class AdministrationPageController {
      */
     private void clickOnAllComments()
     {
-
         Utils.removeAllFromPane(adminPageBox);
         List<List<Object>> objects = mongoDBDriver.searchAllComments(
                 HOW_MANY_COMMENTS_TO_SHOW*page, HOW_MANY_COMMENTS_TO_SHOW);
@@ -163,10 +160,7 @@ public class AdministrationPageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
-        try{
-            HomePageController homePageController = (HomePageController)
-                    Utils.changeScene("/homepage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        Utils.changeScene("/homepage.fxml", mouseEvent);
     }
 
     /**
@@ -174,10 +168,7 @@ public class AdministrationPageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnLogoutImg(MouseEvent mouseEvent){
-        try {
-            WelcomePageController welcomePageController = (WelcomePageController)
-                    Utils.changeScene("/welcome.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        Utils.changeScene("/welcome.fxml", mouseEvent);
     }
 
     /**
@@ -185,11 +176,9 @@ public class AdministrationPageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnProfImgToChangePage(MouseEvent mouseEvent){
-        try {
-            ProfilePageController profilePageController = (ProfilePageController)
-                    Utils.changeScene("/profilePage.fxml", mouseEvent);
-            profilePageController.setProfile(Session.getInstance().getLoggedUser());
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        ProfilePageController profilePageController = (ProfilePageController)
+                Utils.changeScene("/profilePage.fxml", mouseEvent);
+        profilePageController.setProfile(Session.getInstance().getLoggedUser());
     }
 
     /**
@@ -197,10 +186,7 @@ public class AdministrationPageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
-        try{
-            DiscoveryPageController discoveryPageController = (DiscoveryPageController)
-                    Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        Utils.changeScene("/discoveryPage.fxml", mouseEvent);
     }
 
     /**

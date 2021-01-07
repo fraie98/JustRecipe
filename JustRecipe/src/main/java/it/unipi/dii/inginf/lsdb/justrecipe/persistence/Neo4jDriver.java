@@ -4,8 +4,6 @@ import it.unipi.dii.inginf.lsdb.justrecipe.config.ConfigurationParameters;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.Recipe;
 import it.unipi.dii.inginf.lsdb.justrecipe.model.User;
 import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
-import org.bson.BsonMaximumSizeExceededException;
-import org.bson.conversions.Bson;
 import org.neo4j.driver.*;
 
 import java.util.*;
@@ -91,8 +89,6 @@ public class Neo4jDriver implements DatabaseDriver{
             if(r.getCarbs()!=-1)
                 query.put("carbs",r.getCarbs());
 
-            //System.out.println(query);
-
             session.writeTransaction((TransactionWork<Void>) tx -> {
                 tx.run( "UNWIND $props as rnew " +
                                 "MATCH (u:User{username:$name}) " +
@@ -108,7 +104,6 @@ public class Neo4jDriver implements DatabaseDriver{
         catch (Exception ex)
         {
             System.err.println("Error in adding a new recipe in Neo4J");
-            ex.printStackTrace();
             return false;
         }
     }
@@ -308,7 +303,7 @@ public class Neo4jDriver implements DatabaseDriver{
      */
     public int howManyFollower(String user)
     {
-        return howMany( "match (a:User)-[r:FOLLOWS]->(b:User{username:$placeholder}) return count(a)",user);
+        return howMany( "MATCH (a:User)-[r:FOLLOWS]->(b:User{username:$placeholder}) RETURN count(a)",user);
     }
 
     /**

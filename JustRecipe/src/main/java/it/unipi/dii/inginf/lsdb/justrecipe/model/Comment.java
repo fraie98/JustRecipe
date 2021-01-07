@@ -7,17 +7,12 @@ public class Comment {
     private String text;
     private Date creationTime;
 
-    //Constructors
-    public Comment(){}
-
     public Comment(String authorUsername, String text, Date creationTime) {
         this.authorUsername = authorUsername;
         this.text = text;
         this.creationTime = creationTime;
     }
 
-
-    //Getters
 
     public String getAuthorUsername() {
         return authorUsername;
@@ -31,7 +26,6 @@ public class Comment {
         return creationTime;
     }
 
-    //Setters
     public void setText(String text) {
         this.text = text;
     }

@@ -11,9 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import org.neo4j.driver.internal.InternalPath;
-
-import java.beans.EventHandler;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -41,8 +38,9 @@ public class AddRecipePageController {
     @FXML private Text titlePage;
     @FXML private ImageView iconOfTitlePage;
 
-
-
+    /**
+     * Initialization functions
+     */
     public void initialize ()
     {
         neo4jDriver = Neo4jDriver.getInstance();
@@ -52,7 +50,7 @@ public class AddRecipePageController {
         discoveryImg.setOnMouseClicked(mouseEvent -> clickOnDiscImgtoChangePage(mouseEvent));
         logoutImg.setOnMouseClicked(mouseEvent -> clickOnLogoutImg(mouseEvent));
         profileImg.setOnMouseClicked(mouseEvent -> clickOnProfileToChangePage(mouseEvent));
-        submit.setOnMouseClicked(mouseEvent -> submitNewRecipe(mouseEvent));
+        submit.setOnMouseClicked(mouseEvent -> submitNewRecipe());
         clear.setOnMouseClicked(mouseEvent -> clearAllFields());
     }
 
@@ -81,7 +79,7 @@ public class AddRecipePageController {
     /**
      * Control the fields and add new recipe in the DBs
      */
-    private void submitNewRecipe(MouseEvent mouseEvent)
+    private void submitNewRecipe()
     {
         // If I write nothing in the field then getText return an empty String (not null!)
         if(addTitle.getText().isEmpty() || addIngr.getText().isEmpty() || addInstructions.getText().isEmpty())
@@ -91,13 +89,7 @@ public class AddRecipePageController {
         else
         {
             List<String> ingr = Arrays.asList(addIngr.getText().split(","));
-            System.out.println(ingr);
-
             List<String> categ =  Arrays.asList(addCateg.getText().split(","));
-            System.out.println(categ);
-
-            //Date ts = new Date(System.currentTimeMillis());
-            //Date ts = new Date(new Date().getTime());
             Date ts;
             if (addTitle.isEditable())
                 ts = new Date();
@@ -149,8 +141,6 @@ public class AddRecipePageController {
                     Utils.showErrorAlert("Error!\nThe Protein field must conteins only numbers!");
                     return;
                 }
-
-            System.out.println(calo + " " + fat + " " + carbs +" "+ proteins);
 
             Recipe newRec = new Recipe(addTitle.getText(), addInstructions.getText(), ingr, categ, calo, fat, proteins, carbs, ts, addUrl.getText(), creator, null);
 
@@ -215,10 +205,7 @@ public class AddRecipePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
-        try{
-            HomePageController homePageController = (HomePageController)
-                    Utils.changeScene("/homepage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        Utils.changeScene("/homepage.fxml", mouseEvent);
     }
 
     /**
@@ -226,10 +213,7 @@ public class AddRecipePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnLogoutImg(MouseEvent mouseEvent){
-        try {
-            WelcomePageController welcomePageController = (WelcomePageController)
-                    Utils.changeScene("/welcome.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        Utils.changeScene("/welcome.fxml", mouseEvent);
     }
 
     /**
@@ -237,10 +221,7 @@ public class AddRecipePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
-        try{
-            DiscoveryPageController discoveryPageController = (DiscoveryPageController)
-                    Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("DiscoveryPageController is null!!!!");}
+        Utils.changeScene("/discoveryPage.fxml", mouseEvent);
     }
 
     /**

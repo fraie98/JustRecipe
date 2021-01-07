@@ -15,10 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
 public class ProfilePageController {
@@ -49,6 +47,9 @@ public class ProfilePageController {
     private XYChart.Series series; //single series
     private final String[] DAY_OF_WEEK = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
 
+    /**
+     * Initialization functions
+     */
     public void initialize ()
     {
         appSession = Session.getInstance();
@@ -123,7 +124,8 @@ public class ProfilePageController {
             addRecipeOrMyProfileImg.setOnMouseClicked(mouseEvent -> clickOnMyProfile(mouseEvent));
         }
 
-        Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0, HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
+        Utils.addRecipesSnap(recipeVbox, mongoDBDriver.getRecipesFromAuthorUsername(0,
+                HOW_MANY_SNAPSHOT_TO_SHOW, u.getUsername()));
         updateLineChart();
     }
 
@@ -239,8 +241,7 @@ public class ProfilePageController {
      */
     private void clickOnAdminPage(MouseEvent mouseEvent)
     {
-        AdministrationPageController administrationPageController = (AdministrationPageController)
-                Utils.changeScene("/adminPage.fxml", mouseEvent);
+        Utils.changeScene("/adminPage.fxml", mouseEvent);
     }
 
     /**
@@ -257,10 +258,7 @@ public class ProfilePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
-        try{
-            HomePageController homePageController = (HomePageController)
-                    Utils.changeScene("/homepage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        Utils.changeScene("/homepage.fxml", mouseEvent);
     }
 
     /**
@@ -290,11 +288,7 @@ public class ProfilePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnAddRecipeImg(MouseEvent mouseEvent){
-        try{
-            AddRecipePageController addRecipePageController;
-            addRecipePageController = (AddRecipePageController)
-                    Utils.changeScene("/addRecipe.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("addRecipePageController is null!!!!");n.printStackTrace();}
+        Utils.changeScene("/addRecipe.fxml", mouseEvent);
     }
 
     /**
@@ -302,10 +296,7 @@ public class ProfilePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnLogoutImg(MouseEvent mouseEvent){
-        try {
-            WelcomePageController welcomePageController = (WelcomePageController)
-                    Utils.changeScene("/welcome.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        Utils.changeScene("/welcome.fxml", mouseEvent);
     }
 
     /**
@@ -313,12 +304,13 @@ public class ProfilePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnDiscImgtoChangePage(MouseEvent mouseEvent){
-        try{
-            DiscoveryPageController discoveryPageController = (DiscoveryPageController)
-                    Utils.changeScene("/discoveryPage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        Utils.changeScene("/discoveryPage.fxml", mouseEvent);
     }
 
+    /**
+     * Function that is called when the user click on the previous button
+     * @param mouseEvent    Event that leads to the handler
+     */
     private void clickOnPrevious(MouseEvent mouseEvent){
         Utils.removeAllFromPane(recipeVbox);
         page--;
@@ -329,6 +321,10 @@ public class ProfilePageController {
                         HOW_MANY_SNAPSHOT_TO_SHOW, userName.getText()));
     }
 
+    /**
+     * Function that is called when the user click on the next button
+     * @param mouseEvent    Event that leads to the handler
+     */
     private void clickOnNext(MouseEvent mouseEvent){
         Utils.removeAllFromPane(recipeVbox);
         page++;

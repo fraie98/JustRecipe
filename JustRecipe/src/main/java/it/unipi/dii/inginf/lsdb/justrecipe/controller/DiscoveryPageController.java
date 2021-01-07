@@ -18,7 +18,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DiscoveryPageController {
@@ -45,6 +44,9 @@ public class DiscoveryPageController {
     private final int NUM_RECIPES_THRESHOLD = 5;
     private int page; // number of page (at the beginning at 0), increase with nextButton and decrease with previousButton
 
+    /**
+     * Initialization functions
+     */
     public void initialize ()
     {
         appSession = Session.getInstance();
@@ -188,10 +190,7 @@ public class DiscoveryPageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
-        try{
-            HomePageController homePageController = (HomePageController)
-                    Utils.changeScene("/homepage.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("homePageController is null!!!!");}
+        Utils.changeScene("/homepage.fxml", mouseEvent);
     }
 
     /**
@@ -199,10 +198,7 @@ public class DiscoveryPageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnLogoutImg(MouseEvent mouseEvent){
-        try {
-            WelcomePageController welcomePageController = (WelcomePageController)
-                    Utils.changeScene("/welcome.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        Utils.changeScene("/welcome.fxml", mouseEvent);
     }
 
     /**
@@ -210,11 +206,9 @@ public class DiscoveryPageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnProfImgToChangePage(MouseEvent mouseEvent){
-        try {
-            ProfilePageController profilePageController = (ProfilePageController)
-                    Utils.changeScene("/profilePage.fxml", mouseEvent);
-            profilePageController.setProfile(Session.getInstance().getLoggedUser());
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        ProfilePageController profilePageController = (ProfilePageController)
+                Utils.changeScene("/profilePage.fxml", mouseEvent);
+        profilePageController.setProfile(Session.getInstance().getLoggedUser());
     }
 
     /**

@@ -1,15 +1,12 @@
 package it.unipi.dii.inginf.lsdb.justrecipe.main;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.MongoDBDriver;
 import it.unipi.dii.inginf.lsdb.justrecipe.persistence.Neo4jDriver;
-import it.unipi.dii.inginf.lsdb.justrecipe.utils.Utils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
 
 /**
  * Class used to start the application

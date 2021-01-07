@@ -17,8 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
-import javax.rmi.CORBA.Util;
 import java.util.Date;
 
 /**
@@ -55,6 +53,9 @@ public class RecipePageController {
     private Neo4jDriver neo4jDriver;
     private MongoDBDriver mongoDBDriver;
 
+    /**
+     * Initialization functions
+     */
     public void initialize ()
     {
         homeImg.setOnMouseClicked(mouseEvent -> clickOnHomepageToChangePage(mouseEvent));
@@ -72,6 +73,9 @@ public class RecipePageController {
         recipeEditImg.setOnMouseClicked(mouseEvent -> clickOnEditButton(mouseEvent));
     }
 
+    /**
+     * Handler function for the click on the like
+     */
     private void handleClickOnLike()
     {
         if(neo4jDriver.isThisRecipeLikedByOne(recipeTitle.getText(),appSession.getLoggedUser().getUsername()))
@@ -108,7 +112,7 @@ public class RecipePageController {
 
     /**
      * Function who handle the editButton
-     * @param mouseEvent
+     * @param mouseEvent    Event that leads to the handler
      */
     private void clickOnEditButton(MouseEvent mouseEvent){
         AddRecipePageController addRecipePageController = (AddRecipePageController)
@@ -209,8 +213,7 @@ public class RecipePageController {
      * @param mouseEvent    event that represents the click on the icon
      */
     private void clickOnHomepageToChangePage(MouseEvent mouseEvent){
-        HomePageController homePageController = (HomePageController)
-                Utils.changeScene("/homepage.fxml", mouseEvent);
+        Utils.changeScene("/homepage.fxml", mouseEvent);
     }
 
     /**
@@ -238,8 +241,7 @@ public class RecipePageController {
      * @param mouseEvent    event that represents the click on the icon
      */
     private void clickOnDiscoveryToChangePage(MouseEvent mouseEvent){
-        DiscoveryPageController discoveryPageController = (DiscoveryPageController)
-                Utils.changeScene("/discoveryPage.fxml", mouseEvent);
+        Utils.changeScene("/discoveryPage.fxml", mouseEvent);
     }
 
     /**
@@ -247,10 +249,7 @@ public class RecipePageController {
      * @param mouseEvent event that represents the click on the icon
      */
     private void clickOnLogoutImg(MouseEvent mouseEvent){
-        try {
-            WelcomePageController welcomePageController = (WelcomePageController)
-                    Utils.changeScene("/welcome.fxml", mouseEvent);
-        }catch (NullPointerException n){System.out.println("profilePageController is null!!!!");}
+        Utils.changeScene("/welcome.fxml", mouseEvent);
     }
 }
 

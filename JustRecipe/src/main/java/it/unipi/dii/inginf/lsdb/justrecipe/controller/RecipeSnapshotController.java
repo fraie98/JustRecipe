@@ -11,10 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-
-import javax.lang.model.type.NullType;
-import java.util.Date;
 
 public class RecipeSnapshotController {
 
@@ -31,6 +27,9 @@ public class RecipeSnapshotController {
     private Neo4jDriver neo4jDriver;
     private Session appSession;
 
+    /**
+     * Initialization functions
+     */
     public void initialize ()
     {
         appSession = Session.getInstance();
@@ -52,7 +51,6 @@ public class RecipeSnapshotController {
                 (RecipePageController) Utils.changeScene("/recipePage.fxml", mouseEvent);
         recipePageController.setRecipe(recipe);
     }
-
 
     public void setRecipe (Recipe recipe)
     {
