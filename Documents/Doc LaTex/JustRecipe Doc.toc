@@ -21,7 +21,7 @@
 \contentsline {subsection}{\numberline {2.5.2}Sharding}{15}%
 \contentsline {section}{\numberline {2.6}Software Architecture}{15}%
 \contentsline {subsection}{\numberline {2.6.1}Client - Server Architecture}{15}%
-\contentsline {subsubsection}{Client Side}{16}%
+\contentsline {subsubsection}{Client Side}{15}%
 \contentsline {subsubsection}{Server side}{16}%
 \contentsline {subsection}{\numberline {2.6.2}Inter-Databases Consistency}{16}%
 \contentsline {chapter}{\numberline {3}Implementation and Test}{17}%
@@ -66,15 +66,16 @@
 \contentsline {subsubsection}{Index on User Username}{34}%
 \contentsline {subsubsection}{Index on Recipe Creation Time}{34}%
 \contentsline {subsubsection}{Index on Comment Creation Time}{35}%
-\contentsline {chapter}{\numberline {4}User Manual}{36}%
-\contentsline {section}{\numberline {4.1}How To Configure The System}{36}%
-\contentsline {section}{\numberline {4.2}Login And Registration}{37}%
-\contentsline {section}{\numberline {4.3}Homepage, Discovery and First Steps}{38}%
-\contentsline {section}{\numberline {4.4}User Profile}{43}%
-\contentsline {section}{\numberline {4.5}How To Handle A Recipe}{45}%
-\contentsline {section}{\numberline {4.6}How To Handle Comments}{47}%
-\contentsline {section}{\numberline {4.7}Suggested recipes realistic use}{47}%
-\contentsline {section}{\numberline {4.8}DiscoveryPage ComboBox Explenation}{48}%
-\contentsline {section}{\numberline {4.9}Moderator Functions}{48}%
-\contentsline {section}{\numberline {4.10}Administrator Functions}{51}%
-\contentsline {section}{\numberline {4.11}Logout}{55}%
+\contentsline {subsubsection}{Index on Ingredients}{35}%
+\contentsline {chapter}{\numberline {4}User Manual}{37}%
+\contentsline {section}{\numberline {4.1}How To Configure The System}{37}%
+\contentsline {section}{\numberline {4.2}Login And Registration}{38}%
+\contentsline {section}{\numberline {4.3}Homepage, Discovery and First Steps}{39}%
+\contentsline {section}{\numberline {4.4}User Profile}{44}%
+\contentsline {section}{\numberline {4.5}How To Handle A Recipe}{46}%
+\contentsline {section}{\numberline {4.6}How To Handle Comments}{48}%
+\contentsline {section}{\numberline {4.7}Suggested recipes realistic use}{48}%
+\contentsline {section}{\numberline {4.8}DiscoveryPage ComboBox Explenation}{49}%
+\contentsline {section}{\numberline {4.9}Moderator Functions}{49}%
+\contentsline {section}{\numberline {4.10}Administrator Functions}{52}%
+\contentsline {section}{\numberline {4.11}Logout}{56}%

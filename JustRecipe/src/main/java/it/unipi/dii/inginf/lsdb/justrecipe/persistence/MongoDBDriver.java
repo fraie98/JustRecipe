@@ -93,7 +93,7 @@ public class MongoDBDriver implements DatabaseDriver{
             ConnectionString connectionString = new ConnectionString(string);
             MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                     .applyConnectionString(connectionString)
-                    .readPreference(ReadPreference.secondaryPreferred())
+                    .readPreference(ReadPreference.primary())
                     .retryWrites(true)
                     .writeConcern(WriteConcern.W3)
                     .build();
@@ -444,6 +444,7 @@ public class MongoDBDriver implements DatabaseDriver{
         Bson sort = sort(descending("comments.creationTime"));
         Bson skip = skip(howManySkip);
         Bson limit = limit(howMany);
+
         MongoCursor<Document> iterator = (MongoCursor<Document>)
                 collection.aggregate(Arrays.asList(unwind, sort, skip, limit)).iterator();
         while (iterator.hasNext())

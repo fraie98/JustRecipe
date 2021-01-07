@@ -278,8 +278,8 @@ The main actors of the application are four:
 The non-functional requirements of the applications are described in the following lists:
 \begin{itemize}
 	\item \emph{Usability}: The application must be user-friendly so a GUI is adopted. A low response time is necessary in order to avoid too long waits for the user.
-	\item \emph{Data Availability}: For modern shared-data systems and for a social network application, the most crucial requirement is that the data must be always available as the service too.
-	\item \emph{Tolerance to single point of failure}: If a server crashes another one is available, this is ensured by the use of replicas.
+	\item \emph{Availability}: For modern shared-data systems and for a social network application, the most crucial requirement is that the service must be always available.
+
 	\item \emph{Data Consistency}: The operations must be monotonic and so all the users must see the last version of the data and the update operations must be performed in the same order in which they are issued.
 
 	\item \emph{Reliability}: The application must work without crashes and so it must handle exceptions if they occur.
@@ -522,12 +522,13 @@ Because of the large amount of information to deal with, it is important to spli
 \section{Distributed Database Design}
 In our application some of the most important requirements are the \emph{Availability} and the \emph{Consistency}. Thus is very important to us to have a distributed system in order to ensure:
 \begin{itemize}
-	\item An high availability, due to the fact that we have more servers (in our case we have 3 virtual machines provided by University of Pisa\footnote{172.16.3.157 - 172.16.3.107 -  172.16.3.108}) and so we haven't the single point of failure issue.
+	\item An high availability of the service, due to the fact that we have more servers (in our case we have 3 virtual machines provided by University of Pisa\footnote{172.16.3.157 - 172.16.3.107 -  172.16.3.108}) and so we haven't the single point of failure issue.
 	\item An high consistency, because, even if the data on a server would be corrupted (for a server malfunction for instance), we have an update replica that maintains the correct data.
-	\item A low latency, in fact thanks to sharding and replicas the load is balanced among the cluster servers. We have to remark that this is not always true because, in order to maintain consistency, it is possible to have a longer latency with respect to the one that we would achieve without consistency (replicas must be updated and this requires time).
 \end{itemize}
 
 \noindent This two objectives can be reached using replicas (copy of the same data on different servers) and sharding (the dataset is split up into different parts, each part is on a different server of the cluster or on more than one server depending from the design choises performed).
+
+\noindent The system is on the AC side of the CAP triangle: \emph{Consistency} and \emph{Availability} are ensured by replicas on Neo4J and multi-writes on MongoDB (see following sections). 
 
 \noindent In the following sections we discuss about these two techniques explaining the design choices performed in order to obtain the best performance achievable and in order to respect the given requirements. 
 
@@ -1550,31 +1551,20 @@ A study of performance has been completed, the results are available in table \r
 \end{table}
 
 
+\lstset{language=code}
+\begin{lstlisting}
+	db.recipes.createIndex({creationTime:-1},{name:'creationTime_index'})
+\end{lstlisting}
+
+
 \subsubsection{Index on Comment Creation Time}
-A possible index is the one on the creation time of the comment, this index affect the query \emph{Last Comments}. In order to see if the index must be added or not, let analyze the result of the index analysis for this index on that query (see table \ref{table: Statistics about comment creation time index})
+A possible index is the one on the creation time of the comment, this index affects the query \emph{Last Comments}. In order to see if the index must be added or not, let analyze the result of the index analysis for this index on that query (see table \ref{table: Statistics about comment creation time index})
+
 
 \begin{table}[htpb]
 	\centering
 	\caption{Statistics about comment creation time index}
 	\label{table: Statistics about comment creation time index}
-		\begin{tabular}{lllll}
-			\cline{1-3}
-			\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
-			\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without index}} &
-			\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with index}} &
-			&
-			\\ \cline{1-3}
-			\multicolumn{1}{|l|}{Last Comments} &
-			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 284ms\\ TotalKeysExamined: 0\\ TotalDocsExamined: 45352\end{tabular}} &
-			\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 290ms\\ TotalKeysExamined: 45383\\ TotalDocsExamined: 45352\end{tabular}} &
-			&
-			\\ \cline{1-3}
-		\end{tabular}
-	\end{table}
-
-\begin{table}[htpb]
-	\centering
-	\caption{New table}
 	\begin{tabular}{lllll}
 		\cline{1-3}
 		\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
@@ -1590,40 +1580,55 @@ A possible index is the one on the creation time of the comment, this index affe
 	\end{tabular}
 \end{table}
 
-\noindent From the result obtained we can see that the addition of that index do not imply a improve in the performance but instead a downgrade of performance. In fact the query with the index require more time with respect to the one without index.
+\noindent From the result obtained we can see that the addition of that index imply an improvement in the performance. In fact the query with the index requires less time with respect to the one without index.
 
-\noindent For this reason we don't create an index on the creation time of the comment.
+\noindent For this reason we create an index on the creation time of the comment.
 
-\noindent The reason for the downgrade of the performance is because MongoDB creates a multi index, so it create an index for recipe and another index for comments. Thus if the index is present it examines a number of keys that is larger than the number of recipes, because it takes into account recipes and comments.
-\begin{comment}
-\subsubsection{Index on Recipe Addition Time}
-A possible index is the one on the attribute \emph{when} of the relations \emph{ADDS} in Neo4J database. In order to evaluate the performance of this index let analyze the test results in table 3.5 obtained using the command \emph{PROFILE} and doing repetead tests taking the mean value at the end.
+\noindent The reason for the improvement of the performance is because we create a sparse index, so the recipes in which there aren't comments are not taken into account. Thus if the index is present it examines a number of keys that is lesser than the number of recipes, because not all recipes contain comments. In the test scenario are present 18 comments in 3 different recipes and in fact only these are taken into account with a huge reduction of examined docs.
+
+\lstset{language=code}
+\begin{lstlisting}
+	db.recipes.createIndex({"comments.creationTime":-1},
+	{sparse:true, name:'commentsCreationTime_index'})
+\end{lstlisting}
+
+\subsubsection{Index on Ingredients}
+A possible \emph{text index} is the one on the ingredients due to the fact that we have to search them.
+
+\noindent In order to test the text index we use the following query as example.
+\lstset{language=code}
+\begin{lstlisting}
+db.recipes.explain("executionStats").aggregate([
+		 {$match: {"$text": {"$search":"\"vanilla\" \"milk\" \"strawberries\""}}},
+		 {$sort : {creationTime : -1 }},
+		 { $skip: 0}, {$limit: 20}
+	 ])
+\end{lstlisting}
+
+\noindent The results are the ones in the table \ref{table: Statistics about text index}.
+
+\newpage
 
 \begin{table}[htpb]
 	\centering
-	\caption{Statistics about index on recipe addition time}
-	\begin{tabular}{lllll}
+	\caption{Statistics about comment creation time index}
+	\label{table: Statistics about text index}
+	\begin{tabular}{cllll}
 		\cline{1-3}
 		\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
 		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without index}} &
 		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with index}} &
 		&
 		\\ \cline{1-3}
-		\multicolumn{1}{|l|}{Suggested Recipes} &
-		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 89988\\ Mean Execution Time: 149,6ms\end{tabular}} &
-		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 89988\\ Mean Execution Time: 122ms\end{tabular}} &
-		&
-		\\ \cline{1-3}
-		\multicolumn{1}{|l|}{Recipes of Following Users} &
-		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 13935\\ Mean Execution Time: 11ms\end{tabular}} &
-		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Examined: 13935\\ Mean Execution Time: 9,8ms\end{tabular}} &
+		\multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}Search For \\ Recipe's Ingredients\end{tabular}} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 91ms\\ TotalKeysExamined: 6514\\ TotalDocsExamined: 6514\end{tabular}} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 249ms\\ TotalKeysExamined: 12239\\ TotalDocsExamined: 998\end{tabular}} &
 		&
 		\\ \cline{1-3}
 	\end{tabular}
 \end{table}
 
-\noindent As we can see from the table only for the first query we have a little margin of benefit (for the first case we can say that the performance are equal), but this margin is not good enough (it's only 30 ms more or less) to justify the addition of this index, because even if it improves a bit the performance on the \emph{Suggested Recipes} query, it deteriorates the writing performance because we have to update the index for each insertion.
-\end{comment}
+\noindent Considering the results we can notice that without index the system uses the index on the creation time and for our queries that index is the one that ensures better performance.
 
 \chapter{User Manual}
 In this chapter we discuss how to use the application from the user's point of view.
