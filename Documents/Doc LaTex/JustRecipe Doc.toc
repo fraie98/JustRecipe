@@ -27,9 +27,9 @@
 \contentsline {chapter}{\numberline {3}Implementation and Test}{17}%
 \contentsline {section}{\numberline {3.1}Main Modules}{17}%
 \contentsline {section}{\numberline {3.2}Main Packages and Classes}{17}%
-\contentsline {subsection}{\numberline {3.2.1}it.unipi.dii.inginf.lsdb.justrecipe.config}{17}%
-\contentsline {subsection}{\numberline {3.2.2}it.unipi.dii.inginf.lsdb.justrecipe.main}{17}%
-\contentsline {subsection}{\numberline {3.2.3}it.unipi.dii.inginf.lsdb.justrecipe.model}{17}%
+\contentsline {subsection}{\numberline {3.2.1}it.unipi.dii.inginf.lsdb.justrecipe.config}{18}%
+\contentsline {subsection}{\numberline {3.2.2}it.unipi.dii.inginf.lsdb.justrecipe.main}{18}%
+\contentsline {subsection}{\numberline {3.2.3}it.unipi.dii.inginf.lsdb.justrecipe.model}{18}%
 \contentsline {subsection}{\numberline {3.2.4}it.unipi.dii.inginf.lsdb.justrecipe.persistence}{18}%
 \contentsline {subsection}{\numberline {3.2.5}it.unipi.dii.inginf.lsdb.justrecipe.controller}{18}%
 \contentsline {subsection}{\numberline {3.2.6}it.unipi.dii.inginf.lsdb.justrecipe.utils}{19}%
@@ -59,14 +59,14 @@
 \contentsline {subsubsection}{Last comments}{31}%
 \contentsline {subsubsection}{Suggested recipes}{32}%
 \contentsline {subsubsection}{Most followed and active users}{33}%
-\contentsline {section}{\numberline {3.6}Tests and Statistical Analysis}{33}%
-\contentsline {subsection}{\numberline {3.6.1}Queries Analysis}{33}%
-\contentsline {subsection}{\numberline {3.6.2}Index Analysis}{33}%
+\contentsline {section}{\numberline {3.6}Tests and Statistical Analysis}{34}%
+\contentsline {subsection}{\numberline {3.6.1}Queries Analysis}{34}%
+\contentsline {subsection}{\numberline {3.6.2}Index Analysis}{34}%
 \contentsline {subsubsection}{Index on Recipe Title}{34}%
 \contentsline {subsubsection}{Index on User Username}{34}%
-\contentsline {subsubsection}{Index on Recipe Creation Time}{34}%
+\contentsline {subsubsection}{Index on Recipe Creation Time}{35}%
 \contentsline {subsubsection}{Index on Comment Creation Time}{35}%
-\contentsline {subsubsection}{Index on Ingredients}{35}%
+\contentsline {subsubsection}{Index on Ingredients}{36}%
 \contentsline {chapter}{\numberline {4}User Manual}{37}%
 \contentsline {section}{\numberline {4.1}How To Configure The System}{37}%
 \contentsline {section}{\numberline {4.2}Login And Registration}{38}%
@@ -75,7 +75,7 @@
 \contentsline {section}{\numberline {4.5}How To Handle A Recipe}{46}%
 \contentsline {section}{\numberline {4.6}How To Handle Comments}{48}%
 \contentsline {section}{\numberline {4.7}Suggested recipes realistic use}{48}%
-\contentsline {section}{\numberline {4.8}DiscoveryPage ComboBox Explenation}{49}%
+\contentsline {section}{\numberline {4.8}DiscoveryPage ComboBox Explanation}{49}%
 \contentsline {section}{\numberline {4.9}Moderator Functions}{49}%
 \contentsline {section}{\numberline {4.10}Administrator Functions}{52}%
 \contentsline {section}{\numberline {4.11}Logout}{56}%
