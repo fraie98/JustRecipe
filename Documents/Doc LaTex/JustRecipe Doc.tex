@@ -1571,6 +1571,25 @@ A possible index is the one on the creation time of the comment, this index affe
 			\\ \cline{1-3}
 		\end{tabular}
 	\end{table}
+
+\begin{table}[htpb]
+	\centering
+	\caption{New table}
+	\begin{tabular}{lllll}
+		\cline{1-3}
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Query}} &
+		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results without index}} &
+		\multicolumn{1}{c|}{\cellcolor[HTML]{000000}{\color[HTML]{FFFFFF} Results with index}} &
+		&
+		\\ \cline{1-3}
+		\multicolumn{1}{|l|}{Last Comments} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 123ms\\ TotalKeysExamined: 0\\ TotalDocsExamined: 45348\end{tabular}} &
+		\multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}ExecutionTimeMillis: 2ms\\ TotalKeysExamined: 18\\ TotalDocsExamined: 3\end{tabular}} &
+		&
+		\\ \cline{1-3}
+	\end{tabular}
+\end{table}
+
 \noindent From the result obtained we can see that the addition of that index do not imply a improve in the performance but instead a downgrade of performance. In fact the query with the index require more time with respect to the one without index.
 
 \noindent For this reason we don't create an index on the creation time of the comment.
