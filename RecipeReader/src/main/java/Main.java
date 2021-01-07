@@ -33,7 +33,6 @@ public class Main {
                 "172.16.3.107:27020, 172.16.3.108:27020");
         MongoClientSettings mongoClientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
-                .readPreference(ReadPreference.primaryPreferred())
                 .retryWrites(true)
                 .writeConcern(WriteConcern.W3).build();
         mongoClient = MongoClients.create(mongoClientSettings);
@@ -63,6 +62,8 @@ public class Main {
         // Create the indexes
         collection.createIndex(Indexes.descending("creationTime"),
                 new IndexOptions().name("creationTime_index"));
+        collection.createIndex(Indexes.descending("comments.creationTime"),
+                new IndexOptions().name("commentCreationTime_index").sparse(true));
 
         List<RecipeRaw> rawRecipes = new ArrayList<>();
         addRecipes_full_format(rawRecipes, PATH_FULL_FORMAT_RECIPES);

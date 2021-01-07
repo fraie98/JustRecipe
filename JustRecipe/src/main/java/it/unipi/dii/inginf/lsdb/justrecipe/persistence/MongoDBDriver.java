@@ -440,8 +440,10 @@ public class MongoDBDriver implements DatabaseDriver{
         Bson skip = skip(howManySkip);
         Bson limit = limit(howMany);
 
+        Document documentHint = new Document("comments.creationTime", -1);
+
         MongoCursor<Document> iterator = (MongoCursor<Document>)
-                collection.aggregate(Arrays.asList(unwind, sort, skip, limit)).iterator();
+                collection.aggregate(Arrays.asList(unwind, sort, skip, limit)).hint(documentHint).iterator();
         while (iterator.hasNext())
         {
             Document document = iterator.next();
