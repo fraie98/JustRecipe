@@ -1,174 +1,176 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.12.12)  7 JAN 2021 19:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.9)  14 JAN 2021 14:52
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**"JustRecipe Doc.tex"
-(./JustRecipe Doc.tex
-LaTeX2e <2020-02-02> patch level 2
-L3 programming layer <2020-02-14>
-(/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
-Document Class: report 2019/12/20 v1.4l Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+**"./JustRecipe Doc.tex"
+("JustRecipe Doc.tex"
+LaTeX2e <2020-10-01> patch level 2
+L3 programming layer <2020-10-27> xparse <2020-03-03>
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
+Document Class: report 2020/04/10 v1.4m Standard LaTeX document class
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 )
-\c@part=\count167
-\c@chapter=\count168
-\c@section=\count169
-\c@subsection=\count170
-\c@subsubsection=\count171
-\c@paragraph=\count172
-\c@subparagraph=\count173
-\c@figure=\count174
-\c@table=\count175
+\c@part=\count175
+\c@chapter=\count176
+\c@section=\count177
+\c@subsection=\count178
+\c@subsubsection=\count179
+\c@paragraph=\count180
+\c@subparagraph=\count181
+\c@figure=\count182
+\c@table=\count183
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
-\bibindent=\dimen134
+\bibindent=\dimen138
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
 )
-(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2018/08/11 v1.3c Input encoding file
-\inpenc@prehook=\toks14
-\inpenc@posthook=\toks15
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2020/08/01 v1.3d Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 )
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/02/14 3.40 The Babel package
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2020/10/27 3.51 The Babel package
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/switch.def
-File: switch.def 2020/02/14 3.40 Babel switching mechanism
-)
-(/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
-Language: english 2017/06/06 v3.3r English support from the babel system
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.def
+File: babel.def 2020/10/27 3.51 Babel common definitions
+\babel@savecnt=\count184
+\U@D=\dimen139
+\l@babelnohyphens=\language79
 
-(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/02/14 3.40 Babel common definitions
-\babel@savecnt=\count176
-\U@D=\dimen135
-
-(/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count177
 )
+\bbl@dirlevel=\count185
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.l
+df
+Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: \l@canadian = using hyphenrules for english
 (babel)             (\language0) on input line 102.
 Package babel Info: \l@australian = using hyphenrules for ukenglish
-(babel)             (\language8) on input line 105.
+(babel)             (\language73) on input line 105.
 Package babel Info: \l@newzealand = using hyphenrules for ukenglish
-(babel)             (\language8) on input line 108.
+(babel)             (\language73) on input line 108.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 )
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2019/11/07 v1.0c TeX engine tests
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-\Gm@cnth=\count178
-\Gm@cntv=\count179
-\c@Gm@tempcnt=\count180
-\Gm@bindingoffset=\dimen136
-\Gm@wd@mp=\dimen137
-\Gm@odd@mp=\dimen138
-\Gm@even@mp=\dimen139
-\Gm@layoutwidth=\dimen140
-\Gm@layoutheight=\dimen141
-\Gm@layouthoffset=\dimen142
-\Gm@layoutvoffset=\dimen143
-\Gm@dimlist=\toks17
-)
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+\Gm@cnth=\count186
+\Gm@cntv=\count187
+\c@Gm@tempcnt=\count188
+\Gm@bindingoffset=\dimen140
+\Gm@wd@mp=\dimen141
+\Gm@odd@mp=\dimen142
+\Gm@even@mp=\dimen143
+\Gm@layoutwidth=\dimen144
+\Gm@layoutheight=\dimen145
+\Gm@layouthoffset=\dimen146
+\Gm@layoutvoffset=\dimen147
+\Gm@dimlist=\toks18
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen144
-\Gin@req@width=\dimen145
-)
-(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+\Gin@req@height=\dimen148
+\Gin@req@width=\dimen149
+) (C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/subfig\subfig.sty
 Package: subfig 2005/06/28 ver: 1.3 subfig package
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
-Package caption3 Info: TeX engine: e-TeX on input line 61.
-\captionmargin=\dimen146
-\captionmargin@=\dimen147
-\captionwidth=\dimen148
-\caption@tempdima=\dimen149
-\caption@indent=\dimen150
-\caption@parindent=\dimen151
-\caption@hangindent=\dimen152
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen150
+\captionmargin@=\dimen151
+\captionwidth=\dimen152
+\caption@tempdima=\dimen153
+\caption@indent=\dimen154
+\caption@parindent=\dimen155
+\caption@hangindent=\dimen156
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count181
-\c@continuedfloat=\count182
+\c@caption@flags=\count189
+\c@continuedfloat=\count190
 )
-\c@KVtest=\count183
+\c@KVtest=\count191
 \sf@farskip=\skip49
-\sf@captopadj=\dimen153
+\sf@captopadj=\dimen157
 \sf@capskip=\skip50
 \sf@nearskip=\skip51
-\c@subfigure=\count184
-\c@subfigure@save=\count185
-\c@lofdepth=\count186
-\c@subtable=\count187
-\c@subtable@save=\count188
-\c@lotdepth=\count189
+\c@subfigure=\count192
+\c@subfigure@save=\count193
+\c@lofdepth=\count194
+\c@subtable=\count195
+\c@subtable@save=\count196
+\c@lotdepth=\count197
 \sf@top=\skip52
 \sf@bottom=\skip53
-)
-(/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+) (C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty
 Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks18
-\verbatim@line=\toks19
+\every@verbatim=\toks19
+\verbatim@line=\toks20
 \verbatim@in@stream=\read3
 )
-(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
-
-(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 
-(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen154
-\ar@mcellbox=\box45
-\extrarowheight=\dimen155
-\NC@list=\toks20
+\col@sep=\dimen158
+\ar@mcellbox=\box47
+\extrarowheight=\dimen159
+\NC@list=\toks21
 \extratabsurround=\skip54
 \backup@length=\skip55
-\ar@cellbox=\box46
+\ar@cellbox=\box48
 )
-\everycr=\toks21
+\everycr=\toks22
 \minrowclearance=\skip56
 )
-\rownum=\count190
+\rownum=\count198
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
 Package xcolor Info: Model `RGB' extended on input line 1364.
@@ -179,46 +181,45 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count191
-\lst@gtempboxa=\box47
-\lst@token=\toks22
-\lst@length=\count192
-\lst@currlwidth=\dimen156
-\lst@column=\count193
-\lst@pos=\count194
-\lst@lostspace=\dimen157
-\lst@width=\dimen158
-\lst@newlines=\count195
-\lst@lineno=\count196
-\lst@maxwidth=\dimen159
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count199
+\lst@gtempboxa=\box49
+\lst@token=\toks23
+\lst@length=\count266
+\lst@currlwidth=\dimen160
+\lst@column=\count267
+\lst@pos=\count268
+\lst@lostspace=\dimen161
+\lst@width=\dimen162
+\lst@newlines=\count269
+\lst@lineno=\count270
+\lst@maxwidth=\dimen163
 
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-\c@lstnumber=\count197
-\lst@skipnumbers=\count198
-\lst@framebox=\box48
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count271
+\lst@skipnumbers=\count272
+\lst@framebox=\box50
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2019/09/10 1.8c listings configuration
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
-Package: listings 2019/09/10 1.8c (Carsten Heinz)
-
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count199
-\l__pdf_internal_box=\box49
-)
-(./JustRecipe Doc.aux)
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
+\l__kernel_color_stack_int=\count273
+\l__pdf_internal_box=\box51
+) ("JustRecipe Doc.aux")
 \openout1 = `"JustRecipe Doc.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
@@ -271,43 +272,42 @@ LaTeX Font Info:    ... okay on input line 105.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count266
-\scratchdimen=\dimen160
-\scratchbox=\box50
-\nofMPsegments=\count267
-\nofMParguments=\count268
-\everyMPshowfont=\toks23
-\MPscratchCnt=\count269
-\MPscratchDim=\dimen161
-\MPnumerator=\count270
-\makeMPintoPDFobject=\count271
-\everyMPtoPDFconversion=\toks24
-) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+\scratchcounter=\count274
+\scratchdimen=\dimen164
+\scratchbox=\box52
+\nofMPsegments=\count275
+\nofMParguments=\count276
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count277
+\MPscratchDim=\dimen165
+\MPnumerator=\count278
+\makeMPintoPDFobject=\count279
+\everyMPtoPDFconversion=\toks25
+)
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
+)
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count272
+\c@lstlisting=\count280
 <img/unipi.png, id=1, 1204.5pt x 1229.59375pt>
 File: img/unipi.png Graphic file (type png)
 <use img/unipi.png>
 Package pdftex.def Info: img/unipi.png  used on input line 110.
 (pdftex.def)             Requested size: 185.65298pt x 189.51563pt.
+ [1
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/unipi.png>]
-(./JustRecipe Doc.toc
+{C:/Users/franc/AppData/Local/MiKTeX/pdftex/config/pdftex.map} <./img/unipi.png
+>] ("JustRecipe Doc.toc"
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -334,7 +334,7 @@ Chapter 2.
 [5
 
 ] [6] [7]
-<img/UseCaseDiagram.png, id=46, 1138.2525pt x 1116.17pt>
+<img/UseCaseDiagram.png, id=45, 1138.2525pt x 1116.17pt>
 File: img/UseCaseDiagram.png Graphic file (type png)
 <use img/UseCaseDiagram.png>
 Package pdftex.def Info: img/UseCaseDiagram.png  used on input line 297.
@@ -345,13 +345,13 @@ Overfull \hbox (42.72795pt too wide) in paragraph at lines 297--298
  []
 
 [8 <./img/UseCaseDiagram.png>]
-<img/ClassDiagram_generaliz.png, id=51, 734.745pt x 421.575pt>
+<img/ClassDiagram_generaliz.png, id=50, 734.745pt x 421.575pt>
 File: img/ClassDiagram_generaliz.png Graphic file (type png)
 <use img/ClassDiagram_generaliz.png>
 Package pdftex.def Info: img/ClassDiagram_generaliz.png  used on input line 327
 .
 (pdftex.def)             Requested size: 367.3716pt x 210.78697pt.
-<img/ClassDiagram.png, id=52, 667.49374pt x 421.575pt>
+<img/ClassDiagram.png, id=51, 667.49374pt x 421.575pt>
 File: img/ClassDiagram.png Graphic file (type png)
 <use img/ClassDiagram.png>
 Package pdftex.def Info: img/ClassDiagram.png  used on input line 336.
@@ -369,46 +369,49 @@ LaTeX Warning: No positions in optional float specifier.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
 20.
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [11]
-<img/graphDbModel.png, id=65, 587.19376pt x 392.46625pt>
+)
+[11]
+<img/graphDbModel.png, id=64, 587.19376pt x 392.46625pt>
 File: img/graphDbModel.png Graphic file (type png)
 <use img/graphDbModel.png>
 Package pdftex.def Info: img/graphDbModel.png  used on input line 487.
 (pdftex.def)             Requested size: 352.31897pt x 235.48155pt.
  [12 <./img/graphDbModel.png>]
-<img/UML_colorato.png, id=72, 667.49374pt x 421.575pt>
+<img/UML_colorato.png, id=71, 667.49374pt x 421.575pt>
 File: img/UML_colorato.png Graphic file (type png)
 <use img/UML_colorato.png>
 Package pdftex.def Info: img/UML_colorato.png  used on input line 519.
 (pdftex.def)             Requested size: 333.74606pt x 210.78697pt.
- [13 <./img/UML_colorato.png>] [14] [15] [16]
+ [13 <./img/UML_colorato.png>] [14] [15]
+[16]
 Chapter 3.
 [17
 
-] [18] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
+] [18]
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 738.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 737.
 
 [19] [20] [21] [22] [23] [24] [25] [26]
-Overfull \hbox (4.6226pt too wide) in paragraph at lines 1096--1104
+Overfull \hbox (4.6226pt too wide) in paragraph at lines 1095--1103
  [][] 
  []
 
-<img/graphScreen.png, id=120, 382.42876pt x 468.75125pt>
+<img/graphScreen.png, id=119, 382.42876pt x 468.75125pt>
 File: img/graphScreen.png Graphic file (type png)
 <use img/graphScreen.png>
-Package pdftex.def Info: img/graphScreen.png  used on input line 1109.
+Package pdftex.def Info: img/graphScreen.png  used on input line 1108.
 (pdftex.def)             Requested size: 267.69829pt x 328.12363pt.
 [27 <./img/graphScreen.png>] [28] [29]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-) [30] [31]
-[32] [33] [34]
-Overfull \hbox (24.30153pt too wide) in paragraph at lines 1549--1558
+(C:\Users\franc\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
+[30] [31] [32] [33] [34]
+Overfull \hbox (24.30153pt too wide) in paragraph at lines 1548--1557
  [][] 
  []
 
@@ -417,391 +420,396 @@ Chapter 4.
 [37
 
 ]
-<img/user_manual/login.png, id=160, 604.2575pt x 440.64626pt>
+<img/user_manual/login.png, id=158, 604.2575pt x 440.64626pt>
 File: img/user_manual/login.png Graphic file (type png)
 <use img/user_manual/login.png>
-Package pdftex.def Info: img/user_manual/login.png  used on input line 1670.
+Package pdftex.def Info: img/user_manual/login.png  used on input line 1669.
 (pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
-<img/user_manual/register.png, id=161, 604.2575pt x 440.64626pt>
+<img/user_manual/register.png, id=159, 604.2575pt x 440.64626pt>
 File: img/user_manual/register.png Graphic file (type png)
 <use img/user_manual/register.png>
-Package pdftex.def Info: img/user_manual/register.png  used on input line 1684.
+Package pdftex.def Info: img/user_manual/register.png  used on input line 1683.
 
 (pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
-<img/user_manual/loginsection.png, id=162, 604.2575pt x 440.64626pt>
+<img/user_manual/loginsection.png, id=160, 604.2575pt x 440.64626pt>
 File: img/user_manual/loginsection.png Graphic file (type png)
 <use img/user_manual/loginsection.png>
 Package pdftex.def Info: img/user_manual/loginsection.png  used on input line 1
-694.
+693.
 (pdftex.def)             Requested size: 181.27864pt x 132.19489pt.
  [38 <./img/user_manual/login.png> <./img/user_manual/register.png> <./img/user
 _manual/loginsection.png>]
-<img/user_manual/blank-homepage.png, id=169, 1205.50375pt x 828.09375pt>
+<img/user_manual/blank-homepage.png, id=167, 1205.50375pt x 828.09375pt>
 File: img/user_manual/blank-homepage.png Graphic file (type png)
 <use img/user_manual/blank-homepage.png>
 Package pdftex.def Info: img/user_manual/blank-homepage.png  used on input line
- 1704.
+ 1703.
 (pdftex.def)             Requested size: 301.3752pt x 207.02293pt.
-<img/user_manual/discovery-icon.png, id=170, 209.78375pt x 74.2775pt>
+<img/user_manual/discovery-icon.png, id=168, 209.78375pt x 74.2775pt>
 File: img/user_manual/discovery-icon.png Graphic file (type png)
 <use img/user_manual/discovery-icon.png>
 Package pdftex.def Info: img/user_manual/discovery-icon.png  used on input line
- 1712.
+ 1711.
 (pdftex.def)             Requested size: 62.9356pt x 22.28342pt.
-<img/user_manual/first-discovery.png, id=171, 1205.50375pt x 828.09375pt>
+<img/user_manual/first-discovery.png, id=169, 1205.50375pt x 828.09375pt>
 File: img/user_manual/first-discovery.png Graphic file (type png)
 <use img/user_manual/first-discovery.png>
 Package pdftex.def Info: img/user_manual/first-discovery.png  used on input lin
-e 1720.
+e 1719.
 (pdftex.def)             Requested size: 301.3752pt x 207.02293pt.
-<img/user_manual/snap.png, id=172, 436.63126pt x 332.24126pt>
+<img/user_manual/snap.png, id=170, 436.63126pt x 332.24126pt>
 File: img/user_manual/snap.png Graphic file (type png)
 <use img/user_manual/snap.png>
-Package pdftex.def Info: img/user_manual/snap.png  used on input line 1729.
+Package pdftex.def Info: img/user_manual/snap.png  used on input line 1728.
 (pdftex.def)             Requested size: 152.82323pt x 116.28618pt.
  [39 <./img/user_manual/blank-homepage.png> <./img/user_manual/discovery-icon.p
 ng> <./img/user_manual/first-discovery.png>]
-<img/user_manual/recipepage.png, id=179, 1221.56375pt x 828.09375pt>
+<img/user_manual/recipepage.png, id=177, 1221.56375pt x 828.09375pt>
 File: img/user_manual/recipepage.png Graphic file (type png)
 <use img/user_manual/recipepage.png>
 Package pdftex.def Info: img/user_manual/recipepage.png  used on input line 173
-7.
+6.
 (pdftex.def)             Requested size: 427.55373pt x 289.83716pt.
 
-Overfull \hbox (14.98874pt too wide) in paragraph at lines 1737--1738
+Overfull \hbox (14.98874pt too wide) in paragraph at lines 1736--1737
  [][] 
  []
 
-<img/user_manual/beforelike.png, id=180, 315.1775pt x 104.39pt>
+<img/user_manual/beforelike.png, id=178, 315.1775pt x 104.39pt>
 File: img/user_manual/beforelike.png Graphic file (type png)
 <use img/user_manual/beforelike.png>
 Package pdftex.def Info: img/user_manual/beforelike.png  used on input line 174
-7.
+6.
 (pdftex.def)             Requested size: 97.70401pt x 32.36055pt.
-<img/user_manual/afterlike.png, id=181, 324.21124pt x 105.39375pt>
+<img/user_manual/afterlike.png, id=179, 324.21124pt x 105.39375pt>
 File: img/user_manual/afterlike.png Graphic file (type png)
 <use img/user_manual/afterlike.png>
-Package pdftex.def Info: img/user_manual/afterlike.png  used on input line 1754
+Package pdftex.def Info: img/user_manual/afterlike.png  used on input line 1753
 .
 (pdftex.def)             Requested size: 100.50444pt x 32.6717pt.
 [40 <./img/user_manual/snap.png> <./img/user_manual/recipepage.png> <./img/user
 _manual/beforelike.png>]
-<img/user_manual/user-icon.png, id=188, 187.70125pt x 232.87pt>
+<img/user_manual/user-icon.png, id=186, 187.70125pt x 232.87pt>
 File: img/user_manual/user-icon.png Graphic file (type png)
 <use img/user_manual/user-icon.png>
-Package pdftex.def Info: img/user_manual/user-icon.png  used on input line 1765
+Package pdftex.def Info: img/user_manual/user-icon.png  used on input line 1764
 .
 (pdftex.def)             Requested size: 71.32721pt x 88.4915pt.
-<img/user_manual/generic-user-page.png, id=189, 1203.49625pt x 820.06375pt>
+<img/user_manual/generic-user-page.png, id=187, 1203.49625pt x 820.06375pt>
 File: img/user_manual/generic-user-page.png Graphic file (type png)
 <use img/user_manual/generic-user-page.png>
 Package pdftex.def Info: img/user_manual/generic-user-page.png  used on input l
-ine 1773.
+ine 1772.
 (pdftex.def)             Requested size: 457.33333pt x 311.62746pt.
 
-Overfull \hbox (44.76834pt too wide) in paragraph at lines 1773--1774
+Overfull \hbox (44.76834pt too wide) in paragraph at lines 1772--1773
  [][] 
  []
 
-<img/user_manual/howToFollow.png, id=190, 192.72pt x 188.705pt>
+<img/user_manual/howToFollow.png, id=188, 192.72pt x 188.705pt>
 File: img/user_manual/howToFollow.png Graphic file (type png)
 <use img/user_manual/howToFollow.png>
 Package pdftex.def Info: img/user_manual/howToFollow.png  used on input line 17
-81.
+80.
 (pdftex.def)             Requested size: 115.63287pt x 113.22386pt.
-<img/user_manual/afterfollow.png, id=191, 179.67125pt x 186.6975pt>
+<img/user_manual/afterfollow.png, id=189, 179.67125pt x 186.6975pt>
 File: img/user_manual/afterfollow.png Graphic file (type png)
 <use img/user_manual/afterfollow.png>
 Package pdftex.def Info: img/user_manual/afterfollow.png  used on input line 17
-87.
+86.
 (pdftex.def)             Requested size: 107.80356pt x 112.01935pt.
 [41 <./img/user_manual/afterlike.png> <./img/user_manual/user-icon.png> <./img/
 user_manual/generic-user-page.png>]
-<img/user_manual/menu.png, id=198, 68.255pt x 226.8475pt>
+<img/user_manual/menu.png, id=196, 68.255pt x 226.8475pt>
 File: img/user_manual/menu.png Graphic file (type png)
 <use img/user_manual/menu.png>
-Package pdftex.def Info: img/user_manual/menu.png  used on input line 1798.
+Package pdftex.def Info: img/user_manual/menu.png  used on input line 1797.
 (pdftex.def)             Requested size: 40.95331pt x 136.10954pt.
-<img/user_manual/previousbutton.png, id=199, 1205.50375pt x 828.09375pt>
+<img/user_manual/previousbutton.png, id=197, 1205.50375pt x 828.09375pt>
 File: img/user_manual/previousbutton.png Graphic file (type png)
 <use img/user_manual/previousbutton.png>
 Package pdftex.def Info: img/user_manual/previousbutton.png  used on input line
- 1804.
+ 1803.
 (pdftex.def)             Requested size: 421.93263pt x 289.83716pt.
 
-Overfull \hbox (9.36765pt too wide) in paragraph at lines 1804--1805
+Overfull \hbox (9.36765pt too wide) in paragraph at lines 1803--1804
  [][] 
  []
 
 [42 <./img/user_manual/howToFollow.png> <./img/user_manual/afterfollow.png> <./
 img/user_manual/menu.png>] [43 <./img/user_manual/previousbutton.png>]
-<img/user_manual/profile-icon.png, id=211, 209.78375pt x 74.2775pt>
+<img/user_manual/profile-icon.png, id=209, 209.78375pt x 74.2775pt>
 File: img/user_manual/profile-icon.png Graphic file (type png)
 <use img/user_manual/profile-icon.png>
 Package pdftex.def Info: img/user_manual/profile-icon.png  used on input line 1
-819.
+818.
 (pdftex.def)             Requested size: 75.52208pt x 26.73987pt.
-<img/user_manual/myprofile.png, id=212, 1203.49625pt x 820.06375pt>
+<img/user_manual/myprofile.png, id=210, 1203.49625pt x 820.06375pt>
 File: img/user_manual/myprofile.png Graphic file (type png)
 <use img/user_manual/myprofile.png>
-Package pdftex.def Info: img/user_manual/myprofile.png  used on input line 1826
+Package pdftex.def Info: img/user_manual/myprofile.png  used on input line 1825
 .
 (pdftex.def)             Requested size: 276.79831pt x 188.61069pt.
-<img/user_manual/addrecipe.png, id=213, 1203.49625pt x 820.06375pt>
+<img/user_manual/addrecipe.png, id=211, 1203.49625pt x 820.06375pt>
 File: img/user_manual/addrecipe.png Graphic file (type png)
 <use img/user_manual/addrecipe.png>
-Package pdftex.def Info: img/user_manual/addrecipe.png  used on input line 1834
+Package pdftex.def Info: img/user_manual/addrecipe.png  used on input line 1833
 .
 (pdftex.def)             Requested size: 276.79831pt x 188.61069pt.
- [44 <./img/user_manual/Profile-icon.png> <./img/user_manual/myprofile.png> <./
+ [44 <./img/user_manual/profile-icon.png> <./img/user_manual/myprofile.png> <./
 img/user_manual/addrecipe.png>]
-<img/user_manual/afteraddrecipe.png, id=220, 1203.49625pt x 820.06375pt>
+<img/user_manual/afteraddrecipe.png, id=218, 1203.49625pt x 820.06375pt>
 File: img/user_manual/afteraddrecipe.png Graphic file (type png)
 <use img/user_manual/afteraddrecipe.png>
 Package pdftex.def Info: img/user_manual/afteraddrecipe.png  used on input line
- 1851.
+ 1850.
 (pdftex.def)             Requested size: 300.87332pt x 205.01543pt.
-<img/user_manual/editprofile.png, id=221, 1203.49625pt x 820.06375pt>
+<img/user_manual/editprofile.png, id=219, 1203.49625pt x 820.06375pt>
 File: img/user_manual/editprofile.png Graphic file (type png)
 <use img/user_manual/editprofile.png>
 Package pdftex.def Info: img/user_manual/editprofile.png  used on input line 18
-59.
+58.
 (pdftex.def)             Requested size: 300.87332pt x 205.01543pt.
  [45 <./img/user_manual/afteraddrecipe.png> <./img/user_manual/editprofile.png>
 ]
-<img/user_manual/beforepreview.png, id=227, 669.50125pt x 207.77625pt>
+<img/user_manual/beforepreview.png, id=225, 669.50125pt x 207.77625pt>
 File: img/user_manual/beforepreview.png Graphic file (type png)
 <use img/user_manual/beforepreview.png>
 Package pdftex.def Info: img/user_manual/beforepreview.png  used on input line 
-1869.
+1868.
 (pdftex.def)             Requested size: 200.85191pt x 62.33334pt.
-<img/user_manual/afterpreview.png, id=228, 658.46pt x 197.73875pt>
+<img/user_manual/afterpreview.png, id=226, 658.46pt x 197.73875pt>
 File: img/user_manual/afterpreview.png Graphic file (type png)
 <use img/user_manual/afterpreview.png>
 Package pdftex.def Info: img/user_manual/afterpreview.png  used on input line 1
-875.
+874.
 (pdftex.def)             Requested size: 197.53952pt x 59.32208pt.
-<img/user_manual/pageOfMyRecipe.png, id=229, 1221.56375pt x 828.09375pt>
+<img/user_manual/pageOfMyRecipe.png, id=227, 1221.56375pt x 828.09375pt>
 File: img/user_manual/pageOfMyRecipe.png Graphic file (type png)
 <use img/user_manual/pageOfMyRecipe.png>
 Package pdftex.def Info: img/user_manual/pageOfMyRecipe.png  used on input line
- 1884.
+ 1883.
 (pdftex.def)             Requested size: 366.47195pt x 248.43004pt.
-<img/user_manual/editRecipe.png, id=230, 1203.49625pt x 820.06375pt>
+<img/user_manual/editRecipe.png, id=228, 1203.49625pt x 820.06375pt>
 File: img/user_manual/editRecipe.png Graphic file (type png)
 <use img/user_manual/editRecipe.png>
 Package pdftex.def Info: img/user_manual/editRecipe.png  used on input line 189
-3.
+2.
 (pdftex.def)             Requested size: 361.05167pt x 246.02103pt.
  [46 <./img/user_manual/beforepreview.png> <./img/user_manual/afterpreview.png>
- <./img/user_manual/pageOfMyRecipe.png>] [47 <./img/user_manual/editrecipe.png>
+ <./img/user_manual/pageOfMyRecipe.png>] [47 <./img/user_manual/editRecipe.png>
 ]
-<img/user_manual/comment1.png, id=241, 1227.58624pt x 837.1275pt>
+<img/user_manual/comment1.png, id=239, 1227.58624pt x 837.1275pt>
 File: img/user_manual/comment1.png Graphic file (type png)
 <use img/user_manual/comment1.png>
-Package pdftex.def Info: img/user_manual/comment1.png  used on input line 1904.
+Package pdftex.def Info: img/user_manual/comment1.png  used on input line 1903.
 
 (pdftex.def)             Requested size: 454.1998pt x 309.73233pt.
 
-Overfull \hbox (41.63481pt too wide) in paragraph at lines 1904--1905
+Overfull \hbox (41.63481pt too wide) in paragraph at lines 1903--1904
  [][] 
  []
 
-<img/user_manual/properDiscoveryPage.png, id=242, 1211.52625pt x 836.12375pt>
+<img/user_manual/properDiscoveryPage.png, id=240, 1211.52625pt x 836.12375pt>
 File: img/user_manual/properDiscoveryPage.png Graphic file (type png)
 <use img/user_manual/properDiscoveryPage.png>
 Package pdftex.def Info: img/user_manual/properDiscoveryPage.png  used on input
- line 1918.
+ line 1917.
 (pdftex.def)             Requested size: 448.25769pt x 309.36095pt.
 
-Overfull \hbox (35.6927pt too wide) in paragraph at lines 1918--1919
+Overfull \hbox (35.6927pt too wide) in paragraph at lines 1917--1918
  [][] 
  []
 
 [48 <./img/user_manual/comment1.png>]
-<img/user_manual/combobox0.png, id=248, 1212.53pt x 837.1275pt>
+<img/user_manual/combobox0.png, id=246, 1212.53pt x 837.1275pt>
 File: img/user_manual/combobox0.png Graphic file (type png)
 <use img/user_manual/combobox0.png>
-Package pdftex.def Info: img/user_manual/combobox0.png  used on input line 1930
+Package pdftex.def Info: img/user_manual/combobox0.png  used on input line 1929
 .
 (pdftex.def)             Requested size: 448.62909pt x 309.73233pt.
 
-Overfull \hbox (36.0641pt too wide) in paragraph at lines 1930--1931
+Overfull \hbox (36.0641pt too wide) in paragraph at lines 1929--1930
  [][] 
  []
 
-<img/user_manual/combobox1.png, id=249, 1212.53pt x 840.13875pt>
+<img/user_manual/combobox1.png, id=247, 1212.53pt x 840.13875pt>
 File: img/user_manual/combobox1.png Graphic file (type png)
 <use img/user_manual/combobox1.png>
-Package pdftex.def Info: img/user_manual/combobox1.png  used on input line 1939
+Package pdftex.def Info: img/user_manual/combobox1.png  used on input line 1938
 .
 (pdftex.def)             Requested size: 448.62909pt x 310.84647pt.
 
-Overfull \hbox (36.0641pt too wide) in paragraph at lines 1939--1940
+Overfull \hbox (36.0641pt too wide) in paragraph at lines 1938--1939
  [][] 
  []
 
-<img/user_manual/combobox2.png, id=250, 1214.5375pt x 839.135pt>
+<img/user_manual/combobox2.png, id=248, 1214.5375pt x 839.135pt>
 File: img/user_manual/combobox2.png Graphic file (type png)
 <use img/user_manual/combobox2.png>
-Package pdftex.def Info: img/user_manual/combobox2.png  used on input line 1946
+Package pdftex.def Info: img/user_manual/combobox2.png  used on input line 1945
 .
 (pdftex.def)             Requested size: 449.37184pt x 310.47508pt.
 
-Overfull \hbox (36.80685pt too wide) in paragraph at lines 1946--1947
+Overfull \hbox (36.80685pt too wide) in paragraph at lines 1945--1946
  [][] 
  []
 
-<img/user_manual/moderatorFunction0.png, id=251, 1211.52625pt x 830.10126pt>
+<img/user_manual/moderatorFunction0.png, id=249, 1211.52625pt x 830.10126pt>
 File: img/user_manual/moderatorFunction0.png Graphic file (type png)
 <use img/user_manual/moderatorFunction0.png>
 Package pdftex.def Info: img/user_manual/moderatorFunction0.png  used on input 
-line 1955.
+line 1954.
 (pdftex.def)             Requested size: 448.25769pt x 307.13266pt.
 
-Overfull \hbox (35.6927pt too wide) in paragraph at lines 1955--1956
+Overfull \hbox (35.6927pt too wide) in paragraph at lines 1954--1955
  [][] 
  []
 
-<img/user_manual/moderatorFunction1.png, id=252, 1212.53pt x 835.12pt>
+<img/user_manual/moderatorFunction1.png, id=250, 1212.53pt x 835.12pt>
 File: img/user_manual/moderatorFunction1.png Graphic file (type png)
 <use img/user_manual/moderatorFunction1.png>
 Package pdftex.def Info: img/user_manual/moderatorFunction1.png  used on input 
-line 1960.
+line 1959.
 (pdftex.def)             Requested size: 448.62909pt x 308.98956pt.
 
-Overfull \hbox (36.0641pt too wide) in paragraph at lines 1960--1961
+Overfull \hbox (36.0641pt too wide) in paragraph at lines 1959--1960
  [][] 
  []
 
 [49 <./img/user_manual/properDiscoveryPage.png>] [50 <./img/user_manual/combobo
 x0.png> <./img/user_manual/combobox1.png>] [51 <./img/user_manual/combobox2.png
 > <./img/user_manual/moderatorFunction0.png>]
-<img/user_manual/administratorFunction0.png, id=268, 1214.5375pt x 843.15pt>
+<img/user_manual/administratorFunction0.png, id=265, 1214.5375pt x 843.15pt>
 File: img/user_manual/administratorFunction0.png Graphic file (type png)
 <use img/user_manual/administratorFunction0.png>
 Package pdftex.def Info: img/user_manual/administratorFunction0.png  used on in
-put line 1974.
+put line 1973.
 (pdftex.def)             Requested size: 449.37184pt x 311.96062pt.
 
-Overfull \hbox (36.80685pt too wide) in paragraph at lines 1974--1975
+Overfull \hbox (36.80685pt too wide) in paragraph at lines 1973--1974
  [][] 
  []
 
-<img/user_manual/administratorFunction1.png, id=269, 1213.53375pt x 834.11626pt
+<img/user_manual/administratorFunction1.png, id=266, 1213.53375pt x 834.11626pt
 >
 File: img/user_manual/administratorFunction1.png Graphic file (type png)
 <use img/user_manual/administratorFunction1.png>
 Package pdftex.def Info: img/user_manual/administratorFunction1.png  used on in
-put line 1979.
+put line 1978.
 (pdftex.def)             Requested size: 449.00047pt x 308.61818pt.
 
-Overfull \hbox (36.43549pt too wide) in paragraph at lines 1979--1980
+Overfull \hbox (36.43549pt too wide) in paragraph at lines 1978--1979
  [][] 
  []
 
-<img/user_manual/administratorFunction2.png, id=270, 1209.51875pt x 838.13126pt
+<img/user_manual/administratorFunction2.png, id=267, 1209.51875pt x 838.13126pt
 >
 File: img/user_manual/administratorFunction2.png Graphic file (type png)
 <use img/user_manual/administratorFunction2.png>
 Package pdftex.def Info: img/user_manual/administratorFunction2.png  used on in
-put line 1984.
+put line 1983.
 (pdftex.def)             Requested size: 447.51494pt x 310.10371pt.
 
-Overfull \hbox (34.94995pt too wide) in paragraph at lines 1984--1985
+Overfull \hbox (34.94995pt too wide) in paragraph at lines 1983--1984
  [][] 
  []
 
-<img/user_manual/administratorFunction3.png, id=271, 1211.52625pt x 837.1275pt>
+<img/user_manual/administratorFunction3.png, id=268, 1211.52625pt x 837.1275pt>
 
 File: img/user_manual/administratorFunction3.png Graphic file (type png)
 <use img/user_manual/administratorFunction3.png>
 Package pdftex.def Info: img/user_manual/administratorFunction3.png  used on in
-put line 1991.
+put line 1990.
 (pdftex.def)             Requested size: 448.25769pt x 309.73233pt.
 
-Overfull \hbox (35.6927pt too wide) in paragraph at lines 1991--1992
+Overfull \hbox (35.6927pt too wide) in paragraph at lines 1990--1991
  [][] 
  []
 
-<img/user_manual/administratorFunction4.png, id=272, 1209.51875pt x 837.1275pt>
+<img/user_manual/administratorFunction4.png, id=269, 1209.51875pt x 837.1275pt>
 
 File: img/user_manual/administratorFunction4.png Graphic file (type png)
 <use img/user_manual/administratorFunction4.png>
 Package pdftex.def Info: img/user_manual/administratorFunction4.png  used on in
-put line 1998.
+put line 1997.
 (pdftex.def)             Requested size: 447.51494pt x 309.73233pt.
 
-Overfull \hbox (34.94995pt too wide) in paragraph at lines 1998--1999
+Overfull \hbox (34.94995pt too wide) in paragraph at lines 1997--1998
  [][] 
  []
 
-<img/user_manual/administratorFunction5.png, id=273, 1211.52625pt x 829.0975pt>
+<img/user_manual/administratorFunction5.png, id=270, 1211.52625pt x 829.0975pt>
 
 File: img/user_manual/administratorFunction5.png Graphic file (type png)
 <use img/user_manual/administratorFunction5.png>
 Package pdftex.def Info: img/user_manual/administratorFunction5.png  used on in
-put line 2005.
+put line 2004.
 (pdftex.def)             Requested size: 448.25769pt x 306.76128pt.
 
-Overfull \hbox (35.6927pt too wide) in paragraph at lines 2005--2006
+Overfull \hbox (35.6927pt too wide) in paragraph at lines 2004--2005
  [][] 
  []
 
-<img/user_manual/administratorFunction6.png, id=274, 1214.5375pt x 830.10126pt>
+<img/user_manual/administratorFunction6.png, id=271, 1214.5375pt x 830.10126pt>
 
 File: img/user_manual/administratorFunction6.png Graphic file (type png)
 <use img/user_manual/administratorFunction6.png>
 Package pdftex.def Info: img/user_manual/administratorFunction6.png  used on in
-put line 2012.
+put line 2011.
 (pdftex.def)             Requested size: 449.37184pt x 307.13266pt.
 
-Overfull \hbox (36.80685pt too wide) in paragraph at lines 2012--2013
+Overfull \hbox (36.80685pt too wide) in paragraph at lines 2011--2012
  [][] 
  []
 
-<img/user_manual/logoutIcon.png, id=275, 54.2025pt x 55.20625pt>
+<img/user_manual/logoutIcon.png, id=272, 54.2025pt x 55.20625pt>
 File: img/user_manual/logoutIcon.png Graphic file (type png)
 <use img/user_manual/logoutIcon.png>
 Package pdftex.def Info: img/user_manual/logoutIcon.png  used on input line 202
-4.
+3.
 (pdftex.def)             Requested size: 20.0546pt x 20.42598pt.
 [52 <./img/user_manual/moderatorFunction1.png>] [53 <./img/user_manual/administ
 ratorFunction0.png> <./img/user_manual/administratorFunction1.png>] [54 <./img/
 user_manual/administratorFunction2.png> <./img/user_manual/administratorFunctio
 n3.png>] [55 <./img/user_manual/administratorFunction4.png> <./img/user_manual/
 administratorFunction5.png>] [56 <./img/user_manual/administratorFunction6.png>
- <./img/user_manual/logoutIcon.png>] (./JustRecipe Doc.aux) ) 
+ <./img/user_manual/logoutIcon.png>] ("JustRecipe Doc.aux") ) 
 Here is how much of TeX's memory you used:
- 7683 strings out of 481239
- 112413 string characters out of 5920376
- 877350 words of memory out of 5000000
- 22832 multiletter control sequences out of 15000+600000
- 549532 words of font info for 52 fonts, out of 8000000 for 9000
+ 8031 strings out of 479832
+ 121890 string characters out of 2871058
+ 1252292 words of memory out of 3000000
+ 24872 multiletter control sequences out of 15000+200000
+ 552282 words of font info for 57 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,17n,60p,890b,2165s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/
-fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-
-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
-/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/t
-ype1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super
-/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/
-share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/ty
-pe1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/
-sfrm0500.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0600.pfb></usr/s
-hare/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/typ
-e1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/s
-frm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/sh
-are/texmf/fonts/type1/public/cm-super/sfti0800.pfb></usr/share/texmf/fonts/type
-1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sf
-ti1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on "JustRecipe Doc.pdf" (57 pages, 3024839 bytes).
+ 66i,17n,76p,892b,2167s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\franc\A
+ppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm0800.pk> <C:\Users\f
+ranc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0500.pk> <C:\U
+sers\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk>
+ <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm10
+00.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\
+ecbx1200.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/d
+pi600\ecbx1440.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappe
+n/ec/dpi600\ecbx2074.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/j
+knappen/ec/dpi600\ecti0800.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/lj
+four/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts
+/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\franc\AppData\Local\MiKTeX
+\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\franc\AppData\Local\
+MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\franc\AppData\
+Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\franc\Ap
+pData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\fr
+anc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Us
+ers\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> 
+<C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti172
+8.pk> <C:\Users\franc\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\e
+cbx1728.pk><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmr7.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on "JustRecipe Doc.pdf" (57 pages, 2890852 bytes).
 PDF statistics:
- 370 PDF objects out of 1000 (max. 8388607)
- 195 compressed objects within 2 object streams
+ 960 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  236 words of extra memory for PDF output out of 10000 (max. 10000000)
 
