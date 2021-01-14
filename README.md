@@ -1,2 +1,2 @@
 # JustRecipe
-Repository for group project of Large Scale and Multistructured Database
+JustRecipe is a Java application which handles a large-scale database of recipes handled by MongoDB and Neo4J.
